@@ -2,6 +2,8 @@
 
 [![GitHub contributors](https://img.shields.io/github/contributors/code4romania/stam-acasa.svg?style=for-the-badge)](https://github.com/code4romania/stam-acasa/graphs/contributors) [![GitHub last commit](https://img.shields.io/github/last-commit/code4romania/stam-acasa.svg?style=for-the-badge)](https://github.com/code4romania/stam-acasa/commits/master) [![License: MPL 2.0](https://img.shields.io/badge/license-MPL%202.0-brightgreen.svg?style=for-the-badge)](https://opensource.org/licenses/MPL-2.0)
 
+This repo hold the frontend app for Stam acasa and the Common API for Diaspora Hub & Stăm acasă
+
 Objective: Reduction in the over overloading of emergency phone numbers, quick and easy collection of information from a very large population, constant evaluation of a large population, the offer of support in the management of cases for authorities.
 
 How: Centralization and monitoring of the state of people under auto-isolation with standardized questionnaires completed daily directly in the users’ web application, for their families.
@@ -30,7 +32,7 @@ You can also list any pending features and planned improvements for the project 
 
 ## Repos and projects
 
-API repo: https://github.com/code4romania/centralizare-api
+https://github.com/code4romania/diaspora-hub
 
 ## Deployment
 
