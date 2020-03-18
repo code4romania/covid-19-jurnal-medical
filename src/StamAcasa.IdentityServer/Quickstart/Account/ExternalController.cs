@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace IdentityServer4.Quickstart.UI
+namespace IdentityServer.Quickstart.Account
 {
     [SecurityHeaders]
     [AllowAnonymous]
