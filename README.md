@@ -8,15 +8,13 @@ Objective: Reduction in the over overloading of emergency phone numbers, quick a
 
 How: Centralization and monitoring of the state of people under auto-isolation with standardized questionnaires completed daily directly in the users’ web application, for their families.
 
-[See the project live](insert_link_here)
+[See the project live](https://stamacasa.ro/)
 
 [Contributing](#contributing) | [Built with](#built-with) | [Repos and projects](#repos-and-projects) | [Deployment](#deployment) | [Feedback](#feedback) | [License](#license) | [About Code4Ro](#about-code4ro)
 
 ## Contributing
 
 This project is built by amazing volunteers and you can be one of them! Here's a list of ways in [which you can contribute to this project](.github/CONTRIBUTING.md).
-
-You can also list any pending features and planned improvements for the project here.
 
 ## Built With
 
