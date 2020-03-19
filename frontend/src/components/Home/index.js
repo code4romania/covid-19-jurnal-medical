@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "taskforce-fe-components";
+import { Button } from "@code4ro/taskforce-fe-components";
 import { useHistory } from "react-router-dom";
 
 const Home = () => {
