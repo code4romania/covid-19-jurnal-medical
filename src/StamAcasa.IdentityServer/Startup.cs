@@ -9,14 +9,18 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StamAcasa.IdentityServer;
 
 namespace IdentityServer {
     public class Startup {
-        public Startup(IConfiguration configuration) {
+        public Startup(IConfiguration configuration)
+        {
             Configuration = configuration;
+            _identityConfiguration = new StamAcasaIdentityConfiguration(configuration);
         }
 
         public IConfiguration Configuration { get; }
+        private IStamAcasaIdentityConfiguration _identityConfiguration;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
@@ -32,9 +36,9 @@ namespace IdentityServer {
                     options.Events.RaiseFailureEvents = true;
                     options.Events.RaiseSuccessEvents = true;
                 })
-                .AddInMemoryIdentityResources(Config.Ids)
-                .AddInMemoryApiResources(Config.Apis)
-                .AddInMemoryClients(Config.Clients)
+                .AddInMemoryIdentityResources(_identityConfiguration.Ids)
+                .AddInMemoryApiResources(_identityConfiguration.Apis())
+                .AddInMemoryClients(_identityConfiguration.Clients)
                 .AddAspNetIdentity<ApplicationUser>();
             
             // not recommended for production - you need to store your key material somewhere secure
