@@ -23,7 +23,7 @@ var config = {
     client_id: "js",
     redirect_uri: "https://localhost:5003/callback.html",
     response_type: "id_token token",
-    scope:"openid email api1",
+    scope:"openid email answersApi",
     post_logout_redirect_uri: "https://localhost:5003/index.html",
     loadUserInfo: false
 };
@@ -44,7 +44,7 @@ function login() {
 
 function api() {
     mgr.getUser().then(function (user) {
-        var url = "https://localhost:5007/identity";
+        var url = "https://localhost:5007/api/answer/";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);

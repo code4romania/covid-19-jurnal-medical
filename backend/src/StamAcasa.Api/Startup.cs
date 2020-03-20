@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StamAcasa.Api.Common;
+using StamAcasa.Api.Models;
+using StamAcasa.Api.Services;
 
 namespace Api
 {
@@ -57,6 +59,11 @@ namespace Api
                         .AllowAnyMethod();
                 });
             });
+            switch (Configuration.GetValue<StorageTypes>("StorageType")) {
+                case StorageTypes.FileSystem:
+                    services.AddSingleton<IFileService, LocalFileService>();
+                    break;
+            }
         }
 
         public void Configure(IApplicationBuilder app)
