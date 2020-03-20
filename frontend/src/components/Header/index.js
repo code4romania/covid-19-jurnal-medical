@@ -19,12 +19,12 @@ const Header = () => {
       <NavLink className="navLink" to="/despre">
         Despre
       </NavLink>
-      <NavLink className="navLink" to="https://code4.ro/ro/apps/">
+      <a className="navLink" href="https://code4.ro/ro/apps/">
         Ecosistemul Covid-19
-      </NavLink>
-      <NavLink className="navLink" to="https://code4.ro/ro/doneaza/">
+      </a>
+      <a className="navLink" href="https://code4.ro/ro/doneaza/">
         Sprijină proiectul
-      </NavLink>
+      </a>
     </>
   );
 
