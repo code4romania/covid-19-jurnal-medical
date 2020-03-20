@@ -1,12 +1,14 @@
-# Project name
+# Stăm acasă
 
-[![GitHub contributors](https://img.shields.io/github/contributors/code4romania/NEW_REPO_SLUG_HERE.svg?style=for-the-badge)](https://github.com/code4romania/NEW_REPO_SLUG_HERE/graphs/contributors) [![GitHub last commit](https://img.shields.io/github/last-commit/code4romania/NEW_REPO_SLUG_HERE.svg?style=for-the-badge)](https://github.com/code4romania/NEW_REPO_SLUG_HERE/commits/master) [![License: MPL 2.0](https://img.shields.io/badge/license-MPL%202.0-brightgreen.svg?style=for-the-badge)](https://opensource.org/licenses/MPL-2.0)
+[![GitHub contributors](https://img.shields.io/github/contributors/code4romania/stam-acasa.svg?style=for-the-badge)](https://github.com/code4romania/stam-acasa/graphs/contributors) [![GitHub last commit](https://img.shields.io/github/last-commit/code4romania/stam-acasa.svg?style=for-the-badge)](https://github.com/code4romania/stam-acasa/commits/master) [![License: MPL 2.0](https://img.shields.io/badge/license-MPL%202.0-brightgreen.svg?style=for-the-badge)](https://opensource.org/licenses/MPL-2.0)
 
-Insert bullets description of the project if available.
+This repo hold the frontend app for Stam acasa and the Common API for Diaspora Hub & Stăm acasă
 
-[See the project live](insert_link_here)
+Objective: Reduction in the over overloading of emergency phone numbers, quick and easy collection of information from a very large population, constant evaluation of a large population, the offer of support in the management of cases for authorities.
 
-Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.
+How: Centralization and monitoring of the state of people under auto-isolation with standardized questionnaires completed daily directly in the users’ web application, for their families.
+
+[See the project live](https://stamacasa.ro/)
 
 [Contributing](#contributing) | [Built with](#built-with) | [Repos and projects](#repos-and-projects) | [Deployment](#deployment) | [Feedback](#feedback) | [License](#license) | [About Code4Ro](#about-code4ro)
 
@@ -14,33 +16,40 @@ Give a short introduction of your project. Let this section explain the objectiv
 
 This project is built by amazing volunteers and you can be one of them! Here's a list of ways in [which you can contribute to this project](.github/CONTRIBUTING.md).
 
-You can also list any pending features and planned improvements for the project here.
-
 ## Built With
 
 ### Programming languages
+Javascript
 
 ### Platforms
 
 ### Frontend framework
+- [ReactJS](https://reactjs.org/)
+- [Bulma](https://bulma.io/)
 
 ### Package managers
+npm
 
 ### Database technology & provider
 
 ## Repos and projects
 
-Mention all related repos and projects.
+https://github.com/code4romania/diaspora-hub
 
 ## Deployment
 
-Guide users through getting your code up and running on their own system. In this section you can talk about:
-1. Installation process
-2. Software dependencies
-3. Latest releases
-4. API references
+### Frontend
+1. Install dependencies
 
-Describe and show how to build your code and run the tests.
+```
+npm install
+```
+
+2. Run project
+
+```
+npm start
+```
 
 ## Feedback
 
