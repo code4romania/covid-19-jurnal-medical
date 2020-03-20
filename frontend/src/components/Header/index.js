@@ -3,7 +3,7 @@ import React from "react";
 import { ReactComponent as LogoSvg } from "../../assets/stamacasa.svg";
 import { NavLink } from "react-router-dom";
 import { Header as TFHeader } from "@code4ro/taskforce-fe-components";
-import { IncubatedBy } from "@code4ro/taskforce-fe-components";
+import { DevelopedBy } from "@code4ro/taskforce-fe-components";
 
 import "./header.css";
 
@@ -43,7 +43,7 @@ const Header = () => {
         MenuItems={<MenuItems />}
         ProfileItems={<ProfileItems />}
       />
-      <IncubatedBy />
+      <DevelopedBy />
     </>
   );
 };
