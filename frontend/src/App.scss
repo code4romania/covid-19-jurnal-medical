@@ -5,5 +5,11 @@ html {
 }
 
 #mainContent {
-  padding: 0 100px;
+  padding: 0 20px;
+}
+
+@media screen and (min-width: 1024px) {
+  #mainContent {
+    padding: 0 100px;
+  }
 }

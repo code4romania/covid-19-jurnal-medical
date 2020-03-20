@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { Header as TFHeader } from "@code4ro/taskforce-fe-components";
 import { DevelopedBy } from "@code4ro/taskforce-fe-components";
 
-import "./header.css";
+import "./header.scss";
 
 const Header = () => {
   const Logo = () => (
