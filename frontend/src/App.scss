@@ -1,5 +1,9 @@
 @import "./styles/base.scss";
 
-html{
-    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+html {
+  font-family: "Titillium Web", Arial, Helvetica, sans-serif;
+}
+
+#mainContent {
+  padding: 0 100px;
 }
