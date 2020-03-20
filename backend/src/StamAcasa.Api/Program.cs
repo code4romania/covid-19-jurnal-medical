@@ -17,7 +17,8 @@ namespace Api
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            WebHost.CreateDefaultBuilder(args).
+                ConfigureAppConfiguration(options=>{})
                 .UseStartup<Startup>()
                 .Build();
     }
