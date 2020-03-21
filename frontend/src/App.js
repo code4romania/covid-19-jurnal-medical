@@ -15,7 +15,7 @@ const App = () => (
       <StepsBar />
       <AppRouter />
     </div>
-    <Footer></Footer>
+    <Footer />
   </>
 );
 
