@@ -18,6 +18,10 @@ const Header = ({ user }) => {
     UserThunks.authenticate();
   };
 
+  const handleLogout = () => {
+    UserThunks.logout();
+  };
+
   const Logo = () => (
     <NavLink to="/">
       <LogoSvg />
@@ -38,16 +42,17 @@ const Header = ({ user }) => {
     </>
   );
 
-  const ProfileItems = () =>
-    user ? (
-      <div>Wellcome, {user.profile.email}</div>
-    ) : (
-      <>
-        <NavLink to="/">Contul meu</NavLink>
-        <div className="accountSeparator"></div>
+  const ProfileItems = () => (
+    <>
+      <NavLink to="/">Contul meu</NavLink>
+      <div className="accountSeparator"></div>
+      {user ? (
+        <Button onClick={handleLogout}>Logout</Button>
+      ) : (
         <Button onClick={handleLogin}>Login</Button>
-      </>
-    );
+      )}
+    </>
+  );
 
   return (
     <>
@@ -68,11 +73,12 @@ const mapStateToProps = state => {
 };
 
 Header.propTypes = {
-  user: PropTypes.shape({
-    profile: PropTypes.shape({
-      email: PropTypes.string.isRequired
-    })
-  })
+  user: PropTypes.object
+  //  PropTypes.shape({
+  //     profile: PropTypes.shape({
+  //       email: PropTypes.string.isRequired
+  //     })
+  //   })
 };
 
 export default connect(mapStateToProps)(Header);

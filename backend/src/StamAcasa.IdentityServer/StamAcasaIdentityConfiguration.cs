@@ -54,7 +54,7 @@ namespace StamAcasa.IdentityServer {
                     RequireConsent = false,
 
                     RedirectUris =           { "http://localhost:3000/signin-oidc" },
-                    PostLogoutRedirectUris = { "http://localhost:3000/index.html" },
+                    PostLogoutRedirectUris = { "http://localhost:3000/post-logout" },
                     AllowedCorsOrigins =     { "http://localhost:3000" },
 
                     AllowedScopes =

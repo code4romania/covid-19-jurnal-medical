@@ -8,7 +8,9 @@ import Footer from "./components/Footer";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import "./App.scss";
-import RedirectOidc from "./Redirect";
+import SigninRoute from "./components/OIDC/SigninRoute";
+import PostLogoutRoute from "./components/OIDC/PostLogoutRoute";
+import SilentRefreshRoute from "./components/OIDC/SilentRefreshRoute";
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/despre" component={About} />
-          <Route exact path="/signin-oidc" component={RedirectOidc} />
+          <Route exact path="/signin-oidc" component={SigninRoute} />
+          <Route exact path="/post-logout" component={PostLogoutRoute} />
+          <Route exact path="/silent-refresh" component={SilentRefreshRoute} />
         </Switch>
       </div>
       <Footer></Footer>
