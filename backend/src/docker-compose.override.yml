@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  stamacasa.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5007:80"
+
+  identityserver:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 5000:80
+      - 5001:443
