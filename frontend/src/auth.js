@@ -14,8 +14,7 @@ const userManagerSettings = {
   scope: "openid email",
   automaticSilentRenew: true,
   userStore: new WebStorageStateStore({ store: sessionStorage }),
-  checkSessionInterval: 10000,
-  
+  checkSessionInterval: 10000
 };
 
 const userManager = new UserManager(userManagerSettings);

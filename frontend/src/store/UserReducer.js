@@ -38,7 +38,7 @@ const thunks = {
     await AuthService.signoutCallback();
     dispatch({ type: "user/clear" });
   },
-  silentRefresh: async dispatch => {
+  silentRefresh: async () => {
     await AuthService.silentRefresh();
   }
 };

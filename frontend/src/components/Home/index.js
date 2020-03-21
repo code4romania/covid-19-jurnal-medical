@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Button } from "@code4ro/taskforce-fe-components";
 import { useHistory } from "react-router-dom";
 // import { AuthService } from "../../auth";
@@ -20,14 +21,20 @@ const Home = ({ tryToLoadUser }) => {
   );
 };
 
+Home.propTypes = {
+  tryToLoadUser: PropTypes.func.isRequired
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     tryToLoadUser: () => {
       var loadedUser = window.sessionStorage.getItem("user");
       var user = null;
       try {
-        user = JSON.parse(loadedUser)
-      } catch (e) {console.log(e)}
+        user = JSON.parse(loadedUser);
+      } catch (e) {
+        console.log(e);
+      }
       if (loadedUser && user) {
         dispatch({ type: "user/set", payload: user });
       }
