@@ -6,42 +6,6 @@
   margin-top: 200px;
 }
 
-.login h1 {
-  color: #bfbfbf;
-  font-size: 24px;
-  margin: 15px 0;
-}
-
-.login-form {
-  width: 250px;
-}
-
-.login-form label {
-  color: #004890;
-  width: 100%;
-}
-
-.login-form input {
-  background: #e8e8e8;
-  border-radius: 5px;
-  border-width: 0;
-  display: block;
-  padding: 6px;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.button-wrapper {
-  text-align: center;
-}
-
-.forgot-password {
-  display: block;
-  color: #004890;
-  margin-top: 20px;
-  text-decoration: underline;
-}
-
 @media (max-width: 425px) {
   .login {
     margin-top: 100px;
