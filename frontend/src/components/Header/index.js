@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { ReactComponent as LogoSvg } from "../../assets/stamacasa.svg";
 import { NavLink } from "react-router-dom";
@@ -7,13 +8,14 @@ import {
   DevelopedBy,
   Button
 } from "@code4ro/taskforce-fe-components";
-import { AuthService } from "../../auth";
+import { UserThunks } from "../../store/UserReducer";
+import { connect } from "react-redux";
 
 import "./header.css";
 
-const Header = () => {
+const Header = ({ user }) => {
   const handleLogin = () => {
-    AuthService.signin();
+    UserThunks.authenticate();
   };
 
   const Logo = () => (
@@ -35,11 +37,10 @@ const Header = () => {
       </a>
     </>
   );
-  console.log("render");
 
   const ProfileItems = () =>
-    AuthService.isAuthenticated() ? (
-      <div>Wellcome, {AuthService.user.profile.email}</div>
+    user ? (
+      <div>Wellcome, {user.profile.email}</div>
     ) : (
       <>
         <NavLink to="/">Contul meu</NavLink>
@@ -60,4 +61,18 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    user: state.UserReducer.user
+  };
+};
+
+Header.propTypes = {
+  user: PropTypes.shape({
+    profile: PropTypes.shape({
+      email: PropTypes.string.isRequired
+    })
+  })
+};
+
+export default connect(mapStateToProps)(Header);

@@ -1,10 +1,24 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
-import { AuthService } from "./auth";
+import { UserThunks } from "./store/UserReducer";
+import { connect } from "react-redux";
 
-const RedirectOidc = () => {
-  AuthService.signinCallback();
+const RedirectOidc = ({ loadUser }) => {
+  loadUser();
   return <Redirect to="/"></Redirect>;
 };
 
-export default RedirectOidc;
+const mapDispatchToProps = dispatch => {
+  return {
+    loadUser: () => {
+      UserThunks.setUser(dispatch);
+    }
+  };
+};
+
+RedirectOidc.propTypes = {
+  loadUser: PropTypes.func.isRequired
+};
+
+export default connect(null, mapDispatchToProps)(RedirectOidc);
