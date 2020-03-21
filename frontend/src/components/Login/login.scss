@@ -6,8 +6,26 @@
   margin-top: 200px;
 }
 
+.login .logo-wrapper {
+  margin-bottom: 24px;
+}
+
+.login .logo-wrapper svg {
+  height: 70px;
+}
+
+.login-wrapper {
+  width: 400px;
+}
+
 @media (max-width: 425px) {
   .login {
     margin-top: 100px;
+  }
+  .login .logo-wrapper svg {
+    height: 50px;
+  }
+  .login-wrapper {
+    width: 300px;
   }
 }

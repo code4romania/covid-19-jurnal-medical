@@ -9,11 +9,13 @@ import "./login.scss";
 const Login = () => {
   return (
     <div className="login">
-      <div className="container">
+      <div className="logo-wrapper">
         <NavLink to="/">
           <LogoSvg />
         </NavLink>
-        <LoginForm />
+      </div>
+      <div className="login-wrapper">
+        <LoginForm rightContent={<NavLink to="/">Ai uitat parola?</NavLink>} />
       </div>
     </div>
   );
