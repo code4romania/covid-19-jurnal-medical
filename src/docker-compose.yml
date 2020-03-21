@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: StamAcasa.Api/Dockerfile
+    ports: 
+      - 5001:80
 
   rabbitmq:
     image: local_rabbit
@@ -18,4 +20,13 @@ services:
        # The standard AMQP protocol port
       - 5672:5672
         # HTTP management UI
-      - 15672:15672  
+      - 15672:15672
+
+  identityserver:
+    image: identityserver_img
+    container_name: identityserver
+    build:
+        context: .
+        dockerfile: StamAcasa.IdentityServer/Dockerfile
+    ports: 
+      - 5000:5000
