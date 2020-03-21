@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import "./App.scss";
+import RedirectOidc from "./Redirect";
 
 function App() {
   return (
@@ -14,13 +15,13 @@ function App() {
       <Header />
       <div className="container">
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/despre" component={About} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/despre" component={About} />
+          <Route exact path="/signin-oidc" component={RedirectOidc} />
         </Switch>
       </div>
       <Footer></Footer>
     </>
-
   );
 }
 

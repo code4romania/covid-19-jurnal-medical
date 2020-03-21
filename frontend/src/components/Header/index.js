@@ -2,12 +2,20 @@ import React from "react";
 
 import { ReactComponent as LogoSvg } from "../../assets/stamacasa.svg";
 import { NavLink } from "react-router-dom";
-import { Header as TFHeader } from "@code4ro/taskforce-fe-components";
-import { DevelopedBy } from "@code4ro/taskforce-fe-components";
+import {
+  Header as TFHeader,
+  DevelopedBy,
+  Button
+} from "@code4ro/taskforce-fe-components";
+import { AuthService } from "../../auth";
 
 import "./header.css";
 
 const Header = () => {
+  const handleLogin = () => {
+    AuthService.signin();
+  };
+
   const Logo = () => (
     <NavLink to="/">
       <LogoSvg />
@@ -27,14 +35,18 @@ const Header = () => {
       </a>
     </>
   );
+  console.log("render");
 
-  const ProfileItems = () => (
-    <>
-      <NavLink to="/">Contul meu</NavLink>
-      <div className="accountSeparator"></div>
-      <NavLink to="/">Login</NavLink>
-    </>
-  );
+  const ProfileItems = () =>
+    AuthService.isAuthenticated() ? (
+      <div>Wellcome, {AuthService.user.profile.email}</div>
+    ) : (
+      <>
+        <NavLink to="/">Contul meu</NavLink>
+        <div className="accountSeparator"></div>
+        <Button onClick={handleLogin}>Login</Button>
+      </>
+    );
 
   return (
     <>

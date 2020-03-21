@@ -8,6 +8,7 @@ const Home = () => {
   function handleClick() {
     history.push("/despre");
   }
+
   return (
     <div>
       <h1>Home</h1>
