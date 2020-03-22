@@ -23,7 +23,20 @@ namespace StamAcasa.Api.Controllers
             _userService = userService;
         }
 
+        [HttpGet]
+        [Produces(typeof(UserInfo))]
+        public async Task<IActionResult> GetUserInfo()
+        {
+            var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+            if (sub == null)
+                return new UnauthorizedResult();
+
+            var result = await _userService.GetUserInfo(sub);
+            return new OkObjectResult(result);
+        }
+
         [HttpPost]
+        [Produces(typeof(bool))]
         public async Task<IActionResult> SaveUserInfo(UserModel model)
         {
             if(!ModelState.IsValid)
@@ -33,24 +46,12 @@ namespace StamAcasa.Api.Controllers
                 return new UnauthorizedResult();
 
             model.Sub = sub;
-            var result = await _userService.AddUserInfo(model);
+            var result = await _userService.AddOrUpdateUserInfo(model);
             return new OkObjectResult(result);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateUserInfo(UserModel model) {
-            if (!ModelState.IsValid)
-                return new BadRequestObjectResult(ModelState.Values);
-            var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (sub == null)
-                return new UnauthorizedResult();
 
-            model.Sub = sub;
-            var result = await _userService.UpdateUserInfo(model);
-            return new OkObjectResult(result);
-        }
-
-        [HttpPost("/dependent")]
+        [HttpPost("dependent")]
         public async Task<IActionResult> SaveDependentInfo(UserModel model) {
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
@@ -58,8 +59,19 @@ namespace StamAcasa.Api.Controllers
             if (sub == null)
                 return new UnauthorizedResult();
 
-            model.Sub = sub;
             var result = await _userService.AddDependentInfo(model, sub);
+            return new OkObjectResult(result);
+        }
+
+        [HttpGet("dependent")]
+        public async Task<IActionResult> GetDependentPeople() {
+            if (!ModelState.IsValid)
+                return new BadRequestObjectResult(ModelState.Values);
+            var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+            if (sub == null)
+                return new UnauthorizedResult();
+
+            var result = await _userService.GetDependentInfo(sub);
             return new OkObjectResult(result);
         }
     }
