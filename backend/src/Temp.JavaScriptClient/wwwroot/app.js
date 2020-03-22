@@ -23,7 +23,7 @@ var config = {
     client_id: "js",
     redirect_uri: "http://localhost:5000/sigin-oidc",
     response_type: "id_token token",
-    scope:"openid email answersApi",
+    scope:"openid email answersApi usersApi",
     post_logout_redirect_uri: "https://localhost:5003/index.html",
     loadUserInfo: false
 };

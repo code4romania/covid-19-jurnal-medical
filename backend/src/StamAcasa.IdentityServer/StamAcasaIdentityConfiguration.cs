@@ -61,7 +61,28 @@ namespace StamAcasa.IdentityServer {
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Email,
-                        "answersApi"
+                        "answersApi","usersApi"
+                    },
+                    AllowAccessTokensViaBrowser = true,
+                    AccessTokenType = AccessTokenType.Reference
+                },
+                //Swagger UI client
+                new Client
+                {
+                    ClientId = "swaggerClientLocalhost",
+                    ClientName = "Swagger UI Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    RequirePkce = false,
+                    RequireClientSecret = false,
+                    RequireConsent = false,
+                    RedirectUris =           { "https://localhost:5007/swagger/oauth2-redirect.html" },
+                    AllowedCorsOrigins =     { "https://localhost:5007" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "answersApi","usersApi"
                     },
                     AllowAccessTokensViaBrowser = true,
                     AccessTokenType = AccessTokenType.Reference
