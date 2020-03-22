@@ -32,7 +32,7 @@ const Header = () => {
     <>
       <NavLink to="/">Contul meu</NavLink>
       <div className="accountSeparator"></div>
-      <NavLink to="/">Login</NavLink>
+      <NavLink to="/login">Login</NavLink>
     </>
   );
 

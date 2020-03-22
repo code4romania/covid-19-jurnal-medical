@@ -1,11 +1,10 @@
-import Home from "../Home";
 import About from "../About";
 
 export const ROUTES = {
   home: {
     path: "/",
     extraProps: { exact: true },
-    component: Home
+    component: () => "Placeholder home"
   },
   despre: {
     path: "/despre",
