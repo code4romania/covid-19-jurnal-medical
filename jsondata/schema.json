@@ -1,0 +1,585 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "array",
+    "readOnly": false,
+    "writeOnly": false,
+    "uniqueItems": false,
+    "minItems": 0,
+    "minContains": 1,
+    "title": "The Root Schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "additionalItems": true,
+    "items": {
+        "$id": "#/items",
+        "type": "object",
+        "readOnly": false,
+        "writeOnly": false,
+        "minProperties": 0,
+        "title": "The Items Schema",
+        "description": "An explanation about the purpose of this instance.",
+        "default": {},
+        "examples": [
+            {
+                "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                "active": true,
+                "display_order": 3.0,
+                "nodes": [
+                    {
+                        "type": "SINGLE_CHOICE",
+                        "title": "Ai călătorit recent în afara țării?",
+                        "content": null,
+                        "options": [
+                            {
+                                "value": "da",
+                                "option": 1.0
+                            },
+                            {
+                                "option": 2.0,
+                                "value": "nu"
+                            }
+                        ],
+                        "node_id": 1.0,
+                        "answers": [
+                            {
+                                "options": [
+                                    1.0
+                                ],
+                                "result": 2.0
+                            },
+                            {
+                                "result": 3.0,
+                                "options": [
+                                    2.0
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "node_id": 2.0,
+                        "answers": [
+                            {
+                                "result": 3.0,
+                                "options": [
+                                    1.0
+                                ]
+                            },
+                            {
+                                "options": [
+                                    2.0
+                                ],
+                                "result": 3.0
+                            },
+                            {
+                                "options": [
+                                    3.0
+                                ],
+                                "result": 3.0
+                            },
+                            {
+                                "options": [
+                                    4.0
+                                ],
+                                "result": 3.0
+                            },
+                            {
+                                "result": 4.0,
+                                "options": [
+                                    1.0,
+                                    2.0
+                                ]
+                            }
+                        ],
+                        "type": "MULTIPLE_CHOICE",
+                        "title": "Ai vreunul dintre simptomele de mai jos (bifează toate opțiunile care se aplică)?",
+                        "content": null,
+                        "options": [
+                            {
+                                "value": "temperatură ridicată",
+                                "option": 1.0
+                            },
+                            {
+                                "option": 2.0,
+                                "value": "tuse seacă"
+                            },
+                            {
+                                "value": "dificultate în respirație",
+                                "option": 3.0
+                            },
+                            {
+                                "option": 4.0,
+                                "value": "mucozități nazale excesive"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "FINAL",
+                        "title": "Conform cu răspunsurile tale, iată ce recomandăm:",
+                        "content": "Conform cu răspunsurile tale, iată ce recomandăm: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        "options": null,
+                        "node_id": 3.0,
+                        "answers": null
+                    },
+                    {
+                        "content": "Sună la 00000 pentru a cere testarea. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        "options": null,
+                        "node_id": 4.0,
+                        "answers": null,
+                        "type": "FINAL",
+                        "title": "Sună la 00000 pentru a cere testarea"
+                    }
+                ],
+                "doc_id": 103.0,
+                "buttons": null,
+                "doc_type": "STATIC_PAGE",
+                "title": "Simptome și tratament"
+            }
+        ],
+        "additionalProperties": true,
+        "required": [
+            "title",
+            "doc_type",
+            "doc_id",
+            "active",
+            "display_order",
+            "content",
+            "buttons",
+            "nodes"
+        ],
+        "properties": {
+            "title": {
+                "$id": "#/items/properties/title",
+                "type": "string",
+                "readOnly": false,
+                "writeOnly": false,
+                "minLength": 0,
+                "title": "The Title Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                    "Simptome și tratament"
+                ]
+            },
+            "doc_type": {
+                "$id": "#/items/properties/doc_type",
+                "type": "string",
+                "readOnly": false,
+                "writeOnly": false,
+                "minLength": 0,
+                "title": "The Doc_type Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                    "STATIC_PAGE"
+                ]
+            },
+            "doc_id": {
+                "$id": "#/items/properties/doc_id",
+                "type": "integer",
+                "readOnly": false,
+                "writeOnly": false,
+                "title": "The Doc_id Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": 0,
+                "examples": [
+                    103
+                ]
+            },
+            "active": {
+                "$id": "#/items/properties/active",
+                "type": "boolean",
+                "readOnly": false,
+                "writeOnly": false,
+                "title": "The Active Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": false,
+                "examples": [
+                    true
+                ]
+            },
+            "display_order": {
+                "$id": "#/items/properties/display_order",
+                "type": "integer",
+                "readOnly": false,
+                "writeOnly": false,
+                "title": "The Display_order Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": 0,
+                "examples": [
+                    3
+                ]
+            },
+            "content": {
+                "$id": "#/items/properties/content",
+                "type": "string",
+                "readOnly": false,
+                "writeOnly": false,
+                "minLength": 0,
+                "title": "The Content Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
+                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                ]
+            },
+            "buttons": {
+                "$id": "#/items/properties/buttons",
+                "readOnly": false,
+                "writeOnly": false,
+                "title": "The Buttons Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": null,
+                "examples": [
+                    null
+                ]
+            },
+            "nodes-start-id": {
+                "$id": "#/items/properties/nodes-start-id",
+                "type": "integer",
+                "readOnly": false,
+                "writeOnly": false,
+                "title": "The nodes-start-id Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": 0,
+                "examples": [
+                    3
+                ]
+            },
+            "nodes": {
+                "$id": "#/items/properties/nodes",
+                "type": "array",
+                "readOnly": false,
+                "writeOnly": false,
+                "uniqueItems": false,
+                "minItems": 0,
+                "minContains": 1,
+                "title": "The Nodes Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": [],
+                "additionalItems": true,
+                "items": {
+                    "$id": "#/items/properties/nodes/items",
+                    "type": "object",
+                    "readOnly": false,
+                    "writeOnly": false,
+                    "minProperties": 0,
+                    "title": "The Items Schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "title": "Ai călătorit recent în afara țării?",
+                            "content": null,
+                            "options": [
+                                {
+                                    "option": 1.0,
+                                    "value": "da"
+                                },
+                                {
+                                    "option": 2.0,
+                                    "value": "nu"
+                                }
+                            ],
+                            "node_id": 1.0,
+                            "answers": [
+                                {
+                                    "result": 2.0,
+                                    "options": [
+                                        1.0
+                                    ]
+                                },
+                                {
+                                    "options": [
+                                        2.0
+                                    ],
+                                    "result": 3.0
+                                }
+                            ],
+                            "type": "SINGLE_CHOICE"
+                        },
+                        {
+                            "node_id": 2.0,
+                            "answers": [
+                                {
+                                    "result": 3.0,
+                                    "options": [
+                                        1.0
+                                    ]
+                                },
+                                {
+                                    "result": 3.0,
+                                    "options": [
+                                        2.0
+                                    ]
+                                },
+                                {
+                                    "options": [
+                                        3.0
+                                    ],
+                                    "result": 3.0
+                                },
+                                {
+                                    "result": 3.0,
+                                    "options": [
+                                        4.0
+                                    ]
+                                },
+                                {
+                                    "options": [
+                                        1.0,
+                                        2.0
+                                    ],
+                                    "result": 4.0
+                                }
+                            ],
+                            "type": "MULTIPLE_CHOICE",
+                            "title": "Ai vreunul dintre simptomele de mai jos (bifează toate opțiunile care se aplică)?",
+                            "content": null,
+                            "options": [
+                                {
+                                    "value": "temperatură ridicată",
+                                    "option": 1.0
+                                },
+                                {
+                                    "value": "tuse seacă",
+                                    "option": 2.0
+                                },
+                                {
+                                    "value": "dificultate în respirație",
+                                    "option": 3.0
+                                },
+                                {
+                                    "value": "mucozități nazale excesive",
+                                    "option": 4.0
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Conform cu răspunsurile tale, iată ce recomandăm:",
+                            "content": "Conform cu răspunsurile tale, iată ce recomandăm: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                            "options": null,
+                            "node_id": 3.0,
+                            "answers": null,
+                            "type": "FINAL"
+                        },
+                        {
+                            "content": "Sună la 00000 pentru a cere testarea. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                            "options": null,
+                            "node_id": 4.0,
+                            "answers": null,
+                            "type": "FINAL",
+                            "title": "Sună la 00000 pentru a cere testarea"
+                        }
+                    ],
+                    "additionalProperties": true,
+                    "required": [
+                        "node_id",
+                        "title",
+                        "type",
+                        "content",
+                        "options",
+                        "answers"
+                    ],
+                    "properties": {
+                        "node_id": {
+                            "$id": "#/items/properties/nodes/items/properties/node_id",
+                            "type": "integer",
+                            "readOnly": false,
+                            "writeOnly": false,
+                            "title": "The Node_id Schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                1
+                            ]
+                        },
+                        "title": {
+                            "$id": "#/items/properties/nodes/items/properties/title",
+                            "type": "string",
+                            "readOnly": false,
+                            "writeOnly": false,
+                            "minLength": 0,
+                            "title": "The Title Schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "Ai călătorit recent în afara țării?"
+                            ]
+                        },
+                        "type": {
+                            "$id": "#/items/properties/nodes/items/properties/type",
+                            "type": "string",
+                            "enum": ["SINGLE_CHOICE", "SINGLE_CHOICE_FREE_TEXT", "MULTIPLE_CHOICE", "MULTIPLE_CHOICE_FREE_TEXT", "FINAL"],
+                            "readOnly": false,
+                            "writeOnly": false,
+                            "minLength": 0,
+                            "title": "The Type Schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "SINGLE_CHOICE"
+                            ]
+                        },
+                        "content": {
+                            "$id": "#/items/properties/nodes/items/properties/content",
+                            "readOnly": false,
+                            "writeOnly": false,
+                            "title": "The Content Schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": null,
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "options": {
+                            "$id": "#/items/properties/nodes/items/properties/options",
+                            "type": "array",
+                            "readOnly": false,
+                            "writeOnly": false,
+                            "uniqueItems": false,
+                            "minItems": 0,
+                            "minContains": 1,
+                            "title": "The Options Schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": [],
+                            "additionalItems": true,
+                            "items": {
+                                "$id": "#/items/properties/nodes/items/properties/options/items",
+                                "type": "object",
+                                "readOnly": false,
+                                "writeOnly": false,
+                                "minProperties": 0,
+                                "title": "The Items Schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": {},
+                                "examples": [
+                                    {
+                                        "value": "da",
+                                        "option": 1.0
+                                    },
+                                    {
+                                        "option": 2.0,
+                                        "value": "nu"
+                                    }
+                                ],
+                                "additionalProperties": true,
+                                "required": [
+                                    "option",
+                                    "value"
+                                ],
+                                "properties": {
+                                    "option": {
+                                        "$id": "#/items/properties/nodes/items/properties/options/items/properties/option",
+                                        "type": "integer",
+                                        "readOnly": false,
+                                        "writeOnly": false,
+                                        "title": "The Option Schema",
+                                        "description": "An explanation about the purpose of this instance.",
+                                        "default": 0,
+                                        "examples": [
+                                            1
+                                        ]
+                                    },
+                                    "value": {
+                                        "$id": "#/items/properties/nodes/items/properties/options/items/properties/value",
+                                        "type": "string",
+                                        "readOnly": false,
+                                        "writeOnly": false,
+                                        "minLength": 0,
+                                        "title": "The Value Schema",
+                                        "description": "An explanation about the purpose of this instance.",
+                                        "default": "",
+                                        "examples": [
+                                            "da"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "answers": {
+                            "$id": "#/items/properties/nodes/items/properties/answers",
+                            "type": "array",
+                            "readOnly": false,
+                            "writeOnly": false,
+                            "uniqueItems": false,
+                            "minItems": 0,
+                            "minContains": 1,
+                            "title": "The Answers Schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": [],
+                            "additionalItems": true,
+                            "items": {
+                                "$id": "#/items/properties/nodes/items/properties/answers/items",
+                                "type": "object",
+                                "readOnly": false,
+                                "writeOnly": false,
+                                "minProperties": 0,
+                                "title": "The Items Schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": {},
+                                "examples": [
+                                    {
+                                        "result": 2.0,
+                                        "options": [
+                                            1.0
+                                        ]
+                                    },
+                                    {
+                                        "options": [
+                                            2.0
+                                        ],
+                                        "result": 3.0
+                                    }
+                                ],
+                                "additionalProperties": true,
+                                "required": [
+                                    "options",
+                                    "result"
+                                ],
+                                "properties": {
+                                    "options": {
+                                        "$id": "#/items/properties/nodes/items/properties/answers/items/properties/options",
+                                        "type": "array",
+                                        "readOnly": false,
+                                        "writeOnly": false,
+                                        "uniqueItems": false,
+                                        "minItems": 0,
+                                        "minContains": 1,
+                                        "title": "The Options Schema",
+                                        "description": "An explanation about the purpose of this instance.",
+                                        "default": [],
+                                        "additionalItems": true,
+                                        "items": {
+                                            "$id": "#/items/properties/nodes/items/properties/answers/items/properties/options/items",
+                                            "type": "integer",
+                                            "readOnly": false,
+                                            "writeOnly": false,
+                                            "title": "The Items Schema",
+                                            "description": "An explanation about the purpose of this instance.",
+                                            "default": 0,
+                                            "examples": [
+                                                1
+                                            ]
+                                        }
+                                    },
+                                    "result": {
+                                        "$id": "#/items/properties/nodes/items/properties/answers/items/properties/result",
+                                        "type": "integer",
+                                        "readOnly": false,
+                                        "writeOnly": false,
+                                        "title": "The Result Schema",
+                                        "description": "An explanation about the purpose of this instance.",
+                                        "default": 0,
+                                        "examples": [
+                                            2
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

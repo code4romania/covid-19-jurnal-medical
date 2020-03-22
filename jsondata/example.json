@@ -1,0 +1,151 @@
+[
+    {
+        "$schema": "schema.json",
+        "title": "Q1 - Initial - Self",
+        "doc_type":"STATIC_PAGE",
+        "doc_id": 1,
+        "active": true,
+        "display_order": 1,
+        "content": "",
+        "buttons": null,
+        "nodes": [
+            {
+                "node_id": 0,
+                "title": "QUESTION",
+                "type": "SINGLE_CHOICE",
+                "type": "SINGLE_CHOICE_FREE_TEXT",
+                "type": "MULTIPLE_CHOICE",
+                "type": "MULTIPLE_CHOICE_FREE_TEXT",
+                "type": "FINAL",
+                "content": null,
+                "options": [
+                    {
+                        "option": 1,
+                        "value": "da"
+                    },
+                    {
+                        "option": 2,
+                        "value": "nu"
+                    }
+                ],
+                "answers": [
+                    {
+                        "options": [
+                            1
+                        ],
+                        "result": 2
+                    },
+                    {
+                        "options": [
+                            2
+                        ],
+                        "result": 3
+                    }
+                ]
+            },
+            {
+                "node_id": 1,
+                "title": "Ai călătorit recent în afara țării?",
+                "type": "SINGLE_CHOICE",
+                "content": null,
+                "options": [
+                    {
+                        "option": 1,
+                        "value": "da"
+                    },
+                    {
+                        "option": 2,
+                        "value": "nu"
+                    }
+                ],
+                "answers": [
+                    {
+                        "options": [
+                            1
+                        ],
+                        "result": 2
+                    },
+                    {
+                        "options": [
+                            2
+                        ],
+                        "result": 3
+                    }
+                ]
+            },
+            {
+                "node_id": 2,
+                "title": "Ai vreunul dintre simptomele de mai jos (bifează toate opțiunile care se aplică)?",
+                "type": "MULTIPLE_CHOICE",
+                "content": null,
+                "options": [
+                    {
+                        "option": 1,
+                        "value": "temperatură ridicată"
+                    },
+                    {
+                        "option": 2,
+                        "value": "tuse seacă"
+                    },
+                    {
+                        "option": 3,
+                        "value": "dificultate în respirație"
+                    },
+                    {
+                        "option": 4,
+                        "value": "mucozități nazale excesive"
+                    }
+                ],
+                "answers": [
+                    {
+                        "options": [
+                            1
+                        ],
+                        "result": 3
+                    },
+                    {
+                        "options": [
+                            2
+                        ],
+                        "result": 3
+                    },
+                    {
+                        "options": [
+                            3
+                        ],
+                        "result": 3
+                    },
+                    {
+                        "options": [
+                            4
+                        ],
+                        "result": 3
+                    },
+                    {
+                        "options": [
+                            1,
+                            2
+                        ],
+                        "result": 4
+                    }
+                ]
+            },
+            {
+                "node_id": 3,
+                "title": "Conform cu răspunsurile tale, iată ce recomandăm:",
+                "type": "MULTIPLE_CHOICE",
+                "content": "Conform cu răspunsurile tale, iată ce recomandăm: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                "options": null,
+                "answers": null
+            },
+            {
+                "node_id": 4,
+                "title": "Sună la 00000 pentru a cere testarea",
+                "type": "FINAL",
+                "content": "Sună la 00000 pentru a cere testarea. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                "options": null,
+                "answers": null
+            }
+        ]
+    }
+]
