@@ -1,8 +1,19 @@
 import React from "react";
-import AppRouter from "./components/AppRouter";
+import { Route, Switch } from "react-router-dom";
 
 import "./App.scss";
+import { ROUTES } from "./routes";
 
-const App = () => <AppRouter />;
+const App = () => {
+  const appRoutes = Object.values(ROUTES);
+
+  return (
+    <Switch>
+      {appRoutes.map(({ path, component, extraProps }) => (
+        <Route path={path} component={component} key={path} {...extraProps} />
+      ))}
+    </Switch>
+  );
+};
 
 export default App;

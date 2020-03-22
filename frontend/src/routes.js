@@ -1,6 +1,6 @@
-import Home from "../Home";
-import About from "../About";
-import Login from "../Login";
+import Home from "./components/Home";
+import About from "./components/About";
+import Login from "./components/Login";
 
 export const ROUTES = {
   home: {
