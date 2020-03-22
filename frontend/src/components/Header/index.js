@@ -11,7 +11,7 @@ import {
 import { UserThunks } from "../../store/UserReducer";
 import { connect } from "react-redux";
 
-import "./header.css";
+import "./header.scss";
 
 const Header = ({ user, loadUser }) => {
   if (!user) {
@@ -33,13 +33,13 @@ const Header = ({ user, loadUser }) => {
 
   const MenuItems = () => (
     <>
-      <NavLink className="navLink" to="/despre">
+      <NavLink className="nav-link" to="/despre">
         Despre
       </NavLink>
-      <a className="navLink" href="https://code4.ro/ro/apps/">
+      <a className="nav-link" href="https://code4.ro/ro/apps/">
         Ecosistemul Covid-19
       </a>
-      <a className="navLink" href="https://code4.ro/ro/doneaza/">
+      <a className="nav-link" href="https://code4.ro/ro/doneaza/">
         Sprijină proiectul
       </a>
     </>

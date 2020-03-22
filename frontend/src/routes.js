@@ -1,14 +1,19 @@
-import Home from "../Home";
-import About from "../About";
-import SigninRoute from "../OIDC/SigninRoute";
-import PostLogoutRoute from "../OIDC/PostLogoutRoute";
-import SilentRefreshRoute from "../OIDC/SilentRefreshRoute";
+import Home from "./components/Home";
+import About from "./components/About";
+import SigninRoute from "./components/OIDC/SigninRoute";
+import PostLogoutRoute from "./components/OIDC/PostLogoutRoute";
+import SilentRefreshRoute from "./components/OIDC/SilentRefreshRoute";
+import Login from "./components/Login";
 
 export const ROUTES = {
   home: {
     path: "/",
     extraProps: { exact: true },
     component: Home
+  },
+  login: {
+    path: "/login",
+    component: Login
   },
   despre: {
     path: "/despre",

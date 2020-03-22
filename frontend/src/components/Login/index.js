@@ -15,7 +15,7 @@ const Login = () => {
   const [loginData, setState] = useState(initialState);
   return (
     <div className="loginPage">
-      <img src={StamAcasaLogo} style={{ width: 300 }}></img>
+      <img src={StamAcasaLogo} style={{ width: 300 }} alt={"logo"}></img>
       <div style={style}>
         <LoginForm
           rightContent={<Link to="/register">Ai uitat parola?</Link>}
