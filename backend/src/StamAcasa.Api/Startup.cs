@@ -17,22 +17,26 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using StamAcasa.Api;
 using StamAcasa.Api.Common;
 using StamAcasa.Api.Models;
 using StamAcasa.Api.Services;
 using StamAcasa.Common;
 using StamAcasa.Common.Services;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Api
 {
     public class Startup
     {
         private readonly IWebHostEnvironment _environment;
+        private string _swaggerClientName;
 
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             _environment = environment;
             Configuration = configuration;
+            _swaggerClientName = configuration.GetValue<string>("SwaggerOidcClientName");
         }
 
         public IConfiguration Configuration { get; }
@@ -78,6 +82,8 @@ namespace Api
             services.AddDbContext<UserDbContext>(options=>
                 options.UseSqlite(Configuration.GetConnectionString("UserDBConnection")));
             services.AddScoped<IUserService, UserService>();
+
+            services.ConfigureSwagger(Configuration);
         }
 
         public void Configure(IApplicationBuilder app)
@@ -109,6 +115,18 @@ namespace Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.OAuthClientId(_swaggerClientName);
+                c.OAuthAppName("Swagger UI");
+                c.ConfigObject = new ConfigObject {
+                    Urls = new[]
+                    {
+                        new UrlDescriptor{Name = "api", Url = "/swagger/v1/swagger.json"} 
+                    }
+                };
             });
         }
     }
