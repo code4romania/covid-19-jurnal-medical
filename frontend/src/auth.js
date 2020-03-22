@@ -7,7 +7,7 @@ const userManagerSettings = {
   post_logout_redirect_uri: "http://localhost:3000/post-logout",
   automaticSilentRenew: true,
   silent_redirect_uri: "http://localhost:3000/silent-refresh",
-  respone_type: "id_token token",
+  response_type: "id_token token",
   scope: "openid email",
   revokeAccessTokenOnSignout: true,
 
