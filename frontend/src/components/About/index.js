@@ -1,11 +1,9 @@
 import React from "react";
 
+import BasePage from "../BasePage";
+
 const About = () => {
-  return (
-    <div>
-      <h1>About</h1>
-    </div>
-  );
+  return <BasePage>About placeholder</BasePage>;
 };
 
 export default About;
