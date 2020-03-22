@@ -13,7 +13,10 @@ import { connect } from "react-redux";
 
 import "./header.css";
 
-const Header = ({ user }) => {
+const Header = ({ user, loadUser }) => {
+  if (!user) {
+    loadUser();
+  }
   const handleLogin = () => {
     UserThunks.authenticate();
   };
@@ -72,13 +75,15 @@ const mapStateToProps = state => {
   };
 };
 
-Header.propTypes = {
-  user: PropTypes.object
-  //  PropTypes.shape({
-  //     profile: PropTypes.shape({
-  //       email: PropTypes.string.isRequired
-  //     })
-  //   })
+const mapDispatchToProps = dispatch => {
+  return {
+    loadUser: () => UserThunks.loadUser(dispatch)
+  };
 };
 
-export default connect(mapStateToProps)(Header);
+Header.propTypes = {
+  user: PropTypes.object,
+  loadUser: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

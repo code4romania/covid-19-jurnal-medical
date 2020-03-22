@@ -53,7 +53,7 @@ namespace StamAcasa.IdentityServer {
                     RequireClientSecret = false,
                     RequireConsent = false,
 
-                    RedirectUris =           { "http://localhost:3000/signin-oidc" },
+                    RedirectUris =           { "http://localhost:3000/signin-oidc", "http://localhost:3000/silent-refresh" },
                     PostLogoutRedirectUris = { "http://localhost:3000/post-logout" },
                     AllowedCorsOrigins =     { "http://localhost:3000" },
 

@@ -12,7 +12,7 @@ const SilentRefreshRoute = ({ silentRefresh }) => {
 const mapDispatchToProps = dispatch => {
   return {
     silentRefresh: () => {
-      UserThunks.silentRefresh(dispatch);
+      UserThunks.silentRefreshCallback(dispatch);
     }
   };
 };
