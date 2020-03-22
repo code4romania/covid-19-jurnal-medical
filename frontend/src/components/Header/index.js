@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { Header as TFHeader } from "@code4ro/taskforce-fe-components";
 import { DevelopedBy } from "@code4ro/taskforce-fe-components";
 
-import "./header.css";
+import "./header.scss";
 
 const Header = () => {
   const Logo = () => (
@@ -16,13 +16,13 @@ const Header = () => {
 
   const MenuItems = () => (
     <>
-      <NavLink className="navLink" to="/despre">
+      <NavLink className="nav-link" to="/despre">
         Despre
       </NavLink>
-      <a className="navLink" href="https://code4.ro/ro/apps/">
+      <a className="nav-link" href="https://code4.ro/ro/apps/">
         Ecosistemul Covid-19
       </a>
-      <a className="navLink" href="https://code4.ro/ro/doneaza/">
+      <a className="nav-link" href="https://code4.ro/ro/doneaza/">
         Sprijină proiectul
       </a>
     </>
@@ -31,7 +31,7 @@ const Header = () => {
   const ProfileItems = () => (
     <>
       <NavLink to="/">Contul meu</NavLink>
-      <div className="accountSeparator"></div>
+      <div className="account-separator"></div>
       <NavLink to="/login">Login</NavLink>
     </>
   );
