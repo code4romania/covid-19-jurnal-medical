@@ -42,8 +42,8 @@ namespace StamAcasa.Api.Controllers
 
             var timestamp = DateTime.Now.ToEpochTime();
             form.Add("Timestamp", timestamp);
-            form.Add("User", User.Claims.FirstOrDefault(c => c.Type == "email")?.Value);
             var sub = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value);
+            form.Add("User", sub);
 
             var contentToSave = JsonConvert.SerializeObject(form).ToString();
             _fileService.SaveRawData(contentToSave, 
