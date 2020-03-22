@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className="container" id="mainContent">
+      <div className="container main-content">
         <Hero
           title="Ce pași ai de urmat"
           subtitle="Pentru a te putea ajuta iata ce ai la dispozitie in contul tau:"
