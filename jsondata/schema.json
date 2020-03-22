@@ -24,7 +24,7 @@
                 "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                 "active": true,
                 "display_order": 3.0,
-                "nodes": [
+                "form": [
                     {
                         "type": "SINGLE_CHOICE",
                         "title": "Ai călătorit recent în afara țării?",
@@ -144,7 +144,7 @@
             "display_order",
             "content",
             "buttons",
-            "nodes"
+            "form"
         ],
         "properties": {
             "title": {
@@ -233,32 +233,32 @@
                     null
                 ]
             },
-            "nodes-start-id": {
-                "$id": "#/items/properties/nodes-start-id",
+            "form-start-id": {
+                "$id": "#/items/properties/form-start-id",
                 "type": "integer",
                 "readOnly": false,
                 "writeOnly": false,
-                "title": "The nodes-start-id Schema",
+                "title": "The form-start-id Schema",
                 "description": "An explanation about the purpose of this instance.",
                 "default": 0,
                 "examples": [
                     3
                 ]
             },
-            "nodes": {
-                "$id": "#/items/properties/nodes",
+            "form": {
+                "$id": "#/items/properties/form",
                 "type": "array",
                 "readOnly": false,
                 "writeOnly": false,
                 "uniqueItems": false,
                 "minItems": 0,
                 "minContains": 1,
-                "title": "The Nodes Schema",
+                "title": "The form Schema",
                 "description": "An explanation about the purpose of this instance.",
                 "default": [],
                 "additionalItems": true,
                 "items": {
-                    "$id": "#/items/properties/nodes/items",
+                    "$id": "#/items/properties/form/items",
                     "type": "object",
                     "readOnly": false,
                     "writeOnly": false,
@@ -382,7 +382,7 @@
                     ],
                     "properties": {
                         "node_id": {
-                            "$id": "#/items/properties/nodes/items/properties/node_id",
+                            "$id": "#/items/properties/form/items/properties/node_id",
                             "type": "integer",
                             "readOnly": false,
                             "writeOnly": false,
@@ -394,7 +394,7 @@
                             ]
                         },
                         "title": {
-                            "$id": "#/items/properties/nodes/items/properties/title",
+                            "$id": "#/items/properties/form/items/properties/title",
                             "type": "string",
                             "readOnly": false,
                             "writeOnly": false,
@@ -407,7 +407,7 @@
                             ]
                         },
                         "type": {
-                            "$id": "#/items/properties/nodes/items/properties/type",
+                            "$id": "#/items/properties/form/items/properties/type",
                             "type": "string",
                             "enum": ["SINGLE_CHOICE", "SINGLE_CHOICE_FREE_TEXT", "MULTIPLE_CHOICE", "MULTIPLE_CHOICE_FREE_TEXT", "FINAL"],
                             "readOnly": false,
@@ -421,7 +421,7 @@
                             ]
                         },
                         "content": {
-                            "$id": "#/items/properties/nodes/items/properties/content",
+                            "$id": "#/items/properties/form/items/properties/content",
                             "readOnly": false,
                             "writeOnly": false,
                             "title": "The Content Schema",
@@ -432,7 +432,7 @@
                             ]
                         },
                         "options": {
-                            "$id": "#/items/properties/nodes/items/properties/options",
+                            "$id": "#/items/properties/form/items/properties/options",
                             "type": "array",
                             "readOnly": false,
                             "writeOnly": false,
@@ -444,7 +444,7 @@
                             "default": [],
                             "additionalItems": true,
                             "items": {
-                                "$id": "#/items/properties/nodes/items/properties/options/items",
+                                "$id": "#/items/properties/form/items/properties/options/items",
                                 "type": "object",
                                 "readOnly": false,
                                 "writeOnly": false,
@@ -469,7 +469,7 @@
                                 ],
                                 "properties": {
                                     "option": {
-                                        "$id": "#/items/properties/nodes/items/properties/options/items/properties/option",
+                                        "$id": "#/items/properties/form/items/properties/options/items/properties/option",
                                         "type": "integer",
                                         "readOnly": false,
                                         "writeOnly": false,
@@ -481,7 +481,7 @@
                                         ]
                                     },
                                     "value": {
-                                        "$id": "#/items/properties/nodes/items/properties/options/items/properties/value",
+                                        "$id": "#/items/properties/form/items/properties/options/items/properties/value",
                                         "type": "string",
                                         "readOnly": false,
                                         "writeOnly": false,
@@ -497,7 +497,7 @@
                             }
                         },
                         "answers": {
-                            "$id": "#/items/properties/nodes/items/properties/answers",
+                            "$id": "#/items/properties/form/items/properties/answers",
                             "type": "array",
                             "readOnly": false,
                             "writeOnly": false,
@@ -509,7 +509,7 @@
                             "default": [],
                             "additionalItems": true,
                             "items": {
-                                "$id": "#/items/properties/nodes/items/properties/answers/items",
+                                "$id": "#/items/properties/form/items/properties/answers/items",
                                 "type": "object",
                                 "readOnly": false,
                                 "writeOnly": false,
@@ -538,7 +538,7 @@
                                 ],
                                 "properties": {
                                     "options": {
-                                        "$id": "#/items/properties/nodes/items/properties/answers/items/properties/options",
+                                        "$id": "#/items/properties/form/items/properties/answers/items/properties/options",
                                         "type": "array",
                                         "readOnly": false,
                                         "writeOnly": false,
@@ -550,7 +550,7 @@
                                         "default": [],
                                         "additionalItems": true,
                                         "items": {
-                                            "$id": "#/items/properties/nodes/items/properties/answers/items/properties/options/items",
+                                            "$id": "#/items/properties/form/items/properties/answers/items/properties/options/items",
                                             "type": "integer",
                                             "readOnly": false,
                                             "writeOnly": false,
@@ -563,7 +563,7 @@
                                         }
                                     },
                                     "result": {
-                                        "$id": "#/items/properties/nodes/items/properties/answers/items/properties/result",
+                                        "$id": "#/items/properties/form/items/properties/answers/items/properties/result",
                                         "type": "integer",
                                         "readOnly": false,
                                         "writeOnly": false,
