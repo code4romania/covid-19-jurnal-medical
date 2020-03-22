@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "bulma": "^0.8.0",
+    "oidc-client": "^1.10.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
@@ -47,6 +48,10 @@
     "eslint-plugin-react": "^7.19.0",
     "husky": "^4.2.3",
     "node-sass": "^4.13.1",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
   }
 }

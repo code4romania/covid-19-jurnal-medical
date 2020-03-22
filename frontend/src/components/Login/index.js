@@ -1,21 +1,27 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { LoginForm } from "@code4ro/taskforce-fe-components";
-
-import { ReactComponent as LogoSvg } from "../../assets/stamacasa.svg";
-
-import "./login.scss";
+import StamAcasaLogo from "../../images/stamacasa.svg";
+import "./Login.scss";
 
 const Login = () => {
+  const style = { minWidth: 300, maxWidth: 400 };
+  const initialState = {
+    email: "",
+    password: "",
+    remember: true
+  };
+
+  const [loginData, setState] = useState(initialState);
   return (
-    <div className="login">
-      <div className="logo-wrapper">
-        <NavLink to="/">
-          <LogoSvg />
-        </NavLink>
-      </div>
-      <div className="login-wrapper">
-        <LoginForm rightContent={<NavLink to="/">Ai uitat parola?</NavLink>} />
+    <div className="loginPage">
+      <img src={StamAcasaLogo} style={{ width: 300 }} alt={"logo"}></img>
+      <div style={style}>
+        <LoginForm
+          rightContent={<Link to="/register">Ai uitat parola?</Link>}
+          initialState={loginData}
+          onSubmit={setState}
+        />
       </div>
     </div>
   );

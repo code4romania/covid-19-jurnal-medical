@@ -1,5 +1,8 @@
 import Home from "./components/Home";
 import About from "./components/About";
+import SigninRoute from "./components/OIDC/SigninRoute";
+import PostLogoutRoute from "./components/OIDC/PostLogoutRoute";
+import SilentRefreshRoute from "./components/OIDC/SilentRefreshRoute";
 import Login from "./components/Login";
 
 export const ROUTES = {
@@ -27,5 +30,17 @@ export const ROUTES = {
   addmember: {
     path: "/add-member",
     component: () => "Placeholder addmember"
+  },
+  oidcSignin: {
+    path: "/signin-oidc",
+    component: SigninRoute
+  },
+  oidcPosLogout: {
+    path: "/post-logout",
+    component: PostLogoutRoute
+  },
+  oidcSilentRefresh: {
+    path: "/silent-refresh",
+    component: SilentRefreshRoute
   }
 };

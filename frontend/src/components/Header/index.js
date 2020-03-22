@@ -1,13 +1,30 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { ReactComponent as LogoSvg } from "../../assets/stamacasa.svg";
 import { NavLink } from "react-router-dom";
-import { Header as TFHeader } from "@code4ro/taskforce-fe-components";
-import { DevelopedBy } from "@code4ro/taskforce-fe-components";
+import {
+  Header as TFHeader,
+  DevelopedBy,
+  Button
+} from "@code4ro/taskforce-fe-components";
+import { UserThunks } from "../../store/UserReducer";
+import { connect } from "react-redux";
 
 import "./header.scss";
 
-const Header = () => {
+const Header = ({ user, loadUser }) => {
+  if (!user) {
+    loadUser();
+  }
+  const handleLogin = () => {
+    UserThunks.authenticate();
+  };
+
+  const handleLogout = () => {
+    UserThunks.logout();
+  };
+
   const Logo = () => (
     <NavLink to="/">
       <LogoSvg />
@@ -31,8 +48,12 @@ const Header = () => {
   const ProfileItems = () => (
     <>
       <NavLink to="/">Contul meu</NavLink>
-      <div className="account-separator"></div>
-      <NavLink to="/login">Login</NavLink>
+      <div className="accountSeparator"></div>
+      {user ? (
+        <Button onClick={handleLogout}>Logout</Button>
+      ) : (
+        <Button onClick={handleLogin}>Login</Button>
+      )}
     </>
   );
 
@@ -48,4 +69,21 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    user: state.UserReducer.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loadUser: () => UserThunks.loadUser(dispatch)
+  };
+};
+
+Header.propTypes = {
+  user: PropTypes.object,
+  loadUser: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

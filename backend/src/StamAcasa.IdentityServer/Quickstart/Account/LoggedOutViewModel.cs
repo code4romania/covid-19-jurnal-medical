@@ -10,7 +10,7 @@ namespace IdentityServer.Quickstart.Account
         public string ClientName { get; set; }
         public string SignOutIframeUrl { get; set; }
 
-        public bool AutomaticRedirectAfterSignOut { get; set; }
+        public bool AutomaticRedirectAfterSignOut { get; set; } = true;
 
         public string LogoutId { get; set; }
         public bool TriggerExternalSignout => ExternalAuthenticationScheme != null;
