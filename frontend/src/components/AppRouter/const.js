@@ -1,11 +1,16 @@
 import Home from "../Home";
 import About from "../About";
+import Login from "../Login";
 
 export const ROUTES = {
   home: {
     path: "/",
     extraProps: { exact: true },
     component: Home
+  },
+  login: {
+    path: "/login",
+    component: Login
   },
   despre: {
     path: "/despre",
