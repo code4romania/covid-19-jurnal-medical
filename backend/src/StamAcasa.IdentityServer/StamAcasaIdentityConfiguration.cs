@@ -61,7 +61,7 @@ namespace StamAcasa.IdentityServer {
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Email,
-                        "answersApi"
+                        "answersApi","usersApi"
                     },
                     AllowAccessTokensViaBrowser = true,
                     AccessTokenType = AccessTokenType.Reference
