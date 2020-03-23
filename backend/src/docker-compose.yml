@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  stamacasa.identityserver:
+    image: ${DOCKER_REGISTRY-}stamacasaidentityserver
+    build:
+      context: .
+      dockerfile: StamAcasa.IdentityServer/Dockerfile
+
+  stamacasa.api:
+    image: ${DOCKER_REGISTRY-}stamacasaapi
+    build:
+      context: .
+      dockerfile: StamAcasa.Api/Dockerfile
+
