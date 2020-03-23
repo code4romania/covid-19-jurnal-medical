@@ -5,8 +5,7 @@ import { ReactComponent as LogoSvg } from "../../assets/stamacasa.svg";
 import { NavLink } from "react-router-dom";
 import {
   Header as TFHeader,
-  DevelopedBy,
-  Button
+  DevelopedBy
 } from "@code4ro/taskforce-fe-components";
 import { UserThunks } from "../../store/UserReducer";
 import { connect } from "react-redux";
@@ -36,25 +35,23 @@ const Header = ({ user, loadUser }) => {
       <NavLink className="nav-link" to="/despre">
         Despre
       </NavLink>
-      <a className="nav-link" href="https://code4.ro/ro/apps/">
-        Ecosistemul Covid-19
-      </a>
-      <a className="nav-link" href="https://code4.ro/ro/doneaza/">
-        Sprijină proiectul
-      </a>
+      <a href="https://code4.ro/ro/apps/">Ecosistemul Covid-19</a>
+      <a href="https://code4.ro/ro/doneaza/">Sprijină proiectul</a>
     </>
   );
 
   const ProfileItems = () => (
-    <>
-      <NavLink to="/">Contul meu</NavLink>
-      <div className="accountSeparator"></div>
+    <span className="account-items">
       {user ? (
-        <Button onClick={handleLogout}>Logout</Button>
+        <>
+          <NavLink to="/">Contul meu</NavLink>
+          <div className="account-separator"></div>
+          <a onClick={handleLogout}>Logout</a>
+        </>
       ) : (
-        <Button onClick={handleLogin}>Login</Button>
+        <a onClick={handleLogin}>Login</a>
       )}
-    </>
+    </span>
   );
 
   return (
