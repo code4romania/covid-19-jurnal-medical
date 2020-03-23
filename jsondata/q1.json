@@ -16,7 +16,7 @@
             "options": [
                 {
                     "placeholder": "Introdu aici varsta ta",
-                    "type": "date"
+                    "optionType": "date"
                 }
             ]
         },

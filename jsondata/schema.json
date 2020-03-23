@@ -3,15 +3,26 @@
     "definitions": {
         "option": {
             "type": "object",
+            "required": ["label"],
+            "description": "If the `value` field is missing, the answer value will become the label",
             "properties": {
                 "label": {
                     "type": "string"
                 },
+                "value": {
+                    "type": [
+                        "string",
+                        "boolean"
+                    ]
+                }
+            }
+        },
+        "inputOption": {
+            "type": "object",
+            "required": ["placeholder", "optionType"],
+            "properties": {
                 "placeholder": {
                     "type": "string"
-                },
-                "value": {
-                    "type": ["string", "boolean"]
                 },
                 "optionType": {
                     "enum": [
@@ -52,7 +63,14 @@
                 "options": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/option"
+                        "oneOf": [
+                            {
+                                "$ref": "#/definitions/option"
+                            },
+                            {
+                                "$ref": "#/definitions/inputOption"
+                            }
+                        ]
                     }
                 },
                 "answers": {
