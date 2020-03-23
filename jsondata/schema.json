@@ -19,122 +19,6 @@
         "title": "The Items Schema",
         "description": "An explanation about the purpose of this instance.",
         "default": {},
-        "examples": [
-            {
-                "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                "active": true,
-                "display_order": 3.0,
-                "form": [
-                    {
-                        "type": "SINGLE_CHOICE",
-                        "title": "Ai călătorit recent în afara țării?",
-                        "content": null,
-                        "options": [
-                            {
-                                "value": "da",
-                                "option": 1.0
-                            },
-                            {
-                                "option": 2.0,
-                                "value": "nu"
-                            }
-                        ],
-                        "node_id": 1.0,
-                        "answers": [
-                            {
-                                "options": [
-                                    1.0
-                                ],
-                                "result": 2.0
-                            },
-                            {
-                                "result": 3.0,
-                                "options": [
-                                    2.0
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "node_id": 2.0,
-                        "answers": [
-                            {
-                                "result": 3.0,
-                                "options": [
-                                    1.0
-                                ]
-                            },
-                            {
-                                "options": [
-                                    2.0
-                                ],
-                                "result": 3.0
-                            },
-                            {
-                                "options": [
-                                    3.0
-                                ],
-                                "result": 3.0
-                            },
-                            {
-                                "options": [
-                                    4.0
-                                ],
-                                "result": 3.0
-                            },
-                            {
-                                "result": 4.0,
-                                "options": [
-                                    1.0,
-                                    2.0
-                                ]
-                            }
-                        ],
-                        "type": "MULTIPLE_CHOICE",
-                        "title": "Ai vreunul dintre simptomele de mai jos (bifează toate opțiunile care se aplică)?",
-                        "content": null,
-                        "options": [
-                            {
-                                "value": "temperatură ridicată",
-                                "option": 1.0
-                            },
-                            {
-                                "option": 2.0,
-                                "value": "tuse seacă"
-                            },
-                            {
-                                "value": "dificultate în respirație",
-                                "option": 3.0
-                            },
-                            {
-                                "option": 4.0,
-                                "value": "mucozități nazale excesive"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "FINAL",
-                        "title": "Conform cu răspunsurile tale, iată ce recomandăm:",
-                        "content": "Conform cu răspunsurile tale, iată ce recomandăm: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                        "options": null,
-                        "node_id": 3.0,
-                        "answers": null
-                    },
-                    {
-                        "content": "Sună la 00000 pentru a cere testarea. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                        "options": null,
-                        "node_id": 4.0,
-                        "answers": null,
-                        "type": "FINAL",
-                        "title": "Sună la 00000 pentru a cere testarea"
-                    }
-                ],
-                "doc_id": 103.0,
-                "buttons": null,
-                "doc_type": "STATIC_PAGE",
-                "title": "Simptome și tratament"
-            }
-        ],
         "additionalProperties": true,
         "required": [
             "title",
@@ -233,13 +117,13 @@
                     null
                 ]
             },
-            "form-start-id": {
-                "$id": "#/items/properties/form-start-id",
+            "firstNodeId": {
+                "$id": "#/items/properties/firstNodeId",
                 "type": "integer",
                 "readOnly": false,
                 "writeOnly": false,
-                "title": "The form-start-id Schema",
-                "description": "An explanation about the purpose of this instance.",
+                "title": "The firstNodeId Schema",
+                "description": "Id of the first question from the form (starting question id)",
                 "default": 0,
                 "examples": [
                     3
@@ -254,7 +138,7 @@
                 "minItems": 0,
                 "minContains": 1,
                 "title": "The form Schema",
-                "description": "An explanation about the purpose of this instance.",
+                "description": "A collection of Questions and their relationships",
                 "default": [],
                 "additionalItems": true,
                 "items": {
@@ -266,135 +150,31 @@
                     "title": "The Items Schema",
                     "description": "An explanation about the purpose of this instance.",
                     "default": {},
-                    "examples": [
-                        {
-                            "title": "Ai călătorit recent în afara țării?",
-                            "content": null,
-                            "options": [
-                                {
-                                    "option": 1.0,
-                                    "value": "da"
-                                },
-                                {
-                                    "option": 2.0,
-                                    "value": "nu"
-                                }
-                            ],
-                            "node_id": 1.0,
-                            "answers": [
-                                {
-                                    "result": 2.0,
-                                    "options": [
-                                        1.0
-                                    ]
-                                },
-                                {
-                                    "options": [
-                                        2.0
-                                    ],
-                                    "result": 3.0
-                                }
-                            ],
-                            "type": "SINGLE_CHOICE"
-                        },
-                        {
-                            "node_id": 2.0,
-                            "answers": [
-                                {
-                                    "result": 3.0,
-                                    "options": [
-                                        1.0
-                                    ]
-                                },
-                                {
-                                    "result": 3.0,
-                                    "options": [
-                                        2.0
-                                    ]
-                                },
-                                {
-                                    "options": [
-                                        3.0
-                                    ],
-                                    "result": 3.0
-                                },
-                                {
-                                    "result": 3.0,
-                                    "options": [
-                                        4.0
-                                    ]
-                                },
-                                {
-                                    "options": [
-                                        1.0,
-                                        2.0
-                                    ],
-                                    "result": 4.0
-                                }
-                            ],
-                            "type": "MULTIPLE_CHOICE",
-                            "title": "Ai vreunul dintre simptomele de mai jos (bifează toate opțiunile care se aplică)?",
-                            "content": null,
-                            "options": [
-                                {
-                                    "value": "temperatură ridicată",
-                                    "option": 1.0
-                                },
-                                {
-                                    "value": "tuse seacă",
-                                    "option": 2.0
-                                },
-                                {
-                                    "value": "dificultate în respirație",
-                                    "option": 3.0
-                                },
-                                {
-                                    "value": "mucozități nazale excesive",
-                                    "option": 4.0
-                                }
-                            ]
-                        },
-                        {
-                            "title": "Conform cu răspunsurile tale, iată ce recomandăm:",
-                            "content": "Conform cu răspunsurile tale, iată ce recomandăm: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            "options": null,
-                            "node_id": 3.0,
-                            "answers": null,
-                            "type": "FINAL"
-                        },
-                        {
-                            "content": "Sună la 00000 pentru a cere testarea. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            "options": null,
-                            "node_id": 4.0,
-                            "answers": null,
-                            "type": "FINAL",
-                            "title": "Sună la 00000 pentru a cere testarea"
-                        }
-                    ],
                     "additionalProperties": true,
                     "required": [
-                        "node_id",
-                        "title",
+                        "questionId",
+                        "questionText",
                         "type",
                         "content",
                         "options",
                         "answers"
                     ],
                     "properties": {
-                        "node_id": {
-                            "$id": "#/items/properties/form/items/properties/node_id",
+                        "questionId": {
+                            "$id": "#/items/properties/form/items/properties/questionId",
                             "type": "integer",
                             "readOnly": false,
                             "writeOnly": false,
-                            "title": "The Node_id Schema",
+                            "title": "The questionId Schema",
                             "description": "An explanation about the purpose of this instance.",
                             "default": 0,
+                            "unique": true,
                             "examples": [
                                 1
                             ]
                         },
-                        "title": {
-                            "$id": "#/items/properties/form/items/properties/title",
+                        "questionText": {
+                            "$id": "#/items/properties/form/items/properties/questionText",
                             "type": "string",
                             "readOnly": false,
                             "writeOnly": false,
@@ -409,7 +189,7 @@
                         "type": {
                             "$id": "#/items/properties/form/items/properties/type",
                             "type": "string",
-                            "enum": ["SINGLE_CHOICE", "SINGLE_CHOICE_FREE_TEXT", "MULTIPLE_CHOICE", "MULTIPLE_CHOICE_FREE_TEXT", "FINAL"],
+                            "enum": ["SINGLE_CHOICE", "MULTIPLE_CHOICE", "FINAL"],
                             "readOnly": false,
                             "writeOnly": false,
                             "minLength": 0,
