@@ -19,7 +19,7 @@
         },
         "inputOption": {
             "type": "object",
-            "required": ["placeholder", "optionType"],
+            "required": ["optionType"],
             "properties": {
                 "placeholder": {
                     "type": "string"

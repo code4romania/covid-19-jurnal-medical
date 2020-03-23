@@ -15,7 +15,6 @@
             "questionType": "INPUT",
             "options": [
                 {
-                    "placeholder": "Introdu aici varsta ta",
                     "optionType": "date"
                 }
             ]
@@ -171,8 +170,12 @@
         {
             "questionId": 0,
             "questionText": "De ce altă boală cronică suferi?",
-            "questionType": "SINGLE_CHOICE",
-            "options": []
+            "questionType": "INPUT",
+            "options": [
+                {
+                    "optionType": "string"
+                }
+            ]
         },
         {
             "questionId": 0,
@@ -207,8 +210,12 @@
         {
             "questionId": 0,
             "questionText": "Din ce dată ai avut prima dată febră?",
-            "questionType": "SINGLE_CHOICE",
-            "options": []
+            "questionType": "INPUT",
+            "options": [
+                {
+                    "optionType": "date"
+                }
+            ]
         },
         {
             "questionId": 0,
@@ -228,8 +235,12 @@
         {
             "questionId": 0,
             "questionText": "Din ce dată ai avut durere în gât și/sau dificultate în a înghiți?",
-            "questionType": "SINGLE_CHOICE",
-            "options": []
+            "questionType": "INPUT",
+            "options": [
+                {
+                    "optionType": "date"
+                }
+            ]
         },
         {
             "questionId": 0,
@@ -249,8 +260,12 @@
         {
             "questionId": 0,
             "questionText": "Din ce data ai avut tuse?",
-            "questionType": "SINGLE_CHOICE",
-            "options": []
+            "questionType": "INPUT",
+            "options": [
+                {
+                    "optionType": "date"
+                }
+            ]
         },
         {
             "questionId": 0,
@@ -270,8 +285,12 @@
         {
             "questionId": 0,
             "questionText": "Din ce dată ai avut dificultate în a respira?",
-            "questionType": "SINGLE_CHOICE",
-            "options": []
+            "questionType": "INPUT",
+            "options": [
+                {
+                    "optionType": "date"
+                }
+            ]
         },
         {
             "questionId": 0,
@@ -291,8 +310,12 @@
         {
             "questionId": 0,
             "questionText": "Din ce dată ţi-a curs nasul?",
-            "questionType": "SINGLE_CHOICE",
-            "options": []
+            "questionType": "INPUT",
+            "options": [
+                {
+                    "optionType": "date"
+                }
+            ]
         },
         {
             "questionId": 0,
@@ -312,12 +335,16 @@
         {
             "questionId": 0,
             "questionText": "Te rugam sa le descrii",
-            "questionType": "SINGLE_CHOICE",
-            "options": []
+            "questionType": "INPUT",
+            "options": [
+                {
+                    "optionType": "string"
+                }
+            ]
         },
         {
             "questionId": 0,
-            "questionText": "Gândindu-te la perioada de 14 zile înainte de a avea primul simptom/semn de răceală sau gripă:",
+            "questionText": " ----- this is a section; Gândindu-te la perioada de 14 zile înainte de a avea primul simptom/semn de răceală sau gripă:",
             "questionType": "SINGLE_CHOICE",
             "options": []
         },
@@ -339,8 +366,12 @@
         {
             "questionId": 0,
             "questionText": "Te rugăm să specifici zona/țara la care te referi",
-            "questionType": "SINGLE_CHOICE",
-            "options": []
+            "questionType": "INPUT",
+            "options": [
+                {
+                    "optionType": "string"
+                }
+            ]
         },
         {
             "questionId": 0,
@@ -360,8 +391,12 @@
         {
             "questionId": 0,
             "questionText": "Te rugăm să specifici unde",
-            "questionType": "SINGLE_CHOICE",
-            "options": []
+            "questionType": "INPUT",
+            "options": [
+                {
+                    "optionType": "string"
+                }
+            ]
         },
         {
             "questionId": 0,
@@ -397,13 +432,39 @@
             "questionId": 0,
             "questionText": "În momentul de față, te afli în izolare la domiciliu?",
             "questionType": "SINGLE_CHOICE",
-            "options": []
+            "options": [
+                {
+                    "label": "Da, sunt in izolare - nu ies deloc din locuinta"
+                },
+                {
+                    "label": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie"
+                },
+                {
+                    "label": "Nu sunt in izolare si ies din locuinta dupa program normal"
+                },
+                {
+                    "label": "Alta situatie"
+                }
+            ]
         },
         {
             "questionId": 0,
-            "questionType": "SINGLE_CHOICE",
             "questionText": "Celelalte persoane din locuință se află în izolare la domiciliu?",
-            "options": []
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da, sunt in izolare - nu ies deloc din locuinta"
+                },
+                {
+                    "label": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie"
+                },
+                {
+                    "label": "Nu sunt in izolare si ies din locuinta dupa program normal"
+                },
+                {
+                    "label": "Alta situatie"
+                }
+            ]
         }
     ]
 }
