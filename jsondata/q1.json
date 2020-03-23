@@ -1,400 +1,409 @@
-[
-    {
-        "$schema": "schema.json",
-        "title": "Ai simptome?",
-        "doc_type": "STATIC_PAGE",
-        "doc_id": 103,
-        "active": false,
-        "display_order": 3,
-        "content": "asdasd",
-        "buttons": null,
-        "firstNodeId": 1,
-        "form": [
-            {
-                "questionId": 1,
-                "questionText": "Care este vârsta ta în ani împliniţi?",
-                "type": "SINGLE_CHOICE",
-                "options": []
-            },
-            {
-                "questionId": 2,
-                "questionText": "Care este sexul tău?",
-                "type": "SINGLE_CHOICE",
-                "options": []
-            },
-            {
-                "questionId": 3,
-                "questionText": "Ești însărcinată?",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 4,
-                "questionText": "Ai născut în ultimele 6 luni?",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 5,
-                "questionText": "Ești fumător/fumătoare? (inclusiv țigări electronice)",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 5,
-                "questionText": "Ti-a  spus vreun medic că ai oricare dintre următoarele afecțiuni?",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "O boală de inimă? (boală cardiovasculară inclusiv hipertensiune)",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "Diabet",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "O boală a plămânilor? (pulmonară)",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "Cancer (boală oncologică)",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "Altă boală cronică ",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "De ce altă boală cronică suferi?",
-                "type": "SINGLE_CHOICE",
-                "options": []
-            },
-            {
-                "questionId": 0,
-                "questionText": "Ai avut in ultimele 14 zile orice semn/simptom de raceală sau gripă?",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "Ai avut febra 38 grade celsius sau mai mare?",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "Din ce dată ai avut prima dată febră?",
-                "type": "SINGLE_CHOICE",
-                "options": []
-            },
-            {
-                "questionId": 0,
-                "questionText": "Ai avut durere în gât și/sau dificultate în a înghiți?",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "Din ce dată ai avut durere în gât și/sau dificultate în a înghiți?",
-                "type": "SINGLE_CHOICE",
-                "options": []
-            },
-            {
-                "questionId": 0,
-                "questionText": "Ai avut tuse intensă?",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "Din ce data ai avut tuse?",
-                "type": "SINGLE_CHOICE",
-                "options": []
-            },
-            {
-                "questionId": 0,
-                "questionText": "Ai avut dificultate în a respira?",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "Din ce dată ai avut dificultate în a respira?",
-                "type": "SINGLE_CHOICE",
-                "options": []
-            },
-            {
-                "questionId": 0,
-                "questionText": "Ți-a curs nasul?",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "Din ce dată ţi-a curs nasul?",
-                "type": "SINGLE_CHOICE",
-                "options": []
-            },
-            {
-                "questionId": 0,
-                "questionText": "Alte simptome",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "Te rugam sa le descrii",
-                "type": "SINGLE_CHOICE",
-                "options": []
-            },
-            {
-                "questionId": 0,
-                "questionText": "Gândindu-te la perioada de 14 zile înainte de a avea primul simptom/semn de răceală sau gripă:",
-                "type": "SINGLE_CHOICE",
-                "options": []
-            },
-            {
-                "questionId": 0,
-                "questionText": "Ai călătorit în/prin zone în care au existat cazuri de noul coronavirus?",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "Te rugăm să specifici zona/țara la care te referi",
-                "type": "SINGLE_CHOICE",
-                "options": []
-            },
-            {
-                "questionId": 0,
-                "questionText": "Ai fost la un spital sau în incinta oricărui alt serviciu medical?",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "Te rugăm să specifici unde",
-                "type": "SINGLE_CHOICE",
-                "options": []
-            },
-            {
-                "questionId": 0,
-                "questionText": "Ai fost în contact direct cu o persoană diagnosticată/ confirmată cu noul coronavirus?",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "În momentul de față, împarți locuința și cu alte persoane?",
-                "type": "SINGLE_CHOICE",
-                "options": [
-                    {
-                        "label": "Da",
-                        "value": true
-                    },
-                    {
-                        "label": "Nu",
-                        "value": false
-                    }
-                ]
-            },
-            {
-                "questionId": 0,
-                "questionText": "În momentul de față, te afli în izolare la domiciliu?",
-                "type": "SINGLE_CHOICE",
-                "options": []
-            },
-            {
-                "questionId": 0,
-            "type": "SINGLE_CHOICE",
-            
-                "questionText": "Celelalte persoane din locuință se află în izolare la domiciliu?",
-                "options": []
-            }
-        ]
-    }
-]
+{
+    "$schema": "./schema.json",
+    "title": "Ai simptome?",
+    "doc_type": "STATIC_PAGE",
+    "doc_id": 103,
+    "active": false,
+    "display_order": 3,
+    "content": "asdasd",
+    "buttons": null,
+    "firstNodeId": 1,
+    "form": [
+        {
+            "questionId": 1,
+            "questionText": "Care este vârsta ta în ani împliniţi?",
+            "questionType": "INPUT",
+            "options": [
+                {
+                    "placeholder": "Introdu aici varsta ta",
+                    "type": "date"
+                }
+            ]
+        },
+        {
+            "questionId": 2,
+            "questionText": "Care este sexul tău?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Masculin"
+                },
+                {
+                    "label": "Feminin"
+                }
+            ]
+        },
+        {
+            "questionId": 3,
+            "questionText": "Ești însărcinată?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 4,
+            "questionText": "Ai născut în ultimele 6 luni?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 5,
+            "questionText": "Ești fumător/fumătoare? (inclusiv țigări electronice)",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 5,
+            "questionText": "Ti-a  spus vreun medic că ai oricare dintre următoarele afecțiuni?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "O boală de inimă? (boală cardiovasculară inclusiv hipertensiune)",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "Diabet",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "O boală a plămânilor? (pulmonară)",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "Cancer (boală oncologică)",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "Altă boală cronică ",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "De ce altă boală cronică suferi?",
+            "questionType": "SINGLE_CHOICE",
+            "options": []
+        },
+        {
+            "questionId": 0,
+            "questionText": "Ai avut in ultimele 14 zile orice semn/simptom de raceală sau gripă?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "Ai avut febra 38 grade celsius sau mai mare?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "Din ce dată ai avut prima dată febră?",
+            "questionType": "SINGLE_CHOICE",
+            "options": []
+        },
+        {
+            "questionId": 0,
+            "questionText": "Ai avut durere în gât și/sau dificultate în a înghiți?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "Din ce dată ai avut durere în gât și/sau dificultate în a înghiți?",
+            "questionType": "SINGLE_CHOICE",
+            "options": []
+        },
+        {
+            "questionId": 0,
+            "questionText": "Ai avut tuse intensă?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "Din ce data ai avut tuse?",
+            "questionType": "SINGLE_CHOICE",
+            "options": []
+        },
+        {
+            "questionId": 0,
+            "questionText": "Ai avut dificultate în a respira?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "Din ce dată ai avut dificultate în a respira?",
+            "questionType": "SINGLE_CHOICE",
+            "options": []
+        },
+        {
+            "questionId": 0,
+            "questionText": "Ți-a curs nasul?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "Din ce dată ţi-a curs nasul?",
+            "questionType": "SINGLE_CHOICE",
+            "options": []
+        },
+        {
+            "questionId": 0,
+            "questionText": "Alte simptome",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "Te rugam sa le descrii",
+            "questionType": "SINGLE_CHOICE",
+            "options": []
+        },
+        {
+            "questionId": 0,
+            "questionText": "Gândindu-te la perioada de 14 zile înainte de a avea primul simptom/semn de răceală sau gripă:",
+            "questionType": "SINGLE_CHOICE",
+            "options": []
+        },
+        {
+            "questionId": 0,
+            "questionText": "Ai călătorit în/prin zone în care au existat cazuri de noul coronavirus?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "Te rugăm să specifici zona/țara la care te referi",
+            "questionType": "SINGLE_CHOICE",
+            "options": []
+        },
+        {
+            "questionId": 0,
+            "questionText": "Ai fost la un spital sau în incinta oricărui alt serviciu medical?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "Te rugăm să specifici unde",
+            "questionType": "SINGLE_CHOICE",
+            "options": []
+        },
+        {
+            "questionId": 0,
+            "questionText": "Ai fost în contact direct cu o persoană diagnosticată/ confirmată cu noul coronavirus?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "În momentul de față, împarți locuința și cu alte persoane?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 0,
+            "questionText": "În momentul de față, te afli în izolare la domiciliu?",
+            "questionType": "SINGLE_CHOICE",
+            "options": []
+        },
+        {
+            "questionId": 0,
+            "questionType": "SINGLE_CHOICE",
+            "questionText": "Celelalte persoane din locuință se află în izolare la domiciliu?",
+            "options": []
+        }
+    ]
+}

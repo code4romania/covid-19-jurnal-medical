@@ -1,365 +1,194 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "http://example.com/example.json",
-    "type": "array",
-    "readOnly": false,
-    "writeOnly": false,
-    "uniqueItems": false,
-    "minItems": 0,
-    "minContains": 1,
-    "title": "The Root Schema",
-    "description": "The root schema comprises the entire JSON document.",
-    "additionalItems": true,
-    "items": {
-        "$id": "#/items",
-        "type": "object",
-        "readOnly": false,
-        "writeOnly": false,
-        "minProperties": 0,
-        "title": "The Items Schema",
-        "description": "An explanation about the purpose of this instance.",
-        "default": {},
-        "additionalProperties": true,
-        "required": [
-            "title",
-            "doc_type",
-            "doc_id",
-            "active",
-            "display_order",
-            "content",
-            "buttons",
-            "form"
-        ],
-        "properties": {
-            "title": {
-                "$id": "#/items/properties/title",
-                "type": "string",
+    "definitions": {
+        "option": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "placeholder": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": ["string", "boolean"]
+                },
+                "optionType": {
+                    "enum": [
+                        "date",
+                        "string",
+                        "number"
+                    ]
+                }
+            }
+        },
+        "question": {
+            "type": "object",
+            "required": [
+                "questionId",
+                "questionText",
+                "questionType",
+                "options"
+            ],
+            "properties": {
+                "questionId": {
+                    "type": "integer",
+                    "unique": true
+                },
+                "questionText": {
+                    "type": "string"
+                },
+                "questionType": {
+                    "enum": [
+                        "SINGLE_CHOICE",
+                        "MULTIPLE_CHOICE",
+                        "INPUT",
+                        "FINAL"
+                    ]
+                },
+                "content": {
+                    "type": "string"
+                },
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/option"
+                    }
+                },
+                "answers": {
+                    "type": "array"
+                }
+            }
+        },
+        "form": {
+            "type": "array",
+            "minItems": 0,
+            "minContains": 1,
+            "title": "The form Schema",
+            "description": "A collection of Questions and their relationships",
+            "items": {
+                "$ref": "#/definitions/question"
+            }
+        },
+        "answer": {
+            "type": "array",
+            "readOnly": false,
+            "writeOnly": false,
+            "uniqueItems": false,
+            "minItems": 0,
+            "minContains": 1,
+            "title": "The Answers Schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/items/properties/form/items/properties/answers/items",
+                "type": "object",
                 "readOnly": false,
                 "writeOnly": false,
-                "minLength": 0,
-                "title": "The Title Schema",
+                "minProperties": 0,
+                "title": "The Items Schema",
                 "description": "An explanation about the purpose of this instance.",
-                "default": "",
+                "default": {},
                 "examples": [
-                    "Simptome și tratament"
-                ]
-            },
-            "doc_type": {
-                "$id": "#/items/properties/doc_type",
-                "type": "string",
-                "readOnly": false,
-                "writeOnly": false,
-                "minLength": 0,
-                "title": "The Doc_type Schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": "",
-                "examples": [
-                    "STATIC_PAGE"
-                ]
-            },
-            "doc_id": {
-                "$id": "#/items/properties/doc_id",
-                "type": "integer",
-                "readOnly": false,
-                "writeOnly": false,
-                "title": "The Doc_id Schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": 0,
-                "examples": [
-                    103
-                ]
-            },
-            "active": {
-                "$id": "#/items/properties/active",
-                "type": "boolean",
-                "readOnly": false,
-                "writeOnly": false,
-                "title": "The Active Schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": false,
-                "examples": [
-                    true
-                ]
-            },
-            "display_order": {
-                "$id": "#/items/properties/display_order",
-                "type": "integer",
-                "readOnly": false,
-                "writeOnly": false,
-                "title": "The Display_order Schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": 0,
-                "examples": [
-                    3
-                ]
-            },
-            "content": {
-                "$id": "#/items/properties/content",
-                "type": "string",
-                "readOnly": false,
-                "writeOnly": false,
-                "minLength": 0,
-                "title": "The Content Schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": "",
-                "examples": [
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-                ]
-            },
-            "buttons": {
-                "$id": "#/items/properties/buttons",
-                "readOnly": false,
-                "writeOnly": false,
-                "title": "The Buttons Schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": null,
-                "examples": [
-                    null
-                ]
-            },
-            "firstNodeId": {
-                "$id": "#/items/properties/firstNodeId",
-                "type": "integer",
-                "readOnly": false,
-                "writeOnly": false,
-                "title": "The firstNodeId Schema",
-                "description": "Id of the first question from the form (starting question id)",
-                "default": 0,
-                "examples": [
-                    3
-                ]
-            },
-            "form": {
-                "$id": "#/items/properties/form",
-                "type": "array",
-                "readOnly": false,
-                "writeOnly": false,
-                "uniqueItems": false,
-                "minItems": 0,
-                "minContains": 1,
-                "title": "The form Schema",
-                "description": "A collection of Questions and their relationships",
-                "default": [],
-                "additionalItems": true,
-                "items": {
-                    "$id": "#/items/properties/form/items",
-                    "type": "object",
-                    "readOnly": false,
-                    "writeOnly": false,
-                    "minProperties": 0,
-                    "title": "The Items Schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "additionalProperties": true,
-                    "required": [
-                        "questionId",
-                        "questionText",
-                        "type",
-                        "content",
-                        "options",
-                        "answers"
-                    ],
-                    "properties": {
-                        "questionId": {
-                            "$id": "#/items/properties/form/items/properties/questionId",
+                    {
+                        "result": 2.0,
+                        "options": [
+                            1.0
+                        ]
+                    },
+                    {
+                        "options": [
+                            2.0
+                        ],
+                        "result": 3.0
+                    }
+                ],
+                "additionalProperties": true,
+                "required": [
+                    "options",
+                    "result"
+                ],
+                "properties": {
+                    "options": {
+                        "$id": "#/items/properties/form/items/properties/answers/items/properties/options",
+                        "type": "array",
+                        "readOnly": false,
+                        "writeOnly": false,
+                        "uniqueItems": false,
+                        "minItems": 0,
+                        "minContains": 1,
+                        "title": "The Options Schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                            "$id": "#/items/properties/form/items/properties/answers/items/properties/options/items",
                             "type": "integer",
                             "readOnly": false,
                             "writeOnly": false,
-                            "title": "The questionId Schema",
+                            "title": "The Items Schema",
                             "description": "An explanation about the purpose of this instance.",
                             "default": 0,
-                            "unique": true,
                             "examples": [
                                 1
                             ]
-                        },
-                        "questionText": {
-                            "$id": "#/items/properties/form/items/properties/questionText",
-                            "type": "string",
-                            "readOnly": false,
-                            "writeOnly": false,
-                            "minLength": 0,
-                            "title": "The Title Schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "Ai călătorit recent în afara țării?"
-                            ]
-                        },
-                        "type": {
-                            "$id": "#/items/properties/form/items/properties/type",
-                            "type": "string",
-                            "enum": ["SINGLE_CHOICE", "MULTIPLE_CHOICE", "FINAL"],
-                            "readOnly": false,
-                            "writeOnly": false,
-                            "minLength": 0,
-                            "title": "The Type Schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "SINGLE_CHOICE"
-                            ]
-                        },
-                        "content": {
-                            "$id": "#/items/properties/form/items/properties/content",
-                            "readOnly": false,
-                            "writeOnly": false,
-                            "title": "The Content Schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": null,
-                            "examples": [
-                                null
-                            ]
-                        },
-                        "options": {
-                            "$id": "#/items/properties/form/items/properties/options",
-                            "type": "array",
-                            "readOnly": false,
-                            "writeOnly": false,
-                            "uniqueItems": false,
-                            "minItems": 0,
-                            "minContains": 1,
-                            "title": "The Options Schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": [],
-                            "additionalItems": true,
-                            "items": {
-                                "$id": "#/items/properties/form/items/properties/options/items",
-                                "type": "object",
-                                "readOnly": false,
-                                "writeOnly": false,
-                                "minProperties": 0,
-                                "title": "The Items Schema",
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": {},
-                                "examples": [
-                                    {
-                                        "value": "da",
-                                        "option": 1.0
-                                    },
-                                    {
-                                        "option": 2.0,
-                                        "value": "nu"
-                                    }
-                                ],
-                                "additionalProperties": true,
-                                "required": [
-                                    "option",
-                                    "value"
-                                ],
-                                "properties": {
-                                    "option": {
-                                        "$id": "#/items/properties/form/items/properties/options/items/properties/option",
-                                        "type": "integer",
-                                        "readOnly": false,
-                                        "writeOnly": false,
-                                        "title": "The Option Schema",
-                                        "description": "An explanation about the purpose of this instance.",
-                                        "default": 0,
-                                        "examples": [
-                                            1
-                                        ]
-                                    },
-                                    "value": {
-                                        "$id": "#/items/properties/form/items/properties/options/items/properties/value",
-                                        "type": "string",
-                                        "readOnly": false,
-                                        "writeOnly": false,
-                                        "minLength": 0,
-                                        "title": "The Value Schema",
-                                        "description": "An explanation about the purpose of this instance.",
-                                        "default": "",
-                                        "examples": [
-                                            "da"
-                                        ]
-                                    }
-                                }
-                            }
-                        },
-                        "answers": {
-                            "$id": "#/items/properties/form/items/properties/answers",
-                            "type": "array",
-                            "readOnly": false,
-                            "writeOnly": false,
-                            "uniqueItems": false,
-                            "minItems": 0,
-                            "minContains": 1,
-                            "title": "The Answers Schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": [],
-                            "additionalItems": true,
-                            "items": {
-                                "$id": "#/items/properties/form/items/properties/answers/items",
-                                "type": "object",
-                                "readOnly": false,
-                                "writeOnly": false,
-                                "minProperties": 0,
-                                "title": "The Items Schema",
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": {},
-                                "examples": [
-                                    {
-                                        "result": 2.0,
-                                        "options": [
-                                            1.0
-                                        ]
-                                    },
-                                    {
-                                        "options": [
-                                            2.0
-                                        ],
-                                        "result": 3.0
-                                    }
-                                ],
-                                "additionalProperties": true,
-                                "required": [
-                                    "options",
-                                    "result"
-                                ],
-                                "properties": {
-                                    "options": {
-                                        "$id": "#/items/properties/form/items/properties/answers/items/properties/options",
-                                        "type": "array",
-                                        "readOnly": false,
-                                        "writeOnly": false,
-                                        "uniqueItems": false,
-                                        "minItems": 0,
-                                        "minContains": 1,
-                                        "title": "The Options Schema",
-                                        "description": "An explanation about the purpose of this instance.",
-                                        "default": [],
-                                        "additionalItems": true,
-                                        "items": {
-                                            "$id": "#/items/properties/form/items/properties/answers/items/properties/options/items",
-                                            "type": "integer",
-                                            "readOnly": false,
-                                            "writeOnly": false,
-                                            "title": "The Items Schema",
-                                            "description": "An explanation about the purpose of this instance.",
-                                            "default": 0,
-                                            "examples": [
-                                                1
-                                            ]
-                                        }
-                                    },
-                                    "result": {
-                                        "$id": "#/items/properties/form/items/properties/answers/items/properties/result",
-                                        "type": "integer",
-                                        "readOnly": false,
-                                        "writeOnly": false,
-                                        "title": "The Result Schema",
-                                        "description": "An explanation about the purpose of this instance.",
-                                        "default": 0,
-                                        "examples": [
-                                            2
-                                        ]
-                                    }
-                                }
-                            }
                         }
+                    },
+                    "result": {
+                        "$id": "#/items/properties/form/items/properties/answers/items/properties/result",
+                        "type": "integer",
+                        "readOnly": false,
+                        "writeOnly": false,
+                        "title": "The Result Schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": 0,
+                        "examples": [
+                            2
+                        ]
                     }
                 }
             }
+        }
+    },
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string"
+        },
+        "doc_type": {
+            "type": "string"
+        },
+        "doc_id": {
+            "type": "integer"
+        },
+        "active": {
+            "type": "boolean"
+        },
+        "display_order": {
+            "type": "integer"
+        },
+        "content": {
+            "type": "string"
+        },
+        "buttons": {
+            "$id": "#/items/properties/buttons",
+            "readOnly": false,
+            "writeOnly": false,
+            "title": "The Buttons Schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": null,
+            "examples": [
+                null
+            ]
+        },
+        "firstNodeId": {
+            "type": "integer",
+            "title": "The firstNodeId Schema",
+            "description": "Id of the first question from the form (starting question id)"
+        },
+        "form": {
+            "$ref": "#definitions/form"
         }
     }
 }
