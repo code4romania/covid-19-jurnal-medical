@@ -53,15 +53,36 @@ namespace StamAcasa.IdentityServer {
                     RequireClientSecret = false,
                     RequireConsent = false,
 
-                    RedirectUris =           { "https://localhost:5003/callback.html" },
-                    PostLogoutRedirectUris = { "https://localhost:5003/index.html" },
-                    AllowedCorsOrigins =     { "https://localhost:5003" },
+                    RedirectUris =           { "http://localhost:3000/signin-oidc", "http://localhost:3000/silent-refresh" },
+                    PostLogoutRedirectUris = { "http://localhost:3000/post-logout" },
+                    AllowedCorsOrigins =     { "http://localhost:3000" },
 
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Email,
-                        "answersApi"
+                        "answersApi","usersApi"
+                    },
+                    AllowAccessTokensViaBrowser = true,
+                    AccessTokenType = AccessTokenType.Reference
+                },
+                //Swagger UI client
+                new Client
+                {
+                    ClientId = "swaggerClientLocalhost",
+                    ClientName = "Swagger UI Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    RequirePkce = false,
+                    RequireClientSecret = false,
+                    RequireConsent = false,
+                    RedirectUris =           { "https://localhost:5007/swagger/oauth2-redirect.html" },
+                    AllowedCorsOrigins =     { "https://localhost:5007" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "answersApi","usersApi"
                     },
                     AllowAccessTokensViaBrowser = true,
                     AccessTokenType = AccessTokenType.Reference

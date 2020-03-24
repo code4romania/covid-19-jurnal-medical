@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { PropTypes } from "prop-types";
+import PropTypes from "prop-types";
 
 import { List, ListItem } from "@code4ro/taskforce-fe-components";
 
@@ -22,12 +22,12 @@ const StepsBar = ({ history, location: { pathname } }) => (
 );
 
 StepsBar.propTypes = {
-  history: {
-    push: () => {}
-  },
-  location: {
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }),
+  location: PropTypes.shape({
     pathname: PropTypes.string
-  }
+  })
 };
 
 export default withRouter(StepsBar);

@@ -1,18 +1,20 @@
 import React from "react";
-import { Button } from "@code4ro/taskforce-fe-components";
-import { useHistory } from "react-router-dom";
+
+import { Hero } from "@code4ro/taskforce-fe-components";
+import StepsBar from "../StepsBar";
+import BasePage from "../BasePage";
 
 const Home = () => {
-  const history = useHistory();
-
-  function handleClick() {
-    history.push("/despre");
-  }
   return (
-    <div>
-      <h1>Home</h1>
-      <Button onClick={handleClick}>About</Button>
-    </div>
+    <BasePage>
+      <Hero
+        title="Ce pași ai de urmat"
+        subtitle="Pentru a te putea ajuta iata ce ai la dispozitie in contul tau:"
+        useFallbackIcon={true}
+      />
+      <StepsBar />
+      Home placeholder
+    </BasePage>
   );
 };
 

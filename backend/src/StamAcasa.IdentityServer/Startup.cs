@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using IdentityServer.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,7 +41,13 @@ namespace IdentityServer {
                 .AddInMemoryApiResources(_identityConfiguration.Apis())
                 .AddInMemoryClients(_identityConfiguration.Clients)
                 .AddAspNetIdentity<ApplicationUser>();
-            
+
+            //services.AddHttpsRedirection(options =>
+            //{
+            //    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+            //    options.HttpsPort = 5000;
+            //});
+
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
             services.AddAuthentication();

@@ -11,6 +11,8 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StamAcasa.IdentityServer", "StamAcasa.IdentityServer\StamAcasa.IdentityServer.csproj", "{95B11059-51A8-4DBA-91A7-745509606C24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StamAcasa.Common", "StamAcasa.Common\StamAcasa.Common.csproj", "{0252468F-5F19-4C84-9BC4-9E018DBF1263}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,7 +37,10 @@ Global
 		{95B11059-51A8-4DBA-91A7-745509606C24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95B11059-51A8-4DBA-91A7-745509606C24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95B11059-51A8-4DBA-91A7-745509606C24}.Release|Any CPU.Build.0 = Release|Any CPU
-
+		{0252468F-5F19-4C84-9BC4-9E018DBF1263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0252468F-5F19-4C84-9BC4-9E018DBF1263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0252468F-5F19-4C84-9BC4-9E018DBF1263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0252468F-5F19-4C84-9BC4-9E018DBF1263}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

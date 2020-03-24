@@ -4,26 +4,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using StamAcasa.Api;
 using StamAcasa.Api.Common;
 using StamAcasa.Api.Models;
 using StamAcasa.Api.Services;
+using StamAcasa.Common;
+using StamAcasa.Common.Services;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Api
 {
     public class Startup
     {
         private readonly IWebHostEnvironment _environment;
+        private string _swaggerClientName;
 
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             _environment = environment;
             Configuration = configuration;
+            _swaggerClientName = configuration.GetValue<string>("SwaggerOidcClientName");
         }
 
         public IConfiguration Configuration { get; }
@@ -64,11 +77,35 @@ namespace Api
                     services.AddSingleton<IFileService, LocalFileService>();
                     break;
             }
+
+            services.AddAutoMapper(typeof(Startup), typeof(UserDbContext));
+            services.AddDbContext<UserDbContext>(options=>
+                options.UseSqlite(Configuration.GetConnectionString("UserDBConnection")));
+            services.AddScoped<IUserService, UserService>();
+
+            services.ConfigureSwagger(Configuration);
         }
 
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
+            app.UseExceptionHandler(appError =>
+            {
+                appError.Run(async context => {
+                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    context.Response.ContentType = "application/json";
+
+                    var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+                    if (contextFeature != null) {
+                        var errorResponse = JsonConvert.SerializeObject(new {
+                            StatusCode = context.Response.StatusCode,
+                            Message = $"Internal Server Error. {contextFeature.Error.Message}"
+                        });
+                        context.Response.ContentLength = errorResponse.Length;
+                        await context.Response.WriteAsync(errorResponse, Encoding.UTF8);
+                    }
+                });
+            });
 
             app.UseCors("default");
 
@@ -78,6 +115,18 @@ namespace Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.OAuthClientId(_swaggerClientName);
+                c.OAuthAppName("Swagger UI");
+                c.ConfigObject = new ConfigObject {
+                    Urls = new[]
+                    {
+                        new UrlDescriptor{Name = "api", Url = "/swagger/v1/swagger.json"} 
+                    }
+                };
             });
         }
     }

@@ -1,22 +1,23 @@
 import React from "react";
-
-import AppRouter from "./components/AppRouter";
-
-import Header from "./components/Header";
-import StepsBar from "./components/StepsBar";
-import Footer from "./components/Footer";
+import { Provider } from "react-redux";
+import { store } from "./store";
+import { Route, Switch } from "react-router-dom";
 
 import "./App.scss";
+import { ROUTES } from "./routes";
 
-const App = () => (
-  <>
-    <Header />
-    <div className="container">
-      <StepsBar />
-      <AppRouter />
-    </div>
-    <Footer />
-  </>
-);
+const App = () => {
+  const appRoutes = Object.values(ROUTES);
+
+  return (
+    <Provider store={store}>
+      <Switch>
+        {appRoutes.map(({ path, component, extraProps }) => (
+          <Route path={path} component={component} key={path} {...extraProps} />
+        ))}
+      </Switch>
+    </Provider>
+  );
+};
 
 export default App;
