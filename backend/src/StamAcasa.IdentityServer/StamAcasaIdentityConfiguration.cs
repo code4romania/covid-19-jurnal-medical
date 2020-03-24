@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using IdentityServer4;
 using IdentityServer4.Models;
 using Microsoft.Extensions.Configuration;
 using StamAcasa.IdentityServer.Models;
@@ -15,10 +14,12 @@ namespace StamAcasa.IdentityServer {
     public class StamAcasaIdentityConfiguration : IStamAcasaIdentityConfiguration
     {
         private readonly IConfiguration _configuration;
+        private readonly List<Client> _clients = new List<Client>();
 
         public StamAcasaIdentityConfiguration(IConfiguration configuration)
         {
             _configuration = configuration;
+            configuration.GetSection("ClientApplications").Bind(_clients);
         }
         public IEnumerable<IdentityResource> Ids =>
             new List<IdentityResource>
@@ -26,7 +27,6 @@ namespace StamAcasa.IdentityServer {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Email(),
             };
-
 
         public IEnumerable<ApiResource> Apis() {
             var result = new List<ApiResource>();
@@ -40,53 +40,6 @@ namespace StamAcasa.IdentityServer {
             return result;
         }
 
-        public IEnumerable<Client> Clients =>
-            new List<Client>
-            {
-                // JavaScript Client
-                new Client
-                {
-                    ClientId = "js",
-                    ClientName = "JavaScript Client",
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    RequirePkce = false,
-                    RequireClientSecret = false,
-                    RequireConsent = false,
-
-                    RedirectUris =           { "http://localhost:3000/signin-oidc", "http://localhost:3000/silent-refresh" },
-                    PostLogoutRedirectUris = { "http://localhost:3000/post-logout" },
-                    AllowedCorsOrigins =     { "http://localhost:3000" },
-
-                    AllowedScopes =
-                    {
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Email,
-                        "answersApi","usersApi"
-                    },
-                    AllowAccessTokensViaBrowser = true,
-                    AccessTokenType = AccessTokenType.Reference
-                },
-                //Swagger UI client
-                new Client
-                {
-                    ClientId = "swaggerClientLocalhost",
-                    ClientName = "Swagger UI Client",
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    RequirePkce = false,
-                    RequireClientSecret = false,
-                    RequireConsent = false,
-                    RedirectUris =           { "https://localhost:5007/swagger/oauth2-redirect.html" },
-                    AllowedCorsOrigins =     { "https://localhost:5007" },
-
-                    AllowedScopes =
-                    {
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Email,
-                        "answersApi","usersApi"
-                    },
-                    AllowAccessTokensViaBrowser = true,
-                    AccessTokenType = AccessTokenType.Reference
-                }
-            };
+        public IEnumerable<Client> Clients => _clients;
     }
 }
