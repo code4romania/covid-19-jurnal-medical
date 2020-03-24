@@ -39,6 +39,10 @@ namespace IdentityServer {
                 {
                     webBuilder
                         .UseStartup<Startup>();
+                })
+                .ConfigureHostConfiguration(configDelegate =>
+                {
+                    configDelegate.AddEnvironmentVariables();
                 });
     }
 }
