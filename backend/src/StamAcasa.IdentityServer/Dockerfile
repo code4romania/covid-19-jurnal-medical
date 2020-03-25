@@ -9,6 +9,9 @@ WORKDIR /src
 COPY ["StamAcasa.IdentityServer/StamAcasa.IdentityServer.csproj", "StamAcasa.IdentityServer/"]
 RUN dotnet restore "StamAcasa.IdentityServer/StamAcasa.IdentityServer.csproj"
 COPY . .
+#Remove db file; we will mount it as a volume
+RUN rm -f IdentityServer.db
+
 WORKDIR "/src/StamAcasa.IdentityServer"
 RUN dotnet build "StamAcasa.IdentityServer.csproj" -c Release -o /app/build
 
