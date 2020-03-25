@@ -35,8 +35,20 @@ const Header = ({ user, loadUser }) => {
       <NavLink className="nav-link" to="/despre">
         Despre
       </NavLink>
-      <a href="https://code4.ro/ro/apps/" target="_blank" rel="noopener noreferrer">Ecosistemul Covid-19</a>
-      <a href="https://code4.ro/ro/doneaza/" target="_blank" rel="noopener noreferrer">Sprijină proiectul</a>
+      <a
+        href="https://code4.ro/ro/apps/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Ecosistemul Covid-19
+      </a>
+      <a
+        href="https://code4.ro/ro/doneaza/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Sprijină proiectul
+      </a>
     </>
   );
 
