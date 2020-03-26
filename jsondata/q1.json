@@ -11,6 +11,7 @@
     "form": [
         {
             "questionId": 1,
+            "nextQuestionId": 2,
             "questionText": "Care este vârsta ta în ani împliniţi?",
             "questionType": "INPUT",
             "options": [
@@ -21,11 +22,13 @@
         },
         {
             "questionId": 2,
+            "nextQuestionId": 3,
             "questionText": "Care este sexul tău?",
             "questionType": "SINGLE_CHOICE",
             "options": [
                 {
-                    "label": "Masculin"
+                    "label": "Masculin",
+                    "nextQuestionId": 5
                 },
                 {
                     "label": "Feminin"
@@ -34,6 +37,7 @@
         },
         {
             "questionId": 3,
+            "nextQuestionId": 4,
             "questionText": "Ești însărcinată?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -49,6 +53,7 @@
         },
         {
             "questionId": 4,
+            "nextQuestionId": 5,
             "questionText": "Ai născut în ultimele 6 luni?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -64,6 +69,7 @@
         },
         {
             "questionId": 5,
+            "nextQuestionId": 6,
             "questionText": "Ești fumător/fumătoare? (inclusiv țigări electronice)",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -79,6 +85,7 @@
         },
         {
             "questionId": 5,
+            "nextQuestionId": 2,
             "questionText": "Ti-a  spus vreun medic că ai oricare dintre următoarele afecțiuni?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -94,6 +101,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "O boală de inimă? (boală cardiovasculară inclusiv hipertensiune)",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -109,6 +117,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Diabet",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -124,6 +133,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "O boală a plămânilor? (pulmonară)",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -139,6 +149,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Cancer (boală oncologică)",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -154,6 +165,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Altă boală cronică ",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -169,6 +181,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "De ce altă boală cronică suferi?",
             "questionType": "INPUT",
             "options": [
@@ -179,6 +192,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Ai avut in ultimele 14 zile orice semn/simptom de raceală sau gripă?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -194,6 +208,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Ai avut febra 38 grade celsius sau mai mare?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -209,6 +224,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Din ce dată ai avut prima dată febră?",
             "questionType": "INPUT",
             "options": [
@@ -219,6 +235,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Ai avut durere în gât și/sau dificultate în a înghiți?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -234,6 +251,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Din ce dată ai avut durere în gât și/sau dificultate în a înghiți?",
             "questionType": "INPUT",
             "options": [
@@ -244,6 +262,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Ai avut tuse intensă?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -259,6 +278,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Din ce data ai avut tuse?",
             "questionType": "INPUT",
             "options": [
@@ -269,6 +289,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Ai avut dificultate în a respira?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -284,6 +305,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Din ce dată ai avut dificultate în a respira?",
             "questionType": "INPUT",
             "options": [
@@ -294,6 +316,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Ți-a curs nasul?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -309,6 +332,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Din ce dată ţi-a curs nasul?",
             "questionType": "INPUT",
             "options": [
@@ -319,6 +343,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Alte simptome",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -334,6 +359,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Te rugam sa le descrii",
             "questionType": "INPUT",
             "options": [
@@ -344,12 +370,14 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": " ----- this is a section; Gândindu-te la perioada de 14 zile înainte de a avea primul simptom/semn de răceală sau gripă:",
             "questionType": "SINGLE_CHOICE",
             "options": []
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Ai călătorit în/prin zone în care au existat cazuri de noul coronavirus?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -365,6 +393,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Te rugăm să specifici zona/țara la care te referi",
             "questionType": "INPUT",
             "options": [
@@ -375,6 +404,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Ai fost la un spital sau în incinta oricărui alt serviciu medical?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -390,6 +420,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Te rugăm să specifici unde",
             "questionType": "INPUT",
             "options": [
@@ -400,6 +431,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Ai fost în contact direct cu o persoană diagnosticată/ confirmată cu noul coronavirus?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -415,6 +447,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "În momentul de față, împarți locuința și cu alte persoane?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -430,6 +463,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "În momentul de față, te afli în izolare la domiciliu?",
             "questionType": "SINGLE_CHOICE",
             "options": [
@@ -449,6 +483,7 @@
         },
         {
             "questionId": 0,
+            "nextQuestionId": 2,
             "questionText": "Celelalte persoane din locuință se află în izolare la domiciliu?",
             "questionType": "SINGLE_CHOICE",
             "options": [

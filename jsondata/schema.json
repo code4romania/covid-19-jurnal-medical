@@ -14,6 +14,9 @@
                         "string",
                         "boolean"
                     ]
+                },
+                "nextQuestionId": {
+                    "type": "integer"
                 }
             }
         },
@@ -30,6 +33,9 @@
                         "string",
                         "number"
                     ]
+                },
+                "nextQuestionId": {
+                    "type": "integer"
                 }
             }
         },
@@ -37,6 +43,7 @@
             "type": "object",
             "required": [
                 "questionId",
+                "nextQuestionId",
                 "questionText",
                 "questionType",
                 "options"
@@ -45,6 +52,9 @@
                 "questionId": {
                     "type": "integer",
                     "unique": true
+                },
+                "nextQuestionId": {
+                    "type": "integer"
                 },
                 "questionText": {
                     "type": "string"
