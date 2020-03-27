@@ -2,7 +2,7 @@
 
 [![GitHub contributors](https://img.shields.io/github/contributors/code4romania/stam-acasa.svg?style=for-the-badge)](https://github.com/code4romania/stam-acasa/graphs/contributors) [![GitHub last commit](https://img.shields.io/github/last-commit/code4romania/stam-acasa.svg?style=for-the-badge)](https://github.com/code4romania/stam-acasa/commits/master) [![License: MPL 2.0](https://img.shields.io/badge/license-MPL%202.0-brightgreen.svg?style=for-the-badge)](https://opensource.org/licenses/MPL-2.0)
 
-This repo hold the frontend app for Stam acasa and the Common API for Diaspora Hub & Stăm acasă
+This repo holds the frontend app and the API for Stăm acasă
 
 Objective: Reduction in the over overloading of emergency phone numbers, quick and easy collection of information from a very large population, constant evaluation of a large population, the offer of support in the management of cases for authorities.
 
@@ -19,9 +19,11 @@ This project is built by amazing volunteers and you can be one of them! Here's a
 ## Built With
 
 ### Programming languages
+C#
 Javascript
 
 ### Platforms
+.NET Core 3.1
 
 ### Frontend framework
 - [ReactJS](https://reactjs.org/)
@@ -31,12 +33,21 @@ Javascript
 npm
 
 ### Database technology & provider
+PostgreSQL
 
 ## Repos and projects
 
-https://github.com/code4romania/diaspora-hub
-
 ## Deployment
+
+### Backend
+1. Install Docker for your platform https://docs.docker.com/
+
+2. Run project
+
+```
+cd backend/src
+docker-compose up
+```
 
 ### Frontend
 1. Install dependencies
