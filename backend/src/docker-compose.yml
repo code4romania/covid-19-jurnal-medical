@@ -7,12 +7,8 @@ services:
       context: .
       dockerfile: StamAcasa.Api/Dockerfile
     environment: 
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=devcertpass
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/root/.aspnet/https/stamacasais.pfx
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_HTTPS_PORT=5007
+      - ASPNETCORE_URLS=http://+:80
     ports: 
-      - 5007:443
       - 5008:80
     volumes: 
       #- ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
@@ -35,17 +31,9 @@ services:
     image: identityserver_img
     container_name: identityserver
     environment: 
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=devcertpass
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/root/.aspnet/https/stamacasais.pfx
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_HTTPS_PORT=5000
+      - ASPNETCORE_URLS=http://+:80
     build:
         context: .
         dockerfile: StamAcasa.IdentityServer/Dockerfile
     ports: 
-      - 5000:443
       - 5001:80
-    volumes: 
-      #- ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
-      - ${HOME}/.aspnet/https:/root/.aspnet/https/ 
-      - /StamAcasa.IdentityServer/IdentityServer.db:/app/IdentityServer.db
