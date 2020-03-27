@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+  stamacasa.api:
+    image: ${DOCKER_REGISTRY-}stamacasaapi
+    build:
+      context: .
+      dockerfile: StamAcasa.Api/Dockerfile
+    environment: 
+      - ASPNETCORE_URLS=http://+:80
+    ports: 
+      - 5008:80
+    volumes: 
+      #- ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+      - ${HOME}/.aspnet/https:/root/.aspnet/https/
+
+  rabbitmq:
+    image: local_rabbit
+    restart: always
+    container_name: rabbitmq
+    build: 
+      context: rabbitconfig/
+      dockerfile: Dockerfile
+    ports:
+       # The standard AMQP protocol port
+      - 5672:5672
+        # HTTP management UI
+      - 15672:15672
+
+  identityserver:
+    image: identityserver_img
+    container_name: identityserver
+    environment: 
+      - ASPNETCORE_URLS=http://+:80
+    build:
+        context: .
+        dockerfile: StamAcasa.IdentityServer/Dockerfile
+    ports: 
+      - 5001:80

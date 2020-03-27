@@ -1,7 +1,7 @@
 import { UserManager, WebStorageStateStore } from "oidc-client";
 
 const userManagerSettings = {
-  authority: "https://localhost:5000",
+  authority: "http://localhost:5001",
   client_id: "js",
   redirect_uri: "http://localhost:3000/signin-oidc",
   post_logout_redirect_uri: "http://localhost:3000/post-logout",
