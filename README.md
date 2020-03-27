@@ -19,8 +19,8 @@ This project is built by amazing volunteers and you can be one of them! Here's a
 ## Built With
 
 ### Programming languages
-C#
-Javascript
+- C#
+- Javascript
 
 ### Platforms
 .NET Core 3.1
