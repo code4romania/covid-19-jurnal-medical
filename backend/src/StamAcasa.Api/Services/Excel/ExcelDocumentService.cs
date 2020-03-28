@@ -180,7 +180,7 @@ namespace StamAcasa.Api.Services.Excel {
                 case CellDataType.Decimal:
                     return CreateCellStyleDecimal(wb);
                 default:
-                    return CreateCellStyleDate(wb);
+                    return CreateCellStyle(wb);
             }
         }
 
