@@ -13,21 +13,21 @@ on:
       paths:
         - "backend/src/StamAcasa.IdentityServer/**"
         - "backend/src/StamAcasa.Common/**"
-  
-  name: CI-IdentityServer
-  
-  env:
+
+name: CI-IdentityServer
+
+env:
     IMAGE_NAME: ${{ secrets.DOCKER_HUB_ORGANIZATION }}/stamacasa-identityserver
-  
-  jobs:
+
+jobs:
     build-parser:
       name: Build IdentityServer container
       runs-on: ubuntu-latest
-  
+
       steps:
         - name: Checkoout
           uses: actions/checkout@v2
-  
+
         - name: Build Docker image
           run: |
             cd backend/src
@@ -49,7 +49,7 @@ on:
               $IMAGE_NAME:$GITHUB_SHA \
               $IMAGE_NAME:develop
             docker push $IMAGE_NAME:develop
-  
+
         - name: Tag Latest
           if: github.ref == 'refs/heads/master'
           run: |
@@ -57,3 +57,4 @@ on:
               $IMAGE_NAME:$GITHUB_SHA \
               $IMAGE_NAME:latest
             docker push $IMAGE_NAME:latest 
+
