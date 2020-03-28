@@ -358,3 +358,5 @@ MigrationBackup/
 
 **/appsettings.*.json
 .docker/
+
+.DS_Store
