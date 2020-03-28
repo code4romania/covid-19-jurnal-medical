@@ -14,12 +14,12 @@ on:
         - "backend/src/StamAcasa.IdentityServer/**"
         - "backend/src/StamAcasa.Common/**"
 
-  name: CI-IdentityServer
+name: CI-IdentityServer
 
-  env:
+env:
     IMAGE_NAME: ${{ secrets.DOCKER_HUB_ORGANIZATION }}/stamacasa-identityserver
 
-  jobs:
+jobs:
     build-parser:
       name: Build IdentityServer container
       runs-on: ubuntu-latest
