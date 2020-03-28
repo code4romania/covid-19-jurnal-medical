@@ -14,7 +14,7 @@ on:
         - "backend/src/StamAcasa.IdentityServer/**"
         - "backend/src/StamAcasa.Common/**"
   
-  name: CI-API
+  name: CI-IdentityServer
   
   env:
     IMAGE_NAME: ${{ secrets.DOCKER_HUB_ORGANIZATION }}/stamacasa-identityserver
@@ -56,5 +56,4 @@ on:
             docker tag \
               $IMAGE_NAME:$GITHUB_SHA \
               $IMAGE_NAME:latest
-            docker push $IMAGE_NAME:latest
-  
+            docker push $IMAGE_NAME:latest 
