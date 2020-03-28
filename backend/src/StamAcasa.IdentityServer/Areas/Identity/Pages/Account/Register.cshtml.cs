@@ -84,7 +84,7 @@ namespace IdentityServer.Pages.Account
                     {
                         new Claim(JwtClaimTypes.Id, Input.Email),
                         new Claim(JwtClaimTypes.Email, Input.Email),
-                        new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
+                        new Claim(JwtClaimTypes.EmailVerified, "false", ClaimValueTypes.Boolean),
                     });
                     _logger.LogInformation("User created a new account with password.");
 
