@@ -4,6 +4,7 @@ import SigninRoute from "./components/OIDC/SigninRoute";
 import PostLogoutRoute from "./components/OIDC/PostLogoutRoute";
 import SilentRefreshRoute from "./components/OIDC/SilentRefreshRoute";
 import Login from "./components/Login";
+import CardsPlayground from "./components/CardsPlayground";
 
 export const ROUTES = {
   home: {
@@ -42,5 +43,9 @@ export const ROUTES = {
   oidcSilentRefresh: {
     path: "/silent-refresh",
     component: SilentRefreshRoute
+  },
+  cardsPlayground: {
+    path: "/cards-playground",
+    component: CardsPlayground
   }
 };

@@ -1,0 +1,44 @@
+.circular-progress-bar {
+
+  position: relative;
+  width: 89.71px;
+  height: 89.71px;
+
+  &__background,
+  &__progress {
+    fill: none;
+  }
+  
+  &__background {
+    stroke: #6B6B6B;
+  }
+  
+  &__progress {
+    stroke: #F2994A;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+	
+  &__text {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 49px;
+  }
+
+  &__circle {
+    position: absolute;
+  }
+
+  &__circle-abstract-top {
+    position: absolute;
+    right: 2px;
+    top: -3px;
+    transform: rotate(-2deg);
+  }
+
+  &__circle-abstract-bottom {
+    left: 22px;
+    bottom: -12px;
+    position: absolute;
+  }
+}
