@@ -10,5 +10,6 @@ namespace StamAcasa.Common.Services {
         Task<bool> AddDependentInfo(UserModel user, string parentSub);
         Task<UserInfo> GetUserInfo(string sub);
         Task<IEnumerable<UserInfo>> GetDependentInfo(string sub);
+        Task<IEnumerable<UserInfo>> GetAll();
     }
 }
