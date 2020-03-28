@@ -80,6 +80,7 @@ namespace Api
             }
 
             services.AddTransient<IExcelDocumentService, ExcelDocumentService>();
+            services.AddTransient<IAnswersExcelExporter, AnswersExcelExporter>();
 
             services.AddAutoMapper(typeof(Startup), typeof(UserDbContext));
             services.AddDbContext<UserDbContext>(options=>
