@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using StamAcasa.Common.Models;
 
-namespace StamAcasa.Common.Services {
+namespace StamAcasa.Common.Services
+{
     public class UserService : IUserService {
         private readonly UserDbContext _context;
         private readonly IMapper _mapper;
@@ -60,6 +60,13 @@ namespace StamAcasa.Common.Services {
                 .Include("DependentUsers")
                 .FirstOrDefaultAsync(u => u.Sub == sub);
             var result = user.DependentUsers.Select(d=>_mapper.Map<UserInfo>(d));
+            return result;
+        }
+
+        public async Task<IEnumerable<UserInfo>> GetAll()
+        {
+            var users = await _context.Users.ToListAsync();
+            var result = users.Select(_mapper.Map<UserInfo>);
             return result;
         }
     }
