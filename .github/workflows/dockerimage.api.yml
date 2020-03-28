@@ -21,7 +21,7 @@ env:
 
 jobs:
   build-parser:
-    name: Build Parser container
+    name: Build API container
     runs-on: ubuntu-latest
 
     steps:
