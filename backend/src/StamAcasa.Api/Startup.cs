@@ -21,6 +21,7 @@ using StamAcasa.Api;
 using StamAcasa.Api.Common;
 using StamAcasa.Api.Models;
 using StamAcasa.Api.Services;
+using StamAcasa.Api.Services.Excel;
 using StamAcasa.Common;
 using StamAcasa.Common.Services;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -77,6 +78,8 @@ namespace Api
                     services.AddSingleton<IFileService, LocalFileService>();
                     break;
             }
+
+            services.AddTransient<IExcelDocumentService, ExcelDocumentService>();
 
             services.AddAutoMapper(typeof(Startup), typeof(UserDbContext));
             services.AddDbContext<UserDbContext>(options=>
