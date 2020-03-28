@@ -31,7 +31,7 @@ namespace StamAcasa.Api.Services
        public async Task SaveRawData(string fileContent, string fileName)
        {
            string path = Path.Combine(_directory, fileName);
-           File.WriteAllText(path, fileContent);
+           await File.WriteAllTextAsync(path, fileContent);
        }
 
        public async Task<IEnumerable<object>> GetForms(string sub)

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using StamAcasa.Api.Services;
+using StamAcasa.Common.Services;
 
 namespace StamAcasa.Api.Controllers
 {
@@ -17,18 +18,18 @@ namespace StamAcasa.Api.Controllers
     [ApiController]
     public class AnswerController : ControllerBase
     {
-        private readonly IFileService _fileService;
+        private readonly IAnswerServiceAggregator  _answerServiceAggregator;        
 
-        public AnswerController(IFileService fileService)
+        public AnswerController(IAnswerServiceAggregator answerServiceAggregator)
         {
-            _fileService = fileService;
+            _answerServiceAggregator = answerServiceAggregator;            
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             var sub = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value).ToString("N");
-            var result = await _fileService.GetForms(sub);
+            var result = await _answerServiceAggregator.GetForms(sub);
             return new OkObjectResult(result);
         }
 
@@ -42,13 +43,12 @@ namespace StamAcasa.Api.Controllers
 
             var timestamp = DateTime.Now.ToEpochTime();
             form.Add("Timestamp", timestamp);
-            var sub = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value);
-            form.Add("User", sub);
+            //here sub should be of the patient not the claims from the IdentityUser
+            //var sub = Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value);           
+            //form.Add("User", sub);
 
-            var contentToSave = JsonConvert.SerializeObject(form).ToString();
-            _fileService.SaveRawData(contentToSave, 
-                $"{sub.ToString("N")}_{form.doc_id}_{timestamp}.json");
 
+            await _answerServiceAggregator.SaveRawData(form);
             return new OkObjectResult(string.Empty);
         }
 

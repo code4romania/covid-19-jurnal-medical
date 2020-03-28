@@ -82,6 +82,8 @@ namespace Api
             services.AddDbContext<UserDbContext>(options=>
                 options.UseSqlite(Configuration.GetConnectionString("UserDBConnection")));
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAssessmentHistoryService, AssessmentHistoryService>();
+            services.AddScoped<IAnswerServiceAggregator, AnswerServiceAggregator>();            
 
             services.ConfigureSwagger(Configuration);
         }
