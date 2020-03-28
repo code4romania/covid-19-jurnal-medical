@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using StamAcasa.Common.Models;
 
 namespace StamAcasa.Common.Notifications
@@ -13,6 +15,16 @@ namespace StamAcasa.Common.Notifications
         {
             Id = Guid.NewGuid();
             UserInfo = userInfo;
+        }
+
+        public byte[] GetBytes()
+        {
+            var bf = new BinaryFormatter();
+            using (var ms = new MemoryStream())
+            {
+                bf.Serialize(ms, this);
+                return ms.ToArray();
+            }
         }
     }
 }
