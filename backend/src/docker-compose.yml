@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   stamacasa.api:
-    image: ${DOCKER_REGISTRY-}stamacasaapi
+    image: ${DOCKER_REGISTRY-}stamacasa/api
     build:
       context: .
       dockerfile: StamAcasa.Api/Dockerfile
@@ -28,8 +28,7 @@ services:
       - 15672:15672
 
   identityserver:
-    image: identityserver_img
-    container_name: identityserver
+    image: ${DOCKER_REGISTRY-}stamacasa/identityserver
     environment: 
       - ASPNETCORE_URLS=http://+:80
     build:
