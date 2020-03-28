@@ -30,10 +30,10 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd backend
+          cd backend/src
           docker build . \
             --tag $IMAGE_NAME:$GITHUB_SHA \
-            --file src/StamAcasa.Api/Dockerfile
+            --file StamAcasa.Api/Dockerfile
       - name: Upload Docker image
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         run: |
