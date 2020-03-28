@@ -5,11 +5,11 @@ using StamAcasa.Common.Services;
 
 namespace StamAcasa.Common.Queue
 {
-    class QueueImpl : IQueue
+    public class NotificationQueue : IQueue
     {
         private readonly INotification _notification;
 
-        public QueueImpl(INotification notification)
+        public NotificationQueue(INotification notification)
         {
             _notification = notification;
         }

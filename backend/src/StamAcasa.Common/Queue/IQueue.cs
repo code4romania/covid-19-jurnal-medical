@@ -3,7 +3,7 @@ using StamAcasa.Common.Notifications;
 
 namespace StamAcasa.Common.Services
 {
-    interface IQueue
+    public interface IQueue
     {
         Task Queue(INotification notification);
 
