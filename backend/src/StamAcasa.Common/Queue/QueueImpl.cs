@@ -1,15 +1,12 @@
-﻿using StamAcasa.Common.Notifications;
-using StamAcasa.Common.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
+using StamAcasa.Common.Notifications;
+using StamAcasa.Common.Services;
 
 namespace StamAcasa.Common.Queue
 {
     class QueueImpl : IQueue
     {
-
         private readonly INotification _notification;
 
         public QueueImpl(INotification notification)
@@ -22,7 +19,7 @@ namespace StamAcasa.Common.Queue
             throw new NotImplementedException();
         }
 
-        public void Queue(INotification notification)
+        public Task Queue(INotification notification)
         {
             throw new NotImplementedException();
         }

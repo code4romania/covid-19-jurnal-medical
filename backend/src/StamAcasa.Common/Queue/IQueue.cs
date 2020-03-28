@@ -1,14 +1,11 @@
-﻿using StamAcasa.Common.Notifications;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using StamAcasa.Common.Notifications;
 
 namespace StamAcasa.Common.Services
 {
     interface IQueue
     {
-        void Queue(INotification notification);
+        Task Queue(INotification notification);
 
         Task<INotification> Dequeue();
     }
