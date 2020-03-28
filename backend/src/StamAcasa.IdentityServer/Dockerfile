@@ -9,8 +9,6 @@ WORKDIR /src
 COPY ["StamAcasa.IdentityServer/StamAcasa.IdentityServer.csproj", "StamAcasa.IdentityServer/"]
 RUN dotnet restore "StamAcasa.IdentityServer/StamAcasa.IdentityServer.csproj"
 COPY . .
-#Remove db file; we will mount it as a volume
-RUN rm -f IdentityServer.db
 
 WORKDIR "/src/StamAcasa.IdentityServer"
 RUN dotnet build "StamAcasa.IdentityServer.csproj" -c Release -o /app/build
@@ -21,5 +19,7 @@ RUN dotnet publish "StamAcasa.IdentityServer.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+RUN chmod -R 1744 /app
 
 ENTRYPOINT ["dotnet", "StamAcasa.IdentityServer.dll"]
