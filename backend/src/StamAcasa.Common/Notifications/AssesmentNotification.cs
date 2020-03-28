@@ -1,4 +1,5 @@
 ﻿using System;
+using StamAcasa.Common.Models;
 
 namespace StamAcasa.Common.Notifications
 {
@@ -6,10 +7,12 @@ namespace StamAcasa.Common.Notifications
     {
         public Guid Id { get; }
 
-        public AssesmentNotification()
+        private UserInfo UserInfo { get; }
+
+        public AssesmentNotification(UserInfo userInfo)
         {
             Id = Guid.NewGuid();
+            UserInfo = userInfo;
         }
-
     }
 }
