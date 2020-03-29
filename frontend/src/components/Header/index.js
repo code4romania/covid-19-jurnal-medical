@@ -65,7 +65,9 @@ const Header = ({ user, loadUser }) => {
         <>
           <a
             href={`${environment.registerUrl}?returnUrl=${window.location}register-complete`}
-          >Inregistrare</a>
+          >
+            Inregistrare
+          </a>
           <a onClick={handleLogin}>Login</a>
         </>
       )}

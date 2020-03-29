@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { UserThunks } from "../../store/UserReducer";
 
 const RegisterCompleteRoute = () => {
-  UserThunks.authenticate(); 
+  UserThunks.authenticate();
   return <Redirect to="/"></Redirect>;
 };
 
