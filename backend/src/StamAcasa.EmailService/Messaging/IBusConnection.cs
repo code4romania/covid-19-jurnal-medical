@@ -1,6 +1,6 @@
 using RabbitMQ.Client;
 
-namespace StamAcasa.EmailService
+namespace StamAcasa.EmailService.Messaging
 {
     public interface IBusConnection
     {

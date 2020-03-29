@@ -6,9 +6,9 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using StamAcasa.EmailService.EmailBuilder;
 
-namespace StamAcasa.EmailService.Subscriber
+namespace StamAcasa.EmailService.Messaging
 {
-    public class EmailQueueSubscriber : ISubscriber, IDisposable
+    public class EmailQueueSubscriber : IQueueSubscriber, IDisposable
     {
         private readonly IBusConnection _connection;
         private IModel _channel;

@@ -6,7 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
 using StamAcasa.EmailService.EmailBuilder;
-using StamAcasa.EmailService.Subscriber;
+using StamAcasa.EmailService.Mailing;
+using StamAcasa.EmailService.Messaging;
 
 namespace StamAcasa.EmailService
 {
@@ -36,8 +37,20 @@ namespace StamAcasa.EmailService
                     };
                 });
 
+                services.AddSingleton<ISender>(ctx =>
+                {
+                    var options = new MailOptions()
+                    {
+                        Host = context.Configuration["SMTP:HostName"],
+                        User = "<user>",
+                        Password = "<password>"
+                    };
+
+                    return new SmtpSender(options);
+                });
+
                 services.AddSingleton<IBusConnection, RabbitMQPersistentConnection>();
-                services.AddSingleton<ISubscriber, EmailQueueSubscriber>();
+                services.AddSingleton<IQueueSubscriber, EmailQueueSubscriber>();
 
                 services.AddTransient<IEmailBuilderService, EmailBuilderService>();
 
