@@ -9,7 +9,6 @@ import {
 } from "@code4ro/taskforce-fe-components";
 import { UserThunks } from "../../store/UserReducer";
 import { connect } from "react-redux";
-import environment from "../../environment.json";
 
 import "./header.scss";
 
@@ -64,7 +63,7 @@ const Header = ({ user, loadUser }) => {
       ) : (
         <>
           <a
-            href={`${environment.registerUrl}?returnUrl=${window.location}register-complete`}
+            href={`${process.env.REACT_APP_IDP_URL}/identity/account/register?returnUrl=${window.location}register-complete`}
           >
             Inregistrare
           </a>
