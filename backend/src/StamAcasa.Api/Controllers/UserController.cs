@@ -23,9 +23,9 @@ namespace StamAcasa.Api.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         [Produces(typeof(UserInfo))]
-        public async Task<IActionResult> GetUserInfo()
+        public async Task<IActionResult> GetUserInfo(int? id)
         {
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
             if (sub == null)

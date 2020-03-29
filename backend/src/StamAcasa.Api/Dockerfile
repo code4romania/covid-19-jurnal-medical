@@ -19,4 +19,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
+RUN chmod -R 1744 /app
+
 ENTRYPOINT ["dotnet", "StamAcasa.Api.dll"]

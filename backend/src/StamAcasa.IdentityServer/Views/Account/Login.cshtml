@@ -1,58 +1,59 @@
 ﻿@model IdentityServer.Quickstart.Account.LoginViewModel
 
 <div class="login-page">
-    <div class="page-header">
-        <h1>Login</h1>
-    </div>
 
     <partial name="_ValidationSummary" />
 
-    <div class="row">
 
         @if (Model.EnableLocalLogin)
         {
-            <div class="col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Local Login</h3>
+        <div class="login-form-wrapper">
+        <img src="~/stamacasa.svg" alt="logo" role="logo">
+        <div class="container __login-form-container">
+            <h1 class="subtitle is-size-2">LOGIN</h1>
+
+            <form asp-route="Login">
+                <input type="hidden" asp-for="ReturnUrl" />
+                <div class="container">
+                    <div class="field">
+                        <label asp-for="Username" class="label"></label>
+                        <div class="control is-expanded">
+                            <input class="input is-medium" placeholder="Email" asp-for="Username" type="email" autofocus>
+                        </div>
                     </div>
-                    <div class="panel-body">
+                    <div class="field">
+                        <label asp-for="Password" class="label"></label>
+                        <div class="control is-expanded">
+                            <input type="password" class="input is-medium" placeholder="Password" asp-for="Password" autocomplete="off">
+                        </div>
+                    </div>
+                        @if (Model.AllowRememberLogin)
+                        {
+                        <div class="container __login-form-options">
+                            <label class="__checkbox-label" asp-for="RememberLogin">
+                              <input type="checkbox" name="remember" asp-for="RememberLogin">
+                              <span class="__checkbox-custom"></span>
+                                  Remember me
+                            </label>
+                          <div>
+                            <a href="/register">Ai uitat parola?</a>
+                          </div>
+                        </div>
 
-                        <form asp-route="Login">
-                            <input type="hidden" asp-for="ReturnUrl" />
-
-                            <fieldset>
-                                <div class="form-group">
-                                    <label asp-for="Username"></label>
-                                    <input class="form-control" placeholder="Username" asp-for="Username" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="Password"></label>
-                                    <input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
-                                </div>
-                                @if (Model.AllowRememberLogin)
-                                {
-                                    <div class="form-group login-remember">
-                                        <label asp-for="RememberLogin">
-                                            <input asp-for="RememberLogin">
-                                            <strong>Remember My Login</strong>
-                                        </label>
-                                    </div>
-                                }
-
-                                <div>
-                                    <p>Default user is alice@test.com password is Alice123*</p>
-                                </div>
-
-                                <div class="form-group">
-                                    <button class="btn btn-primary" name="button" value="login">Login</button>
-                                    <button class="btn btn-default" name="button" value="cancel">Cancel</button>
-                                </div>
-                            </fieldset>
-                        </form>
+                        }
+                    <div class="container has-text-centered __login-form-button-container">
+                        <button type="button" name="button" value="login" class="button is-primary is-medium">Login</button>
                     </div>
                 </div>
+            </form>
+
+
+            <div style="margin-top: 40px;">
+                <p>Development info:</p>
+                <p>Default user is alice@test.com password is Alice123*</p>
             </div>
+        </div>
+        </div>
         }
 
         @if (Model.VisibleExternalProviders.Any())
@@ -89,5 +90,4 @@
                 There are no login schemes configured for this client.
             </div>
         }
-    </div>
 </div>

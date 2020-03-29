@@ -5,6 +5,7 @@ import PostLogoutRoute from "./components/OIDC/PostLogoutRoute";
 import SilentRefreshRoute from "./components/OIDC/SilentRefreshRoute";
 import Login from "./components/Login";
 import CardsPlayground from "./components/CardsPlayground";
+import AddMember from "./components/AddMember";
 
 export const ROUTES = {
   home: {
@@ -30,7 +31,7 @@ export const ROUTES = {
   },
   addmember: {
     path: "/add-member",
-    component: () => "Placeholder addmember"
+    component: AddMember
   },
   oidcSignin: {
     path: "/signin-oidc",

@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   stamacasa.api:
-    image: ${DOCKER_REGISTRY-}stamacasaapi
+    image: ${DOCKER_REGISTRY-}stamacasa-api
     build:
       context: .
       dockerfile: StamAcasa.Api/Dockerfile
@@ -10,9 +10,9 @@ services:
       - ASPNETCORE_URLS=http://+:80
     ports: 
       - 5008:80
-    volumes: 
+    # volumes: 
       #- ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
-      - ${HOME}/.aspnet/https:/root/.aspnet/https/
+      #- ${HOME}/.aspnet/https:/root/.aspnet/https/
 
   rabbitmq:
     image: local_rabbit
@@ -28,8 +28,7 @@ services:
       - 15672:15672
 
   identityserver:
-    image: identityserver_img
-    container_name: identityserver
+    image: ${DOCKER_REGISTRY-}stamacasa-identityserver
     environment: 
       - ASPNETCORE_URLS=http://+:80
     build:
@@ -37,3 +36,23 @@ services:
         dockerfile: StamAcasa.IdentityServer/Dockerfile
     ports: 
       - 5001:80
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=docker 
+      - POSTGRES_USER=docker 
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - /postgres_data:/var/lib/postgresql/data
+      
+  frontend:
+    image:  ${DOCKER_REGISTRY-}stamacasa
+    build:
+        context: ../../frontend
+        dockerfile: Dockerfile
+    ports:
+     - 5002:80
