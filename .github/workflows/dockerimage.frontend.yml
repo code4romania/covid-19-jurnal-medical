@@ -28,7 +28,7 @@ jobs:
 
         - name: Build Docker image
           run: |
-            cd frontend/src
+            cd frontend
             docker build . \
               --tag $IMAGE_NAME:$GITHUB_SHA \
               --file Dockerfile
