@@ -9,6 +9,7 @@ import {
 } from "@code4ro/taskforce-fe-components";
 import { UserThunks } from "../../store/UserReducer";
 import { connect } from "react-redux";
+import environment from "../../environment.json";
 
 import "./header.scss";
 
@@ -61,7 +62,12 @@ const Header = ({ user, loadUser }) => {
           <a onClick={handleLogout}>Logout</a>
         </>
       ) : (
-        <a onClick={handleLogin}>Login</a>
+        <>
+          <a
+            href={`${environment.registerUrl}?returnUrl=${window.location}register-complete`}
+          >Inregistrare</a>
+          <a onClick={handleLogin}>Login</a>
+        </>
       )}
     </span>
   );
