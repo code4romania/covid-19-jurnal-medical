@@ -3,7 +3,9 @@
     "definitions": {
         "option": {
             "type": "object",
-            "required": ["label"],
+            "required": [
+                "label"
+            ],
             "description": "If the `value` field is missing, the answer value will become the label",
             "properties": {
                 "label": {
@@ -22,7 +24,9 @@
         },
         "inputOption": {
             "type": "object",
-            "required": ["optionType"],
+            "required": [
+                "optionType"
+            ],
             "properties": {
                 "placeholder": {
                     "type": "string"
@@ -84,7 +88,10 @@
                     }
                 },
                 "answers": {
-                    "type": "array"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/answer"
+                    }
                 }
             }
         },
@@ -99,82 +106,20 @@
             }
         },
         "answer": {
-            "type": "array",
-            "readOnly": false,
-            "writeOnly": false,
-            "uniqueItems": false,
-            "minItems": 0,
-            "minContains": 1,
-            "title": "The Answers Schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": [],
-            "additionalItems": true,
-            "items": {
-                "$id": "#/items/properties/form/items/properties/answers/items",
-                "type": "object",
-                "readOnly": false,
-                "writeOnly": false,
-                "minProperties": 0,
-                "title": "The Items Schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": {},
-                "examples": [
-                    {
-                        "result": 2.0,
-                        "options": [
-                            1.0
-                        ]
-                    },
-                    {
-                        "options": [
-                            2.0
-                        ],
-                        "result": 3.0
+            "type": "object",
+            "required": [
+                "options",
+                "result"
+            ],
+            "properties": {
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"                        
                     }
-                ],
-                "additionalProperties": true,
-                "required": [
-                    "options",
-                    "result"
-                ],
-                "properties": {
-                    "options": {
-                        "$id": "#/items/properties/form/items/properties/answers/items/properties/options",
-                        "type": "array",
-                        "readOnly": false,
-                        "writeOnly": false,
-                        "uniqueItems": false,
-                        "minItems": 0,
-                        "minContains": 1,
-                        "title": "The Options Schema",
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": [],
-                        "additionalItems": true,
-                        "items": {
-                            "$id": "#/items/properties/form/items/properties/answers/items/properties/options/items",
-                            "type": "integer",
-                            "readOnly": false,
-                            "writeOnly": false,
-                            "title": "The Items Schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                1
-                            ]
-                        }
-                    },
-                    "result": {
-                        "$id": "#/items/properties/form/items/properties/answers/items/properties/result",
-                        "type": "integer",
-                        "readOnly": false,
-                        "writeOnly": false,
-                        "title": "The Result Schema",
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": 0,
-                        "examples": [
-                            2
-                        ]
-                    }
+                },
+                "result": {
+                    "type": "integer"
                 }
             }
         }
@@ -200,19 +145,10 @@
             "type": "string"
         },
         "buttons": {
-            "$id": "#/items/properties/buttons",
-            "readOnly": false,
-            "writeOnly": false,
-            "title": "The Buttons Schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": null,
-            "examples": [
-                null
-            ]
+            "$id": "#/items/properties/buttons"
         },
         "firstNodeId": {
             "type": "integer",
-            "title": "The firstNodeId Schema",
             "description": "Id of the first question from the form (starting question id)"
         },
         "form": {
