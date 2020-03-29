@@ -4,13 +4,13 @@ on:
         - develop
         - master
       paths:
-        - "frontend/src/**"
+        - "frontend/**"
     pull_request:
       branches:
         - develop
         - master
       paths:
-        - "frontend/src/**"
+        - "frontend/**"
 
 name: CI-FrontEnd
 
@@ -28,7 +28,7 @@ jobs:
 
         - name: Build Docker image
           run: |
-            cd frontend/src
+            cd frontend
             docker build . \
               --tag $IMAGE_NAME:$GITHUB_SHA \
               --file Dockerfile
