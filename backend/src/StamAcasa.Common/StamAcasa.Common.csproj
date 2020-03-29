@@ -7,10 +7,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200321214733_InitialCreate.cs" />
     <Compile Remove="Migrations\20200321214733_InitialCreate.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
+    <Compile Remove="Migrations\20200329144639_AdjustFormContentJsonColumn.cs" />
+    <Compile Remove="Migrations\20200329144639_AdjustFormContentJsonColumn.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
