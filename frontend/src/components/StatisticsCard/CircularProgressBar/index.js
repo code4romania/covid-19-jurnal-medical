@@ -17,7 +17,7 @@ const CircularProgressBar = ({ strokeWidth, percentage, number }) => {
 
   return (
     <div className="circular-progress-bar">
-      <svg
+      {/* <svg
         className="circular-progress-bar__circle-abstract-bottom"
         width="76"
         height="76"
@@ -44,7 +44,7 @@ const CircularProgressBar = ({ strokeWidth, percentage, number }) => {
           d="M34.5928 42.5461C34.5928 42.5461 32.8283 42.4435 36.7358 40.6932C40.6433 38.9429 47.8156 23.7465 40.0484 19.9222C32.2811 16.0978 39.5443 8.42575 36.8257 4.08655C34.1071 -0.252643 31.1689 -0.628618 24.7196 3.65805C18.2703 7.94472 5.82833 -3.50456 1.47175 5.58396C-2.88484 14.6725 4.51531 3.63802 4.51531 3.63802L22.6606 9.34632L34.1045 19.3672L34.5928 42.5461Z"
           fill="#F2994A"
         />
-      </svg>
+      </svg> */}
       <svg
         className="circular-progress-bar__circle"
         width={sqSize}
