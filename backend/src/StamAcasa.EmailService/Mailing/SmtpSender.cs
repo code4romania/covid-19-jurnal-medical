@@ -22,17 +22,17 @@ namespace StamAcasa.EmailService.Mailing
         {
             using (var client = new SmtpClient())
             {
-                client.SslProtocols = SslProtocols.Ssl3 | SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12 | SslProtocols.Tls13;
+                client.SslProtocols = SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12 | SslProtocols.Tls13;
 
-                await client.ConnectAsync(_options.Host, 465, true, cancellationToken);
+                await client.ConnectAsync(_options.Host, _options.Port, _options.UseSsl, cancellationToken);
 
                 // Note: only needed if the SMTP server requires authentication
                 await client.AuthenticateAsync(_options.User, _options.Password, cancellationToken);
 
 
                 var messageToSend = BuildMessage(email);
-                await client.SendAsync(messageToSend);
-                await client.DisconnectAsync(true);
+                await client.SendAsync(messageToSend, cancellationToken);
+                await client.DisconnectAsync(true, cancellationToken);
             }
         }
 

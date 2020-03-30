@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
@@ -23,7 +24,17 @@ namespace StamAcasa.EmailService
             .UseWindowsService()
             .ConfigureAppConfiguration((context, config) =>
             {
+                var env = context.HostingEnvironment;
+
                 // configure the app here.
+                config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)        // { "Parent": { "Child": value } } is queried using "Parent:Child"
+                    .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
+                    .AddEnvironmentVariables();                                                     // { "Parent": { "Child": value } } is equivalent to variable Parent__Child
+
+                if (args != null)
+                {
+                    config.AddCommandLine(args);
+                }
             })
             .ConfigureServices((context, services) =>
             {
@@ -33,6 +44,8 @@ namespace StamAcasa.EmailService
                     return new ConnectionFactory()
                     {
                         HostName = context.Configuration["RabbitMQ:HostName"],
+                        UserName = context.Configuration["RabbitMQ:User"],
+                        Password = context.Configuration["RabbitMQ:Password"],
                         DispatchConsumersAsync = true // this is mandatory to have Async Subscribers
                     };
                 });
@@ -42,8 +55,10 @@ namespace StamAcasa.EmailService
                     var options = new MailOptions()
                     {
                         Host = context.Configuration["SMTP:HostName"],
-                        User = "<user>",
-                        Password = "<password>"
+                        Port = context.Configuration.GetValue<int>("SMTP:Port"),
+                        UseSsl = context.Configuration.GetValue<bool>("SMTP:UseSsl"),
+                        User = context.Configuration["SMTP:User"],
+                        Password = context.Configuration["SMTP:Password"]
                     };
 
                     return new SmtpSender(options);
