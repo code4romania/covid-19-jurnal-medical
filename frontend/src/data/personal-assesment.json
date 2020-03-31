@@ -4,7 +4,7 @@
   "form": [
     {
       "questionId": 1,
-      "questionText": "Ai prezentat simptome?",
+      "questionText": "Ai avut febra 38 grade celsius sau mai mare?",
       "type": "SINGLE_CHOICE",
       "options": [
         {
@@ -14,28 +14,19 @@
         {
           "label": "Nu",
           "value": 0,
-          "nextQuestionId": 4
+          "nextQuestionId": 3
         }
       ]
     },
     {
       "questionId": 2,
-      "questionText": "Ce temperatura ai avut?",
-      "type": "SINGLE_CHOICE",
-      "options": [
-        {
-          "label": "37",
-          "value": 1
-        },
-        {
-          "label": "38",
-          "value": 2
-        }
-      ]
+      "questionText": "Din ce dată ai avut prima dată febră?",
+      "type": "FREE_TEXT",
+      "options": []
     },
     {
       "questionId": 3,
-      "questionText": "Ești fumător/fumătoare? (inclusiv țigări electronice)",
+      "questionText": "Ai avut durere în gât și/sau dificultate în a înghiți?",
       "type": "SINGLE_CHOICE",
       "options": [
         {
@@ -44,37 +35,91 @@
         },
         {
           "label": "Nu",
-          "value": 0
+          "value": 0,
+          "nextQuestionId": 5
         }
       ]
     },
     {
       "questionId": 4,
-      "questionText": "Care este sexul tău?",
+      "questionText": "Din ce dată ai avut durere în gât și/sau dificultate în a înghiți?",
+      "type": "FREE_TEXT",
+      "options": []
+    },
+    {
+      "questionId": 5,
+      "questionText": "Ai avut tuse intensă?",
       "type": "SINGLE_CHOICE",
       "options": [
         {
-          "label": "Masculin",
+          "label": "Da",
           "value": 1
         },
         {
-          "label": "Feminin",
-          "value": 2
+          "label": "Nu",
+          "value": 0,
+          "nextQuestionId": 7
         }
       ]
     },
     {
-      "questionId": 5,
+      "questionId": 6,
+      "questionText": "Din ce dată ai avut durere în gât și/sau dificultate în a înghiți?",
+      "type": "FREE_TEXT",
+      "options": []
+    },
+    {
+      "questionId": 7,
+      "questionText": "Ai avut dificultate în a respira?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "label": "Da",
+          "value": 1
+        },
+        {
+          "label": "Nu",
+          "value": 0,
+          "nextQuestionId": 9
+        }
+      ]
+    },
+    {
+      "questionId": 8,
+      "questionText": "Din ce dată ai avut dificultate în a respira?",
+      "type": "FREE_TEXT",
+      "options": []
+    },
+    {
+      "questionId": 9,
+      "questionText": "Ți-a curs nasul?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "label": "Da",
+          "value": 1
+        },
+        {
+          "label": "Nu",
+          "value": 0,
+          "nextQuestionId": 11
+        }
+      ]
+    },
+    {
+      "questionId": 10,
+      "questionText": "Din ce dată ţi-a curs nasul?",
+      "type": "FREE_TEXT",
+      "options": []
+    },
+    {
+      "questionId": 11,
       "type": "FINAL",
       "questionText": "Ce trebuie sa faci?",
       "options": [
         {
           "label": "Esti bine! Stai acasa!",
           "value": 0
-        },
-        {
-          "label": "Suna medicul de familie! Dar stai acasa!",
-          "value": 1
         }
       ]
     }

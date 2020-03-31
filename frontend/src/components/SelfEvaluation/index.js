@@ -5,7 +5,9 @@ import api from "../../api";
 
 const SelfEvaluation = () => {
   // eslint-disable-next-line no-unused-vars
-  const evaluateCallback = () => {};
+  const evaluateCallback = (formState, options) => {
+    return options[0];
+  };
 
   const onFinishingForm = result => {
     console.log(result);
