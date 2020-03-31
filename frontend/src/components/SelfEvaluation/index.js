@@ -1,10 +1,15 @@
 import React from "react";
 import { Form } from "@code4ro/taskforce-fe-components";
-import data from "../../data/self-eval.json";
+import data from "../../data/personal-assesment.json";
+import api from "../../api";
 
 const SelfEvaluation = () => {
-  const evaluateCallback = (formData, options) => {
-    // TODO Send data to BE
+  // eslint-disable-next-line no-unused-vars
+  const evaluateCallback = () => {};
+
+  const onFinishingForm = result => {
+    console.log(result);
+    api.post(`http://localhost:5008/api/form?id=${result.formId}`, result);
   };
 
   return (
@@ -12,7 +17,7 @@ const SelfEvaluation = () => {
       <Form
         data={data}
         evaluateForm={evaluateCallback}
-        onFinishingForm={results => console.log(results)}
+        onFinishingForm={onFinishingForm}
       />
     </div>
   );
