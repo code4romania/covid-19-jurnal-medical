@@ -16,14 +16,12 @@ const Header = ({ user, loadUser }) => {
   if (!user) {
     loadUser();
   }
-  const handleLogin = event => {
+  const handleLogin = () => {
     UserThunks.authenticate();
-    event.preventDefault();
   };
 
-  const handleLogout = event => {
+  const handleLogout = () => {
     UserThunks.logout();
-    event.preventDefault();
   };
 
   const Logo = () => (
@@ -60,9 +58,7 @@ const Header = ({ user, loadUser }) => {
         <>
           <NavLink to="/">Contul meu</NavLink>
           <div className="account-separator"></div>
-          <a href="#/" onClick={handleLogout}>
-            Logout
-          </a>
+          <a onClick={handleLogout}>Logout</a>
         </>
       ) : (
         <>
@@ -71,9 +67,7 @@ const Header = ({ user, loadUser }) => {
           >
             Inregistrare
           </a>
-          <a href="#/" onClick={handleLogin}>
-            Login
-          </a>
+          <a onClick={handleLogin}>Login</a>
         </>
       )}
     </span>
