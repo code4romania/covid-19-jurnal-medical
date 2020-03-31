@@ -14,7 +14,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <Switch>
-        {[...baseRoutes, ...oidcRoutes].map(
+        {[...oidcRoutes, ...baseRoutes].map(
           ({ path, component, extraProps }) => (
             <Route
               path={path}

@@ -18,15 +18,10 @@ const Home = () => {
       />
       <StepsBar />
       <div>
-        {/* <BrowserRouter> */}
-        {/* <Switch> */}
         {homeRoutes.map(({ path, component, extraProps }) => (
           <Route path={path} component={component} key={path} {...extraProps} />
         ))}
-        {/* </Switch>
-        </BrowserRouter> */}
       </div>
-      {/* Home placeholder */}
     </BasePage>
   );
 };
