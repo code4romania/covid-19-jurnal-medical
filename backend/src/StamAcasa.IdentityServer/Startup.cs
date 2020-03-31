@@ -1,10 +1,13 @@
+using System;
 using IdentityServer.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StamAcasa.IdentityServer;
+using StamAcasa.IdentityServer.Services;
 
 namespace IdentityServer
 {
@@ -29,6 +32,7 @@ namespace IdentityServer
                 {
                     options.UserInteraction.LoginUrl = "/account/login";
                     options.UserInteraction.LogoutUrl = "/account/logout";
+                    
                     options.Events.RaiseErrorEvents = true;
                     options.Events.RaiseInformationEvents = true;
                     options.Events.RaiseFailureEvents = true;
@@ -42,6 +46,20 @@ namespace IdentityServer
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
             services.AddAuthentication();
+            var emailType = Configuration.GetValue<EmailingSystemTypes>("EMailingSystem");
+            switch (emailType)
+            {
+                case EmailingSystemTypes.SendGrid:
+                    services.Configure<AuthMessageSenderOptions>(Configuration);
+                    services.AddTransient<IEmailSender, EmailSenderSendGrid>();
+                    break;
+                case EmailingSystemTypes.Smtp:
+                    services.Configure<SmtpSenderOptions>(Configuration);
+                    services.AddTransient<IEmailSender, EmailSenderSmtp>();
+                    break;
+                default:
+                    break;
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,10 +74,10 @@ namespace IdentityServer
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+                app.UseHttpsRedirection();
             }
 
             app.UseRouting();
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseIdentityServer();
             app.UseAuthentication();

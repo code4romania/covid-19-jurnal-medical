@@ -61,7 +61,14 @@ const Header = ({ user, loadUser }) => {
           <a onClick={handleLogout}>Logout</a>
         </>
       ) : (
-        <a onClick={handleLogin}>Login</a>
+        <>
+          <a
+            href={`${process.env.REACT_APP_IDP_URL}/identity/account/register?returnUrl=${window.location}register-complete`}
+          >
+            Inregistrare
+          </a>
+          <a onClick={handleLogin}>Login</a>
+        </>
       )}
     </span>
   );
