@@ -21,22 +21,18 @@ export const ROUTES = {
   oidc: {
     signin: {
       path: "/signin-oidc",
-      extraProps: { exact: true },
       component: SigninRoute
     },
     postlogout: {
       path: "/post-logout",
-      extraProps: { exact: true },
       component: PostLogoutRoute
     },
     silentrefresh: {
       path: "/silent-refresh",
-      extraProps: { exact: true },
       component: SilentRefreshRoute
     },
     registercomplete: {
       path: "/register-complete",
-      extraProps: { exact: true },
       component: RegisterCompleteRoute
     }
   },
