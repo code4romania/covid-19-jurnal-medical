@@ -10,7 +10,6 @@ const SelfEvaluation = () => {
   };
 
   const onFinishingForm = result => {
-    console.log(result);
     api.post(`http://localhost:5008/api/form?id=${result.formId}`, result);
   };
 
