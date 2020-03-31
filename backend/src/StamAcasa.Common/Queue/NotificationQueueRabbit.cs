@@ -10,18 +10,20 @@ namespace StamAcasa.Common.Queue
     {
         private string HostName { get; }
 
-        private string QueueName { get; }
+        private RabbitConfig Config { get; }
 
-        private string Exchange { get; }
+        private IConnection Connection { get; }
 
-        private string RoutingKey { get; }
-
-        public NotificationQueueRabbit(string hostName, string queueName, string exchange, string routingKey)
+        public NotificationQueueRabbit(string hostName, RabbitConfig config)
         {
             HostName = hostName;
-            QueueName = queueName;
-            Exchange = exchange;
-            RoutingKey = routingKey;
+            Config = config;
+        }
+
+        public NotificationQueueRabbit(IConnection connection, RabbitConfig config)
+        {
+            Connection = connection;
+            Config = config;
         }
 
         public Task<INotification> Dequeue()
@@ -31,24 +33,33 @@ namespace StamAcasa.Common.Queue
 
         public Task Queue(INotification notification)
         {
-            var factory = new ConnectionFactory() { HostName = HostName };
-            using (var connection = factory.CreateConnection())
+            if (null != Connection)
             {
-                using (var channel = connection.CreateModel())
-                {
-                    channel.QueueDeclare(queue: QueueName,
-                         durable: true,
-                         exclusive: false,
-                         autoDelete: false,
-                         arguments: null);
+                return QueueInternal(notification, Connection);
+            }
 
-                    var body = notification.GetBytes();
+            using (var connection = new ConnectionFactory() { HostName = HostName }.CreateConnection())
+            {
+                return QueueInternal(notification, connection);
+            }
+        }
 
-                    channel.BasicPublish(exchange: Exchange,
-                                     routingKey: RoutingKey,
-                                     basicProperties: null,
-                                     body: body);
-                }
+        private Task QueueInternal(INotification notification, IConnection connection)
+        {
+            using (var channel = connection.CreateModel())
+            {
+                channel.QueueDeclare(queue: Config.QueueName,
+                     durable: true,
+                     exclusive: false,
+                     autoDelete: false,
+                     arguments: null);
+
+                var body = notification.GetBytes();
+
+                channel.BasicPublish(exchange: Config.Exchange,
+                                 routingKey: Config.RoutingKey,
+                                 basicProperties: null,
+                                 body: body);
             }
 
             return Task.CompletedTask;
