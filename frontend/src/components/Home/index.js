@@ -4,7 +4,7 @@ import { Hero } from "@code4ro/taskforce-fe-components";
 import StepsBar from "../StepsBar";
 import BasePage from "../BasePage";
 import { ROUTES } from "../../routes";
-import { Route } from "react-router-dom";
+import { AuthenticatedRoute } from "../../AuthenticatedRoute";
 
 const Home = () => {
   const { home } = ROUTES;
@@ -19,7 +19,12 @@ const Home = () => {
       <StepsBar />
       <div>
         {homeRoutes.map(({ path, component, extraProps }) => (
-          <Route path={path} component={component} key={path} {...extraProps} />
+          <AuthenticatedRoute
+            path={path}
+            component={component}
+            key={path}
+            {...extraProps}
+          />
         ))}
       </div>
     </BasePage>

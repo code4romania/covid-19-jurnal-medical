@@ -3,24 +3,19 @@ import About from "./components/About";
 import SigninRoute from "./components/OIDC/SigninRoute";
 import PostLogoutRoute from "./components/OIDC/PostLogoutRoute";
 import SilentRefreshRoute from "./components/OIDC/SilentRefreshRoute";
-import Login from "./components/Login";
 import AddMember from "./components/AddMember";
 import RegisterCompleteRoute from "./components/OIDC/RegisterCompleteRoute";
 import SelfEvaluation from "./components/SelfEvaluation";
 
 export const ROUTES = {
   base: {
-    homea: {
-      path: "/",
-      component: Home
-    },
-    login: {
-      path: "/login",
-      component: Login
-    },
     despre: {
       path: "/despre",
       component: About
+    },
+    home: {
+      path: "/",
+      component: Home
     }
   },
   oidc: {
