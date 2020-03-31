@@ -1,4 +1,18 @@
 .App-header {
+  nav {
+    button {
+      font-size: 16px;
+      border: none;
+      color: #000;
+      text-decoration: none;
+      margin: 0px 10px;
+      padding: 0.25rem 0.75rem;
+    }
+
+    button:hover {
+      background: #fafafa;
+    }
+  }
   nav * {
     vertical-align: middle;
   }

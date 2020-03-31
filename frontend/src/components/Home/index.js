@@ -17,16 +17,15 @@ const Home = () => {
         useFallbackIcon={true}
       />
       <StepsBar />
-      <div>
-        {homeRoutes.map(({ path, component, extraProps }) => (
-          <AuthenticatedRoute
-            path={path}
-            component={component}
-            key={path}
-            {...extraProps}
-          />
-        ))}
-      </div>
+
+      {homeRoutes.map(({ path, component, extraProps }) => (
+        <AuthenticatedRoute
+          path={path}
+          component={component}
+          key={path}
+          {...extraProps}
+        />
+      ))}
     </BasePage>
   );
 };

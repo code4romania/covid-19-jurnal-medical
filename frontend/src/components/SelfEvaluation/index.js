@@ -14,13 +14,11 @@ const SelfEvaluation = () => {
   };
 
   return (
-    <div>
-      <Form
-        data={data}
-        evaluateForm={evaluateCallback}
-        onFinishingForm={onFinishingForm}
-      />
-    </div>
+    <Form
+      data={data}
+      evaluateForm={evaluateCallback}
+      onFinishingForm={onFinishingForm}
+    />
   );
 };
 
