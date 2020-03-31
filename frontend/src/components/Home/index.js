@@ -3,8 +3,12 @@ import React from "react";
 import { Hero } from "@code4ro/taskforce-fe-components";
 import StepsBar from "../StepsBar";
 import BasePage from "../BasePage";
+import { ROUTES } from "../../routes";
+import { Route } from "react-router-dom";
 
 const Home = () => {
+  const { home } = ROUTES;
+  const homeRoutes = Object.values(home);
   return (
     <BasePage>
       <Hero
@@ -13,7 +17,16 @@ const Home = () => {
         useFallbackIcon={true}
       />
       <StepsBar />
-      Home placeholder
+      <div>
+        {/* <BrowserRouter> */}
+        {/* <Switch> */}
+        {homeRoutes.map(({ path, component, extraProps }) => (
+          <Route path={path} component={component} key={path} {...extraProps} />
+        ))}
+        {/* </Switch>
+        </BrowserRouter> */}
+      </div>
+      {/* Home placeholder */}
     </BasePage>
   );
 };

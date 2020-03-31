@@ -7,14 +7,23 @@ import "./App.scss";
 import { ROUTES } from "./routes";
 
 const App = () => {
-  const appRoutes = Object.values(ROUTES);
+  const { base, oidc } = ROUTES;
+  const baseRoutes = Object.values(base),
+    oidcRoutes = Object.values(oidc);
 
   return (
     <Provider store={store}>
       <Switch>
-        {appRoutes.map(({ path, component, extraProps }) => (
-          <Route path={path} component={component} key={path} {...extraProps} />
-        ))}
+        {[...baseRoutes, ...oidcRoutes].map(
+          ({ path, component, extraProps }) => (
+            <Route
+              path={path}
+              component={component}
+              key={path}
+              {...extraProps}
+            />
+          )
+        )}
       </Switch>
     </Provider>
   );
