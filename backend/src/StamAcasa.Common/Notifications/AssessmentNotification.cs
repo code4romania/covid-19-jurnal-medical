@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using StamAcasa.Common.Models;
+using StamAcasa.Common.DTO;
 
 namespace StamAcasa.Common.Notifications
 {
