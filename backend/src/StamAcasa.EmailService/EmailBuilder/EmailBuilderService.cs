@@ -1,10 +1,10 @@
-﻿using System;
+﻿
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using StamAcasa.EmailService.EmailBuilder.Models;
+using StamAcasa.Common.Models;
 
 namespace StamAcasa.EmailService.EmailBuilder
 {
@@ -19,7 +19,7 @@ namespace StamAcasa.EmailService.EmailBuilder
             _configuration = configuration;
 
         }
-        public async Task<EmailModel> BuildEmail(EmailRequestModel emailRequest)
+        public async Task<Email> BuildEmail(EmailRequestModel emailRequest)
         {
             _logger.LogInformation("Build email");
             var targetDirectory = _configuration.GetValue<string>("TemplateFolder");
@@ -30,9 +30,9 @@ namespace StamAcasa.EmailService.EmailBuilder
             {
                 string template = await streamReader.ReadToEndAsync();
                 template = FormatTemplate(template, emailRequest);
-                var emailModel = new EmailModel
+                var emailModel = new Email
                 {
-                    Address = emailRequest.Address,
+                    To = emailRequest.Address,
                     Subject = "New Email",
                     Content = template
                 };
