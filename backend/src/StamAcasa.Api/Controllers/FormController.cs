@@ -49,7 +49,7 @@ namespace StamAcasa.Api.Controllers
                 return new UnauthorizedResult();
 
             var form = JsonConvert.DeserializeObject<dynamic>(content.ToString());
-            if (form.doc_id == null)
+            if (form.formId == null)
                 return new BadRequestResult();
 
             var timestamp = DateTime.Now;
@@ -74,11 +74,11 @@ namespace StamAcasa.Api.Controllers
                 Content = contentToSave,
                 Timestamp = timestamp,
                 UserId = id ?? authenticatedUser.Id,
-                FormTypeId = form.doc_id.ToString()
+                FormTypeId = form.formId.ToString()
             });
 
             await _fileService.SaveRawData(contentToSave, 
-                $"{Guid.Parse(subClaimValue).ToString("N")}_{form.doc_id}_{timestamp.ToEpochTime()}.json");
+                $"{Guid.Parse(subClaimValue).ToString("N")}_{form.formId}_{timestamp.ToEpochTime()}.json");
 
             return new OkObjectResult(string.Empty);
         }

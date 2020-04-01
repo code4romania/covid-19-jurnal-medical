@@ -58,7 +58,7 @@ const Header = ({ user, loadUser }) => {
         <>
           <NavLink to="/">Contul meu</NavLink>
           <div className="account-separator"></div>
-          <a onClick={handleLogout}>Logout</a>
+          <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
         <>
@@ -67,7 +67,8 @@ const Header = ({ user, loadUser }) => {
           >
             Inregistrare
           </a>
-          <a onClick={handleLogin}>Login</a>
+          <div className="account-separator"></div>
+          <button onClick={handleLogin}>Login</button>
         </>
       )}
     </span>
