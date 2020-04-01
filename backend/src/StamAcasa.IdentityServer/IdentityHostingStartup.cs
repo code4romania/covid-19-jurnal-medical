@@ -18,7 +18,7 @@ namespace IdentityServer
                         context.Configuration.GetConnectionString("ApplicationDbContextConnection")));
 
                 services.AddDefaultIdentity<ApplicationUser>(options => 
-                        options.SignIn.RequireConfirmedAccount = false)
+                        options.SignIn.RequireConfirmedAccount = true)
                     .AddEntityFrameworkStores<ApplicationDbContext>();
             });
         }
