@@ -19,7 +19,7 @@ RUN dotnet publish "StamAcasa.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY ["StamAcasa.Api/StamAcasa.Api.xml", "StamAcasa.Api.xml"]
+COPY ["StamAcasa.Api/StamAcasa.Api.xml", "StamAcasa.Api.XML"]
 COPY --from=publish /app/publish .
 
 RUN chmod -R 1744 /app
