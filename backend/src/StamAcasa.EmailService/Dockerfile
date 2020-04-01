@@ -4,6 +4,8 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["StamAcasa.EmailService/StamAcasa.EmailService.csproj", "StamAcasa.EmailService/"]
+COPY ["StamAcasa.Common/StamAcasa.Common.csproj", "StamAcasa.Common/"]
+RUN dotnet restore "StamAcasa.Common/StamAcasa.Common.csproj"
 RUN dotnet restore "StamAcasa.EmailService/StamAcasa.EmailService.csproj"
 COPY . .
 WORKDIR "/src/StamAcasa.EmailService"
