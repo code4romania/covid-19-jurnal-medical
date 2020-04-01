@@ -67,6 +67,7 @@ const Header = ({ user, loadUser }) => {
           >
             Inregistrare
           </a>
+          <div className="account-separator"></div>
           <button onClick={handleLogin}>Login</button>
         </>
       )}
