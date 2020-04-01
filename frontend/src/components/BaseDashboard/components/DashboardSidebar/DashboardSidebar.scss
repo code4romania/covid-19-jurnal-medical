@@ -1,0 +1,41 @@
+.dashboardSidebar {
+  height: 100%;
+  width: 290px;
+  position: fixed;
+  border-right: 1px solid #C1C1C1;
+  z-index: 1;
+  top: 85px;
+  padding-top: 40px;
+  left: 0;
+  overflow-x: hidden;
+
+  .sidebar-menu {
+    .dashboardLink {
+      display: block;
+      color: black;
+      padding: 10px 10px 10px 80px;
+    }
+
+    .dashboard-menu-item {
+      background: url("../../../../images/eye-icon.svg") no-repeat 40px 50%;
+
+      &.dashboardActiveLink {
+        background: #FFBD59 url("../../../../images/eye-icon-active.svg") no-repeat 40px 50%;
+      }
+    }
+    .cazuri-red-flag-menu-item, .users-menu-item {
+      background: url("../../../../images/user-icon.svg") no-repeat 40px 50%;
+
+      &.dashboardActiveLink {
+        background: #FFBD59 url("../../../../images/user-icon-active.svg") no-repeat 40px 50%;
+      }
+    }
+    .reports-menu-item {
+      background: url("../../../../images/report-icon.svg") no-repeat 40px 50%;
+
+      &.dashboardActiveLink {
+        background: #FFBD59 url("../../../../images/report-icon-active.svg") no-repeat 40px 50%;
+      }
+    }
+  }
+}

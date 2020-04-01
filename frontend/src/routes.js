@@ -6,12 +6,17 @@ import SilentRefreshRoute from "./components/OIDC/SilentRefreshRoute";
 import AddMember from "./components/AddMember";
 import RegisterCompleteRoute from "./components/OIDC/RegisterCompleteRoute";
 import SelfEvaluation from "./components/SelfEvaluation";
+import BaseDashboard from "./components/BaseDashboard";
 
 export const ROUTES = {
   base: {
     despre: {
       path: "/despre",
       component: About
+    },
+    dashboard: {
+      path: "/dashboard",
+      component: BaseDashboard
     },
     home: {
       path: "/",
