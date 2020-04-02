@@ -17,7 +17,7 @@ on:
 name: CI-API
 
 env:
-  IMAGE_NAME: ${{ secrets.DOCKER_HUB_ORGANIZATION }}/stamacasa-api
+  IMAGE_NAME: ${{ secrets.DOCKER_HUB_ORGANIZATION || 'code4romania' }}/stamacasa-api
 
 jobs:
   build-parser:
