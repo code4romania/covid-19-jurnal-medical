@@ -5,6 +5,7 @@ import PostLogoutRoute from "./components/OIDC/PostLogoutRoute";
 import SilentRefreshRoute from "./components/OIDC/SilentRefreshRoute";
 import Login from "./components/Login";
 import AddMember from "./components/AddMember";
+import CreateYourAccount from "./components/CreateYourAccount";
 
 export const ROUTES = {
   home: {
@@ -15,6 +16,10 @@ export const ROUTES = {
   login: {
     path: "/login",
     component: Login
+  },
+  createYourAccount: {
+    path: "/creaza-ti-cont",
+    component: CreateYourAccount
   },
   despre: {
     path: "/despre",
