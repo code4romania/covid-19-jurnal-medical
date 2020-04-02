@@ -1,3 +1,19 @@
 .select, select{
     width: 100%
 }
+
+.override-is-2 .subtitle.is-2 {
+    font-size: 1rem;
+}
+
+.subtitle:not(:last-child) {
+    margin-bottom: 0.5rem !important;
+}
+
+.is-multiple .select:after {
+    display: none !important;
+}
+
+.is-multiple .select {
+    height: auto !important;
+}

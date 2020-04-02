@@ -3,101 +3,181 @@ import {
   Hero,
   Button,
   Input,
-  Label,
   Select,
   RadioList
 } from "@code4ro/taskforce-fe-components";
 import SidebarLayout from "../SidebarLayout";
 import "./AddMember.scss";
-const AddMember = () => {
-  //TODO: change with api endpoins responses when they are available
-  const relationshipOptions = [
-    { text: "", value: "" },
-    { text: "Bunică", value: "1" }
-  ];
+class AddMember extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const options1 = [
-    { key: true, value: "Da" },
-    { key: false, value: "Nu" }
-  ];
+    this.toggleSex = this.toggleSex.bind(this);
+    this.togglePreexistingConditions = this.togglePreexistingConditions.bind(
+      this
+    );
+    this.toggleDisabilities = this.toggleDisabilities.bind(this);
 
-  const options2 = [
-    { key: "1", value: "Auto izolare" },
-    { key: "2", value: "Carantină la domiciliu" },
-    { key: "3", value: "Carantină specializată" },
-    { key: "4", value: "Niciuna" }
-  ];
+    //TODO: change with api endpoins responses when they are available
+    this.options = {
+      gender: [
+        { key: "1", text: "Feminin" },
+        { key: "2", text: "Masculin" }
+      ],
+      relationship: {
+        female: [
+          { text: "", value: "" },
+          { text: "Bunică", value: "1" },
+          { text: "Mamă", value: "2" },
+          { text: "Fiica", value: "3" },
+          { text: "Soră", value: "4" },
+          { text: "Alt membru al familiei", value: "5" },
+          { text: "Persoană în grijă", value: "6" }
+        ],
+        male: [
+          { text: "", value: "" },
+          { text: "Bunic", value: "1" },
+          { text: "Tată", value: "2" },
+          { text: "Fiu", value: "3" },
+          { text: "Frate", value: "4" },
+          { text: "Alt membru al familiei", value: "5" },
+          { text: "Persoană în grijă", value: "6" }
+        ]
+      },
+      yesNo: [
+        { key: "true", value: "Da" },
+        { key: "false", value: "Nu" }
+      ],
+      preexistingConditions: [
+        { value: "1", text: "Boală cardiovasculară" },
+        { value: "2", text: "Diabet" },
+        { value: "3", text: "Boală pulmonară" },
+        { value: "4", text: "Cancer" },
+        { value: "5", text: "Altă boală cronică" }
+      ],
+      isolation: [
+        { key: "1", value: "Auto izolare" },
+        { key: "2", value: "Carantină la domiciliu" },
+        { key: "3", value: "Carantină specializată" },
+        { key: "4", value: "Niciuna" }
+      ]
+    };
 
-  const genderOptions = [
-    { key: "", text: "" },
-    { key: "1", text: "Feminin" },
-    { key: "2", text: "Masculin" }
-  ];
+    this.state = {
+      showPreexistingConditions: false,
+      showDisabilities: false,
+      useMaleOptions: false,
+      female: true
+    };
+  }
 
-  var ageOptions = [...Array(100).keys()].map(index => ({
-    text: index,
-    value: index
-  }));
-  ageOptions[0].text = "";
+  toggleSex(event) {
+    this.setState({ female: event.target.value === "Feminin" });
+  }
 
-  return (
-    <SidebarLayout>
-      <form>
-        <Hero
-          title="Creează cont pentru un membru al familiei"
-          subtitle="Înregistrează un membru al familiei care nu poate accesa platforma și ajută-l să își facă evaluarea zilnică a simptomelor COVID-19."
-        />
-        <Input label="Nume și prenume" type="text" required="true" />
-        <div className="columns">
-          <div className="column is-6">
-            <Select label="Legătura familiala" options={relationshipOptions} />
-          </div>
-        </div>
-        <div className="columns">
-          <div className="column is-3">
-            <Select label="Vârstă" options={ageOptions} />
-          </div>
-          <div className="column is-3">
-            <Select
-              label="Gen"
-              options={genderOptions}
-              selectProps={{ className: "is-extended" }}
+  togglePreexistingConditions(value) {
+    this.setState({ showPreexistingConditions: value === "Da" });
+  }
+
+  toggleDisabilities(value) {
+    this.setState({ showDisabilities: value === "Da" });
+  }
+
+  validateAge(event) {
+    const value = parseInt(event.target.value.replace(/[^0-9]+/g, ""));
+    // age range is between 0 and 110 - might be worth reconsidering?
+    const boundedValue = Math.min(110, Math.max(0, value));
+
+    event.target.value = isNaN(boundedValue) ? "" : boundedValue;
+  }
+
+  render() {
+    return (
+      <SidebarLayout>
+        <form>
+          <div className="override-is-2">
+            <Hero
+              title="Creează cont pentru un membru al familiei"
+              subtitle="Înregistrează un membru al familiei care nu poate accesa platforma și ajută-l să își facă evaluarea zilnică a simptomelor COVID-19."
             />
-          </div>
-        </div>
-        <Label text="Are condiții de sănătate preexistente?" />
-        <p className="subtitle is-6">
-          Spune-ne dacă suferă de anumte boli cronice, diabet, hipertensiune,
-          etc
-        </p>
-        <Input label="" name="" />
-        <Label text="Are anumite dizabilități?" />
-        <p className="subtitle is-6">
-          Spune-ne dacă sferă de anumite dizabilitati Ex locomotorii, mentale,
-          de vorbire etc.
-        </p>
-        <RadioList label="" type="horizontal" options={options1} />
-        <RadioList
-          label="În ultima perioadă a fost în:"
-          type="horizontal"
-          options={options2}
-        />
+            <Input label="Nume și prenume" type="text" required={true} />
+            <div className="columns">
+              <div className="column is-3">
+                <Input
+                  label="Vârstă"
+                  type="text"
+                  onChange={this.validateAge}
+                  required={true}
+                />
+              </div>
+              <div className="column is-3">
+                <Select
+                  label="Gen"
+                  options={this.options.gender}
+                  selectProps={{
+                    onChange: this.toggleSex,
+                    className: "is-extended"
+                  }}
+                />
+              </div>
+            </div>
+            <div className="columns">
+              <div className="column is-6">
+                <Select
+                  label="Legătura familiala"
+                  options={
+                    this.state.female
+                      ? this.options.relationship.female
+                      : this.options.relationship.male
+                  }
+                />
+              </div>
+            </div>
+            <RadioList
+              label="Are condiții de sănătate preexistente?"
+              description="Spune-ne dacă suferă de anumte boli cronice, diabet, hipertensiune, etc."
+              type="horizontal"
+              options={this.options.yesNo}
+              onChange={this.togglePreexistingConditions}
+              required={true}
+            />
+            {this.state.showPreexistingConditions && (
+              <div className="column is-6 is-multiple">
+                <Select
+                  label="Condiții de sănătate preexistente"
+                  options={this.options.preexistingConditions}
+                  selectProps={{ multiple: "multiple" }}
+                />
+              </div>
+            )}
+            <RadioList
+              label="Are anumite dizabilități?"
+              description="Spune-ne dacă sferă de anumite dizabilitati Ex locomotorii, mentale, de vorbire, etc."
+              type="horizontal"
+              options={this.options.yesNo}
+              onChange={this.toggleDisabilities}
+            />
+            {this.state.showDisabilities && (
+              <Input label="Dizabilități" type="text" required={true} />
+            )}
+            <RadioList
+              label="În ultima perioadă a fost în:"
+              type="horizontal"
+              options={this.options.isolation}
+            />
 
-        <div className="columns">
-          <div className="column is-4 is-offset-8">
-            <Button
-              type="primary"
-              size="large"
-              disabled="true"
-              inputType="submit"
-            >
-              Adaugă
-            </Button>
+            <div className="columns">
+              <div className="column is-4 is-offset-8">
+                <Button type="primary" size="medium" inputType="submit">
+                  Adaugă
+                </Button>
+              </div>
+            </div>
           </div>
-        </div>
-      </form>
-    </SidebarLayout>
-  );
-};
+        </form>
+      </SidebarLayout>
+    );
+  }
+}
 
 export default AddMember;
