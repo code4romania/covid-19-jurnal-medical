@@ -1,12 +1,12 @@
 import { UserManager, WebStorageStateStore } from "oidc-client";
 
 const userManagerSettings = {
-  authority: "http://localhost:5001",
+  authority: process.env.REACT_APP_IDP_URL,
   client_id: "js",
-  redirect_uri: "http://localhost:3000/signin-oidc",
-  post_logout_redirect_uri: "http://localhost:3000/post-logout",
+  redirect_uri: `${process.env.REACT_APP_URL}/signin-oidc`,
+  post_logout_redirect_uri: `${process.env.REACT_APP_URL}/post-logout`,
   automaticSilentRenew: true,
-  silent_redirect_uri: "http://localhost:3000/silent-refresh",
+  silent_redirect_uri: `${process.env.REACT_APP_URL}/silent-refresh`,
   response_type: "id_token token",
   scope: "openid email answersApi",
   revokeAccessTokenOnSignout: true,
