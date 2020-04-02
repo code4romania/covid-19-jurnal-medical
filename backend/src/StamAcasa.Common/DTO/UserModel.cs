@@ -3,8 +3,8 @@ using StamAcasa.Common.Models;
 
 namespace StamAcasa.Common.DTO {
     public class UserModel {
-        public int? Id { get; set; }
-        public bool IsDependent { get; set; }
+        [JsonIgnore]
+        public int Id { get; set; }
         [JsonIgnore]
         public string Sub { get; set; }
         public string FullName { get; set; }
