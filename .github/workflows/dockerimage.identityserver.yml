@@ -17,7 +17,7 @@ on:
 name: CI-IdentityServer
 
 env:
-    IMAGE_NAME: ${{ secrets.DOCKER_HUB_ORGANIZATION }}/stamacasa-identityserver
+    IMAGE_NAME: ${{ secrets.DOCKER_HUB_ORGANIZATION || 'code4romania' }}/stamacasa-identityserver
 
 jobs:
     build-parser:
