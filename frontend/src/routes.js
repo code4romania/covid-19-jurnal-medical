@@ -3,50 +3,55 @@ import About from "./components/About";
 import SigninRoute from "./components/OIDC/SigninRoute";
 import PostLogoutRoute from "./components/OIDC/PostLogoutRoute";
 import SilentRefreshRoute from "./components/OIDC/SilentRefreshRoute";
-import Login from "./components/Login";
 import CardsPlayground from "./components/CardsPlayground";
 import AddMember from "./components/AddMember";
+import RegisterCompleteRoute from "./components/OIDC/RegisterCompleteRoute";
+import SelfEvaluation from "./components/SelfEvaluation";
 
 export const ROUTES = {
-  home: {
-    path: "/",
-    extraProps: { exact: true },
-    component: Home
+  base: {
+    despre: {
+      path: "/despre",
+      component: About
+    },
+    home: {
+      path: "/",
+      component: Home
+    }
   },
-  login: {
-    path: "/login",
-    component: Login
-  },
-  despre: {
-    path: "/despre",
-    component: About
-  },
-  account: {
-    path: "/account",
-    component: () => "Placeholder account"
-  },
-  selfevaluation: {
-    path: "/self-evaluation",
-    component: () => "Placeholder selfevaluation"
-  },
-  addmember: {
-    path: "/add-member",
-    component: AddMember
-  },
-  oidcSignin: {
-    path: "/signin-oidc",
-    component: SigninRoute
-  },
-  oidcPosLogout: {
-    path: "/post-logout",
-    component: PostLogoutRoute
-  },
-  oidcSilentRefresh: {
-    path: "/silent-refresh",
-    component: SilentRefreshRoute
+  oidc: {
+    signin: {
+      path: "/signin-oidc",
+      component: SigninRoute
+    },
+    postlogout: {
+      path: "/post-logout",
+      component: PostLogoutRoute
+    },
+    silentrefresh: {
+      path: "/silent-refresh",
+      component: SilentRefreshRoute
+    },
+    registercomplete: {
+      path: "/register-complete",
+      component: RegisterCompleteRoute
+    }
   },
   cardsPlayground: {
     path: "/cards-playground",
     component: CardsPlayground
+  home: {
+    selfevaluation: {
+      path: "/self-evaluation",
+      component: SelfEvaluation
+    },
+    addmember: {
+      path: "/add-member",
+      component: AddMember
+    },
+    account: {
+      path: "/account",
+      component: () => "Placeholder account"
+    }
   }
 };

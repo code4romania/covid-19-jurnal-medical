@@ -1,5 +1,4 @@
 import React from "react";
-import BasePage from "../BasePage";
 import {
   Hero,
   Button,
@@ -8,7 +7,6 @@ import {
   Select,
   RadioList
 } from "@code4ro/taskforce-fe-components";
-import StepsBar from "../StepsBar";
 import SidebarLayout from "../SidebarLayout";
 import "./AddMember.scss";
 const AddMember = () => {
@@ -43,73 +41,62 @@ const AddMember = () => {
   ageOptions[0].text = "";
 
   return (
-    <BasePage>
-      <Hero
-        title="Ce pași ai de urmat"
-        subtitle="Pentru a te putea ajuta iata ce ai la dispozitie in contul tau:"
-        useFallbackIcon={true}
-      />
-      <StepsBar />
-      <SidebarLayout>
-        <form>
-          <Hero
-            title="Creează cont pentru un membru al familiei"
-            subtitle="Înregistrează un membru al familiei care nu poate accesa platforma și ajută-l să își facă evaluarea zilnică a simptomelor COVID-19."
-          />
-          <Input label="Nume și prenume" type="text" required="true" />
-          <div className="columns">
-            <div className="column is-6">
-              <Select
-                label="Legătura familiala"
-                options={relationshipOptions}
-              />
-            </div>
+    <SidebarLayout>
+      <form>
+        <Hero
+          title="Creează cont pentru un membru al familiei"
+          subtitle="Înregistrează un membru al familiei care nu poate accesa platforma și ajută-l să își facă evaluarea zilnică a simptomelor COVID-19."
+        />
+        <Input label="Nume și prenume" type="text" required="true" />
+        <div className="columns">
+          <div className="column is-6">
+            <Select label="Legătura familiala" options={relationshipOptions} />
           </div>
-          <div className="columns">
-            <div className="column is-3">
-              <Select label="Vârstă" options={ageOptions} />
-            </div>
-            <div className="column is-3">
-              <Select
-                label="Gen"
-                options={genderOptions}
-                selectProps={{ className: "is-extended" }}
-              />
-            </div>
+        </div>
+        <div className="columns">
+          <div className="column is-3">
+            <Select label="Vârstă" options={ageOptions} />
           </div>
-          <Label text="Are condiții de sănătate preexistente?" />
-          <p className="subtitle is-6">
-            Spune-ne dacă suferă de anumte boli cronice, diabet, hipertensiune,
-            etc
-          </p>
-          <Input label="" name="" />
-          <Label text="Are anumite dizabilități?" />
-          <p className="subtitle is-6">
-            Spune-ne dacă sferă de anumite dizabilitati Ex locomotorii, mentale,
-            de vorbire etc.
-          </p>
-          <RadioList label="" type="horizontal" options={options1} />
-          <RadioList
-            label="În ultima perioadă a fost în:"
-            type="horizontal"
-            options={options2}
-          />
+          <div className="column is-3">
+            <Select
+              label="Gen"
+              options={genderOptions}
+              selectProps={{ className: "is-extended" }}
+            />
+          </div>
+        </div>
+        <Label text="Are condiții de sănătate preexistente?" />
+        <p className="subtitle is-6">
+          Spune-ne dacă suferă de anumte boli cronice, diabet, hipertensiune,
+          etc
+        </p>
+        <Input label="" name="" />
+        <Label text="Are anumite dizabilități?" />
+        <p className="subtitle is-6">
+          Spune-ne dacă sferă de anumite dizabilitati Ex locomotorii, mentale,
+          de vorbire etc.
+        </p>
+        <RadioList label="" type="horizontal" options={options1} />
+        <RadioList
+          label="În ultima perioadă a fost în:"
+          type="horizontal"
+          options={options2}
+        />
 
-          <div className="columns">
-            <div className="column is-4 is-offset-8">
-              <Button
-                type="primary"
-                size="large"
-                disabled="true"
-                inputType="submit"
-              >
-                Adaugă
-              </Button>
-            </div>
+        <div className="columns">
+          <div className="column is-4 is-offset-8">
+            <Button
+              type="primary"
+              size="large"
+              disabled="true"
+              inputType="submit"
+            >
+              Adaugă
+            </Button>
           </div>
-        </form>
-      </SidebarLayout>
-    </BasePage>
+        </div>
+      </form>
+    </SidebarLayout>
   );
 };
 

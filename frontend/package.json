@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@code4ro/taskforce-fe-components": "^1.0.4",
     "@nivo/stream": "^0.61.1",
+    "@code4ro/taskforce-fe-components": "^1.0.6",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.2",
     "bulma": "^0.8.1",
     "oidc-client": "^1.10.1",
     "react": "^16.13.0",

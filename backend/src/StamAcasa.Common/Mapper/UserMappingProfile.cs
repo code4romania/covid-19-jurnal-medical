@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using StamAcasa.Common.DTO;
 using StamAcasa.Common.Models;
 
 namespace StamAcasa.Common {
-    public class UserMappingProfile : Profile{
-        public UserMappingProfile()
-        {
+    public class UserMappingProfile : Profile {
+        public UserMappingProfile() {
             CreateMap<UserModel, User>();
         }
     }
