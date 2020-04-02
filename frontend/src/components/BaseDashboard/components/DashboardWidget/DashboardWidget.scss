@@ -1,0 +1,39 @@
+.widget {
+  background: white;
+  width: 100%;
+  border: 1px solid #C1C1C1;
+  border-radius: 10px;
+
+  .doughnut-chart {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    canvas {
+      background: url("../../../../images/chart-background.svg") no-repeat 64% 0;
+    }
+  }
+  .info {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+  }
+  .widget-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0;
+  }
+  .percentage {
+    display: flex;
+    align-items: flex-end;
+  }
+  .myChart2Wrapper {
+    position: relative;
+  }
+  .shadow {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10px;
+    //background-image: #ffffff40;
+  }
+}

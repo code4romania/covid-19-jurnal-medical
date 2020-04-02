@@ -15,7 +15,12 @@ html {
 .justify-content-center {
   justify-content: center;
 }
-
+.align-items-center {
+  align-items: center;
+}
+.d-flex {
+  display: flex;
+}
 @media screen and (min-width: 1024px) {
   .main-content {
     padding: 0 100px;

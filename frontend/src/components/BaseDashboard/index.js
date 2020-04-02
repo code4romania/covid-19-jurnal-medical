@@ -13,10 +13,10 @@ const BaseDashboard = () => {
       </div>
       <div className="container-fluid">
         <div className="columns main-section">
-          <div className="column is-one-quarter is-paddingless">
+          <div className="column is-3 is-paddingless">
             <DashboardSidebar />
           </div>
-          <div className="column is-paddingless">
+          <div className="column is-9 is-paddingless">
             <div className="main">
               {dashboard_routes.map(({ path, component, extraProps }) => (
                 <Route
