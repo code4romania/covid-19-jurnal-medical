@@ -1,13 +1,17 @@
+@import "./src/styles/variables";
+
 .dashboardSidebar {
   height: 100%;
-  width: 290px;
-  position: fixed;
   border-right: 1px solid #C1C1C1;
-  z-index: 1;
-  top: 85px;
   padding-top: 40px;
-  left: 0;
-  overflow-x: hidden;
+
+  @media (max-width: $mobileMaxWidth) {
+    & {
+      height: auto;
+      min-height: auto;
+      padding-top: 0;
+    }
+  }
 
   .sidebar-menu {
     .dashboardLink {
