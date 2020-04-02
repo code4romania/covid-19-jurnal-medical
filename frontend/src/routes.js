@@ -40,6 +40,7 @@ export const ROUTES = {
   cardsPlayground: {
     path: "/cards-playground",
     component: CardsPlayground
+  },
   home: {
     selfevaluation: {
       path: "/self-evaluation",
