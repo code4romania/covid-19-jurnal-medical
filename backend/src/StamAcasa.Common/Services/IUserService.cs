@@ -7,10 +7,11 @@ using StamAcasa.Common.Models;
 namespace StamAcasa.Common.Services {
     public interface IUserService
     {
-        Task<bool> AddOrUpdateUserInfo(UserModel user);
-        Task<bool> AddOrUpdateDependentInfo(UserModel user, string parentSub);
+        Task<User> AddOrUpdateUserInfo(UserModel user);
+        Task<User> AddOrUpdateDependentInfo(UserModel user, string parentSub);
         Task<UserInfo> GetUserInfo(string sub);
         Task<UserInfo> GetUserInfo(int id);
         Task<IEnumerable<UserInfo>> GetDependentInfo(string sub);
+        Task<IEnumerable<UserInfo>> GetAll();
     }
 }
