@@ -95,7 +95,7 @@ class AddMember extends React.Component {
     return (
       <SidebarLayout>
         <form>
-          <div className="override-is-2">
+          <div className="add-member">
             <Hero
               title="Creează cont pentru un membru al familiei"
               subtitle="Înregistrează un membru al familiei care nu poate accesa platforma și ajută-l să își facă evaluarea zilnică a simptomelor COVID-19."

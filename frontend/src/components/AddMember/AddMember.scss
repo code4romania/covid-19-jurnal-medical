@@ -2,18 +2,18 @@
     width: 100%
 }
 
-.override-is-2 .subtitle.is-2 {
+.add-member .subtitle.is-2 {
     font-size: 1rem;
 }
 
-.subtitle:not(:last-child) {
-    margin-bottom: 0.5rem !important;
+.add-member .subtitle:not(:last-child) {
+    margin-bottom: 0.5rem;
 }
 
-.is-multiple .select:after {
-    display: none !important;
+.add-member .is-multiple .select:after {
+    display: none;
 }
 
-.is-multiple .select {
-    height: auto !important;
+.add-member .is-multiple .select {
+    height: auto;
 }
