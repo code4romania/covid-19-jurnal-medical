@@ -18,6 +18,11 @@ namespace StamAcasa.Common.Services.Emailing
 
         public async Task SendAsync(Email email, CancellationToken cancellationToken)
         {
+            // note that SendGridClient doesn't implement IDisposable,
+            // so if we start using this in production mode, we should refactor this
+            // if there's a single api key, then we should be fine with an instance property
+            // otherwise, we should be looking at creating a pool of SendGridClients
+            // a nice read on this: https://github.com/sendgrid/sendgrid-csharp/issues/658
             var client = new SendGridClient(_options.ApiKey);
             var message = new SendGridMessage
             {
