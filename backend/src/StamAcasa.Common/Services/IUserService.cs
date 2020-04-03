@@ -12,5 +12,6 @@ namespace StamAcasa.Common.Services {
         Task<UserInfo> GetUserInfo(string sub);
         Task<UserInfo> GetUserInfo(int id);
         Task<IEnumerable<UserInfo>> GetDependentInfo(string sub);
+        Task<IEnumerable<UserInfo>> GetAll();
     }
 }
