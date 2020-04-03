@@ -2,7 +2,7 @@ import { UserManager, WebStorageStateStore } from "oidc-client";
 
 const userManagerSettings = {
   authority: process.env.REACT_APP_IDP_URL,
-  client_id: "js",
+  client_id: process.env.CLIENT_ID || "js",
   redirect_uri: `${process.env.REACT_APP_URL}/signin-oidc`,
   post_logout_redirect_uri: `${process.env.REACT_APP_URL}/post-logout`,
   automaticSilentRenew: true,

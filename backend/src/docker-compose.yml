@@ -54,10 +54,10 @@ services:
     build:
         context: ../../frontend
         dockerfile: Dockerfile
-        args:
-          REACT_APP_IDP_URL: 'http://localhost:5001'
-          REACT_APP_URL: 'http://localhost:5002'
-
+    environment:
+      REACT_APP_IDP_URL: 'http://localhost:5001'
+      REACT_APP_URL: 'http://localhost:5002'
+      CLIENT_ID: 'jsdocker'
     ports:
      - 5002:80
          
