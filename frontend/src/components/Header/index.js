@@ -58,10 +58,18 @@ const Header = ({ user, loadUser }) => {
         <>
           <NavLink to="/">Contul meu</NavLink>
           <div className="account-separator"></div>
-          <a onClick={handleLogout}>Logout</a>
+          <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
-        <a onClick={handleLogin}>Login</a>
+        <>
+          <a
+            href={`${process.env.REACT_APP_IDP_URL}/identity/account/register?returnUrl=${window.location}register-complete`}
+          >
+            Inregistrare
+          </a>
+          <div className="account-separator"></div>
+          <button onClick={handleLogin}>Login</button>
+        </>
       )}
     </span>
   );

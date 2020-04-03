@@ -1,8 +1,4 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -85,6 +81,7 @@ namespace Api
             services.AddAutoMapper(typeof(Startup), typeof(UserDbContext));
             services.AddDbContext<UserDbContext>(options=>
                 options.UseSqlite(Configuration.GetConnectionString("UserDBConnection")));
+            services.AddScoped<IFormService, FormService>();
             services.AddScoped<IUserService, UserService>();
 
             services.ConfigureSwagger(Configuration);
@@ -131,6 +128,7 @@ namespace Api
                         new UrlDescriptor{Name = "api", Url = "/swagger/v1/swagger.json"} 
                     }
                 };
+               
             });
         }
     }

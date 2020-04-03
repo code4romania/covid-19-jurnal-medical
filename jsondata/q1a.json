@@ -1,0 +1,225 @@
+{
+    "$schema": "./schema.json",
+    "title": "Q1a follow-up",
+    "doc_type": "STATIC_PAGE",
+    "doc_id": 101,
+    "active": false,
+    "display_order": 3,
+    "content": "asdasd",
+    "buttons": null,
+    "firstNodeId": 1,
+    "form": [
+        {
+            "questionId": 1,
+            "nextQuestionId": 2,
+            "questionText": "Ai avut febra 38 grade celsius sau mai mare?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 2,
+            "nextQuestionId": 3,
+            "questionText": "Ai avut durere în gât și/sau dificultate în a înghiți?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 3,
+            "nextQuestionId": 4,
+            "questionText": "Ai avut tuse intensă?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 4,
+            "nextQuestionId": 5,
+            "questionText": "Ai avut dificultate în a respira?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 5,
+            "nextQuestionId": 6,
+            "questionText": "Ți-a curs nasul?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 6,
+            "nextQuestionId": 7,
+            "questionText": "Ai avut alte simptome de răceală sau gripă?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false,
+                    "nextQuestionId": 8
+                }
+            ]
+        },
+        {
+            "questionId": 7,
+            "nextQuestionId": 8,
+            "questionText": "Te rugăm să le descrii",
+            "questionType": "INPUT",
+            "options": [
+                {
+                    "optionType": "string"
+                }
+            ]
+        },
+        {
+            "questionId": 8,
+            "nextQuestionId": 9,
+            "questionText": "În momentul de față, te afli în izolare la domiciliu?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da, sunt in izolare - nu ies deloc din locuinta"
+                },
+                {
+                    "label": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie"
+                },
+                {
+                    "label": "Nu sunt in izolare si ies din locuinta dupa program normal"
+                },
+                {
+                    "label": "Alta situatie"
+                }
+            ]
+        },
+        {
+            "questionId": 9,
+            "nextQuestionId": 10,
+            "questionText": "În momentul de față, împarți locuința și cu alte persoane?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false,
+                    "nextQuestionId": 11
+                }
+            ]
+        },
+        {
+            "questionId": 10,
+            "nextQuestionId": 11,
+            "questionText": "Celelalte persoane din locuință se află în izolare la domiciliu?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da, sunt in izolare - nu ies deloc din locuinta"
+                },
+                {
+                    "label": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie"
+                },
+                {
+                    "label": "Nu sunt in izolare si ies din locuinta dupa program normal"
+                },
+                {
+                    "label": "Alta situatie"
+                }
+            ]
+        },
+        {
+            "questionId": 11,
+            "nextQuestionId": 12,
+            "questionText": "Ai fost la un spital sau în incinta oricărui alt serviciu medical?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false,
+                    "nextQuestionId": 13
+                }
+            ]
+        },
+        {
+            "questionId": 12,
+            "nextQuestionId": 13,
+            "questionText": "Te rugăm să specifici unde",
+            "questionType": "INPUT",
+            "options": [
+                {
+                    "optionType": "string"
+                }
+            ]
+        },
+        {
+            "questionId": 13,
+            "nextQuestionId": 0,
+            "questionText": "Ai fost la un spital sau în incinta oricărui alt serviciu medical?",
+            "questionType": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                },
+                {
+                    "label": "Nu stiu"
+                }
+            ]
+        }
+    ]
+}

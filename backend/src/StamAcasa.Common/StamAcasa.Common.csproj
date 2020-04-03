@@ -7,10 +7,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200321214733_InitialCreate.cs" />
     <Compile Remove="Migrations\20200321214733_InitialCreate.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
+    <Compile Remove="Migrations\20200329144639_AdjustFormContentJsonColumn.cs" />
+    <Compile Remove="Migrations\20200329144639_AdjustFormContentJsonColumn.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +19,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.2" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.1.2" />
   </ItemGroup>
 
 </Project>

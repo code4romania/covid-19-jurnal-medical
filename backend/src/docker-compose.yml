@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   stamacasa.api:
-    image: ${DOCKER_REGISTRY-}stamacasa/api
+    image: ${DOCKER_REGISTRY-}stamacasa-api
     build:
       context: .
       dockerfile: StamAcasa.Api/Dockerfile
@@ -28,7 +28,7 @@ services:
       - 15672:15672
 
   identityserver:
-    image: ${DOCKER_REGISTRY-}stamacasa/identityserver
+    image: ${DOCKER_REGISTRY-}stamacasa-identityserver
     environment: 
       - ASPNETCORE_URLS=http://+:80
     build:
@@ -49,3 +49,16 @@ services:
     volumes:
       - /postgres_data:/var/lib/postgresql/data
       
+  frontend:
+    image:  ${DOCKER_REGISTRY-}stamacasa
+    build:
+        context: ../../frontend
+        dockerfile: Dockerfile
+    ports:
+     - 5002:80
+         
+  stamacasa.email:
+    image: ${DOCKER_REGISTRY-}stamacasaemail
+    build:
+        context: .
+        dockerfile: StamAcasa.EmailService/Dockerfile
