@@ -7,7 +7,7 @@ on:
     branches: [master, develop]
 
 jobs:
-  build:
+  eslint:
     runs-on: ubuntu-latest
     env:
       working-directory: "./frontend"
