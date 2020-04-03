@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
+using StamAcasa.Common.Services.Emailing;
 using StamAcasa.EmailService.EmailBuilder;
-using StamAcasa.EmailService.Mailing;
 using StamAcasa.EmailService.Messaging;
 
 namespace StamAcasa.EmailService
@@ -39,30 +35,26 @@ namespace StamAcasa.EmailService
             .ConfigureServices((context, services) =>
             {
                 services.AddSingleton<IConnectionFactory>(ctx =>
-                {
-
-                    return new ConnectionFactory()
+                    new ConnectionFactory
                     {
                         HostName = context.Configuration["RabbitMQ:HostName"],
                         UserName = context.Configuration["RabbitMQ:User"],
                         Password = context.Configuration["RabbitMQ:Password"],
                         DispatchConsumersAsync = true // this is mandatory to have Async Subscribers
-                    };
-                });
+                    }
+                );
 
-                services.AddSingleton<ISender>(ctx =>
-                {
-                    var options = new MailOptions()
-                    {
-                        Host = context.Configuration["SMTP:HostName"],
-                        Port = context.Configuration.GetValue<int>("SMTP:Port"),
-                        UseSsl = context.Configuration.GetValue<bool>("SMTP:UseSsl"),
-                        User = context.Configuration["SMTP:User"],
-                        Password = context.Configuration["SMTP:Password"]
-                    };
-
-                    return new SmtpSender(options);
-                });
+                services.AddSingleton<IEmailSender>(ctx =>
+                    new SmtpSender(
+                        new SmtpOptions
+                        {
+                            Host = context.Configuration["Smtp:Host"],
+                            Port = context.Configuration.GetValue<int>("Smtp:Port"),
+                            User = context.Configuration["Smtp:User"],
+                            Password = context.Configuration["Smtp:Password"]
+                        }
+                    )
+                );
 
                 services.AddSingleton<IBusConnection, RabbitMQPersistentConnection>();
                 services.AddSingleton<IQueueSubscriber, EmailQueueSubscriber>();

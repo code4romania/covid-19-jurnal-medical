@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using IdentityServer.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Configuration;
+using StamAcasa.Common.Models;
+using StamAcasa.Common.Services.Emailing;
 
 namespace IdentityServer.Pages.Account
 {
@@ -17,11 +19,16 @@ namespace IdentityServer.Pages.Account
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly IConfiguration _configuration;
 
-        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(
+            UserManager<ApplicationUser> userManager,
+            IEmailSender emailSender,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _configuration = configuration;
         }
 
         [BindProperty]
@@ -55,10 +62,17 @@ namespace IdentityServer.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                await _emailSender.SendAsync(
+                    new Email
+                    {
+                        To = Input.Email,
+                        Subject = "Reset Password",
+                        Content = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.",
+                        FromName = _configuration.GetValue<string>("AdminFromName"),
+                        FromEmail = _configuration.GetValue<string>("AdminFromEmail")
+                    },
+                    default
+                );
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
