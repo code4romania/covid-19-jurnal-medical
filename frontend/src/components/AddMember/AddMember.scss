@@ -2,18 +2,24 @@
     width: 100%
 }
 
-.add-member .subtitle.is-2 {
-    font-size: 1rem;
-}
+.add-member {
+    .subtitle {
+        &.is-2 {
+            font-size: 1rem;
+        }
 
-.add-member .subtitle:not(:last-child) {
-    margin-bottom: 0.5rem;
-}
+        &:not(:last-child) {
+            margin-bottom: 0.5rem;
+        }
+    }
 
-.add-member .is-multiple .select:after {
-    display: none;
-}
+    .is-multiple .select {
+        & {
+            height: auto;
+        }
 
-.add-member .is-multiple .select {
-    height: auto;
+        &:after {
+            display: none;
+        }
+    }
 }
