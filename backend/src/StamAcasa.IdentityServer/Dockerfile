@@ -7,6 +7,8 @@ EXPOSE 80 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["StamAcasa.IdentityServer/StamAcasa.IdentityServer.csproj", "StamAcasa.IdentityServer/"]
+COPY ["StamAcasa.Common/StamAcasa.Common.csproj", "StamAcasa.Common/"]
+RUN dotnet restore "StamAcasa.Common/StamAcasa.Common.csproj"
 RUN dotnet restore "StamAcasa.IdentityServer/StamAcasa.IdentityServer.csproj"
 COPY . .
 

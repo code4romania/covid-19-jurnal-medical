@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using StamAcasa.EmailService.EmailBuilder.Models;
+using StamAcasa.Common.Models;
 
 namespace StamAcasa.EmailService.EmailBuilder
 {
     public interface IEmailBuilderService
     {
-        Task<EmailModel> BuildEmail(EmailRequestModel emailModel);
+        Task<Email> BuildEmail(EmailRequestModel emailModel);
     }
 }
