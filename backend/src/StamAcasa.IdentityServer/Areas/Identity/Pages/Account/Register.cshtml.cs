@@ -54,17 +54,17 @@ namespace IdentityServer.Pages.Account
         {
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Adresa de e-mail")]
             public string Email { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Setează parola")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Confirmă parola")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
@@ -89,33 +89,36 @@ namespace IdentityServer.Pages.Account
                     {
                         new Claim(JwtClaimTypes.Id, Input.Email),
                         new Claim(JwtClaimTypes.Email, Input.Email),
-                        new Claim(JwtClaimTypes.EmailVerified, "false", ClaimValueTypes.Boolean),
+                        new Claim(JwtClaimTypes.EmailVerified,
+                            (!_configuration.GetValue<bool>("EnableEmailConfirmation")).ToString().ToLower(),
+                            ClaimValueTypes.Boolean
+                        ),
                     });
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendAsync(
-                        new Email
-                        {
-                            To = Input.Email,
-                            Subject = "Confirm your email",
-                            Content = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.",
-                            FromName = _configuration.GetValue<string>("AdminFromName"),
-                            FromEmail = _configuration.GetValue<string>("AdminFromEmail")
-                        },
-                        default
-                    );
-
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                        var callbackUrl = Url.Page(
+                            "/Account/ConfirmEmail",
+                            pageHandler: null,
+                            values: new {area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl},
+                            protocol: Request.Scheme);
+
+                        await _emailSender.SendAsync(
+                            new Email
+                            {
+                                To = Input.Email,
+                                Subject = "Confirm your email",
+                                Content = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.",
+                                FromName = _configuration.GetValue<string>("AdminFromName"),
+                                FromEmail = _configuration.GetValue<string>("AdminFromEmail")
+                            },
+                            default
+                        );
+
+                        return RedirectToPage("RegisterConfirmation", new {email = Input.Email});
                     }
                     else
                     {
