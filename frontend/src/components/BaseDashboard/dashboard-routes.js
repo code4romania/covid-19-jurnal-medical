@@ -1,5 +1,6 @@
 import Dashboard from "./pages/Dashboard";
 import CazuriRedFlag from "./pages/CazuriRedFlag";
+import AllUsers from "./pages/AllUsers";
 
 const dashboard_routes = [
   {
@@ -19,7 +20,7 @@ const dashboard_routes = [
     name: "Toti utilizatorii",
     path: "/dashboard/users",
     className: "users-menu-item",
-    icon: "user-icon.svg"
+    component: AllUsers
   },
   {
     name: "Rapoarte transmise",

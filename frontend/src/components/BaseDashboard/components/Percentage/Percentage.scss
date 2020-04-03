@@ -3,18 +3,17 @@
   display: flex;
 
   img {
-    margin: 0px 0 10px 10px;
+    margin: 0 0 10px 5px;
   }
 
   &.danger {
     color: red;
 
     img {
-
       transform: rotate(180deg);
     }
   }
   &.success {
-    color: green;
+    color: #3ff707;
   }
 }

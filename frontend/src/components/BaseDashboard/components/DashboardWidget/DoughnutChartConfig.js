@@ -9,7 +9,7 @@ export default {
     animation: {
       duration: 0
     },
-    cutoutPercentage: 70,
+    cutoutPercentage: 75,
     legend: false,
     elements: {
       arc: {

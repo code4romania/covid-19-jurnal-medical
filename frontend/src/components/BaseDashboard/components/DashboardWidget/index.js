@@ -8,19 +8,26 @@ import DoughnutChartConfig from "./DoughnutChartConfig";
 const DashboardWidget = ({ title, data, ...extraProps }) => {
   const chartRef = React.createRef();
   const chartLineRef = React.createRef();
-  const isSuccess = data[data.length - 1] <= data[data.length - 2];
+  const isSuccess = data[data.length - 1] >= data[data.length - 2];
 
   const randomIntFromInterval = (min, max) => {
-    // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
+  };
+
+  const getPercentageValue = () => {
+    const number1 = data[data.length - 1];
+    const number2 = data[data.length - 2];
+    const result = 100 * ((number1 - number2) / ((number1 + number2) / 2));
+
+    return Math.abs(result.toFixed());
   };
 
   const getDoughnutChartConfig = () => {
     const doughnutChartConfig = DoughnutChartConfig;
     const sum = data.reduce((a, b) => a + b, 0);
-    const random = randomIntFromInterval(sum, (sum * 1) / 2);
+    const random = randomIntFromInterval(0, sum);
     doughnutChartConfig.data = {
-      labels: ["Red flag", ""],
+      labels: ["", ""],
       datasets: [
         {
           data: [data.reduce((a, b) => a + b, 0), random],
@@ -36,14 +43,12 @@ const DashboardWidget = ({ title, data, ...extraProps }) => {
   };
 
   const getLineChartConfig = myChartLineRef => {
-    const gradient = myChartLineRef.createLinearGradient(0, 0, 0, 150);
+    const gradient = myChartLineRef.createLinearGradient(0, 0, 0, 100);
     if (isSuccess) {
-      gradient.addColorStop(0, "#0c7a03");
-      gradient.addColorStop(0.5, "#3ff707");
+      gradient.addColorStop(0, "#3ff707");
       gradient.addColorStop(1, "#fff");
     } else {
       gradient.addColorStop(0, "rgba(255, 0, 0, 0.25)");
-      gradient.addColorStop(0.5, "rgba(255, 0,0, 0.5)");
       gradient.addColorStop(1, "#fff");
     }
 
@@ -54,7 +59,7 @@ const DashboardWidget = ({ title, data, ...extraProps }) => {
         datasets: [
           {
             data: data,
-            label: "North America",
+            label: "",
             backgroundColor: gradient,
             pointBackgroundColor: gradient,
             borderWidth: 1,
@@ -109,7 +114,7 @@ const DashboardWidget = ({ title, data, ...extraProps }) => {
           <p className="widget-title">{title}</p>
           <div className="columns is-mobile">
             <div className="column is-4 percentage">
-              <Percentage value={29} success={isSuccess} />
+              <Percentage value={getPercentageValue()} success={isSuccess} />
             </div>
             <div className="column is-8">
               <div className="myChart2Wrapper">
@@ -119,7 +124,6 @@ const DashboardWidget = ({ title, data, ...extraProps }) => {
                   width="200"
                   height="100"
                 />
-                <div className="shadow" />
               </div>
             </div>
           </div>

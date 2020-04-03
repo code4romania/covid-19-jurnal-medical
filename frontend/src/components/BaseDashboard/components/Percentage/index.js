@@ -16,7 +16,7 @@ const Percentage = ({ value, success }) => {
 };
 
 Percentage.propTypes = {
-  value: PropTypes.number,
+  value: PropTypes.string,
   success: PropTypes.bool
 };
 

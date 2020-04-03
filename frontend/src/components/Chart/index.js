@@ -28,7 +28,6 @@ Chart.pluginService.register({
 
       ctx.save();
       ctx.translate(arc.round.x, arc.round.y);
-      console.log(arc.round.startAngle);
       ctx.fillStyle = arc.round.backgroundColor;
       ctx.beginPath();
       ctx.arc(
