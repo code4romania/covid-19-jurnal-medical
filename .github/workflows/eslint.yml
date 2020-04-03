@@ -3,12 +3,8 @@ name: ESLint Check
 on:
   push:
     branches: [master, develop]
-    paths:
-      - "frontend/**"
   pull_request:
     branches: [master, develop]
-    paths:
-      - "frontend/**"
 
 jobs:
   build:
