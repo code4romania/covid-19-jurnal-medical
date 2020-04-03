@@ -17,11 +17,7 @@ export const ROUTES = {
     home: {
       path: "/",
       component: Home
-    },
-    createYourAccount: {
-      path: "/creaza-ti-cont",
-      component: CreateYourAccount
-    },
+    }
   },
   oidc: {
     signin: {
@@ -53,6 +49,10 @@ export const ROUTES = {
     account: {
       path: "/account",
       component: () => "Placeholder account"
+    },
+    createYourAccount: {
+      path: "/creaza-ti-cont",
+      component: CreateYourAccount
     }
   }
 };

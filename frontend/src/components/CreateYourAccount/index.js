@@ -10,6 +10,7 @@ import {
 import BasePage from "../BasePage";
 import SidebarLayout from "../SidebarLayout";
 import "./styles.scss";
+import api from "../../api";
 
 const CreateYourAccount = () => {
   const [form, setForm] = useState({
@@ -41,7 +42,19 @@ const CreateYourAccount = () => {
     }
   };
 
-  const submitForm = () => {};
+  const submitForm = () => {
+    if (!form.isFormValid) {
+      return;
+    }
+
+    api.post(`http://localhost:5008/api/user`, {
+      fullName: form.fullName.value,
+      age: form.age.value,
+      gender: form.gender.value,
+      preexistingMedicalCondition: form.preexistingMedicalCondition.value,
+      quarantineStatus: form.quarantineStatus.value
+    });
+  };
 
   const handleOnChange = (e, val) => {
     const name = e.target.name;
