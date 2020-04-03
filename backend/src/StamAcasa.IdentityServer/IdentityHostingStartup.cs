@@ -16,9 +16,9 @@ namespace IdentityServer
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlite(
                         context.Configuration.GetConnectionString("ApplicationDbContextConnection")));
-
+                var emailConfirmation = context.Configuration.GetValue<bool>("EnableEmailConfirmation");
                 services.AddDefaultIdentity<ApplicationUser>(options => 
-                        options.SignIn.RequireConfirmedAccount = false)
+                        options.SignIn.RequireConfirmedAccount = emailConfirmation)
                     .AddEntityFrameworkStores<ApplicationDbContext>();
             });
         }

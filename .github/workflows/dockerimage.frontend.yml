@@ -15,7 +15,7 @@ on:
 name: CI-FrontEnd
 
 env:
-    IMAGE_NAME: ${{ secrets.DOCKER_HUB_ORGANIZATION }}/stamacasa
+    IMAGE_NAME: ${{ secrets.DOCKER_HUB_ORGANIZATION || 'code4romania' }}/stamacasa
 
 jobs:
     build-parser:
