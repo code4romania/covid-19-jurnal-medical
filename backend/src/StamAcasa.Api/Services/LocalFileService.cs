@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 namespace StamAcasa.Api.Services {
     public class LocalFileService : IFileService {
         private readonly IConfiguration _configuration;
-        private string _directory;
+        private readonly string _directory;
 
         public LocalFileService(IConfiguration configuration) {
             _configuration = configuration;
@@ -17,14 +17,17 @@ namespace StamAcasa.Api.Services {
             if (!Directory.Exists(_directory))
                 Directory.CreateDirectory(_directory);
         }
-        public string GetRawData(string path) {
-            return File.ReadAllText(path);
+
+        public async Task<string> GetRawData(string path) {
+            return await File.ReadAllTextAsync(path);
         }
 
-
         public async Task SaveRawData(string fileContent, string fileName) {
-            string path = Path.Combine(_directory, fileName);
-            File.WriteAllText(path, fileContent);
+            var path = Path.Combine(_directory, fileName);
+            using (var sw = new StreamWriter(path))
+            {
+                await sw.WriteAsync(fileContent);
+            }
         }
 
         public async Task<IEnumerable<object>> GetForms(string sub) {
