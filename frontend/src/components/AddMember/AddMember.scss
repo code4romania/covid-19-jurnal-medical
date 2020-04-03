@@ -14,9 +14,7 @@
     }
 
     .is-multiple .select {
-        & {
-            height: auto;
-        }
+        height: auto;
 
         &:after {
             display: none;
