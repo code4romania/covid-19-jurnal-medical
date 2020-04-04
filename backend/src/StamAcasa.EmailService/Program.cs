@@ -59,10 +59,10 @@ namespace StamAcasa.EmailService
                 services.AddSingleton<IBusConnection, RabbitMQPersistentConnection>();
                 services.AddSingleton<IQueueSubscriber, EmailQueueSubscriber>();
 
+                services.AddSingleton<ITemplateFileSelector, TemplateFileSelector>();
                 services.AddTransient<IEmailBuilderService, EmailBuilderService>();
 
                 services.AddHostedService<Worker>();
-
             });
     }
 }

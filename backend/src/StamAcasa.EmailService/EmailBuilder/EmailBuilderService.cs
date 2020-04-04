@@ -1,8 +1,6 @@
 ﻿
 using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using StamAcasa.Common.Models;
 
@@ -11,21 +9,18 @@ namespace StamAcasa.EmailService.EmailBuilder
     public class EmailBuilderService : IEmailBuilderService
     {
         private readonly ILogger<IEmailBuilderService> _logger;
-        private readonly IConfiguration _configuration;
+        private readonly ITemplateFileSelector _templateFileSelector;
 
-        public EmailBuilderService(ILogger<IEmailBuilderService> logger, IConfiguration configuration)
+        public EmailBuilderService(ILogger<IEmailBuilderService> logger, ITemplateFileSelector templateFileSelector)
         {
             _logger = logger;
-            _configuration = configuration;
-
+            _templateFileSelector = templateFileSelector;
         }
         public async Task<Email> BuildEmail(EmailRequestModel emailRequest)
         {
             _logger.LogInformation("Build email");
-            var targetDirectory = _configuration.GetValue<string>("TemplateFolder");
-            var directory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), targetDirectory);
 
-            var filePath = Path.Combine(directory, "template.html");
+            var filePath = _templateFileSelector.GetTemplatePath(emailRequest.TemplateType);
             using (var streamReader = File.OpenText(filePath))
             {
                 string template = await streamReader.ReadToEndAsync();
