@@ -3,16 +3,23 @@ import api from "../api";
 
 const EvaluationApi = {
   getProfile: async () => {
-    const result = await api.get("http://localhost:5008/api/profile");
+    const result = await api.get(
+      `${process.env.REACT_APP_API_URL}/api/profile`
+    );
 
     return result.data;
   },
 
   sendDependantEvaluationResult: (dependantId, formResults) => {
-    api.post(`http://localhost:5008/api/form?id=${dependantId}`, formResults);
+    api.post(
+      `${process.env.REACT_APP_API_URL}/api/form?id=${dependantId}`,
+      formResults
+    );
   },
   getDependants: async () => {
-    const result = await api.get("http://localhost:5008/api/profile/family");
+    const result = await api.get(
+      `${process.env.REACT_APP_API_URL}/api/profile/family`
+    );
 
     return result.data.map(member => {
       return {
@@ -23,7 +30,10 @@ const EvaluationApi = {
   },
   getSelfEvaluationForm: () => selfEvaluation,
   sendSelfEvaluationResults: (formId, formResults) => {
-    api.post(`http://localhost:5008/api/form?id=${formId}`, formResults);
+    api.post(
+      `${process.env.REACT_APP_API_URL}/api/form?id=${formId}`,
+      formResults
+    );
   }
 };
 
