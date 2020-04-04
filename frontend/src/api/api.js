@@ -1,9 +1,12 @@
 import axios from "axios";
-import { AuthService } from "./auth";
+import { getUserToken } from "./auth";
 
-const api = axios.create();
-api.interceptors.request.use(config => {
-  const token = AuthService.user ? AuthService.user.access_token : null;
+const api = axios.create({
+  baseURL: "http://localhost:5008/api"
+});
+
+api.interceptors.request.use(async config => {
+  const token = await getUserToken();
   if (token) {
     return {
       ...config,

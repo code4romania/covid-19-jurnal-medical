@@ -1,11 +1,12 @@
 import Home from "./components/Home";
 import About from "./components/About";
-import SigninRoute from "./components/OIDC/SigninRoute";
-import PostLogoutRoute from "./components/OIDC/PostLogoutRoute";
-import SilentRefreshRoute from "./components/OIDC/SilentRefreshRoute";
 import AddMember from "./components/AddMember";
-import RegisterCompleteRoute from "./components/OIDC/RegisterCompleteRoute";
 import SelfEvaluation from "./components/SelfEvaluation";
+import {
+  signinCallback,
+  signoutCallback,
+  silentRefreshCallback
+} from "./api/auth";
 
 export const ROUTES = {
   base: {
@@ -21,19 +22,18 @@ export const ROUTES = {
   oidc: {
     signin: {
       path: "/signin-oidc",
-      component: SigninRoute
+      method: signinCallback
     },
     postlogout: {
       path: "/post-logout",
-      component: PostLogoutRoute
+      method: signoutCallback
     },
     silentrefresh: {
       path: "/silent-refresh",
-      component: SilentRefreshRoute
+      method: silentRefreshCallback
     },
     registercomplete: {
-      path: "/register-complete",
-      component: RegisterCompleteRoute
+      path: "/register-complete"
     }
   },
   home: {

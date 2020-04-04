@@ -1,106 +1,23 @@
 import React from "react";
-import PropTypes from "prop-types";
-
-import { ReactComponent as LogoSvg } from "../../assets/stamacasa.svg";
-import { NavLink } from "react-router-dom";
 import {
   Header as TFHeader,
   DevelopedBy
 } from "@code4ro/taskforce-fe-components";
-import { UserThunks } from "../../store/UserReducer";
-import { connect } from "react-redux";
 
 import "./header.scss";
+import ProfileItems from "./ProfileItems";
+import MenuItems from "./MenuItems";
+import Logo from "./Logo";
 
-const Header = ({ user, loadUser }) => {
-  if (!user) {
-    loadUser();
-  }
-  const handleLogin = () => {
-    UserThunks.authenticate();
-  };
+const Header = () => (
+  <>
+    <TFHeader
+      Logo={<Logo />}
+      MenuItems={<MenuItems />}
+      ProfileItems={<ProfileItems />}
+    />
+    <DevelopedBy />
+  </>
+);
 
-  const handleLogout = () => {
-    UserThunks.logout();
-  };
-
-  const Logo = () => (
-    <NavLink to="/">
-      <LogoSvg />
-    </NavLink>
-  );
-
-  const MenuItems = () => (
-    <>
-      <NavLink className="nav-link" to="/despre">
-        Despre
-      </NavLink>
-      <a
-        href="https://code4.ro/ro/apps/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Ecosistemul Covid-19
-      </a>
-      <a
-        href="https://code4.ro/ro/doneaza/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Sprijină proiectul
-      </a>
-    </>
-  );
-
-  const ProfileItems = () => (
-    <span className="account-items">
-      {user ? (
-        <>
-          <NavLink to="/">Contul meu</NavLink>
-          <div className="account-separator"></div>
-          <button onClick={handleLogout}>Logout</button>
-        </>
-      ) : (
-        <>
-          <a
-            href={`${process.env.REACT_APP_IDP_URL}/identity/account/register?returnUrl=${window.location}register-complete`}
-          >
-            Inregistrare
-          </a>
-          <div className="account-separator"></div>
-          <button onClick={handleLogin}>Login</button>
-        </>
-      )}
-    </span>
-  );
-
-  return (
-    <>
-      <TFHeader
-        Logo={<Logo />}
-        MenuItems={<MenuItems />}
-        ProfileItems={<ProfileItems />}
-      />
-      <DevelopedBy />
-    </>
-  );
-};
-
-const mapStateToProps = state => {
-  return {
-    user: state.UserReducer.user
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    loadUser: () => UserThunks.loadUser(dispatch)
-  };
-};
-
-Header.propTypes = {
-  user: PropTypes.object,
-  loadUser: PropTypes.func.isRequired
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
