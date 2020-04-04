@@ -12,7 +12,12 @@ namespace StamAcasa.Common.DTO {
         public Gender Gender { get; set; }
         public string PreexistingMedicalCondition { get; set; }
         public QuarantineStatus QuarantineStatus { get; set; }
-        public string Address { get; set; }
+        public string Disability { get; set; }
+        public RelationshipTypes RelationshipType { get; set; }
+        public bool Smoker { get; set; }
+        public bool LivesWithOthers { get; set; }
+        public QuarantineStatus QuarantineStatusOthers { get; set; }
+
         public string County { get; set; }
         public string City { get; set; }
         public string Country { get; set; }

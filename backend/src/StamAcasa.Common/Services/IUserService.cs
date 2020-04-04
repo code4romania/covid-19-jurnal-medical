@@ -7,8 +7,8 @@ using StamAcasa.Common.Models;
 namespace StamAcasa.Common.Services {
     public interface IUserService
     {
-        Task<User> AddOrUpdateUserInfo(UserProfileDTO user);
-        Task<User> AddOrUpdateDependentInfo(FamilyProfileDTO user, string parentSub);
+        Task<UserInfo> AddOrUpdateUserInfo(UserProfileDTO user);
+        Task<UserInfo> AddOrUpdateDependentInfo(FamilyProfileDTO user, string parentSub);
         Task<UserInfo> GetUserInfo(string sub);
         Task<UserInfo> GetUserInfo(int id);
         Task<IEnumerable<UserInfo>> GetDependentInfo(string sub);
