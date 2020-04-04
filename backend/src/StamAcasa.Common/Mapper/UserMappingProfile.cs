@@ -8,11 +8,6 @@ namespace StamAcasa.Common {
             CreateMap<UserProfileDTO, User>();
         }
     }
-    public class FamilyMappingProfile : Profile {
-        public FamilyMappingProfile() {
-            CreateMap<FamilyProfileDTO, User>();
-        }
-    }
     public class UserInfoMappingProfile : Profile {
         public UserInfoMappingProfile() {
             CreateMap<User, UserInfo>();

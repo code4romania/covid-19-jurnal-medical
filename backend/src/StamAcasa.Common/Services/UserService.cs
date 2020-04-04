@@ -42,7 +42,7 @@ namespace StamAcasa.Common.Services
             return _mapper.Map<UserInfo>(profile);
         }
 
-        public async Task<UserInfo> AddOrUpdateDependentInfo(FamilyProfileDTO dependentInfo, string parentSub)
+        public async Task<UserInfo> AddOrUpdateDependentInfo(UserProfileDTO dependentInfo, string parentSub)
         {
             var parentUser = _context.Users.FirstOrDefault(u => u.Sub == parentSub);
             if (parentUser == null)

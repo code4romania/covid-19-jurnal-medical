@@ -15,22 +15,20 @@ namespace StamAcasa.Common.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ParentId = table.Column<int>(nullable: true),
                     Sub = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Surname = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     Age = table.Column<int>(nullable: false),
                     Gender = table.Column<int>(nullable: false),
-                    PreexistingMedicalCondition = table.Column<string>(nullable: true),
-                    QuarantineStatus = table.Column<int>(nullable: false),
                     County = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
-                    Country = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Disability = table.Column<string>(nullable: true),
-                    RelationshipType = table.Column<int>(nullable: false),
+                    PreexistingMedicalCondition = table.Column<string>(nullable: true),
+                    QuarantineStatus = table.Column<int>(nullable: false),
                     Smoker = table.Column<bool>(nullable: false),
                     LivesWithOthers = table.Column<bool>(nullable: false),
-                    QuarantineStatusOthers = table.Column<int>(nullable: false)
+                    QuarantineStatusOthers = table.Column<int>(nullable: true),
+                    RelationshipType = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {

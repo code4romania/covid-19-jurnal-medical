@@ -53,13 +53,7 @@ namespace StamAcasa.Common.Migrations
                     b.Property<string>("City")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Country")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("County")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Disability")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -86,10 +80,10 @@ namespace StamAcasa.Common.Migrations
                     b.Property<int>("QuarantineStatus")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("QuarantineStatusOthers")
+                    b.Property<int?>("QuarantineStatusOthers")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("RelationshipType")
+                    b.Property<int?>("RelationshipType")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("Smoker")
