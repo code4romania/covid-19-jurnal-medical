@@ -20,8 +20,9 @@ userManager.clearStaleState();
 
 const AuthService = {
   user: null,
-  isAuthenticated: () => {
-    return AuthService.user !== null;
+  isAuthenticated: async () => {
+    let user = await userManager.getUser();
+    return user !== null;
   },
   signin: async () => {
     await userManager.signinRedirect();
