@@ -19,32 +19,34 @@ namespace StamAcasa.Common.Services
             _mapper = mapper;
         }
 
-        private async Task<User> AddOrUpdateEntity(User user, UserModel userUpdateInfo)
+        private async Task<User> AddOrUpdateEntity(User user, object profileUpdateInfo)
         {
             if (user == null) {
-                var newUserInfo = _mapper.Map<User>(userUpdateInfo);
+                var newUserInfo = _mapper.Map<User>(profileUpdateInfo);
                 var saved = await _context.Users.AddAsync(newUserInfo);
                 await _context.SaveChangesAsync();
                 return saved.Entity;
             }
 
-            foreach (var prop in typeof(UserModel).GetProperties().Where(p=>p.Name!="Id"))
-                user
-                    .GetType()
-                    .GetProperty(prop.Name)
-                    ?.SetValue(user, prop.GetValue(userUpdateInfo));
+            var contextEntry = _context.Entry<User>(user);
+            contextEntry.CurrentValues.SetValues(profileUpdateInfo);
+            //foreach (var prop in typeof(UserProfileDTO).GetProperties().Where(p=>p.Name!="Id"))
+            //    user
+            //        .GetType()
+            //        .GetProperty(prop.Name)
+            //        ?.SetValue(user, prop.GetValue(userUpdateInfo));
             _context.Users.Update(user);
             var result = await _context.SaveChangesAsync();
             return result > 0 ? user : null;
         }
 
-        public async Task<User> AddOrUpdateUserInfo(UserModel userUpdateInfo)
+        public async Task<User> AddOrUpdateUserInfo(UserProfileDTO userUpdateInfo)
         {
             var user = _context.Users.FirstOrDefault(u => u.Sub == userUpdateInfo.Sub);
             return await AddOrUpdateEntity(user, userUpdateInfo);
         }
 
-        public async Task<User> AddOrUpdateDependentInfo(UserModel dependentInfo, string parentSub)
+        public async Task<User> AddOrUpdateDependentInfo(FamilyProfileDTO dependentInfo, string parentSub)
         {
             var parentUser = _context.Users.FirstOrDefault(u => u.Sub == parentSub);
             if (parentUser == null)

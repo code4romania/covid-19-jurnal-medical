@@ -32,10 +32,4 @@
     <ProjectReference Include="..\StamAcasa.Common\StamAcasa.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="UserInfo.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

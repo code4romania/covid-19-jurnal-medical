@@ -67,7 +67,7 @@ namespace StamAcasa.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [Produces(typeof(bool))]
-        public async Task<IActionResult> SaveCurrentProfile(UserModel model)
+        public async Task<IActionResult> SaveCurrentProfile(UserProfileDTO model)
         {
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
@@ -91,7 +91,7 @@ namespace StamAcasa.Api.Controllers
         /// <returns>Id of newly created entity.</returns>
         [HttpPost("/family")]
         [Produces(typeof(int))]
-        public async Task<IActionResult> AddFamilyProfile(UserModel model) {
+        public async Task<IActionResult> AddFamilyProfile(FamilyProfileDTO model) {
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
@@ -112,7 +112,7 @@ namespace StamAcasa.Api.Controllers
         /// <returns></returns>
         [HttpPut("/family/{id}")]
         [Produces(typeof(bool))]
-        public async Task<IActionResult> UpdateFamilyProfile(int id, [FromBody] UserModel model)
+        public async Task<IActionResult> UpdateFamilyProfile(int id, [FromBody] FamilyProfileDTO model)
         {
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
