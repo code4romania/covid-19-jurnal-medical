@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "@code4ro/taskforce-fe-components";
 import data from "../../data/personal-assesment.json";
 import api from "../../api";
+import Evaluation from "../Evaluation";
 
 const SelfEvaluation = () => {
   // eslint-disable-next-line no-unused-vars
@@ -14,11 +15,13 @@ const SelfEvaluation = () => {
   };
 
   return (
-    <Form
-      data={data}
-      evaluateForm={evaluateCallback}
-      onFinishingForm={onFinishingForm}
-    />
+    <Evaluation>
+      <Form
+        data={data}
+        evaluateForm={evaluateCallback}
+        onFinishingForm={onFinishingForm}
+      />
+    </Evaluation>
   );
 };
 

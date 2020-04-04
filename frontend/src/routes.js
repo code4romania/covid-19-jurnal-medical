@@ -6,6 +6,7 @@ import SilentRefreshRoute from "./components/OIDC/SilentRefreshRoute";
 import AddMember from "./components/AddMember";
 import RegisterCompleteRoute from "./components/OIDC/RegisterCompleteRoute";
 import SelfEvaluation from "./components/SelfEvaluation";
+import OtherEvaluation from "./components/OtherEvaluation";
 
 export const ROUTES = {
   base: {
@@ -38,8 +39,12 @@ export const ROUTES = {
   },
   home: {
     selfevaluation: {
-      path: "/self-evaluation",
+      path: "/evaluation/self",
       component: SelfEvaluation
+    },
+    otherevaluation: {
+      path: "/evaluation/other",
+      component: OtherEvaluation
     },
     addmember: {
       path: "/add-member",
