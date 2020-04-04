@@ -1,0 +1,23 @@
+.select, select{
+    width: 100%
+}
+
+.add-member {
+    .subtitle {
+        &.is-2 {
+            font-size: 1rem;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .is-multiple .select {
+        height: auto;
+
+        &:after {
+            display: none;
+        }
+    }
+}

@@ -1,8 +1,4 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -21,6 +17,7 @@ using StamAcasa.Api;
 using StamAcasa.Api.Common;
 using StamAcasa.Api.Models;
 using StamAcasa.Api.Services;
+using StamAcasa.Api.Services.Excel;
 using StamAcasa.Common;
 using StamAcasa.Common.Services;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -78,9 +75,13 @@ namespace Api
                     break;
             }
 
+            services.AddTransient<IExcelDocumentService, ExcelDocumentService>();
+            services.AddTransient<IAnswersExcelExporter, AnswersExcelExporter>();
+
             services.AddAutoMapper(typeof(Startup), typeof(UserDbContext));
             services.AddDbContext<UserDbContext>(options=>
                 options.UseSqlite(Configuration.GetConnectionString("UserDBConnection")));
+            services.AddScoped<IFormService, FormService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAssessmentHistoryService, AssessmentHistoryService>();
             services.AddScoped<IAnswerServiceAggregator, AnswerServiceAggregator>();            
@@ -129,6 +130,7 @@ namespace Api
                         new UrlDescriptor{Name = "api", Url = "/swagger/v1/swagger.json"} 
                     }
                 };
+               
             });
         }
     }
