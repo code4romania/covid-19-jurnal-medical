@@ -19,9 +19,9 @@ const userManager = new UserManager(userManagerSettings);
 userManager.clearStaleState();
 
 const AuthService = {
-  user: null,
-  isAuthenticated: () => {
-    return AuthService.user !== null;
+  isAuthenticated: async () => {
+    let user = await userManager.getUser();
+    return user !== null;
   },
   signin: async () => {
     await userManager.signinRedirect();
@@ -29,15 +29,13 @@ const AuthService = {
   signinCallback: async () => {
     try {
       let user = await userManager.signinRedirectCallback();
-      AuthService.user = user;
       return user;
     } catch (e) {
       console.log(e);
     }
   },
   signout: async () => {
-    window.sessionStorage.removeItem("user");
-
+    await userManager.removeUser();
     await userManager.signoutRedirect();
   },
   signoutCallback: async () => {
