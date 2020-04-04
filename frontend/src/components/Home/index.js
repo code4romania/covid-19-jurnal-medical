@@ -1,33 +1,28 @@
 import React from "react";
-
-import { Hero } from "@code4ro/taskforce-fe-components";
-import StepsBar from "../StepsBar";
+import PropTypes from "prop-types";
 import BasePage from "../BasePage";
-import { ROUTES } from "../../routes";
-import { AuthenticatedRoute } from "../../AuthenticatedRoute";
+import UserHomePage from "./components/UserHomePage";
+import DefaultHomePage from "./components/DefaultHomePage";
+import { connect } from "react-redux";
 
-const Home = () => {
-  const { home } = ROUTES;
-  const homeRoutes = Object.values(home);
-  return (
-    <BasePage>
-      <Hero
-        title="Ce pași ai de urmat"
-        subtitle="Pentru a te putea ajuta iata ce ai la dispozitie in contul tau:"
-        useFallbackIcon={true}
-      />
-      <StepsBar />
-
-      {homeRoutes.map(({ path, component, extraProps }) => (
-        <AuthenticatedRoute
-          path={path}
-          component={component}
-          key={path}
-          {...extraProps}
-        />
-      ))}
-    </BasePage>
+const Home = ({ user }) => {
+  const isAuthenticated = user !== null;
+  const page = isAuthenticated ? (
+    <UserHomePage></UserHomePage>
+  ) : (
+    <DefaultHomePage></DefaultHomePage>
   );
+  return <BasePage>{page}</BasePage>;
 };
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    user: state.UserReducer.user
+  };
+};
+
+Home.propTypes = {
+  user: PropTypes.any
+};
+
+export default connect(mapStateToProps)(Home);
