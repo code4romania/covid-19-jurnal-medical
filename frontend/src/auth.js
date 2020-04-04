@@ -1,5 +1,5 @@
 import { UserManager, WebStorageStateStore } from "oidc-client";
-
+//TODO temporary adding more scope - needs to changed
 const userManagerSettings = {
   authority: "http://localhost:5001",
   client_id: "js",
@@ -8,7 +8,7 @@ const userManagerSettings = {
   automaticSilentRenew: true,
   silent_redirect_uri: "http://localhost:3000/silent-refresh",
   response_type: "id_token token",
-  scope: "openid email answersApi",
+  scope: "openid email answersApi usersApi",
   revokeAccessTokenOnSignout: true,
 
   userStore: new WebStorageStateStore({ store: sessionStorage }),

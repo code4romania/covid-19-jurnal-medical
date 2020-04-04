@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Select } from "@code4ro/taskforce-fe-components";
 import PropTypes from "prop-types";
 import EvaluationApi from "../../api/EvaluationApi";
 
 const IntroOtherEvaluation = ({ onFinish }) => {
-  const dependants = EvaluationApi.getDependants();
+  useEffect(() => {
+    EvaluationApi.getDependants().then(members => {
+      setDependants(members);
+      setSelectedMember(members[0]);
+    });
+  });
 
-  const [selectedMember, setSelectedMember] = useState(dependants[0]);
+  const [dependants, setDependants] = useState([]);
+  const [selectedMember, setSelectedMember] = useState(undefined);
   let onChange = event => {
-    console.log(event);
     setSelectedMember(event.target.value);
   };
 
