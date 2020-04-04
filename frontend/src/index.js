@@ -1,15 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import "./index.scss";
+import App from "./components/App/App";
 import * as serviceWorker from "./serviceWorker";
 import "@code4ro/taskforce-fe-components/dist/index.css";
+import { Provider } from "react-redux";
+import store from "./store/store";
 import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );
 

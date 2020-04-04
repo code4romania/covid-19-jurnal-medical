@@ -1,33 +1,26 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
-
 import { List, ListItem } from "@code4ro/taskforce-fe-components";
-
 import { STEPS_CONFIG } from "./const";
+import { useHistory, useLocation } from "react-router-dom";
 
-const StepsBar = ({ history, location: { pathname } }) => (
-  <div className="steps-bar">
-    <List columns={3}>
-      {STEPS_CONFIG.map(({ label, URL }, index) => (
-        <ListItem
-          title={label}
-          key={index}
-          onClick={() => history.push(URL)}
-          active={URL === pathname}
-        />
-      ))}
-    </List>
-  </div>
-);
+const StepsBar = () => {
+  const history = useHistory();
+  const location = useLocation();
 
-StepsBar.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func
-  }),
-  location: PropTypes.shape({
-    pathname: PropTypes.string
-  })
+  return (
+    <div className="steps-bar">
+      <List columns={3}>
+        {STEPS_CONFIG.map(({ label, URL }, index) => (
+          <ListItem
+            title={label}
+            key={index}
+            onClick={() => history.push(URL)}
+            active={URL === location.pathname}
+          />
+        ))}
+      </List>
+    </div>
+  );
 };
 
-export default withRouter(StepsBar);
+export default StepsBar;
