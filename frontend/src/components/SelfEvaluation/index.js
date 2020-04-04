@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Form } from "@code4ro/taskforce-fe-components";
-import data from "../../data/personal-assesment.json";
-import api from "../../api";
 import Evaluation from "../Evaluation";
 import IntroSelfEvaluation from "./introSelfEvaluation";
+import EvaluationApi from "../../api/EvaluationApi";
 
 const SelfEvaluation = () => {
   const [started, setStarted] = useState(false);
@@ -12,15 +11,15 @@ const SelfEvaluation = () => {
     return options[0];
   };
 
-  const onFinishingForm = result => {
-    api.post(`http://localhost:5008/api/form?id=${result.formId}`, result);
-  };
+  const onFinishingForm = result =>
+    EvaluationApi.sendSelfEvaluationResults(result.formId, result);
 
   if (started) {
+    const selfEvaluationForm = EvaluationApi.getSelfEvaluationForm();
     return (
       <Evaluation>
         <Form
-          data={data}
+          data={selfEvaluationForm}
           evaluateForm={evaluateCallback}
           onFinishingForm={onFinishingForm}
         />
