@@ -2,6 +2,12 @@ import selfEvaluation from "../data/personal-assesment.json";
 import api from "../api";
 
 const EvaluationApi = {
+  getProfile: async () => {
+    const result = await api.get("http://localhost:5008/api/profile");
+
+    return result.data;
+  },
+
   sendDependantEvaluationResult: (dependantId, formResults) => {
     api.post(`http://localhost:5008/api/form?id=${dependantId}`, formResults);
   },
