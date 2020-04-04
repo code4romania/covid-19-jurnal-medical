@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading;
 using IdentityModel;
 using IdentityServer.Data;
 using Microsoft.AspNetCore.Identity;
@@ -22,7 +23,7 @@ namespace IdentityServerAspNetIdentity
             var services = new ServiceCollection();
             services.AddLogging();
             services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlite(connectionString));
+               options.UseNpgsql(connectionString));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -32,6 +33,8 @@ namespace IdentityServerAspNetIdentity
             {
                 using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
+                    Thread.Sleep(10000);
+
                     var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
                     context.Database.Migrate();
 
@@ -41,7 +44,8 @@ namespace IdentityServerAspNetIdentity
                     {
                         alice = new ApplicationUser
                         {
-                            UserName = "alice"
+                            UserName = "alice",
+                            EmailConfirmed = true
                         };
                         var result = userMgr.CreateAsync(alice, "Pass123$").Result;
                         if (!result.Succeeded)
@@ -74,7 +78,8 @@ namespace IdentityServerAspNetIdentity
                     {
                         bob = new ApplicationUser
                         {
-                            UserName = "bob"
+                            UserName = "bob",
+                            EmailConfirmed = true
                         };
                         var result = userMgr.CreateAsync(bob, "Pass123$").Result;
                         if (!result.Succeeded)
