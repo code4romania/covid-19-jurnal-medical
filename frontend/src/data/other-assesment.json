@@ -61,6 +61,30 @@
     },
     {
       "questionId": 3,
+      "questionText": "Celalte persoane se afla in izolare la domiciul?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "label": "Da, sunt in izolare, nu ies deloc din locuinta",
+          "value": 0
+        },
+        {
+          "label": "Stau mai mult pe acasa",
+          "value": 1
+        },
+        {
+          "label": "Nu sunt in izolare",
+          "value": 2
+        },
+        {
+          "type": "OTHER",
+          "label": "Alte situatie:",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "questionId": 4,
       "questionText": "Daca ai iesit de la ultima completare a formularului, salveaza cateva detalii despre deplasare",
       "type": "MULTIPLE_CHOICE",
       "options": [
@@ -85,7 +109,7 @@
       ]
     },
     {
-      "questionId": 4,
+      "questionId": 5,
       "questionText": "Ai avut contact cu o persoana diagnosticata/confirmata cu noul coronavirus",
       "type": "SINGLE_CHOICE",
       "options": [
@@ -101,7 +125,7 @@
       ]
     },
     {
-      "questionId": 5,
+      "questionId": 6,
       "type": "FINAL",
       "questionText": "Ce trebuie sa faci?",
       "options": [

@@ -15,11 +15,11 @@ const OtherEvaluation = () => {
     EvaluationApi.sendDependantEvaluationResult(dependant, result);
 
   if (started) {
-    const selfEvaluationForm = EvaluationApi.getSelfEvaluationForm();
+    const otherEvaluationForm = EvaluationApi.getOtherEvaluationForm();
     return (
       <Evaluation>
         <Form
-          data={selfEvaluationForm}
+          data={otherEvaluationForm}
           evaluateForm={evaluateCallback}
           onFinishingForm={onFinishingForm}
         />

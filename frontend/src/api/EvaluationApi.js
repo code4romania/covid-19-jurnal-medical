@@ -1,4 +1,5 @@
 import selfEvaluation from "../data/personal-assesment.json";
+import otherEvaluation from "../data/other-assesment.json";
 import api from "../api";
 
 const EvaluationApi = {
@@ -29,6 +30,7 @@ const EvaluationApi = {
     });
   },
   getSelfEvaluationForm: () => selfEvaluation,
+  getOtherEvaluationForm: () => otherEvaluation,
   sendSelfEvaluationResults: (formId, formResults) => {
     api.post(
       `${process.env.REACT_APP_API_URL}/api/form?id=${formId}`,
