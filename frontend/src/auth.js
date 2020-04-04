@@ -1,12 +1,12 @@
 import { UserManager, WebStorageStateStore } from "oidc-client";
 
 const userManagerSettings = {
-  authority: "http://localhost:5001",
-  client_id: "js",
-  redirect_uri: "http://localhost:3000/signin-oidc",
-  post_logout_redirect_uri: "http://localhost:3000/post-logout",
+  authority: process.env.REACT_APP_IDP_URL,
+  client_id: process.env.CLIENT_ID || "js",
+  redirect_uri: `${process.env.REACT_APP_URL}/signin-oidc`,
+  post_logout_redirect_uri: `${process.env.REACT_APP_URL}/post-logout`,
   automaticSilentRenew: true,
-  silent_redirect_uri: "http://localhost:3000/silent-refresh",
+  silent_redirect_uri: `${process.env.REACT_APP_URL}/silent-refresh`,
   response_type: "id_token token",
   scope: "openid email answersApi",
   revokeAccessTokenOnSignout: true,
@@ -19,9 +19,9 @@ const userManager = new UserManager(userManagerSettings);
 userManager.clearStaleState();
 
 const AuthService = {
-  user: null,
-  isAuthenticated: () => {
-    return AuthService.user !== null;
+  isAuthenticated: async () => {
+    let user = await userManager.getUser();
+    return user !== null;
   },
   signin: async () => {
     await userManager.signinRedirect();
@@ -29,15 +29,13 @@ const AuthService = {
   signinCallback: async () => {
     try {
       let user = await userManager.signinRedirectCallback();
-      AuthService.user = user;
       return user;
     } catch (e) {
       console.log(e);
     }
   },
   signout: async () => {
-    window.sessionStorage.removeItem("user");
-
+    await userManager.removeUser();
     await userManager.signoutRedirect();
   },
   signoutCallback: async () => {

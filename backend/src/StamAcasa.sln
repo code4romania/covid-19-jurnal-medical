@@ -6,12 +6,15 @@ MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StamAcasa.Api", "StamAcasa.Api\StamAcasa.Api.csproj", "{8E064A80-D43B-41E5-AF6F-2707B5671767}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{633E6D0D-5666-4AC7-A23A-C71283E85AA0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0252468F-5F19-4C84-9BC4-9E018DBF1263} = {0252468F-5F19-4C84-9BC4-9E018DBF1263}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StamAcasa.IdentityServer", "StamAcasa.IdentityServer\StamAcasa.IdentityServer.csproj", "{95B11059-51A8-4DBA-91A7-745509606C24}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StamAcasa.Common", "StamAcasa.Common\StamAcasa.Common.csproj", "{0252468F-5F19-4C84-9BC4-9E018DBF1263}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StamAcasa.EmailService", "StamAcasa.EmailService\StamAcasa.EmailService.csproj", "{4472DECA-11A8-4DBE-B508-8ACEC8D1C9E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StamAcasa.EmailService", "StamAcasa.EmailService\StamAcasa.EmailService.csproj", "{4472DECA-11A8-4DBE-B508-8ACEC8D1C9E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

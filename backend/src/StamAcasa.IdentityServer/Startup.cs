@@ -1,12 +1,11 @@
 using IdentityServer.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StamAcasa.Common.Services.Emailing;
 using StamAcasa.IdentityServer;
-using StamAcasa.IdentityServer.Services;
 
 namespace IdentityServer
 {
@@ -49,14 +48,28 @@ namespace IdentityServer
             switch (emailType)
             {
                 case EmailingSystemTypes.SendGrid:
-                    services.Configure<AuthMessageSenderOptions>(Configuration);
-                    services.AddTransient<IEmailSender, EmailSenderSendGrid>();
+                    services.AddSingleton<IEmailSender>(ctx =>
+                        new SendGridSender(
+                            new SendGridOptions
+                            {
+                                ApiKey = Configuration["SendGrid:ApiKey"],
+                                ClickTracking = Configuration.GetValue<bool>("SendGrid:ClickTracking")
+                            }
+                        )
+                    );
                     break;
                 case EmailingSystemTypes.Smtp:
-                    services.Configure<SmtpSenderOptions>(Configuration);
-                    services.AddTransient<IEmailSender, EmailSenderSmtp>();
-                    break;
-                default:
+                    services.AddSingleton<IEmailSender>(ctx =>
+                        new SmtpSender(
+                            new SmtpOptions
+                            {
+                                Host = Configuration["Smtp:Host"],
+                                Port = Configuration.GetValue<int>("Smtp:Port"),
+                                User = Configuration["Smtp:User"],
+                                Password = Configuration["Smtp:Password"]
+                            }
+                        )
+                    );
                     break;
             }
         }

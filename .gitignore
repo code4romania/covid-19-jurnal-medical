@@ -5,3 +5,4 @@
 /.vs
 .idea
 /frontend/obj/Docker/CanonicalServiceNames.cache
+**/postgres_data

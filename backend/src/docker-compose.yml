@@ -52,13 +52,17 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - /postgres_data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
       
   frontend:
     image:  ${DOCKER_REGISTRY-}stamacasa
     build:
         context: ../../frontend
         dockerfile: Dockerfile
+    environment:
+      REACT_APP_IDP_URL: 'http://localhost:5001'
+      REACT_APP_URL: 'http://localhost:5002'
+      CLIENT_ID: 'jsdocker'
     ports:
      - 5002:80
     depends_on:

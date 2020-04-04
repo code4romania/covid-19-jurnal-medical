@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Route } from "react-router-dom";
 import { AuthService } from "./auth";
 
 const AuthenticatedRoute = ({ component: Component, ...rest }) => {
-  const isAuthenticated = AuthService.user !== null;
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  AuthService.isAuthenticated().then(setIsAuthenticated);
 
   return (
     <Route
