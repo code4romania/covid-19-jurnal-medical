@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { ReactComponent as LogoSvg } from "../../assets/stamacasa.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import {
   Header as TFHeader,
   DevelopedBy
@@ -13,11 +13,14 @@ import { connect } from "react-redux";
 import "./header.scss";
 
 const Header = ({ user, loadUser }) => {
+  const history = useHistory();
+
   if (!user) {
     loadUser();
   }
+
   const handleLogin = () => {
-    UserThunks.authenticate();
+    history.push("/login");
   };
 
   const handleLogout = () => {
