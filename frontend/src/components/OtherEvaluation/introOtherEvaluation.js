@@ -7,15 +7,12 @@ const IntroOtherEvaluation = ({ onFinish }) => {
   useEffect(() => {
     EvaluationApi.getDependants().then(members => {
       setDependants(members);
-      setSelectedMember(members[0]);
+      setSelectedMember(members[0].id);
     });
-  });
+  }, []);
 
   const [dependants, setDependants] = useState([]);
   const [selectedMember, setSelectedMember] = useState(undefined);
-  let onChange = event => {
-    setSelectedMember(event.target.value);
-  };
 
   const props = {
     onChange: function(el) {
@@ -25,9 +22,9 @@ const IntroOtherEvaluation = ({ onFinish }) => {
 
   const options = dependants.map(dependant => {
     return {
-      text: dependant,
-      value: dependant,
-      selected: dependant === selectedMember
+      text: dependant.fullName,
+      value: dependant.id,
+      selected: dependant.id === selectedMember
     };
   });
 
@@ -36,7 +33,6 @@ const IntroOtherEvaluation = ({ onFinish }) => {
       <Select
         label={"Alege persoana pentru care faci formularul"}
         options={options}
-        onChange={onChange}
         selectProps={props}
       />
       <Button onClick={() => onFinish(selectedMember)}>

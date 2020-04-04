@@ -12,13 +12,12 @@ const OtherEvaluation = () => {
   };
 
   const onFinishingForm = result =>
-    EvaluationApi.sendSelfEvaluationResults(result.formId, result);
+    EvaluationApi.sendDependantEvaluationResult(dependant, result);
 
   if (started) {
     const selfEvaluationForm = EvaluationApi.getSelfEvaluationForm();
     return (
       <Evaluation>
-        <div className={"dependant"}>{dependant}</div>
         <Form
           data={selfEvaluationForm}
           evaluateForm={evaluateCallback}
