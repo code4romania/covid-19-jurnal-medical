@@ -1,4 +1,3 @@
-using System;
 using IdentityServer.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,7 +31,7 @@ namespace IdentityServer
                 {
                     options.UserInteraction.LoginUrl = "/account/login";
                     options.UserInteraction.LogoutUrl = "/account/logout";
-                    
+
                     options.Events.RaiseErrorEvents = true;
                     options.Events.RaiseInformationEvents = true;
                     options.Events.RaiseFailureEvents = true;

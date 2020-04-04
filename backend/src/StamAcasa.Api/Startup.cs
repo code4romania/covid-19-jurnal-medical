@@ -85,8 +85,10 @@ namespace Api
             services.ConfigureSwagger(Configuration);
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, UserDbContext dbContext)
         {
+            dbContext.Database.Migrate();
+
             app.UseRouting();
             app.UseExceptionHandler(appError =>
             {
