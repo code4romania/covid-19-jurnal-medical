@@ -1,6 +1,7 @@
 {
   "formId": 1,
   "firstNodeId": 1,
+  "title": "Formularul tau",
   "form": [
     {
       "questionId": 1,
