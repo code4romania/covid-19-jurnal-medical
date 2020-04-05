@@ -6,9 +6,13 @@ const EvaluationApi = {
   sendDependantEvaluationResult: (dependantId, formResults) =>
     api.post(`/form?id=${dependantId}`, formResults),
 
-  getSelfEvaluationForm: () => selfEvaluation,
+  //in preparation for an api call so that nothing outside this method will change
+  // eslint-disable-next-line no-undef
+  getSelfEvaluationForm: async () => Promise.resolve(selfEvaluation),
 
-  getOtherEvaluationForm: () => otherEvaluation,
+  //in preparation for an api call so that nothing outside this method will change
+  // eslint-disable-next-line no-undef
+  getOtherEvaluationForm: async () => Promise.resolve(otherEvaluation),
 
   sendSelfEvaluationResults: formResults => api.post("/form", formResults)
 };

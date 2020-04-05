@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "@code4ro/taskforce-fe-components";
 import Evaluation from "../Evaluation";
 import IntroSelfEvaluation from "./introSelfEvaluation";
@@ -6,6 +6,11 @@ import EvaluationApi from "../../api/evaluationApi";
 
 const SelfEvaluation = () => {
   const [started, setStarted] = useState(false);
+  const [evaluationForm, setEvaluationForm] = useState(null);
+
+  useEffect(() => {
+    EvaluationApi.getSelfEvaluationForm().then(setEvaluationForm);
+  });
   // eslint-disable-next-line no-unused-vars
   const evaluateCallback = (formState, options) => {
     return options[0];
@@ -15,11 +20,10 @@ const SelfEvaluation = () => {
     EvaluationApi.sendSelfEvaluationResults(result);
 
   if (started) {
-    const selfEvaluationForm = EvaluationApi.getSelfEvaluationForm();
     return (
       <Evaluation>
         <Form
-          data={selfEvaluationForm}
+          data={evaluationForm}
           evaluateForm={evaluateCallback}
           onFinishingForm={onFinishingForm}
         />
