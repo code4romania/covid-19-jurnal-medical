@@ -51,6 +51,16 @@ class DefaultHomePage extends React.Component {
               putea proteja mai bine de pericol.
             </p>
           </div>
+          <Hero title="Cum îmi creez un cont" />
+          <div className="content">
+            <p>
+              Poți folosi această aplicație pe web sau să ți-o instalezi pe
+              mobil. Primul pas este să te înregistrezi și apoi vei putea să îți
+              completezi profilul tău, pe al altor membri ai familiei sau al
+              altor persoane pe care le ai în grijă și să completezi apoi
+              formularele recurente de monitorizare.
+            </p>
+          </div>
         </SidebarLayout>
       </>
     );
