@@ -1,0 +1,41 @@
+{
+    "nume si prenume": "Ion Petrescu",
+    "Numar de telefon": "0729999999",
+    "Judet, localitate": "Iasi, Targu Frumos",
+    "Varsta in ani impliniti": "33",
+    "Genul": "masculin",
+    "Fumator": "Da",
+    "Afectiuni agravante": "Diabet, o boala de inima",
+    "Locuiesti singur": "Nu",
+    "Izolare proprie la domiciliu": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
+    "Izolare alte persoane la domiciliu": "Da, sunt in izolare, nu ies deloc din locuinta",
+    "Alte persoane in grija": [
+        {
+            "nume si prenume": "Camelia Petrescu",
+            "Numar de telefon": "-",
+            "Tip de relatie": "bunica",
+            "Judet, localitate": "Iasi, Pascani",
+            "Varsta in ani impliniti": "82",
+            "Genul": "feminin",
+            "Fumator": "Nu",
+            "Afectiuni agravante": "Diabet",
+            "Locuiesti singur": "Da",
+            "Izolare proprie la domiciliu": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
+            "Izolare alte persoane la domiciliu": "",
+            "Alte persoane in grija": []
+        },
+        {
+            "nume si prenume": "Ioana Marinescu",
+            "Numar de telefon": "0728888888",
+            "Judet, localitate": "Iasi, Targu Frumos",
+            "Varsta in ani impliniti": "33",
+            "Genul": "faminin",
+            "Fumator": "Nu",
+            "Afectiuni agravante": "Nu",
+            "Locuiesti singur": "Nu",
+            "Izolare proprie la domiciliu": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
+            "Izolare alte persoane la domiciliu": "Da, sunt in izolare, nu ies deloc din locuinta",
+            "Alte persoane in grija": []
+        }
+    ]
+}
