@@ -27,17 +27,16 @@ HEALTHCHECK --interval=60s --timeout=3s --retries=3 \
 EXPOSE 80
 
 # # Add bash
-# RUN apk add --no-cache bash
+RUN apk add --no-cache bash
 
-# WORKDIR /usr/share/nginx/html
-# COPY ./env.sh .
-# COPY .env .
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
-
+WORKDIR /app/build
+COPY ./env.sh .
+COPY .env .
+#COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # # Make our shell script executable
-# RUN chmod +x env.sh
+RUN chmod +x env.sh
 
 # Start Nginx server
-CMD ["serve", "-s", "/app/build", "-l", "80"]
-#CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
+CMD ["/bin/bash", "-c", "/app/build/env.sh && serve", "-s", "/app/build", "-l", "80"]
+# CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
