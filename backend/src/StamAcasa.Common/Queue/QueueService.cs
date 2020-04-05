@@ -31,8 +31,7 @@ namespace StamAcasa.Common.Queue
         public async Task PublishEmailRequest<T>(T message) where T : class
         {
             var messageWrapper = new Message<T>(message);
-            var notificationQueueName = EmailRequestsQueName;
-            await _bus.Advanced.PublishAsync(Exchange.GetDefault(), notificationQueueName, false, messageWrapper);
+            await _bus.Advanced.PublishAsync(Exchange.GetDefault(), EmailRequestsQueName, false, messageWrapper);
         }
 
         public void SubscribeConsumerToNotificationsQueue<T>(Func<T, Task> messageHandler) where T : class
