@@ -1,30 +1,34 @@
 export const instrumentsItems = [
   {
     color: "green",
-    title: "Intaleaza-ti add-on-ul de depistat stiri false"
+    title: "Instalează-ți extensia de Chrome pentru a depista știri false",
+    ctaText: "Instalează extensia",
+    ctaLink:
+      "https://chrome.google.com/webstore/detail/covid-19-stiri-oficiale/pdcpkplohipjhdfdchpmgekifmcdbnha"
+  },
+  {
+    color: "green",
+    title: "Instalează-ți extensia de Firefox pentru a depista știri false",
+    ctaText: "Instalează extensia",
+    ctaLink:
+      "https://addons.mozilla.org/en-US/firefox/addon/covid-19-%C8%99tiri-oficiale/"
   },
   {
     color: "green",
     title: "Știri oficiale și informații la zi",
-    content:
-      "Lorem ipsum dolorit sit amet, consecteur adipiscing elit. Elit, duis pretium",
     ctaText: "Cele mai noi informații oficiale",
-    ctaLink: "https://code4ro.ro"
-  },
-  {
-    color: "red",
-    title: "Vrei să ajuți? Intră aici",
-    content:
-      "Lorem ipsum dolorit sit amet, consecteur adipiscing elit. Elit, duis pretium",
-    ctaText: "Centrul de sprijin",
-    ctaLink: "https://code4ro.ro"
+    ctaLink: "https://stirioficiale.ro/informatii"
   },
   {
     color: "pink",
     title: "Date în timp real",
-    content:
-      "Lorem ipsum dolorit sit amet, consecteur adipiscing elit. Elit, duis pretium",
     ctaText: "Vezi situația curentă",
-    ctaLink: "https://code4ro.ro"
+    ctaLink: "https://datelazi.ro"
+  },
+  {
+    color: "yellow",
+    title: "Află ce ai de făcut în orice situație",
+    ctaText: "Ce trebuie să fac",
+    ctaLink: "https://cetrebuiesafac.ro/"
   }
 ];
