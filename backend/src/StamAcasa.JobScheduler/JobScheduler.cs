@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using StamAcasa.JobScheduler.Extensions;
+using StamAcasa.JobScheduler.Jobs;
 using Timer = System.Timers.Timer;
 
 namespace StamAcasa.JobScheduler
@@ -17,7 +20,7 @@ namespace StamAcasa.JobScheduler
         private readonly ILogger<JobScheduler> _logger;
         private readonly IServiceScopeFactory _serviceScopeFactory;
 
-        private readonly Dictionary<Type, Timer> _schedule = new Dictionary<Type, Timer>();
+        private readonly ConcurrentDictionary<Type, Timer> _schedule = new ConcurrentDictionary<Type, Timer>();
 
         public JobScheduler(
             IConfiguration configuration,
@@ -31,16 +34,27 @@ namespace StamAcasa.JobScheduler
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            ScheduleJobs(cancellationToken);
+            try
+            {
+                ScheduleConfiguredJobs(cancellationToken);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogCritical(exception, $"Error when scheduling jobs: {exception.Message.TrimEnd('.')}.");
+                _logger.LogInformation("Stopping job scheduler service.");
+
+                await StopAsync(cancellationToken);
+                return;
+            }
 
             while (!cancellationToken.IsCancellationRequested)
             {
                 _logger.LogInformation($"Job Scheduler running at: {DateTimeOffset.Now}");
-                await Task.Delay(5000, cancellationToken);
+                await Task.Delay(30000, cancellationToken);
             }
         }
 
-        private void ScheduleJobs(CancellationToken cancellationToken)
+        private void ScheduleConfiguredJobs(CancellationToken cancellationToken)
         {
             var schedulerConfiguration = new Dictionary<string, string>();
             var section = _configuration.GetSection(ConfigurationSectionKey.ScheduledJobs);
@@ -52,47 +66,28 @@ namespace StamAcasa.JobScheduler
 
                 if (jobType is null || !typeof(IScheduledJob).IsAssignableFrom(jobType))
                 {
-                    throw new InvalidOperationException();
+                    throw new Exception(
+                        $"Invalid job configuration: {jobTypeKey} does not implement the {typeof(IScheduledJob)} interface.");
                 }
 
                 var cronExpression = CronExpression.Parse(schedulerConfiguration[jobTypeKey]);
-                DateTimeOffset? next = cronExpression.GetNextOccurrence(DateTimeOffset.Now, TimeZoneInfo.Local);
+                var interval = cronExpression.GetTimeSpanToNextOccurrence();
+                var timer = new Timer(interval.TotalMilliseconds) { Enabled = true };
 
-                if (next is null)
-                {
-                    throw new InvalidOperationException();
-                }
-
-                var interval = next.Value - DateTimeOffset.Now;
-                var timer = new Timer(interval.TotalMilliseconds);
                 timer.Elapsed += async (sender, args) =>
                 {
-                    await ExecuteJob(jobType, cancellationToken, timer, cronExpression);
+                    using IServiceScope scope = _serviceScopeFactory.CreateScope();
+                    var job = (IScheduledJob)scope.ServiceProvider.GetService(jobType);
+
+                    _logger.LogInformation($"Running job {jobType} at {DateTimeOffset.Now}");
+                    await job.RunAsync(cancellationToken);
+
+                    var newInterval = cronExpression.GetTimeSpanToNextOccurrence();
+                    timer.Interval = newInterval.TotalMilliseconds;
                 };
-                timer.Enabled = true;
+
                 _schedule[jobType] = timer;
             }
-        }
-
-        private async Task ExecuteJob(Type jobType, CancellationToken cancellationToken, Timer timer, CronExpression cronExpression)
-        {
-            using IServiceScope scope = _serviceScopeFactory.CreateScope();
-            var job = scope.ServiceProvider.GetService(jobType) as IScheduledJob;
-
-            if (job is null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            await job.ExecuteAsync(cancellationToken);
-
-            DateTimeOffset? next = cronExpression.GetNextOccurrence(DateTimeOffset.Now, TimeZoneInfo.Local);
-            if (next is null)
-            {
-                throw new InvalidOperationException();
-            }
-            var interval = next.Value - DateTimeOffset.Now;
-            timer.Interval = interval.TotalMilliseconds;
         }
     }
 }
