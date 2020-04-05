@@ -6,9 +6,9 @@ services:
     build:
       context: .
       dockerfile: StamAcasa.Api/Dockerfile
-    environment: 
+    environment:
       - ASPNETCORE_URLS=http://+:80
-    ports: 
+    ports:
       - 5008:80
     depends_on:
       - postgres
@@ -21,7 +21,7 @@ services:
     image: local_rabbit
     restart: always
     container_name: rabbitmq
-    build: 
+    build:
       context: rabbitconfig/
       dockerfile: Dockerfile
     ports:
@@ -32,12 +32,12 @@ services:
 
   identityserver:
     image: ${DOCKER_REGISTRY-}stamacasa-identityserver
-    environment: 
+    environment:
       - ASPNETCORE_URLS=http://+:80
     build:
         context: .
         dockerfile: StamAcasa.IdentityServer/Dockerfile
-    ports: 
+    ports:
       - 5001:80
     depends_on:
       - postgres
@@ -46,14 +46,14 @@ services:
     image: postgres
     container_name: postgres
     environment:
-      - POSTGRES_PASSWORD=docker 
-      - POSTGRES_USER=docker 
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_USER=docker
       - POSTGRES_DB=postgres
     ports:
       - 5432:5432
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
-      
+
   frontend:
     image:  ${DOCKER_REGISTRY-}stamacasa
     build:
@@ -62,6 +62,7 @@ services:
     environment:
       REACT_APP_IDP_URL: 'http://localhost:5001'
       REACT_APP_URL: 'http://localhost:5002'
+      REACT_APP_API_URL: 'http://localhost:5008'
       CLIENT_ID: 'jsdocker'
     ports:
      - 5002:80
