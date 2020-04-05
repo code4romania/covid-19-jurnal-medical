@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using StamAcasa.EmailService.EmailBuilder;
+using StamAcasa.Common.EmailService;
 
 namespace StamAcasa.EmailService.Messaging
 {

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using StamAcasa.Common.EmailService;
 using StamAcasa.Common.Models;
 
 namespace StamAcasa.EmailService.EmailBuilder

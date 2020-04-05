@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using StamAcasa.EmailService.EmailBuilder.Models;
+using StamAcasa.Common.EmailService;
 using System.IO;
 using System.Reflection;
 
@@ -14,7 +14,7 @@ namespace StamAcasa.EmailService.EmailBuilder
             _configuration = configuration;
         }
 
-        public string GetTemplatePath(Models.EmailTemplate template)
+        public string GetTemplatePath(EmailTemplate template)
         {
             var targetDirectory = _configuration.GetValue<string>("TemplateFolder");
             var directory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), targetDirectory);

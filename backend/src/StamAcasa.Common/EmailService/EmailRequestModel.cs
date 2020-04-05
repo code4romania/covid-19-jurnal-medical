@@ -1,7 +1,6 @@
-﻿using StamAcasa.EmailService.EmailBuilder.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace StamAcasa.EmailService.EmailBuilder
+namespace StamAcasa.Common.EmailService
 {
     public class EmailRequestModel
     {

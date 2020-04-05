@@ -1,7 +1,6 @@
+using StamAcasa.Common.EmailService;
 using System;
 using System.Threading.Tasks;
-using RabbitMQ.Client.Events;
-using StamAcasa.EmailService.EmailBuilder;
 
 namespace StamAcasa.EmailService.Messaging
 {
