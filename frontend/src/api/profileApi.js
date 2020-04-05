@@ -9,13 +9,7 @@ const ProfileApi = {
   getDependants: async () => {
     const result = await api.get("/profile/family");
 
-    return result.data.map(member => {
-      return {
-        firstName: member["name"],
-        surname: member["surname"],
-        id: member["id"]
-      };
-    });
+    return result.data;
   }
 };
 

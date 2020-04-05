@@ -6,14 +6,18 @@ import ProfileApi from "../../api/profileApi";
 
 const IntroSelfEvaluation = ({ onFinish }) => {
   const [userProfile, setUserProfile] = useState({});
+  const [dependants, setDependants] = useState([]);
 
   useEffect(() => {
     ProfileApi.get().then(profile => setUserProfile(profile));
+    ProfileApi.getDependants().then(dependants => setDependants(dependants));
   }, []);
   return (
     <div>
       <Button onClick={() => onFinish()}>Completeaza formularul</Button>
-      {userProfile.id && <ProfileSummary profile={userProfile} />}
+      {userProfile.id && (
+        <ProfileSummary profile={userProfile} dependants={dependants} />
+      )}
     </div>
   );
 };
