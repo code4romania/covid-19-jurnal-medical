@@ -1,7 +1,7 @@
 import { UserManager, WebStorageStateStore } from "oidc-client";
 //TODO temporary adding more scope - needs to changed
 const userManagerSettings = {
-  authority: "http://localhost:5001",
+  authority: `${process.env.REACT_APP_IDP_URL}`,
   client_id: "js",
   redirect_uri: "http://localhost:3000/signin-oidc",
   post_logout_redirect_uri: "http://localhost:3000/post-logout",
