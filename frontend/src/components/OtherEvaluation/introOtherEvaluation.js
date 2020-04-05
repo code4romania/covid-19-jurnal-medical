@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button, Select } from "@code4ro/taskforce-fe-components";
+import { Select } from "@code4ro/taskforce-fe-components";
 import PropTypes from "prop-types";
 import ProfileApi from "../../api/profileApi";
+import StartFormButton from "../Evaluation/startFormButton";
 
 const IntroOtherEvaluation = ({ onFinish }) => {
   useEffect(() => {
@@ -35,9 +36,7 @@ const IntroOtherEvaluation = ({ onFinish }) => {
         options={options}
         selectProps={props}
       />
-      <Button onClick={() => onFinish(selectedMember)}>
-        Completeaza formularul
-      </Button>
+      <StartFormButton onClick={() => onFinish(selectedMember)} />
     </div>
   );
 };

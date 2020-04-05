@@ -11,7 +11,7 @@ const OtherEvaluation = () => {
 
   useEffect(() => {
     EvaluationApi.getOtherEvaluationForm().then(setEvaluationForm);
-  });
+  }, []);
   const evaluateCallback = (formState, options) => {
     return options[0];
   };

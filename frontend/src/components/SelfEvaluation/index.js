@@ -10,7 +10,7 @@ const SelfEvaluation = () => {
 
   useEffect(() => {
     EvaluationApi.getSelfEvaluationForm().then(setEvaluationForm);
-  });
+  }, []);
   // eslint-disable-next-line no-unused-vars
   const evaluateCallback = (formState, options) => {
     return options[0];

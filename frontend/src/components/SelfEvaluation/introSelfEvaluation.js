@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "@code4ro/taskforce-fe-components";
 import PropTypes from "prop-types";
 import ProfileSummary from "./profileSummary";
 import ProfileApi from "../../api/profileApi";
+import StartFormButton from "../Evaluation/startFormButton";
 
 const IntroSelfEvaluation = ({ onFinish }) => {
   const [userProfile, setUserProfile] = useState({});
@@ -14,7 +14,7 @@ const IntroSelfEvaluation = ({ onFinish }) => {
   }, []);
   return (
     <div>
-      <Button onClick={() => onFinish()}>Completeaza formularul</Button>
+      <StartFormButton onClick={() => onFinish()} />
       {userProfile.id && (
         <ProfileSummary profile={userProfile} dependants={dependants} />
       )}
