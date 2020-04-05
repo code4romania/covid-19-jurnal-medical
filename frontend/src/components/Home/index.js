@@ -1,28 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 import BasePage from "../BasePage";
 import UserHomePage from "./components/UserHomePage";
 import DefaultHomePage from "./components/DefaultHomePage";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
+import { sel as userSel } from "../../store/ducks/user";
 
-const Home = ({ user }) => {
-  const isAuthenticated = user !== null;
-  const page = isAuthenticated ? (
-    <UserHomePage></UserHomePage>
-  ) : (
-    <DefaultHomePage></DefaultHomePage>
-  );
+const Home = () => {
+  const isAuthenticated = useSelector(userSel.user);
+  const page = isAuthenticated ? <UserHomePage /> : <DefaultHomePage />;
   return <BasePage>{page}</BasePage>;
 };
 
-const mapStateToProps = state => {
-  return {
-    user: state.UserReducer.user
-  };
-};
-
-Home.propTypes = {
-  user: PropTypes.any
-};
-
-export default connect(mapStateToProps)(Home);
+export default Home;

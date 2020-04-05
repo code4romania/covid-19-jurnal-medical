@@ -3,7 +3,7 @@ import React from "react";
 import { Hero } from "@code4ro/taskforce-fe-components";
 import StepsBar from "../../StepsBar";
 import { ROUTES } from "../../../routes";
-import { AuthenticatedRoute } from "../../../AuthenticatedRoute";
+import AuthenticatedRoute from "../../AuthenticatedRoute";
 
 const UserHomePage = () => {
   const { home } = ROUTES;
