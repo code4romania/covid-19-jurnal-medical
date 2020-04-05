@@ -1,7 +1,7 @@
-import mockApi from "../api";
+import mockApi from "./api";
 import EvaluationApi from "./EvaluationApi";
 
-jest.mock("../api");
+jest.mock("./api");
 
 describe("EvaluationApi", () => {
   it("sends self evaluation form results", () => {

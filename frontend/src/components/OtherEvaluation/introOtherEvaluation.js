@@ -22,7 +22,7 @@ const IntroOtherEvaluation = ({ onFinish }) => {
 
   const options = dependants.map(dependant => {
     return {
-      text: dependant.fullName,
+      text: `${dependant.firstName} ${dependant.surname}`,
       value: dependant.id,
       selected: dependant.id === selectedMember
     };

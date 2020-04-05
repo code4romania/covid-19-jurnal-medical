@@ -1,7 +1,7 @@
 {
+  "title": "autoevaluare",
   "formId": 1,
   "firstNodeId": 1,
-  "title": "Formularul tau",
   "form": [
     {
       "questionId": 1,
@@ -65,22 +65,23 @@
       "type": "MULTIPLE_CHOICE",
       "options": [
         {
-          "label": "Nu am iesit"
-        },
-        {
-          "type": "OTHER",
-          "label": "Motivul deplasarii",
+          "label": "Nu am iesit",
           "value": 0
         },
         {
           "type": "OTHER",
-          "label": "Ora plecarii",
+          "label": "Motivul deplasarii",
           "value": 1
         },
         {
           "type": "OTHER",
+          "label": "Ora plecarii",
+          "value": 3
+        },
+        {
+          "type": "OTHER",
           "label": "Ora sosiri",
-          "value": 2
+          "value": 4
         }
       ]
     },

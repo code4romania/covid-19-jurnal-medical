@@ -4,8 +4,10 @@ import React from "react";
 const ProfileSummary = ({ profile }) => {
   return (
     <div>
-      {/* eslint-disable-next-line react/prop-types */}
-      <div>Nume: {profile["fullName"]}</div>
+      <div>
+        {/* eslint-disable-next-line react/prop-types */}
+        Nume: {profile["name"]} {profile["surname"]}
+      </div>
       {/* eslint-disable-next-line react/prop-types */}
       <div>Numar de telefon: {profile["phoneNumber"]}</div>
       {/* eslint-disable-next-line react/prop-types */}

@@ -1,6 +1,6 @@
 import selfEvaluation from "../data/personal-assesment.json";
 import otherEvaluation from "../data/other-assesment.json";
-import api from "../api";
+import api from "./api";
 
 const EvaluationApi = {
   getProfile: async () => {
@@ -24,7 +24,8 @@ const EvaluationApi = {
 
     return result.data.map(member => {
       return {
-        fullName: member["fullName"],
+        firstName: member["name"],
+        surname: member["surname"],
         id: member["id"]
       };
     });

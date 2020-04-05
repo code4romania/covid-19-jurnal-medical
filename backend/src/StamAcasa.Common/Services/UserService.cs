@@ -19,32 +19,30 @@ namespace StamAcasa.Common.Services
             _mapper = mapper;
         }
 
-        private async Task<User> AddOrUpdateEntity(User user, UserModel userUpdateInfo)
+        private async Task<User> AddOrUpdateEntity(User user, object profileUpdateInfo)
         {
             if (user == null) {
-                var newUserInfo = _mapper.Map<User>(userUpdateInfo);
+                var newUserInfo = _mapper.Map<User>(profileUpdateInfo);
                 var saved = await _context.Users.AddAsync(newUserInfo);
                 await _context.SaveChangesAsync();
                 return saved.Entity;
             }
 
-            foreach (var prop in typeof(UserModel).GetProperties().Where(p=>p.Name!="Id"))
-                user
-                    .GetType()
-                    .GetProperty(prop.Name)
-                    ?.SetValue(user, prop.GetValue(userUpdateInfo));
+            var contextEntry = _context.Entry<User>(user);
+            contextEntry.CurrentValues.SetValues(profileUpdateInfo);
             _context.Users.Update(user);
             var result = await _context.SaveChangesAsync();
             return result > 0 ? user : null;
         }
 
-        public async Task<User> AddOrUpdateUserInfo(UserModel userUpdateInfo)
+        public async Task<UserInfo> AddOrUpdateUserInfo(UserProfileDTO userUpdateInfo)
         {
             var user = _context.Users.FirstOrDefault(u => u.Sub == userUpdateInfo.Sub);
-            return await AddOrUpdateEntity(user, userUpdateInfo);
+            var profile = await AddOrUpdateEntity(user, userUpdateInfo);
+            return _mapper.Map<UserInfo>(profile);
         }
 
-        public async Task<User> AddOrUpdateDependentInfo(UserModel dependentInfo, string parentSub)
+        public async Task<UserInfo> AddOrUpdateDependentInfo(UserProfileDTO dependentInfo, string parentSub)
         {
             var parentUser = _context.Users.FirstOrDefault(u => u.Sub == parentSub);
             if (parentUser == null)
@@ -55,7 +53,8 @@ namespace StamAcasa.Common.Services
             if(dependentInfo.Id > 0) 
                 existingUserEntity = _context.Users.FirstOrDefault(u => u.Id == dependentInfo.Id);
 
-            return await AddOrUpdateEntity(existingUserEntity, dependentInfo);
+            var profile = await AddOrUpdateEntity(existingUserEntity, dependentInfo);
+            return _mapper.Map<UserInfo>(profile);
         }
 
         public async Task<UserInfo> GetUserInfo(string sub)

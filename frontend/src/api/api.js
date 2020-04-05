@@ -1,10 +1,12 @@
 import axios from "axios";
-import { AuthService } from "./auth";
+import { getUserToken } from "./auth";
 
-const api = axios.create();
+const api = axios.create({
+  baseURL: `${process.env.REACT_APP_API_URL}/api`
+});
+
 api.interceptors.request.use(async config => {
-  const user = await AuthService.loadUser();
-  const token = user ? user.access_token : null;
+  const token = await getUserToken();
   if (token) {
     return {
       ...config,
