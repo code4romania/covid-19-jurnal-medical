@@ -66,3 +66,24 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### Passing environment variables to the app via Docker
+
+When you run the docker container, use the `-e` flag to pass environment variables to the React app.
+
+Those variables will be picked up by the `env.sh` script which is being run inside the container
+and will be exported into the `/public/env-config.js` file.
+
+Example usage:
+
+```
+docker run -p 5000:5000 -e REACT_APP_IDP_URL="http://staging.idp.stamacasa.ro" image/stamacasa
+```
+
+### Passing environment variables to the app ran locally
+
+If you run the app locally, simply edit the `.env` file with the correct values, then
+
+```
+npm start
+```
