@@ -3,11 +3,17 @@ import React from "react";
 import "./MemberAccount.scss";
 
 import mockData from '../mockData/mockData';
-import getDetails from '../common/Details.js';
+import getGeneralInfo from '../common/GeneralInfo.js';
 
 export const MemberAccount = () => {
- 
-    return mockData["Alte persoane in grija"].map(getDetails)
+    
+    const familyMembers = mockData["Alte persoane in grija"];
+
+    if(!familyMembers.length) {
+        return <div> No family Members</div>;
+    }
+
+    return familyMembers.map(getGeneralInfo)
 };
 
 export default MemberAccount;

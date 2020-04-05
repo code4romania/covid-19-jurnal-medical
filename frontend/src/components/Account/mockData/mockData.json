@@ -1,41 +1,617 @@
 {
-    "Nume si prenume": "Ion Petrescu",
-    "Numar de telefon": "0729999999",
-    "Judet, localitate": "Iasi, Targu Frumos",
-    "Varsta in ani impliniti": "33",
-    "Genul": "masculin",
-    "Fumator": "Da",
-    "Afectiuni agravante": "Diabet, o boala de inima",
-    "Locuiesti singur": "Nu",
-    "Izolare proprie la domiciliu": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
-    "Izolare alte persoane la domiciliu": "Da, sunt in izolare, nu ies deloc din locuinta",
-    "Alte persoane in grija": [
+    "general-info": {
+        "Nume si prenume": "Ion Petrescu",
+        "Numar de telefon": "0729999999",
+        "Judet, localitate": "Iasi, Targu Frumos",
+        "Varsta in ani impliniti": "33",
+        "Genul": "masculin",
+        "Fumator": "Da",
+        "Afectiuni agravante": "Diabet, o boala de inima",
+        "Locuiesti singur": "Nu",
+        "Izolare proprie la domiciliu": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
+        "Izolare alte persoane la domiciliu": "Da, sunt in izolare, nu ies deloc din locuinta"
+    },
+    "simptome": [
         {
-            "Nume si prenume": "Camelia Petrescu",
-            "Numar de telefon": "-",
-            "Tip de relatie": "bunica",
-            "Judet, localitate": "Iasi, Pascani",
-            "Varsta in ani impliniti": "82",
-            "Genul": "feminin",
-            "Fumator": "Nu",
-            "Afectiuni agravante": "Diabet",
-            "Locuiesti singur": "Da",
-            "Izolare proprie la domiciliu": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
-            "Izolare alte persoane la domiciliu": "",
-            "Alte persoane in grija": []
+            "time": "14.03.2020/18.30",
+            "values": [
+                {
+                    "name": "Durere in gat si/sau dificultate in a inghiti?",
+                    "value": "Da"
+                },
+                {
+                    "name": "Tuse intensa?",
+                    "value": "Nu"
+                },
+                {
+                    "name": "Dificultate in a respira ?",
+                    "value": "Da"
+                },
+                {
+                    "name": "Îți curge nasul?",
+                    "value": "Da"
+                }
+            ]
         },
         {
-            "Nume si prenume": "Ioana Marinescu",
-            "Numar de telefon": "0728888888",
-            "Judet, localitate": "Iasi, Targu Frumos",
-            "Varsta in ani impliniti": "33",
-            "Genul": "faminin",
-            "Fumator": "Nu",
-            "Afectiuni agravante": "Nu",
-            "Locuiesti singur": "Nu",
-            "Izolare proprie la domiciliu": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
-            "Izolare alte persoane la domiciliu": "Da, sunt in izolare, nu ies deloc din locuinta",
-            "Alte persoane in grija": []
+            "time": "14.03.2020/12.30",
+            "values": [
+                {
+                    "name": "Durere in gat si/sau dificultate in a inghiti?",
+                    "value": "Da"
+                },
+                {
+                    "name": "Tuse intensa?",
+                    "value": "Da"
+                },
+                {
+                    "name": "Dificultate in a respira ?",
+                    "value": "Nu"
+                },
+                {
+                    "name": "Îți curge nasul?",
+                    "value": "Nu"
+                }
+            ]
+        },
+        {
+            "time": "13.03.2020/18.50",
+            "values": [
+                {
+                    "name": "Durere in gat si/sau dificultate in a inghiti?",
+                    "value": "Nu"
+                },
+                {
+                    "name": "Tuse intensa?",
+                    "value": "Nu"
+                },
+                {
+                    "name": "Dificultate in a respira ?",
+                    "value": "Nu"
+                },
+                {
+                    "name": "Îți curge nasul?",
+                    "value": "Nu"
+                }
+            ]
+        },
+        {
+            "time": "12.03.2020/12.30",
+            "values": [
+                {
+                    "name": "Durere in gat si/sau dificultate in a inghiti?",
+                    "value": "Da"
+                },
+                {
+                    "name": "Tuse intensa?",
+                    "value": "Nu"
+                },
+                {
+                    "name": "Dificultate in a respira ?",
+                    "value": "Nu"
+                },
+                {
+                    "name": "Îți curge nasul?",
+                    "value": "Nu"
+                }
+            ]
+        }
+    ],
+    "alte simptome": [
+        {
+            "time": "14.03.2020/18.30",
+            "value": "Frisoane și durere de cap."
+        },
+        {
+            "time": "14.03.2020/12.30",
+            "value": "Frisoane"
+        },
+        {
+            "time": "13.03.2020/18.50",
+            "value": "Niciun alt simptom"
+        },
+        {
+            "time": "12.03.2020/12.30",
+            "value": "Durere de cap și oboseala foarte mare"
+        }
+    ],
+    "deplasari": [
+        {
+            "time": "14.03.2020/18.30",
+            "values": [
+                {
+                    "name": "Motivul deplasării",
+                    "value": "Cumpărături"
+                },
+                {
+                    "name": "Ora plecării",
+                    "value": "13:00"
+                },
+                {
+                    "name": "Ora sosirii",
+                    "value": "14:30"
+                },
+                {
+                    "name": "Contact cu pacient",
+                    "value": "Da"
+                }
+            ]
+        },
+        {
+            "time": "14.03.2020/12.30",
+            "values": [
+                {
+                    "name": "Motivul deplasării",
+                    "value": "Farmacie"
+                },
+                {
+                    "name": "Ora plecării",
+                    "value": "16:00"
+                },
+                {
+                    "name": "Ora sosirii",
+                    "value": "17:00"
+                },
+                {
+                    "name": "Contact cu pacient",
+                    "value": "Nu"
+                }
+            ]
+        },
+        {
+            "time": "13.03.2020/18.50",
+            "values": [
+                {
+                    "name": "Motivul deplasării",
+                    "value": "-"
+                },
+                {
+                    "name": "Ora plecării",
+                    "value": "-"
+                },
+                {
+                    "name": "Ora sosirii",
+                    "value": "-"
+                },
+                {
+                    "name": "Contact cu pacient",
+                    "value": "-"
+                }
+            ]
+        },
+        {
+            "time": "12.03.2020/12.30",
+            "values": [
+                {
+                    "name": "Motivul deplasării",
+                    "value": "Cumpărături"
+                },
+                {
+                    "name": "Ora plecării",
+                    "value": "13:00"
+                },
+                {
+                    "name": "Ora sosirii",
+                    "value": "14:45"
+                },
+                {
+                    "name": "Contact cu pacient",
+                    "value": "Nu"
+                }
+            ]
+        }
+    ],
+    "Alte persoane in grija": [
+        {
+            "general-info": {
+                "Nume si prenume": "Camelia Petrescu",
+                "Numar de telefon": "-",
+                "Tip de relatie": "bunica",
+                "Judet, localitate": "Iasi, Pascani",
+                "Varsta in ani impliniti": "82",
+                "Genul": "feminin",
+                "Fumator": "Nu",
+                "Afectiuni agravante": "Diabet",
+                "Locuiesti singur": "Da",
+                "Izolare proprie la domiciliu": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
+                "Izolare alte persoane la domiciliu": "",
+                "Alte persoane in grija": []
+            },
+            "simptome": [
+                {
+                    "time": "14.03.2020/18.30",
+                    "values": [
+                        {
+                            "name": "Durere in gat si/sau dificultate in a inghiti?",
+                            "value": "Da"
+                        },
+                        {
+                            "name": "Tuse intensa?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Dificultate in a respira ?",
+                            "value": "Da"
+                        },
+                        {
+                            "name": "Îți curge nasul?",
+                            "value": "Da"
+                        }
+                    ]
+                },
+                {
+                    "time": "14.03.2020/12.30",
+                    "values": [
+                        {
+                            "name": "Durere in gat si/sau dificultate in a inghiti?",
+                            "value": "Da"
+                        },
+                        {
+                            "name": "Tuse intensa?",
+                            "value": "Da"
+                        },
+                        {
+                            "name": "Dificultate in a respira ?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Îți curge nasul?",
+                            "value": "Nu"
+                        }
+                    ]
+                },
+                {
+                    "time": "13.03.2020/18.50",
+                    "values": [
+                        {
+                            "name": "Durere in gat si/sau dificultate in a inghiti?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Tuse intensa?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Dificultate in a respira ?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Îți curge nasul?",
+                            "value": "Nu"
+                        }
+                    ]
+                },
+                {
+                    "time": "12.03.2020/12.30",
+                    "values": [
+                        {
+                            "name": "Durere in gat si/sau dificultate in a inghiti?",
+                            "value": "Da"
+                        },
+                        {
+                            "name": "Tuse intensa?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Dificultate in a respira ?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Îți curge nasul?",
+                            "value": "Nu"
+                        }
+                    ]
+                }
+            ],
+            "alte simptome": [
+                {
+                    "time": "14.03.2020/18.30",
+                    "value": "Frisoane și durere de cap."
+                },
+                {
+                    "time": "14.03.2020/12.30",
+                    "value": "Frisoane"
+                },
+                {
+                    "time": "13.03.2020/18.50",
+                    "value": "Niciun alt simptom"
+                },
+                {
+                    "time": "12.03.2020/12.30",
+                    "value": "Durere de cap și oboseala foarte mare"
+                }
+            ],
+            "deplasari": [
+                {
+                    "time": "14.03.2020/18.30",
+                    "values": [
+                        {
+                            "name": "Motivul deplasării",
+                            "value": "Cumpărături"
+                        },
+                        {
+                            "name": "Ora plecării",
+                            "value": "13:00"
+                        },
+                        {
+                            "name": "Ora sosirii",
+                            "value": "14:30"
+                        },
+                        {
+                            "name": "Contact cu pacient",
+                            "value": "Da"
+                        }
+                    ]
+                },
+                {
+                    "time": "14.03.2020/12.30",
+                    "values": [
+                        {
+                            "name": "Motivul deplasării",
+                            "value": "Farmacie"
+                        },
+                        {
+                            "name": "Ora plecării",
+                            "value": "16:00"
+                        },
+                        {
+                            "name": "Ora sosirii",
+                            "value": "17:00"
+                        },
+                        {
+                            "name": "Contact cu pacient",
+                            "value": "Nu"
+                        }
+                    ]
+                },
+                {
+                    "time": "13.03.2020/18.50",
+                    "values": [
+                        {
+                            "name": "Motivul deplasării",
+                            "value": "-"
+                        },
+                        {
+                            "name": "Ora plecării",
+                            "value": "-"
+                        },
+                        {
+                            "name": "Ora sosirii",
+                            "value": "-"
+                        },
+                        {
+                            "name": "Contact cu pacient",
+                            "value": "-"
+                        }
+                    ]
+                },
+                {
+                    "time": "12.03.2020/12.30",
+                    "values": [
+                        {
+                            "name": "Motivul deplasării",
+                            "value": "Cumpărături"
+                        },
+                        {
+                            "name": "Ora plecării",
+                            "value": "13:00"
+                        },
+                        {
+                            "name": "Ora sosirii",
+                            "value": "14:45"
+                        },
+                        {
+                            "name": "Contact cu pacient",
+                            "value": "Nu"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "general-info": {
+                "Nume si prenume": "Ioana Marinescu",
+                "Numar de telefon": "0728888888",
+                "Judet, localitate": "Iasi, Targu Frumos",
+                "Varsta in ani impliniti": "33",
+                "Genul": "faminin",
+                "Fumator": "Nu",
+                "Afectiuni agravante": "Nu",
+                "Locuiesti singur": "Nu",
+                "Izolare proprie la domiciliu": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
+                "Izolare alte persoane la domiciliu": "Da, sunt in izolare, nu ies deloc din locuinta",
+                "Alte persoane in grija": []
+            },
+            "simptome": [
+                {
+                    "time": "14.03.2020/18.30",
+                    "values": [
+                        {
+                            "name": "Durere in gat si/sau dificultate in a inghiti?",
+                            "value": "Da"
+                        },
+                        {
+                            "name": "Tuse intensa?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Dificultate in a respira ?",
+                            "value": "Da"
+                        },
+                        {
+                            "name": "Îți curge nasul?",
+                            "value": "Da"
+                        }
+                    ]
+                },
+                {
+                    "time": "14.03.2020/12.30",
+                    "values": [
+                        {
+                            "name": "Durere in gat si/sau dificultate in a inghiti?",
+                            "value": "Da"
+                        },
+                        {
+                            "name": "Tuse intensa?",
+                            "value": "Da"
+                        },
+                        {
+                            "name": "Dificultate in a respira ?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Îți curge nasul?",
+                            "value": "Nu"
+                        }
+                    ]
+                },
+                {
+                    "time": "13.03.2020/18.50",
+                    "values": [
+                        {
+                            "name": "Durere in gat si/sau dificultate in a inghiti?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Tuse intensa?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Dificultate in a respira ?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Îți curge nasul?",
+                            "value": "Nu"
+                        }
+                    ]
+                },
+                {
+                    "time": "12.03.2020/12.30",
+                    "values": [
+                        {
+                            "name": "Durere in gat si/sau dificultate in a inghiti?",
+                            "value": "Da"
+                        },
+                        {
+                            "name": "Tuse intensa?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Dificultate in a respira ?",
+                            "value": "Nu"
+                        },
+                        {
+                            "name": "Îți curge nasul?",
+                            "value": "Nu"
+                        }
+                    ]
+                }
+            ],
+            "alte simptome": [
+                {
+                    "time": "14.03.2020/18.30",
+                    "value": "Frisoane și durere de cap."
+                },
+                {
+                    "time": "14.03.2020/12.30",
+                    "value": "Frisoane"
+                },
+                {
+                    "time": "13.03.2020/18.50",
+                    "value": "Niciun alt simptom"
+                },
+                {
+                    "time": "12.03.2020/12.30",
+                    "value": "Durere de cap și oboseala foarte mare"
+                }
+            ],
+            "deplasari": [
+                {
+                    "time": "14.03.2020/18.30",
+                    "values": [
+                        {
+                            "name": "Motivul deplasării",
+                            "value": "Cumpărături"
+                        },
+                        {
+                            "name": "Ora plecării",
+                            "value": "13:00"
+                        },
+                        {
+                            "name": "Ora sosirii",
+                            "value": "14:30"
+                        },
+                        {
+                            "name": "Contact cu pacient",
+                            "value": "Da"
+                        }
+                    ]
+                },
+                {
+                    "time": "14.03.2020/12.30",
+                    "values": [
+                        {
+                            "name": "Motivul deplasării",
+                            "value": "Farmacie"
+                        },
+                        {
+                            "name": "Ora plecării",
+                            "value": "16:00"
+                        },
+                        {
+                            "name": "Ora sosirii",
+                            "value": "17:00"
+                        },
+                        {
+                            "name": "Contact cu pacient",
+                            "value": "Nu"
+                        }
+                    ]
+                },
+                {
+                    "time": "13.03.2020/18.50",
+                    "values": [
+                        {
+                            "name": "Motivul deplasării",
+                            "value": "-"
+                        },
+                        {
+                            "name": "Ora plecării",
+                            "value": "-"
+                        },
+                        {
+                            "name": "Ora sosirii",
+                            "value": "-"
+                        },
+                        {
+                            "name": "Contact cu pacient",
+                            "value": "-"
+                        }
+                    ]
+                },
+                {
+                    "time": "12.03.2020/12.30",
+                    "values": [
+                        {
+                            "name": "Motivul deplasării",
+                            "value": "Cumpărături"
+                        },
+                        {
+                            "name": "Ora plecării",
+                            "value": "13:00"
+                        },
+                        {
+                            "name": "Ora sosirii",
+                            "value": "14:45"
+                        },
+                        {
+                            "name": "Contact cu pacient",
+                            "value": "Nu"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
