@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form } from "@code4ro/taskforce-fe-components";
 import Evaluation from "../Evaluation";
 import IntroSelfEvaluation from "./introSelfEvaluation";
-import EvaluationApi from "../../api/EvaluationApi";
+import EvaluationApi from "../../api/evaluationApi";
 
 const SelfEvaluation = () => {
   const [started, setStarted] = useState(false);
@@ -12,7 +12,7 @@ const SelfEvaluation = () => {
   };
 
   const onFinishingForm = result =>
-    EvaluationApi.sendSelfEvaluationResults(result.formId, result);
+    EvaluationApi.sendSelfEvaluationResults(result);
 
   if (started) {
     const selfEvaluationForm = EvaluationApi.getSelfEvaluationForm();

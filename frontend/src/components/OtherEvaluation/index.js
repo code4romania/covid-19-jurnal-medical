@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Evaluation from "../Evaluation";
-import EvaluationApi from "../../api/EvaluationApi";
+import EvaluationApi from "../../api/evaluationApi";
 import { Form } from "@code4ro/taskforce-fe-components";
 import IntroOtherEvaluation from "./introOtherEvaluation";
 

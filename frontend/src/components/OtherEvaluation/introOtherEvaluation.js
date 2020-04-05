@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Select } from "@code4ro/taskforce-fe-components";
 import PropTypes from "prop-types";
-import EvaluationApi from "../../api/EvaluationApi";
+import ProfileApi from "../../api/profileApi";
 
 const IntroOtherEvaluation = ({ onFinish }) => {
   useEffect(() => {
-    EvaluationApi.getDependants().then(members => {
+    ProfileApi.getDependants().then(members => {
       setDependants(members);
       setSelectedMember(members[0].id);
     });

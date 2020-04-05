@@ -3,9 +3,9 @@ import { shallow } from "enzyme";
 import { Form } from "@code4ro/taskforce-fe-components";
 import IntroOtherEvaluation from "./introOtherEvaluation";
 import OtherEvaluation from "./index";
-import EvaluationApi from "../../api/EvaluationApi";
+import EvaluationApi from "../../api/evaluationApi";
 
-jest.mock("../../api/EvaluationApi");
+jest.mock("../../api/evaluationApi");
 
 describe("Other evaluation", () => {
   it("starts the form when action comes from intro", () => {
