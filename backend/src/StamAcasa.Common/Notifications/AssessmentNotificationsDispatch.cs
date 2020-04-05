@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services;
 
 namespace StamAcasa.Common.Notifications
@@ -8,19 +9,19 @@ namespace StamAcasa.Common.Notifications
     {
         private IUserService UserService { get; }
 
-        private IQueue Queue { get; }
+        private readonly IQueueService _queueService;
 
-        public AssessmentNotificationsDispatch(IUserService userService, IQueue queue)
+        public AssessmentNotificationsDispatch(IUserService userService, IQueueService queueService)
         {
             UserService = userService;
-            Queue = queue;
+            _queueService = queueService;
         }
 
         public async Task Process()
         {
             var userInfos = await UserService.GetAll();
             var notifications = userInfos.Select(u => new AssessmentNotification(u));
-            var qTasks = notifications.Select(n => Queue.Queue(n));
+            var qTasks = notifications.Select(n => _queueService.PublishNotification(n));
             await Task.WhenAll(qTasks);
         }
     }
