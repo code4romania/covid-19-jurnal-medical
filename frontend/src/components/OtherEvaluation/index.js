@@ -3,9 +3,11 @@ import Evaluation from "../Evaluation";
 import EvaluationApi from "../../api/evaluationApi";
 import { Form } from "@code4ro/taskforce-fe-components";
 import IntroOtherEvaluation from "./introOtherEvaluation";
+import FinishFormButton from "../Evaluation/finishFormButton";
 
 const OtherEvaluation = () => {
   const [started, setStarted] = useState(false);
+  const [finished, setFinished] = useState(false);
   const [dependant, setDependant] = useState(null);
   const [evaluationForm, setEvaluationForm] = useState(null);
 
@@ -16,8 +18,10 @@ const OtherEvaluation = () => {
     return options[0];
   };
 
-  const onFinishingForm = result =>
+  const onFinishingForm = result => {
+    setFinished(true);
     EvaluationApi.sendDependantEvaluationResult(dependant, result);
+  };
 
   if (started) {
     return (
@@ -27,6 +31,7 @@ const OtherEvaluation = () => {
           evaluateForm={evaluateCallback}
           onFinishingForm={onFinishingForm}
         />
+        {finished && <FinishFormButton />}
       </Evaluation>
     );
   } else {
