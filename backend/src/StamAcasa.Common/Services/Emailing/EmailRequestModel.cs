@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace StamAcasa.Common.EmailService
+namespace StamAcasa.Common.Services.Emailing
 {
     public class EmailRequestModel
     {

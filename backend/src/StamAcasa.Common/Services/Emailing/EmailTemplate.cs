@@ -1,4 +1,4 @@
-﻿namespace StamAcasa.Common.EmailService
+﻿namespace StamAcasa.Common.Services.Emailing
 {
     public enum EmailTemplate
     {

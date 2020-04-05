@@ -1,4 +1,4 @@
-﻿using StamAcasa.Common.EmailService;
+﻿using StamAcasa.Common.Services.Emailing;
 
 namespace StamAcasa.EmailService.EmailBuilder
 {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using StamAcasa.Common.EmailService;
 using StamAcasa.Common.Models;
+using StamAcasa.Common.Services.Emailing;
 
 namespace StamAcasa.EmailService.EmailBuilder
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using StamAcasa.Common.EmailService;
+using StamAcasa.Common.Services.Emailing;
 using System.IO;
 using System.Reflection;
 

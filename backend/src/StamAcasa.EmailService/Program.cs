@@ -1,10 +1,10 @@
+using EasyNetQ;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RabbitMQ.Client;
+using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services.Emailing;
 using StamAcasa.EmailService.EmailBuilder;
-using StamAcasa.EmailService.Messaging;
 
 namespace StamAcasa.EmailService
 {
@@ -34,15 +34,20 @@ namespace StamAcasa.EmailService
             })
             .ConfigureServices((context, services) =>
             {
-                services.AddSingleton<IConnectionFactory>(ctx =>
-                    new ConnectionFactory
-                    {
-                        HostName = context.Configuration["RabbitMQ:HostName"],
-                        UserName = context.Configuration["RabbitMQ:User"],
-                        Password = context.Configuration["RabbitMQ:Password"],
-                        DispatchConsumersAsync = true // this is mandatory to have Async Subscribers
-                    }
-                );
+
+                var hostName = context.Configuration["RabbitMQ:HostName"];
+                var userName = context.Configuration["RabbitMQ:User"];
+                var port = ushort.Parse(context.Configuration["RabbitMQ:Port"]);
+                var password = context.Configuration["RabbitMQ:Password"];
+
+                services.AddSingleton(RabbitHutch.CreateBus(
+                    hostName,
+                    port,
+                    "/",
+                    userName,
+                    password,
+                    10, //default
+                    (x) => { }));
 
                 services.AddSingleton<IEmailSender>(ctx =>
                     new SmtpSender(
@@ -56,11 +61,9 @@ namespace StamAcasa.EmailService
                     )
                 );
 
-                services.AddSingleton<IBusConnection, RabbitMQPersistentConnection>();
-                services.AddSingleton<IQueueSubscriber, EmailQueueSubscriber>();
-
                 services.AddSingleton<ITemplateFileSelector, TemplateFileSelector>();
                 services.AddTransient<IEmailBuilderService, EmailBuilderService>();
+                services.AddSingleton<IQueueService, QueueService>();
 
                 services.AddHostedService<Worker>();
             });
