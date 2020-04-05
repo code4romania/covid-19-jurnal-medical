@@ -3,25 +3,23 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services.Emailing;
 using StamAcasa.EmailService.EmailBuilder;
-using StamAcasa.EmailService.Messaging;
 
 namespace StamAcasa.EmailService
 {
     public class Worker : BackgroundService
     {
-        private readonly IQueueSubscriber _queue;
         private readonly IEmailBuilderService _emailBuilder;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<Worker> _logger;
+        private readonly IQueueService _queueService;
 
-        private const string EMAIL_REQUESTS_QUEUE = "email:requests";
-
-        public Worker(IQueueSubscriber queue, IEmailBuilderService emailBuilder, IEmailSender emailSender, ILogger<Worker> logger)
+        public Worker(IQueueService queueService, IEmailBuilderService emailBuilder, IEmailSender emailSender, ILogger<Worker> logger)
         {
-            _queue = queue ??
-                throw new ArgumentNullException(nameof(queue));
+            _queueService = queueService ??
+                            throw new ArgumentNullException(nameof(queueService));
             _emailBuilder = emailBuilder;
             _emailSender = emailSender;
             _logger = logger;
@@ -31,25 +29,25 @@ namespace StamAcasa.EmailService
         {
             _logger.LogInformation("Email service is starting...");
 
-            _queue.Subscribe(EMAIL_REQUESTS_QUEUE, async (request) =>
-            {
-                try
-                {
-                    var email = await _emailBuilder.BuildEmail(request);
+            _queueService.SubscribeConsumerToEmailRequestsQueue<EmailRequestModel>(async (request) =>
+          {
+              try
+              {
+                  var email = await _emailBuilder.BuildEmail(request);
 
 
-                    _logger.LogInformation($"TO: {email.To}; Subject: {email.Subject}; Content: {email.Content}; Status: sending");
+                  _logger.LogInformation($"TO: {email.To}; Subject: {email.Subject}; Content: {email.Content}; Status: sending");
 
-                    await _emailSender.SendAsync(email, cancellationToken);
+                  await _emailSender.SendAsync(email, cancellationToken);
 
-                    _logger.LogInformation($"TO: {email.To}; Subject: {email.Subject}; Content: {email.Content}; Status: sent");
-                }
+                  _logger.LogInformation($"TO: {email.To}; Subject: {email.Subject}; Content: {email.Content}; Status: sent");
+              }
 
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, ex.Message);
-                }
-            });
+              catch (Exception ex)
+              {
+                  _logger.LogError(ex, ex.Message);
+              }
+          });
 
             return base.StartAsync(cancellationToken);
         }
@@ -68,8 +66,7 @@ namespace StamAcasa.EmailService
 
         public override void Dispose()
         {
-            _queue.Dispose();
-
+            _queueService.Dispose();
             base.Dispose();
         }
     }
