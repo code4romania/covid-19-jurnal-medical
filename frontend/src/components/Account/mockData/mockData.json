@@ -13,192 +13,80 @@
     },
     "simptome": [
         {
-            "time": "14.03.2020/18.30",
-            "values": [
-                {
-                    "name": "Durere in gat si/sau dificultate in a inghiti?",
-                    "value": "Da"
-                },
-                {
-                    "name": "Tuse intensa?",
-                    "value": "Nu"
-                },
-                {
-                    "name": "Dificultate in a respira ?",
-                    "value": "Da"
-                },
-                {
-                    "name": "Îți curge nasul?",
-                    "value": "Da"
-                }
-            ]
+            "Data/ora": "14.03.2020/18.30",
+            "Durere in gat si/sau dificultate in a inghiti?": "Da",
+            "Tuse intensa?": "Nu",
+            "Dificultate in a respira ?": "Da",
+            "Îți curge nasul?": "Da"
         },
         {
-            "time": "14.03.2020/12.30",
-            "values": [
-                {
-                    "name": "Durere in gat si/sau dificultate in a inghiti?",
-                    "value": "Da"
-                },
-                {
-                    "name": "Tuse intensa?",
-                    "value": "Da"
-                },
-                {
-                    "name": "Dificultate in a respira ?",
-                    "value": "Nu"
-                },
-                {
-                    "name": "Îți curge nasul?",
-                    "value": "Nu"
-                }
-            ]
+            "Data/ora": "13.03.2020/18.50",
+            "Durere in gat si/sau dificultate in a inghiti?": "Nu",
+            "Tuse intensa?": "Nu",
+            "Dificultate in a respira ?": "Nu",
+            "Îți curge nasul?": "Nu"
         },
         {
-            "time": "13.03.2020/18.50",
-            "values": [
-                {
-                    "name": "Durere in gat si/sau dificultate in a inghiti?",
-                    "value": "Nu"
-                },
-                {
-                    "name": "Tuse intensa?",
-                    "value": "Nu"
-                },
-                {
-                    "name": "Dificultate in a respira ?",
-                    "value": "Nu"
-                },
-                {
-                    "name": "Îți curge nasul?",
-                    "value": "Nu"
-                }
-            ]
+            "Data/ora": "12.03.2020/12.30",
+            "Durere in gat si/sau dificultate in a inghiti?": "Da",
+            "Tuse intensa?": "Nu",
+            "Dificultate in a respira ?": "Nu",
+            "Îți curge nasul?": "Nu"
         },
         {
-            "time": "12.03.2020/12.30",
-            "values": [
-                {
-                    "name": "Durere in gat si/sau dificultate in a inghiti?",
-                    "value": "Da"
-                },
-                {
-                    "name": "Tuse intensa?",
-                    "value": "Nu"
-                },
-                {
-                    "name": "Dificultate in a respira ?",
-                    "value": "Nu"
-                },
-                {
-                    "name": "Îți curge nasul?",
-                    "value": "Nu"
-                }
-            ]
+            "Data/ora": "11.03.2020/12.30",
+            "Durere in gat si/sau dificultate in a inghiti?": "Nu",
+            "Tuse intensa?": "Nu",
+            "Dificultate in a respira ?": "Nu",
+            "Îți curge nasul?": "Nu"
         }
     ],
     "alte simptome": [
         {
-            "time": "14.03.2020/18.30",
-            "value": "Frisoane și durere de cap."
+            "Data/ora": "14.03.2020/18.30",
+            "Simptome semnalate": "Frisoane și durere de cap."
         },
         {
-            "time": "14.03.2020/12.30",
-            "value": "Frisoane"
+            "Data/ora": "14.03.2020/12.30",
+            "Simptome semnalate": "Frisoane"
         },
         {
-            "time": "13.03.2020/18.50",
-            "value": "Niciun alt simptom"
+            "Data/ora": "13.03.2020/18.50",
+            "Simptome semnalate": "Niciun alt simptom"
         },
         {
-            "time": "12.03.2020/12.30",
-            "value": "Durere de cap și oboseala foarte mare"
+            "Data/ora": "12.03.2020/12.30",
+            "Simptome semnalate": "Durere de cap și oboseala foarte mare"
         }
     ],
     "deplasari": [
         {
-            "time": "14.03.2020/18.30",
-            "values": [
-                {
-                    "name": "Motivul deplasării",
-                    "value": "Cumpărături"
-                },
-                {
-                    "name": "Ora plecării",
-                    "value": "13:00"
-                },
-                {
-                    "name": "Ora sosirii",
-                    "value": "14:30"
-                },
-                {
-                    "name": "Contact cu pacient",
-                    "value": "Da"
-                }
-            ]
+            "Data/ora": "14.03.2020/18.30",
+            "Motivul deplasării": "Cumpărături",
+            "Ora plecării": "13:00",
+            "Ora sosirii": "14:30",
+            "Contact cu pacient": "Da"
         },
         {
-            "time": "14.03.2020/12.30",
-            "values": [
-                {
-                    "name": "Motivul deplasării",
-                    "value": "Farmacie"
-                },
-                {
-                    "name": "Ora plecării",
-                    "value": "16:00"
-                },
-                {
-                    "name": "Ora sosirii",
-                    "value": "17:00"
-                },
-                {
-                    "name": "Contact cu pacient",
-                    "value": "Nu"
-                }
-            ]
+            "Data/ora": "14.03.2020/12.30",
+            "Motivul deplasării": "Farmacie",
+            "Ora plecării": "16:00",
+            "Ora sosirii": "17:00",
+            "Contact cu pacient": "Nu"
         },
         {
-            "time": "13.03.2020/18.50",
-            "values": [
-                {
-                    "name": "Motivul deplasării",
-                    "value": "-"
-                },
-                {
-                    "name": "Ora plecării",
-                    "value": "-"
-                },
-                {
-                    "name": "Ora sosirii",
-                    "value": "-"
-                },
-                {
-                    "name": "Contact cu pacient",
-                    "value": "-"
-                }
-            ]
+            "Data/ora": "13.03.2020/18.50",
+            "Motivul deplasării": "-",
+            "Ora plecării": "-",
+            "Ora sosirii": "-",
+            "Contact cu pacient": "-"
         },
         {
-            "time": "12.03.2020/12.30",
-            "values": [
-                {
-                    "name": "Motivul deplasării",
-                    "value": "Cumpărături"
-                },
-                {
-                    "name": "Ora plecării",
-                    "value": "13:00"
-                },
-                {
-                    "name": "Ora sosirii",
-                    "value": "14:45"
-                },
-                {
-                    "name": "Contact cu pacient",
-                    "value": "Nu"
-                }
-            ]
+            "Data/ora": "12.03.2020/12.30",
+            "Motivul deplasării": "Cumpărături",
+            "Ora plecării": "13:00",
+            "Ora sosirii": "14:45",
+            "Contact cu pacient": "Nu"
         }
     ],
     "Alte persoane in grija": [
