@@ -24,8 +24,12 @@ RUN apk add --no-cache bash
 
 WORKDIR /app/build
 COPY ./env.sh .
-COPY .env .
+COPY ./serve.json .
+# COPY .env .
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Convert dos line endings to unix file endings - problem with build on docker for windows
+RUN sed -i 's/\r$//' env.sh
 
 # Make our shell script executable
 RUN chmod +x env.sh

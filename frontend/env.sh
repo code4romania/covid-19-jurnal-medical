@@ -4,6 +4,9 @@
 rm -rf ./env-config.js
 touch ./env-config.js
 
+# add all env variables in .env file
+printenv > .env
+
 # Add assignment 
 echo "window._env_ = {" >> ./env-config.js
 
