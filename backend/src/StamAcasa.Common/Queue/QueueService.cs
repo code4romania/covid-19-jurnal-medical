@@ -8,7 +8,7 @@ namespace StamAcasa.Common.Queue
 {
     public class QueueService : IQueueService
     {
-        private const string EmailRequestsQueName = "email:requests";
+        private const string EmailRequestsQueueName = "email:requests";
         private readonly IBus _bus;
 
         private readonly Dictionary<string, IQueue> _availableQueues = new Dictionary<string, IQueue>();
@@ -16,10 +16,10 @@ namespace StamAcasa.Common.Queue
         {
             _bus = bus;
             // register queues
-            IQueue queueDeclare = _bus.Advanced.QueueDeclare(EmailRequestsQueName);
+            IQueue queueDeclare = _bus.Advanced.QueueDeclare(EmailRequestsQueueName);
 
             // add them to dictionary
-            _availableQueues.Add(EmailRequestsQueName, queueDeclare);
+            _availableQueues.Add(EmailRequestsQueueName, queueDeclare);
 
         }
 
@@ -31,7 +31,7 @@ namespace StamAcasa.Common.Queue
         public async Task PublishEmailRequest<T>(T message) where T : class
         {
             var messageWrapper = new Message<T>(message);
-            await _bus.Advanced.PublishAsync(Exchange.GetDefault(), EmailRequestsQueName, false, messageWrapper);
+            await _bus.Advanced.PublishAsync(Exchange.GetDefault(), EmailRequestsQueueName, false, messageWrapper);
         }
 
         public void SubscribeConsumerToNotificationsQueue<T>(Func<T, Task> messageHandler) where T : class
@@ -41,7 +41,7 @@ namespace StamAcasa.Common.Queue
 
         public void SubscribeConsumerToEmailRequestsQueue<T>(Func<T, Task> messageHandler) where T : class
         {
-            var emailQueue = _availableQueues[EmailRequestsQueName];
+            var emailQueue = _availableQueues[EmailRequestsQueueName];
 
             _bus.Advanced.Consume(emailQueue, x => x.Add<T>(async (message, info) =>
             {
