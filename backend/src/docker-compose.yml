@@ -61,7 +61,7 @@ services:
       REACT_APP_API_URL: 'http://localhost:5008'
       CLIENT_ID: 'jsdocker'
     ports:
-     - 5002:80
+     - 5002:5002
 
   stamacasa.email:
     image: ${DOCKER_REGISTRY-}stamacasa-email
