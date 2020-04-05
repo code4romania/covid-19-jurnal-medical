@@ -51,6 +51,7 @@ services:
 
   frontend:
     image:  ${DOCKER_REGISTRY-}stamacasa
+    container_name: stamacasa
     build:
         context: ../../frontend
         dockerfile: Dockerfile
@@ -63,7 +64,7 @@ services:
      - 5002:80
 
   stamacasa.email:
-    image: ${DOCKER_REGISTRY-}stamacasaemail
+    image: ${DOCKER_REGISTRY-}stamacasa-email
     build:
         context: .
         dockerfile: StamAcasa.EmailService/Dockerfile
