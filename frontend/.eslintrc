@@ -10,5 +10,9 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended"
-  ]
+  ],
+  "rules": {
+    "no-console": ["error", { "allow": ["info", "error"] }],
+    "react/prefer-stateless-function": "error"
+  }
 }

@@ -9,8 +9,8 @@ using StamAcasa.Common;
 namespace StamAcasa.Common.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20200329125758_AddDisabilityColumn")]
-    partial class AddDisabilityColumn
+    [Migration("20200404214415_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,14 +18,36 @@ namespace StamAcasa.Common.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.2");
 
-            modelBuilder.Entity("StamAcasa.Common.Models.User", b =>
+            modelBuilder.Entity("StamAcasa.Common.Form", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Address")
+                    b.Property<string>("Content")
+                        .HasColumnType("jsonb");
+
+                    b.Property<string>("FormTypeId")
                         .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Forms");
+                });
+
+            modelBuilder.Entity("StamAcasa.Common.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Age")
                         .HasColumnType("INTEGER");
@@ -33,23 +55,20 @@ namespace StamAcasa.Common.Migrations
                     b.Property<string>("City")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Country")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("County")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Disability")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("FullName")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("Gender")
                         .HasColumnType("INTEGER");
+
+                    b.Property<bool>("LivesWithOthers")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
 
                     b.Property<int?>("ParentId")
                         .HasColumnType("INTEGER");
@@ -63,7 +82,19 @@ namespace StamAcasa.Common.Migrations
                     b.Property<int>("QuarantineStatus")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("QuarantineStatusOthers")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("RelationshipType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Smoker")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Sub")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Surname")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -71,6 +102,15 @@ namespace StamAcasa.Common.Migrations
                     b.HasIndex("ParentId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("StamAcasa.Common.Form", b =>
+                {
+                    b.HasOne("StamAcasa.Common.Models.User", "User")
+                        .WithMany("Forms")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("StamAcasa.Common.Models.User", b =>
