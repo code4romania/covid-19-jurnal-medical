@@ -1,5 +1,5 @@
 {
-    "nume si prenume": "Ion Petrescu",
+    "Nume si prenume": "Ion Petrescu",
     "Numar de telefon": "0729999999",
     "Judet, localitate": "Iasi, Targu Frumos",
     "Varsta in ani impliniti": "33",
@@ -11,7 +11,7 @@
     "Izolare alte persoane la domiciliu": "Da, sunt in izolare, nu ies deloc din locuinta",
     "Alte persoane in grija": [
         {
-            "nume si prenume": "Camelia Petrescu",
+            "Nume si prenume": "Camelia Petrescu",
             "Numar de telefon": "-",
             "Tip de relatie": "bunica",
             "Judet, localitate": "Iasi, Pascani",
@@ -25,7 +25,7 @@
             "Alte persoane in grija": []
         },
         {
-            "nume si prenume": "Ioana Marinescu",
+            "Nume si prenume": "Ioana Marinescu",
             "Numar de telefon": "0728888888",
             "Judet, localitate": "Iasi, Targu Frumos",
             "Varsta in ani impliniti": "33",

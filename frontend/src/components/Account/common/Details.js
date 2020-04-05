@@ -5,7 +5,6 @@ const renderField = (fieldName, fieldValue) => {
 };
 
 const Details = (member) => {
-    console.log('Object.keys(member)', Object.keys(member));
     if (!member || !Object.keys(member).length) {
         return <div> Nothing to show yet</div>
     }

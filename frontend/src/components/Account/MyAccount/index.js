@@ -1,18 +1,16 @@
 import React from "react";
 
 import "./MyAccount.scss";
+import getDetails from '../common/Details.js';
 
 import mockData from '../mockData/mockData';
 
 export const MyAccount = () => {
+    const myData = Object.assign({}, mockData);
+    delete myData["Alte persoane in grija"];
 
     return (
-        <p>
-            Completează formularul zilnic de simptome care te
-            ajută să menții un istoric al simptomelor sau al absenței acestora în perioada în care stai în izolare.
-            Parcurge întrebările și răspunde cu atenție. Pe măsură ce completezi, această pagină se va popula cu istoricul răspunsurilor tale.
-            Poți completa formularul aici.
-        </p>
+        getDetails(myData)
     );
 };
 
