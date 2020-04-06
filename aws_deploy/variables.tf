@@ -2,19 +2,10 @@ variable "az_count" {
   type    = number
   default = 2
 }
-variable "region" {
-  type = string
-  default = "eu-west-1"
-}
 
 variable "prefix" {
   type    = string
-  default = "stam-acasa"
-}
-
-variable "env" {
-  description = "environment DEV/Stage/Prod"
-  default = "dev"
+  default = "date-la-zi"
 }
 
 variable "IMAGE_FRONTEND" {
@@ -32,6 +23,11 @@ variable "IMAGE_IDENTITYSERVER" {
 }
 variable "IMAGE_POSTGRES" {
   type = string
-  default = "postgres:default"
+  default = "postgres"
 }
-
+variable "region" {
+  default = "eu-west-1"
+}
+variable "workspace" {
+  default = "develop"
+}

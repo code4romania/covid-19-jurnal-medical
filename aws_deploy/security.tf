@@ -11,9 +11,9 @@ resource "aws_security_group" "public" {
   }
 
   ingress {
-    protocol  = "tcp"
-    from_port = 5432
-    to_port   = 5432
+    protocol    = "tcp"
+    from_port   = 443
+    to_port     = 443
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -51,9 +51,5 @@ resource "aws_security_group" "intra" {
   tags = {
     Name = "${local.name}-intra"
   }
-}
 
-resource "aws_kms_key" "ssm_key" {
-  description         = "${local.name} key for SSM parameters"
-  enable_key_rotation = true
 }

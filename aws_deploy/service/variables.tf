@@ -26,6 +26,10 @@ variable "lb-security_groups" {
   type = list
 }
 
+variable "certificate_arn" {
+  type = string
+}
+
 variable "container_port" {
   type = number
 }
@@ -46,9 +50,7 @@ variable "image" {
 variable "prefix" {
   type = string
 }
-variable "region" {
-  type = string
-}
+
 variable "environment_variables" {
   type    = string
   default = "[]"
@@ -57,4 +59,9 @@ variable "environment_variables" {
 variable "secrets" {
   type    = string
   default = "[]"
+}
+
+variable "instance_count" {
+  type    = number
+  default = 1
 }
