@@ -9,13 +9,15 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bulma": "^0.8.1",
+    "chart.js": "^2.9.3",
     "oidc-client": "^1.10.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "redux-act": "^1.8.0",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "react-super-responsive-table": "^5.1.1"
   },
   "scripts": {
     "start": "./env.sh && react-scripts start",
