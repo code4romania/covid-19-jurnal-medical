@@ -2,18 +2,24 @@ import Home from "./components/Home";
 import About from "./components/About";
 import AddMember from "./components/AddMember";
 import SelfEvaluation from "./components/SelfEvaluation";
+import OtherEvaluation from "./components/OtherEvaluation";
+
 import {
   signinCallback,
   signoutCallback,
   silentRefreshCallback
 } from "./api/auth";
-import OtherEvaluation from "./components/OtherEvaluation";
 
+import BaseDashboard from "./components/BaseDashboard";
 export const ROUTES = {
   base: {
     despre: {
       path: "/despre",
       component: About
+    },
+    dashboard: {
+      path: "/dashboard",
+      component: BaseDashboard
     },
     home: {
       path: "/",
