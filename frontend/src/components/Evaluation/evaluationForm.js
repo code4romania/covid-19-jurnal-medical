@@ -8,7 +8,7 @@ import IntroOtherEvaluation from "../OtherEvaluation/introOtherEvaluation";
 
 const EvaluationForm = ({ getForm, sendResults, introType }) => {
   const [started, setStarted] = useState(false);
-  const finished = useState(false);
+  const [finished] = useState(false);
   const [introData, setIntroData] = useState({});
   const [evaluationFormData, setEvaluationForm] = useState(null);
 
