@@ -18,7 +18,8 @@ const IntroOtherEvaluation = ({ onFinish }) => {
   const props = {
     onChange: function(el) {
       setSelectedMember(el.target.value);
-    }
+    },
+    defaultValue: String(selectedMember)
   };
 
   if (dependants === null) {
@@ -32,8 +33,7 @@ const IntroOtherEvaluation = ({ onFinish }) => {
   const options = dependants.map(dependant => {
     return {
       text: `${dependant.name} ${dependant.surname}`,
-      value: dependant.id,
-      selected: dependant.id === selectedMember
+      value: String(dependant.id)
     };
   });
 
