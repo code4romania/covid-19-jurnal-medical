@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using SQLitePCL;
 using StamAcasa.Common.DTO;
 
-namespace StamAcasa.Common.Services {
-    public class FormService : IFormService {
+namespace StamAcasa.Common.Services
+{
+    public class FormService : IFormService
+    {
         private readonly IMapper _mapper;
         private readonly UserDbContext _context;
 
@@ -34,7 +33,7 @@ namespace StamAcasa.Common.Services {
             var result = await _context
                 .Forms.Include("User")
                 .Where(f => f.User.Sub == userSub)
-                .Select(f=>_mapper.Map<FormInfo>(f))
+                .Select(f => _mapper.Map<FormInfo>(f))
                 .ToListAsync();
 
             return result;
