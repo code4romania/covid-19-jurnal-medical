@@ -61,11 +61,11 @@ namespace StamAcasa.EmailService
                     )
                 );
 
+                services.AddSingleton<ITemplateFileSelector, TemplateFileSelector>();
                 services.AddTransient<IEmailBuilderService, EmailBuilderService>();
                 services.AddSingleton<IQueueService, QueueService>();
 
                 services.AddHostedService<Worker>();
-
             });
     }
 }

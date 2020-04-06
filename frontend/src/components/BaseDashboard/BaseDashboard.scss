@@ -1,0 +1,18 @@
+.dashboard-wrapper {
+  .header-wrapper {
+    border-bottom: 1px solid #C1C1C1;
+  }
+  .App-header  {
+    border-bottom: 0 !important;
+  }
+  .main-section {
+    margin-top: 0px;
+    justify-content: flex-end;
+  }
+  .main {
+    min-height: calc(100vh - 92px);
+    padding: 40px;
+    height: 100%;
+    background: rgba(255, 189, 89, 0.1);
+  }
+}

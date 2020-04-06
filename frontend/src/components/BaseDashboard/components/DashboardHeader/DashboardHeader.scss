@@ -1,0 +1,33 @@
+@import "./src/styles/variables";
+
+.dashboard-header {
+  .searchInput {
+    margin: 0 auto;
+    width: 422px;
+    height: 40px;
+    border-radius: 100px;
+    border: 1px solid #C1C1C1;
+    background: url("../../../../images/search-icon.svg") no-repeat 34px 50%;
+    padding: 0 65px;
+    font-size: 14px;
+
+    @media (max-width: $mobileMaxWidth) {
+      & {
+        margin: 10px;
+        width: 50%;
+        padding: 0 35px;
+        background-position: 10px 50%;
+      }
+    }
+  }
+  @media (max-width: 576px) {
+    .menu-items {
+      width: auto;
+      margin: 10px;
+    }
+    .App-header a {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

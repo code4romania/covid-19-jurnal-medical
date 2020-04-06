@@ -1,0 +1,30 @@
+.widget {
+  .doughnut-chart {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    canvas {
+      background: url("../../../../images/chart-background.svg") no-repeat 68% 5px;
+    }
+  }
+  .info {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+  }
+  .widget-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0;
+  }
+  .percentage {
+    display: flex;
+    align-items: flex-end;
+  }
+  .myChart2Wrapper {
+    position: relative;
+    canvas {
+      margin-bottom: 5px;
+    }
+  }
+}
