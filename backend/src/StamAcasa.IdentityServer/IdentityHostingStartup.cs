@@ -1,5 +1,6 @@
 ﻿using IdentityServer;
 using IdentityServer.Data;
+using IdentityServerAspNetIdentity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,14 +13,17 @@ namespace IdentityServer
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+            builder.ConfigureServices((context, services) =>
+            {
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlite(
+                    options.UseNpgsql(
                         context.Configuration.GetConnectionString("ApplicationDbContextConnection")));
                 var emailConfirmation = context.Configuration.GetValue<bool>("EnableEmailConfirmation");
-                services.AddDefaultIdentity<ApplicationUser>(options => 
+                services.AddDefaultIdentity<ApplicationUser>(options =>
                         options.SignIn.RequireConfirmedAccount = emailConfirmation)
                     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+                SeedData.EnsureSeedData(context.Configuration.GetConnectionString("ApplicationDbContextConnection"));
             });
         }
     }

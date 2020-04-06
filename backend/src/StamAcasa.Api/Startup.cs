@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using StamAcasa.Api;
 using StamAcasa.Api.Common;
+using StamAcasa.Api.Extensions;
 using StamAcasa.Api.Models;
 using StamAcasa.Api.Services;
 using StamAcasa.Api.Services.Excel;
@@ -79,8 +80,9 @@ namespace Api
             services.AddTransient<IAnswersExcelExporter, AnswersExcelExporter>();
 
             services.AddAutoMapper(typeof(Startup), typeof(UserDbContext));
-            services.AddDbContext<UserDbContext>(options=>
-                options.UseSqlite(Configuration.GetConnectionString("UserDBConnection")));
+
+            services.AddPostgreSqlDbContext(Configuration);
+
             services.AddScoped<IFormService, FormService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAssessmentService, AssessmentService>();
@@ -88,8 +90,10 @@ namespace Api
             services.ConfigureSwagger(Configuration);
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, UserDbContext dbContext)
         {
+            dbContext.Database.Migrate();
+
             app.UseRouting();
             app.UseExceptionHandler(appError =>
             {

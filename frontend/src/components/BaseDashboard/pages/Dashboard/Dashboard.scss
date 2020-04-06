@@ -1,0 +1,40 @@
+.dashboard-table{
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  font-size: 12px;
+  thead {
+    font-size: 14px;
+  }
+}
+
+.view-all {
+  background-color: #2D9CDB !important;
+  color: white !important;
+  margin: 20px auto 0px auto;
+  display: block !important;
+}
+
+.table {
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  font-size: 12px;
+  thead {
+    font-size: 14px;
+  }
+
+  &.danger-table {
+    th {
+      color: #EB5757;
+    }
+  }
+  &.info-table {
+    th {
+      color: #2F80ED;
+    }
+  }
+  .last-column {
+    width: 10px;
+  }
+}

@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import React from "react";
 import { sel as userSel } from "../../store/ducks/user";
 import { useSelector } from "react-redux";
+import { Constants } from "../../config/constants";
 
 const ProfileItems = () => {
   const user = useSelector(userSel.user);
@@ -20,7 +21,7 @@ const ProfileItems = () => {
       ) : (
         <>
           <a
-            href={`${process.env.REACT_APP_IDP_URL}/identity/account/register?returnUrl=${window.location}register-complete`}
+            href={`${Constants.idpUrl}/identity/account/register?returnUrl=${window.location}register-complete`}
           >
             Inregistrare
           </a>
