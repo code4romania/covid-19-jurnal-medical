@@ -12,7 +12,7 @@ const IntroOtherEvaluation = ({ onFinish }) => {
     ProfileApi.getDependants().then(members => {
       setDependants(members);
 
-      if (dependants.length > 0) {
+      if (members.length > 0) {
         setSelectedMember(members[0].id);
       }
     });
