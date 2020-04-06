@@ -28,7 +28,7 @@ const Table = ({ dataRows, headers, title }) => {
 
   return (
     <div className="table-container">
-      {title && <h2 className="account-header subheader">{title}</h2>}
+      {title && <h2 className="header subheader">{title}</h2>}
       <table className="table">
         <thead>
           <tr>

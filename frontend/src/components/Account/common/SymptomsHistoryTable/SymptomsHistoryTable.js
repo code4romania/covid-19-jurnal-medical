@@ -10,7 +10,7 @@ const SymptomsHistoryTable = ({ symptomsData, headers, title }) => {
 
   return (
     <div>
-      <h2 className="account-header subheader">{title}</h2>
+      <h2 className="header subheader">{title}</h2>
       <CompletedFormTable headers={headers} dataRows={symptomsData} />
     </div>
   );

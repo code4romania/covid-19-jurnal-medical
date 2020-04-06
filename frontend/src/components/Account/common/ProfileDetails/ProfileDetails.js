@@ -17,7 +17,7 @@ const renderField = (field = {}) => {
   );
 };
 
-const ProfileDetails = ({ fields, others, isSelf }) => {
+const ProfileDetails = ({ fields, isSelf }) => {
   if (!fields || !Object.keys(fields).length) {
     return <div>Nu exista date</div>;
   }
@@ -35,6 +35,7 @@ const ProfileDetails = ({ fields, others, isSelf }) => {
         <div className="left">
           {[
             fields.name,
+            fields.relationship,
             fields.phoneNumber,
             fields.location,
             fields.age,
@@ -55,10 +56,10 @@ const ProfileDetails = ({ fields, others, isSelf }) => {
         <hr />
         <p className="general-info__field">
           <strong>Alte persoane în grijă:</strong>
-          {others.length > 0
-            ? others.map((person, index) => (
+          {fields.others.length > 0
+            ? fields.others.map((person, index) => (
                 <a key={person.id} className="link" href={`#/${person.id}`}>
-                  {person.name} {index !== others.length - 1 && ","}
+                  {person.name} {index !== fields.others.length - 1 && ","}
                 </a>
               ))
             : " - "}
@@ -69,20 +70,17 @@ const ProfileDetails = ({ fields, others, isSelf }) => {
 };
 
 ProfileDetails.defaultProps = {
-  //todo: remove mock when backend ready
-  others: [
-    {
-      name: "Camelia Petrescu",
-      id: "1"
-    },
-    { name: "Ioana Marinescu", id: "2" }
-  ],
   isSelf: false
 };
 
 ProfileDetails.propTypes = {
   fields: PropTypes.shape({
-    name: PropTypes.shape({ label: PropTypes.string, value: PropTypes.string }),
+    name: PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
+      .isRequired,
+    relationship: PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.string
+    }),
     phoneNumber: PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string
@@ -90,34 +88,35 @@ ProfileDetails.propTypes = {
     location: PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string
-    }),
-    age: PropTypes.shape({ label: PropTypes.string, value: PropTypes.string }),
+    }).isRequired,
+    age: PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
+      .isRequired,
     gender: PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string
-    }),
+    }).isRequired,
     smoking: PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.bool
-    }),
+    }).isRequired,
     comorbidities: PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string
-    }),
+    }).isRequired,
     livingAlone: PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.bool
-    }),
+    }).isRequired,
     inIsolation: PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string
-    }),
+    }).isRequired,
     othersInHouseholdIsolation: PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string
-    })
+    }).isRequired,
+    others: PropTypes.array
   }).isRequired,
-  others: PropTypes.array,
   isSelf: PropTypes.bool
 };
 
