@@ -11,78 +11,130 @@
         "inIsolation": {"label": "Izolare proprie la domiciliu", "value": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie"},
         "othersInHouseholdIsolation": {"label": "Izolare alte persoane la domiciliu", "value": "Da, sunt in izolare, nu ies deloc din locuinta"}
     },
+    "temperature": [
+        {
+            "id": "134",
+            "date": "1584198000",
+            "temperature": 36.6
+          },
+          {
+            "id": "136",
+            "date": "1584284400",
+            "temperature": 39
+          },
+          {
+            "id": "139",
+            "date": "1584370800",
+            "temperature": 35
+          },
+          {
+            "id": "140",
+            "date": "1584543600",
+            "temperature": 35
+          },
+          {
+            "id": "141",
+            "date": "1584630000",
+            "temperature": 35
+          },
+          {
+            "id": "142",
+            "date": "1584716400",
+            "temperature": 35
+          },
+          {
+            "id": "143",
+            "date": "1584802800",
+            "temperature": 35
+          },
+          {
+            "id": "144",
+            "date": "1584889200",
+            "temperature": 39
+          },
+          {
+            "id": "145",
+            "date": "1584975600",
+            "temperature": 39
+          },
+          {
+            "id": "146",
+            "date": "1585062000",
+            "temperature": 39
+          }
+    ],
     "simptome": [
         {
-            "Data/ora": "14.03.2020/18.30",
-            "Durere in gat si/sau dificultate in a inghiti?": "Da",
-            "Tuse intensa?": "Nu",
-            "Dificultate in a respira ?": "Da",
-            "Îți curge nasul?": "Da"
+            "date": "1585409621",
+            "soreThroat": true,
+            "cough": true,
+            "shortnessBreath": true,
+            "runningNose": true
         },
         {
-            "Data/ora": "13.03.2020/18.50",
-            "Durere in gat si/sau dificultate in a inghiti?": "Nu",
-            "Tuse intensa?": "Nu",
-            "Dificultate in a respira ?": "Nu",
-            "Îți curge nasul?": "Nu"
+            "date": "1585409621",
+            "soreThroat": false,
+            "cough": false,
+            "shortnessBreath": false,
+            "runningNose": false
         },
         {
-            "Data/ora": "12.03.2020/12.30",
-            "Durere in gat si/sau dificultate in a inghiti?": "Da",
-            "Tuse intensa?": "Nu",
-            "Dificultate in a respira ?": "Nu",
-            "Îți curge nasul?": "Nu"
+            "date": "1585409621",
+            "soreThroat": true,
+            "cough": false,
+            "shortnessBreath": false,
+            "runningNose": false
         },
         {
-            "Data/ora": "11.03.2020/12.30",
-            "Durere in gat si/sau dificultate in a inghiti?": "Nu",
-            "Tuse intensa?": "Nu",
-            "Dificultate in a respira ?": "Nu",
-            "Îți curge nasul?": "Nu"
+            "date": "1585409621",
+            "soreThroat": false,
+            "cough": false,
+            "shortnessBreath": false,
+            "runningNose": false
         }
     ],
     "alte simptome": [
         {
-            "Data/ora": "14.03.2020/18.30",
-            "Simptome semnalate": "Frisoane și durere de cap."
+           "date": "1585409621",
+            "otherSimptoms": "Frisoane și durere de cap."
         },
         {
-            "Data/ora": "14.03.2020/12.30",
-            "Simptome semnalate": "Frisoane"
+            "date": "1585409621",
+            "otherSimptoms": "Frisoane"
         },
         {
-            "Data/ora": "13.03.2020/18.50",
-            "Simptome semnalate": "Niciun alt simptom"
+            "date": "1585409621",
+            "otherSimptoms": "Niciun alt simptom"
         },
         {
-            "Data/ora": "12.03.2020/12.30",
-            "Simptome semnalate": "Durere de cap și oboseala foarte mare"
+            "date": "1585409621",
+            "otherSimptoms": "Durere de cap și oboseala foarte mare"
         }
     ],
     "deplasari": [
         {
-            "Data/ora": "14.03.2020/18.30",
+            "date": "1585409621",
             "Motivul deplasării": "Cumpărături",
             "Ora plecării": "13:00",
             "Ora sosirii": "14:30",
             "Contact cu pacient": "Da"
         },
         {
-            "Data/ora": "14.03.2020/12.30",
+            "date": "1585409621",
             "Motivul deplasării": "Farmacie",
             "Ora plecării": "16:00",
             "Ora sosirii": "17:00",
             "Contact cu pacient": "Nu"
         },
         {
-            "Data/ora": "13.03.2020/18.50",
+            "date": "1585409621",
             "Motivul deplasării": "-",
             "Ora plecării": "-",
             "Ora sosirii": "-",
             "Contact cu pacient": "-"
         },
         {
-            "Data/ora": "12.03.2020/12.30",
+            "date": "1585409621",
             "Motivul deplasării": "Cumpărături",
             "Ora plecării": "13:00",
             "Ora sosirii": "14:45",

@@ -4,32 +4,25 @@
     position: relative;
     padding-top: 10px;
     font-size: 14px;;
-}
-.header {
-    display: flex;
-    justify-content: flex-end;
-}
-.content{
-    display: flex;
-}
-.left, .right {
-    flex: 1;
-}
-.left {
-    margin-right: 10px;
-}
 
-.link{
-    line-height: 21px;
-    text-decoration-line: underline;
-    color: #0066FF;
-    margin-left: 5px;
-}
-hr {
-    max-width: 305x;
-    border: 1px solid #E0E0E0;
-}
-strong {
-    color: black;
-    font-weight: bold;
+    .header {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .content{
+        display: flex;
+    }
+    .left, .right {
+        flex: 1;
+    }
+    .left {
+        margin-right: 10px;
+    }
+    strong {
+        color: black;
+        font-weight: bold;
+    }
+    .profile__field {
+        margin-bottom: 10px;
+    }
 }

@@ -1,5 +1,31 @@
-.account-header {
-    font-weight: bold;
-    font-size: 20px;
-    margin: 10px 0;
+.account-container {
+    margin-bottom: 200px;
+    .account-header {
+        font-weight: bold;
+        font-size: 20px;
+        margin: 10px 0;
+    }
+    .subheader {
+        font-size: 16px;
+    }
+    .account-text {
+        margin: 44px 0;
+        font-size: 14px;
+    }
+    .link{
+        line-height: 21px;
+        text-decoration-line: underline;
+        color: #0066FF;
+        margin-left: 5px;
+    }
+    
+    .account-content {
+        margin-left: 10px;
+        margin-top: 20px;
+    }
+    
+    hr {
+        max-width: 305px;
+        border: 1px solid #E0E0E0;
+    }
 }

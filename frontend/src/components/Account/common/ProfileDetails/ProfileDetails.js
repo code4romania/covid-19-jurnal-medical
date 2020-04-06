@@ -9,7 +9,7 @@ const renderField = (field = {}) => {
   }
   return (
     field.label && (
-      <div className="general-info__field">
+      <div className="profile__field" key={field.label}>
         {" "}
         <strong> {field.label}:</strong> {processedValue}
       </div>
