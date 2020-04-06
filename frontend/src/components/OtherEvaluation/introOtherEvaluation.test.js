@@ -1,23 +1,26 @@
 import React from "react";
 import IntroOtherEvaluation from "./introOtherEvaluation";
-import { mount } from "enzyme";
+import { render, fireEvent, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 import ProfileApi from "../../api/profileApi";
-import { act } from "react-dom/test-utils";
 
 jest.mock("../../api/profileApi");
 
 describe("Intro to self evaluation", () => {
   it("calls on finish on button click", async () => {
     const onFinishMock = jest.fn();
-    ProfileApi.getDependants.mockResolvedValue([{ id: 1, name: "A" }]);
-    let intro;
-    await act(async () => {
-      intro = mount(<IntroOtherEvaluation onFinish={onFinishMock} />);
-    });
-    intro.update();
-    intro.find("select").simulate("change", { target: { value: "A" } });
-    intro.find("button").simulate("click");
+    ProfileApi.getDependants.mockResolvedValue([
+      { id: 1, name: "A", surname: "B" },
+      { id: 2, name: "C", surname: "B" }
+    ]);
 
-    expect(onFinishMock).toHaveBeenCalledWith("A");
+    render(<IntroOtherEvaluation onFinish={onFinishMock} />);
+
+    fireEvent.change(await screen.findByDisplayValue("A B"), {
+      target: { value: "2" }
+    });
+    fireEvent.click(screen.getByRole("button"));
+
+    expect(onFinishMock).toHaveBeenCalledWith("2");
   });
 });
