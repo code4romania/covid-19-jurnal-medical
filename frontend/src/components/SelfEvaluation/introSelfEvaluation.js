@@ -14,7 +14,7 @@ const IntroSelfEvaluation = ({ onFinish }) => {
   }, []);
   return (
     <div>
-      <StartFormButton onClick={() => onFinish()} />
+      <StartFormButton onClick={onFinish} />
       {userProfile.id && (
         <ProfileSummary profile={userProfile} dependants={dependants} />
       )}

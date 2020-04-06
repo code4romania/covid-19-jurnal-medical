@@ -2,9 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { PersonalDataTable } from "@code4ro/taskforce-fe-components";
 
-// eslint-disable-next-line react/prop-types
-const ProfileSummary = ({ profile, dependants }) => {
-  const personalData = {
+const getPersonalData = function(profile) {
+  return {
     age: {
       label: "Vârsta",
       value: profile.age
@@ -20,18 +19,25 @@ const ProfileSummary = ({ profile, dependants }) => {
         ? profile.preexistingMedicalCondition
         : []
     },
-    inIsolation: { label: "In izolare", value: profile.quarantineStatus === 1 },
+    inIsolation: {
+      label: "In izolare",
+      value: profile.quarantineStatus === 1
+    },
     othersInHousehold: {
       label: "Alte persoane in casă",
       value: profile.quarantineStatusOthers === 1
     }
   };
+};
+
+// eslint-disable-next-line react/prop-types
+const ProfileSummary = ({ profile, dependants }) => {
   return (
     <div>
       <b>
         Nume: {profile.name} {profile.surname}{" "}
       </b>
-      <PersonalDataTable personalData={personalData} />
+      <PersonalDataTable personalData={getPersonalData(profile)} />
       <div>
         <b>Alte persoane in grija:</b>
         <ul>
