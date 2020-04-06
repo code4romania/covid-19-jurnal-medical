@@ -1,15 +1,15 @@
 {
     "general-info": {
-        "Nume si prenume": "Ion Petrescu",
-        "Numar de telefon": "0729999999",
-        "Judet, localitate": "Iasi, Targu Frumos",
-        "Varsta in ani impliniti": "33",
-        "Genul": "masculin",
-        "Fumator": "Da",
-        "Afectiuni agravante": "Diabet, o boala de inima",
-        "Locuiesti singur": "Nu",
-        "Izolare proprie la domiciliu": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
-        "Izolare alte persoane la domiciliu": "Da, sunt in izolare, nu ies deloc din locuinta"
+        "name": {"label": "Nume si prenume", "value": "Ion Petrescu"},
+        "phoneNumber": {"label": "Numar de telefon", "value": "0729999999"},
+        "location": {"label": "Judet, localitate", "value": "Iasi, Targu Frumos"},
+        "age": {"label": "Varsta in ani impliniti", "value": "33"},
+        "gender": {"label": "Genul", "value": "masculin"},
+        "smoking": {"label":"Fumator", "value": true},
+        "comorbidities": {"label": "Afectiuni agravante", "value": "Diabet, o boala de inima"},
+        "livingAlone": {"label": "Locuiesti singur", "value": false},
+        "inIsolation": {"label": "Izolare proprie la domiciliu", "value": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie"},
+        "othersInHouseholdIsolation": {"label": "Izolare alte persoane la domiciliu", "value": "Da, sunt in izolare, nu ies deloc din locuinta"}
     },
     "simptome": [
         {

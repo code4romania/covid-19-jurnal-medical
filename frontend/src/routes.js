@@ -2,7 +2,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import AddMember from "./components/AddMember";
 import SelfEvaluation from "./components/SelfEvaluation";
-import Account from './components/Account';
+import Account from "./components/Account";
 
 import {
   signinCallback,
