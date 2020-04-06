@@ -1,5 +1,6 @@
 ﻿using IdentityServer;
 using IdentityServer.Data;
+using IdentityServerAspNetIdentity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +23,7 @@ namespace IdentityServer
                         options.SignIn.RequireConfirmedAccount = emailConfirmation)
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
+                
             });
         }
     }
