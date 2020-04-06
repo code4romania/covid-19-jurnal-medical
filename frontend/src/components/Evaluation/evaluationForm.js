@@ -8,7 +8,7 @@ import IntroOtherEvaluation from "../OtherEvaluation/introOtherEvaluation";
 
 const EvaluationForm = ({ getForm, sendResults, introType }) => {
   const [started, setStarted] = useState(false);
-  const [finished, setFinished] = useState(false);
+  const finished = useState(false);
   const [introData, setIntroData] = useState({});
   const [evaluationFormData, setEvaluationForm] = useState(null);
 
@@ -20,7 +20,12 @@ const EvaluationForm = ({ getForm, sendResults, introType }) => {
   };
 
   const onFinishingForm = result => {
-    setFinished(true);
+    // temporary disable triggering a new state change as there
+    // is a subtle bug in the Form component where on re-render
+    // and the current node being the last one, calls again the
+    // onFinish prop
+
+    // setFinished(true);
     sendResults(result, introData);
   };
 
