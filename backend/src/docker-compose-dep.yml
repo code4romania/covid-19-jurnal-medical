@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_USER=docker
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: local_rabbit
+    restart: always
+    container_name: rabbitmq
+    build:
+      context: rabbitconfig/
+      dockerfile: Dockerfile
+    ports:
+       # The standard AMQP protocol port
+      - 5672:5672
+        # HTTP management UI
+      - 15672:15672
