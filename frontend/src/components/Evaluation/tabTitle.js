@@ -5,7 +5,7 @@ import "./tabTitle.scss";
 
 const TabTitle = ({ link, children }) => {
   const history = useHistory();
-  const pathname = useLocation().pathname;
+  const {pathname} = useLocation();
   return (
     <li
       className={link === pathname && "is-active"}
