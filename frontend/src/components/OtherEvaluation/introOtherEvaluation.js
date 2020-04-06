@@ -16,9 +16,7 @@ const IntroOtherEvaluation = ({ onFinish }) => {
   const [selectedMember, setSelectedMember] = useState(undefined);
 
   const props = {
-    onChange: function(el) {
-      setSelectedMember(el.target.value);
-    },
+    onChange: el => setSelectedMember(el.target.value),
     defaultValue: String(selectedMember)
   };
 
