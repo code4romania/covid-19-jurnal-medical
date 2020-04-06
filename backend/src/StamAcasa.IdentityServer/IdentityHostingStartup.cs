@@ -23,7 +23,7 @@ namespace IdentityServer
                         options.SignIn.RequireConfirmedAccount = emailConfirmation)
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-                
+                SeedData.EnsureSeedData(context.Configuration.GetConnectionString("ApplicationDbContextConnection"));
             });
         }
     }
