@@ -1,17 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./tabTitle.scss";
 
 const TabTitle = ({ link, children }) => {
-  const history = useHistory();
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   return (
-    <li
-      className={link === pathname && "is-active"}
-      onClick={() => history.push(link)}
-    >
-      <a>{children}</a>
+    <li className={link === pathname ? "is-active" : undefined}>
+      <a href={link}>{children}</a>
     </li>
   );
 };

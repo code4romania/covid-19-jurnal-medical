@@ -14,7 +14,7 @@ const EvaluationForm = ({ getForm, sendResults, introType }) => {
 
   useEffect(() => {
     getForm().then(setEvaluationForm);
-  }, []);
+  }, [getForm]);
   const evaluateCallback = (formState, options) => {
     return options[0];
   };

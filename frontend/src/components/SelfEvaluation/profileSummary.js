@@ -30,7 +30,6 @@ const getPersonalData = function(profile) {
   };
 };
 
-// eslint-disable-next-line react/prop-types
 const ProfileSummary = ({ profile, dependants }) => {
   return (
     <div>
@@ -55,12 +54,12 @@ const ProfileSummary = ({ profile, dependants }) => {
 export default ProfileSummary;
 
 ProfileSummary.propTypes = {
-  profile: {
+  profile: PropTypes.shape({
     name: PropTypes.string,
     surname: PropTypes.string,
     phoneNumber: PropTypes.string,
-    age: PropTypes.string,
-    gender: PropTypes.string
-  },
+    age: PropTypes.number,
+    gender: PropTypes.number
+  }),
   dependants: PropTypes.array
 };
