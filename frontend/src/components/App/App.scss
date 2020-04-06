@@ -1,0 +1,36 @@
+@import "../../styles/base";
+
+html {
+  font-family: "Titillium Web", Arial, Helvetica, sans-serif;
+}
+
+.main-content {
+  padding: 0 20px;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+.align-items-center {
+  align-items: center;
+}
+.d-flex {
+  display: flex;
+}
+@media screen and (min-width: 1024px) {
+  .main-content {
+    padding: 0 100px;
+  }
+}
+
+.dashboard-box {
+  padding: 40px;
+  background: white;
+  width: 100%;
+  border: 1px solid #C1C1C1;
+  border-radius: 10px;
+}

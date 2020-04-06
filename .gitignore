@@ -4,3 +4,5 @@
 
 /.vs
 .idea
+**/postgres_data
+**/obj

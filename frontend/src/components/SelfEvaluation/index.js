@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "@code4ro/taskforce-fe-components";
 import data from "../../data/personal-assesment.json";
-import api from "../../api";
+import { submitFormResults } from "../../api/evaluation";
 
 const SelfEvaluation = () => {
   // eslint-disable-next-line no-unused-vars
@@ -10,7 +10,7 @@ const SelfEvaluation = () => {
   };
 
   const onFinishingForm = result => {
-    api.post(`http://localhost:5008/api/form?id=${result.formId}`, result);
+    submitFormResults(result);
   };
 
   return (

@@ -64,7 +64,7 @@ const CazuriRedFlagTable = () => {
           </Tr>
         </Tbody>
       </Table>
-      <button className="button view-all" onClick={() => console.log("test")}>
+      <button className="button view-all" onClick={() => {}}>
         Vezi toate
       </button>
     </div>
