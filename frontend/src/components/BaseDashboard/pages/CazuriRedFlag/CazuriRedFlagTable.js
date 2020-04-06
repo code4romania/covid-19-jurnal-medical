@@ -2,11 +2,10 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import CircleArrow from "../../components/CircleArrow";
-import Box from "../../components/Box";
 
 const CazuriRedFlagTable = () => {
   return (
-    <Box>
+    <div className="dashboard-box">
       <h3>
         <strong>Cazuri red flag</strong>
       </h3>
@@ -68,7 +67,7 @@ const CazuriRedFlagTable = () => {
       <button className="button view-all" onClick={() => console.log("test")}>
         Vezi toate
       </button>
-    </Box>
+    </div>
   );
 };
 

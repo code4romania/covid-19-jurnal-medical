@@ -2,11 +2,10 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import CircleArrow from "../../components/CircleArrow";
-import Box from "../../components/Box";
 
 const AllUsersTable = () => {
   return (
-    <Box>
+    <div className="dashboard-box">
       <h3>
         <strong>Toti utilizatorii</strong>
       </h3>
@@ -68,7 +67,7 @@ const AllUsersTable = () => {
       <button className="button view-all" onClick={() => console.log("test")}>
         Vezi toate
       </button>
-    </Box>
+    </div>
   );
 };
 
