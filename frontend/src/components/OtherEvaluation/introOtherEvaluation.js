@@ -5,18 +5,21 @@ import ProfileApi from "../../api/profileApi";
 import StartFormButton from "../Evaluation/startFormButton";
 
 const IntroOtherEvaluation = ({ onFinish }) => {
+  const [dependants, setDependants] = useState(null);
+  const [selectedMember, setSelectedMember] = useState(null);
+
   useEffect(() => {
     ProfileApi.getDependants().then(members => {
       setDependants(members);
-      setSelectedMember(members[0].id);
+
+      if (dependants.length > 0) {
+        setSelectedMember(members[0].id);
+      }
     });
   }, []);
 
-  const [dependants, setDependants] = useState(null);
-  const [selectedMember, setSelectedMember] = useState(undefined);
-
   const props = {
-    onChange: el => setSelectedMember(el.target.value),
+    onChange: event => setSelectedMember(event.target.value),
     defaultValue: String(selectedMember)
   };
 
