@@ -39,7 +39,8 @@ namespace StamAcasa.Api.Extensions {
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
                 //... and tell Swagger to use those XML comments.
-                o.IncludeXmlComments(xmlPath);
+                if (File.Exists(xmlPath))
+                    o.IncludeXmlComments(xmlPath);
             });
             return services;
         }
