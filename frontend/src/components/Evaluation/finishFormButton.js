@@ -1,10 +1,10 @@
 import React from "react";
 import { Button } from "@code4ro/taskforce-fe-components";
-import PropTypes from "prop-types";
 import "./evalutation.scss";
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-const FinishFormButton = ({ history }) => {
+const FinishFormButton = () => {
+  const history = useHistory();
   return (
     <div className={"call-to-action"}>
       <Button onClick={() => history.push("/")} size={"large"} inverted={true}>
@@ -14,10 +14,4 @@ const FinishFormButton = ({ history }) => {
   );
 };
 
-export default withRouter(FinishFormButton);
-
-FinishFormButton.propTypes = {
-  history: {
-    push: PropTypes.func
-  }
-};
+export default FinishFormButton;
