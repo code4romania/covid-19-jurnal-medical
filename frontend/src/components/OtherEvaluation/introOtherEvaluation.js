@@ -12,7 +12,7 @@ const IntroOtherEvaluation = ({ onFinish }) => {
     });
   }, []);
 
-  const [dependants, setDependants] = useState([]);
+  const [dependants, setDependants] = useState(null);
   const [selectedMember, setSelectedMember] = useState(undefined);
 
   const props = {
@@ -20,6 +20,14 @@ const IntroOtherEvaluation = ({ onFinish }) => {
       setSelectedMember(el.target.value);
     }
   };
+
+  if (dependants === null) {
+    return <div>Formularul se incarca</div>;
+  }
+
+  if (dependants.length === 0) {
+    return <div>Nu aveti dependenti pentru care sa completati formulare</div>;
+  }
 
   const options = dependants.map(dependant => {
     return {

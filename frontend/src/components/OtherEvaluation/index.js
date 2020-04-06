@@ -26,11 +26,14 @@ const OtherEvaluation = () => {
   if (started) {
     return (
       <Evaluation>
-        <Form
-          data={evaluationForm}
-          evaluateForm={evaluateCallback}
-          onFinishingForm={onFinishingForm}
-        />
+        {evaluationForm && (
+          <Form
+            data={evaluationForm}
+            evaluateForm={evaluateCallback}
+            onFinishingForm={onFinishingForm}
+          />
+        )}
+        {evaluationForm === null && <div>Formularul se incarca</div>}
         {finished && <FinishFormButton />}
       </Evaluation>
     );
