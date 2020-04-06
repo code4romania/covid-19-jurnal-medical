@@ -1,54 +1,17 @@
-import React, { useEffect, useState } from "react";
-import Evaluation from "../Evaluation";
+import React from "react";
 import EvaluationApi from "../../api/evaluationApi";
-import { Form } from "@code4ro/taskforce-fe-components";
-import IntroOtherEvaluation from "./introOtherEvaluation";
-import FinishFormButton from "../Evaluation/finishFormButton";
+import EvaluationForm from "../Evaluation/evaluationForm";
 
 const OtherEvaluation = () => {
-  const [started, setStarted] = useState(false);
-  const [finished, setFinished] = useState(false);
-  const [dependant, setDependant] = useState(null);
-  const [evaluationForm, setEvaluationForm] = useState(null);
-
-  useEffect(() => {
-    EvaluationApi.getOtherEvaluationForm().then(setEvaluationForm);
-  }, []);
-  const evaluateCallback = (formState, options) => {
-    return options[0];
-  };
-
-  const onFinishingForm = result => {
-    setFinished(true);
-    EvaluationApi.sendDependantEvaluationResult(dependant, result);
-  };
-
-  if (started) {
-    return (
-      <Evaluation>
-        {evaluationForm && (
-          <Form
-            data={evaluationForm}
-            evaluateForm={evaluateCallback}
-            onFinishingForm={onFinishingForm}
-          />
-        )}
-        {evaluationForm === null && <div>Formularul se incarca</div>}
-        {finished && <FinishFormButton />}
-      </Evaluation>
-    );
-  } else {
-    return (
-      <Evaluation>
-        <IntroOtherEvaluation
-          onFinish={dependant => {
-            setDependant(dependant);
-            setStarted(true);
-          }}
-        />
-      </Evaluation>
-    );
-  }
+  return (
+    <EvaluationForm
+      getForm={EvaluationApi.getOtherEvaluationForm}
+      sendResults={(formResults, formIntro) => {
+        EvaluationApi.sendDependantEvaluationResult(formIntro, formResults);
+      }}
+      introType={"OTHER"}
+    />
+  );
 };
 
 export default OtherEvaluation;
