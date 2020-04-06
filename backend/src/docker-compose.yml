@@ -69,7 +69,7 @@ services:
      - 5002:5002
     depends_on:
       - stamacasa.api
-         
+
   stamacasa.email:
     image: ${DOCKER_REGISTRY-}stamacasa-email
     build:

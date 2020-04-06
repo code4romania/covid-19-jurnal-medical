@@ -7,5 +7,4 @@
 /frontend/obj/Docker/CanonicalServiceNames.cache
 **/postgres_data
 **/obj
-
 .ionide/*
