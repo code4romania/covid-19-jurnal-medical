@@ -29,8 +29,8 @@ namespace StamAcasa.JobScheduler
                         .AddLogging();
 
                     services.AddAutoMapper(typeof(Program), typeof(UserDbContext));
-                    services.AddDbContext<UserDbContext>(options =>
-                        options.UseSqlite(hostContext.Configuration.GetConnectionString("UserDBConnection")));
+                    services.AddDbContextPool<UserDbContext>(options =>
+                        options.UseNpgsql(hostContext.Configuration.GetConnectionString("UserDBConnection")));
 
                     var hostName = hostContext.Configuration["RabbitMQ:HostName"];
                     var userName = hostContext.Configuration["RabbitMQ:User"];
@@ -44,9 +44,9 @@ namespace StamAcasa.JobScheduler
                         userName,
                         password,
                         10, //default
-                        (x) => { }));
+                        (x) => {}));
 
-                    services.TryAddScheduledJob<TestJob>();
+                    services.TryAddScheduledJob<HealthCheckJob>();
                     services.TryAddScheduledJob<SendAssessmentReminderJob>(s =>
                     {
                         s.TryAddTransient<AssessmentNotificationsDispatch>();

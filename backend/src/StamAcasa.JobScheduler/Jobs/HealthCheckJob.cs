@@ -5,18 +5,18 @@ using Microsoft.Extensions.Logging;
 
 namespace StamAcasa.JobScheduler.Jobs
 {
-    internal class TestJob : IScheduledJob
+    internal class HealthCheckJob : IScheduledJob
     {
-        private readonly ILogger<TestJob> _logger;
+        private readonly ILogger<HealthCheckJob> _logger;
 
-        public TestJob(ILogger<TestJob> logger)
+        public HealthCheckJob(ILogger<HealthCheckJob> logger)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public Task RunAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"Job {nameof(TestJob)} ran at {DateTimeOffset.Now}");
+            _logger.LogInformation($"Job {nameof(HealthCheckJob)} ran at {DateTimeOffset.Now}");
             return Task.CompletedTask;
         }
     }
