@@ -1,14 +1,15 @@
 import { UserManager, WebStorageStateStore } from "oidc-client";
+import { Constants } from "../config/constants";
 
 const userManagerSettings = {
-  authority: process.env.REACT_APP_IDP_URL,
-  client_id: process.env.CLIENT_ID || "js",
-  redirect_uri: `${process.env.REACT_APP_URL}/signin-oidc`,
-  post_logout_redirect_uri: `${process.env.REACT_APP_URL}/post-logout`,
+  authority: Constants.idpUrl,
+  client_id: Constants.clientId || "js",
+  redirect_uri: `${Constants.appUrl}/signin-oidc`,
+  post_logout_redirect_uri: `${Constants.appUrl}/post-logout`,
   automaticSilentRenew: true,
-  silent_redirect_uri: `${process.env.REACT_APP_URL}/silent-refresh`,
+  silent_redirect_uri: `${Constants.appUrl}/silent-refresh`,
   response_type: "id_token token",
-  scope: "openid email answersApi",
+  scope: "openid email answersApi usersApi",
   revokeAccessTokenOnSignout: true,
 
   userStore: new WebStorageStateStore({ store: sessionStorage }),

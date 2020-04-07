@@ -1,0 +1,6 @@
+li:not(.is-active){
+  //hackety hack to find the text inside the hero
+  .hero .hero-body .title {
+    color: grey;
+  }
+}

@@ -1,0 +1,19 @@
+.percentage{
+  font-weight: 600;
+  display: flex;
+
+  img {
+    margin: 0 0 10px 5px;
+  }
+
+  &.danger {
+    color: red;
+
+    img {
+      transform: rotate(180deg);
+    }
+  }
+  &.success {
+    color: #3ff707;
+  }
+}

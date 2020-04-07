@@ -90,6 +90,15 @@ module "front-end" {
   image                 = var.IMAGE_FRONTEND
   prefix                = local.name
   region             = var.region
+## Uncomment these lines to pass the API URL to the frontend (and other variables)
+#  environment_variables = <<ENV
+#  [
+#    {
+#      "name" : "REACT_APP_API_URL",
+#      "value" : "https://${module.api_dns.fqdn}"
+#    }
+#  ]
+#ENV
 }
 
 module "api" {
