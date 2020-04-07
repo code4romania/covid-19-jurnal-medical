@@ -9,17 +9,17 @@ const FilterColumn = ({ name, values, handleSelect, selectedValues }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const ref = useRef();
-  values = values = values.filter((x, i, a) => a.indexOf(x) === i);
+  const uniqueValues = values.filter((x, i, a) => a.indexOf(x) === i);
 
   useOutsideClick(ref, () => setIsVisible(false));
 
   useEffect(() => {
-    setSearchResults((values = values.filter((x, i, a) => a.indexOf(x) === i)));
+    setSearchResults(uniqueValues);
   }, []);
 
   useEffect(() => {
     setSearchResults(
-      values.filter(item =>
+      uniqueValues.filter(item =>
         item.toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
@@ -42,13 +42,15 @@ const FilterColumn = ({ name, values, handleSelect, selectedValues }) => {
         <input type="text" placeholder={name} onChange={handleChange} />
         <ul>
           {searchResults.length > 0
-            ? searchResults.map((value, index) => (
-                <li key={index} onClick={() => handleSelect(value)}>
+            ? searchResults.map(value => (
+                <li key={value} onClick={() => handleSelect(value)}>
                   {value}
-                  {selectedValues.includes(value) && <span>&#10003;</span>}
+                  {selectedValues && selectedValues.includes(value) && (
+                    <span className="approve-icon" />
+                  )}
                 </li>
               ))
-            : "Nici un rezultat"}
+            : "Niciun rezultat"}
         </ul>
       </div>
     </div>

@@ -54,7 +54,7 @@ const DATA = [
 
 const NotFound = () => (
   <Tr>
-    <Td colspan={5} align="center">
+    <Td colSpan={5} align="center">
       Not found
     </Td>
   </Tr>

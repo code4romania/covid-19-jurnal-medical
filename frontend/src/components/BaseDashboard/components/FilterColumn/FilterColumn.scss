@@ -11,7 +11,9 @@
   .selected-icon {
     content: "\2713";
   }
-
+  .approve-icon::before {
+    content: "\2713 ";
+  }
   .searchBox {
     position: absolute;
     z-index: 9;
