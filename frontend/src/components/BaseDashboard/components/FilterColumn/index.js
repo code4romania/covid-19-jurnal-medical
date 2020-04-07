@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import "./FilterColumn.scss";
 import useOutsideClick from "../../../useOutsideClick";
+import { ReactComponent as FilterSvg } from "../../../../images/filter-icon.svg";
 
 const FilterColumn = ({ name, values, handleSelect, selectedValues }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -35,7 +36,7 @@ const FilterColumn = ({ name, values, handleSelect, selectedValues }) => {
         className="filter-buttom"
         onClick={() => setIsVisible(!isVisible)}
       >
-        <img src={require("../../../../images/filter-icon.svg")} alt="" />
+        <FilterSvg />
       </button>
       <div className={["searchBox", isVisible ? "isVisible" : ""].join(" ")}>
         <input type="text" placeholder={name} onChange={handleChange} />

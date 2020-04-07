@@ -79,8 +79,8 @@ const CazuriRedFlag = () => {
           </h3>
           <button className="resend-button">@ Trimite selectia</button>
         </div>
-        <br />
-        <Table className="dashboard-table table danger-table bordered">
+        <div className="mb-20" />
+        <Table className="table danger-table bordered">
           <Thead>
             <Tr>
               <Th>

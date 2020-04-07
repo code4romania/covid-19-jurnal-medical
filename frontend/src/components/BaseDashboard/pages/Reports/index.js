@@ -76,11 +76,10 @@ const Reports = () => {
 
   return (
     <div className="dashboard-box">
-      <h3>
+      <h3 className="mb-20">
         <strong>Rapoarte transmise</strong>
       </h3>
-      <br />
-      <Table className="dashboard-table table danger-table bordered">
+      <Table className="table danger-table bordered">
         <Thead>
           <Tr>
             <Th>

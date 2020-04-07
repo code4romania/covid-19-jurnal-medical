@@ -3,9 +3,9 @@ import React from "react";
 
 const DashboardWidgets = () => (
   <>
-    <strong>Date colectate</strong>
-    <br />
-    <br />
+    <div className="mb-20">
+      <strong>Date colectate</strong>
+    </div>
     <div className="columns is-desktop">
       <div className="column is-one-third-desktop">
         <div className="dashboard-box" style={{ padding: 0 }}>

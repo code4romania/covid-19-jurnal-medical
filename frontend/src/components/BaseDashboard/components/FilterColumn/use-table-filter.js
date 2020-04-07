@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const useTableFilter = items => {
   const copy = { ...items[0] };
-  Object.keys(copy).map(key => (copy[key] = []));
+  Object.keys(copy).forEach(key => (copy[key] = []));
   const [filters, setFilters] = useState(copy);
 
   const filteredItems = React.useMemo(() => {
