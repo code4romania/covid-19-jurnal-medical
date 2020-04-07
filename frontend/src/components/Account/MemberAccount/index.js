@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
+import queryString from "query-string";
 import { Select } from "@code4ro/taskforce-fe-components";
 import "./MemberAccount.scss";
 
@@ -15,12 +16,8 @@ export const MemberAccount = ({ data }) => {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    const queryParams = location.search;
-    // todo: use a library to read the query parameter in a more robust way
-    const personId =
-      !!queryParams && queryParams.indexOf("personId") !== -1
-        ? queryParams.split("=")[1]
-        : "";
+    const queryParams = queryString.parse(location.search);
+    const personId = queryParams.personId;
     const member =
       familyMembers.find(member => member.id == personId) || defaultMember;
     setOptions(

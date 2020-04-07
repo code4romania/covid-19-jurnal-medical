@@ -9,7 +9,7 @@ const Tab = ({ title, clickHandler, isActive }) => {
     <a
       role="button"
       onClick={clickHandler}
-      className={`tab ${isActive ? "tab--active" : ""}`}
+      className={`tab ${isActive && "tab--active"}`}
     >
       <Hero title={title} useFallbackIcon={true} />
     </a>
