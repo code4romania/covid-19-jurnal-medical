@@ -13,7 +13,7 @@ using StamAcasa.Common.Services;
 namespace StamAcasa.Api.Controllers
 {
     [Authorize(AuthenticationSchemes = "answersApi")]
-    [Route("api/[controller]/{version}")]
+    [Route("api/form/{version}")]
     [ApiController]
     public class AssessmentController : ControllerBase
     {
