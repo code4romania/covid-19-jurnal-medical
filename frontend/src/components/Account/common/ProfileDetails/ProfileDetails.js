@@ -27,6 +27,9 @@ const ProfileDetails = ({ fields, isSelf }) => {
     <div className="profile__container">
       {isSelf && (
         <div className="header">
+          {
+            //todo: should set url once available
+          }
           <Link className="link" to="#">
             Editare profil
           </Link>

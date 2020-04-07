@@ -33,6 +33,9 @@ export const ProfileHistory = ({ data, isSelf }) => {
         în izolare. Parcurge întrebările și răspunde cu atenție. Pe măsură ce
         completezi, această pagină se va popula cu istoricul răspunsurilor tale.
         Poți completa{" "}
+        {
+          //todo: should set url once available
+        }
         <a className="link" href="#">
           formularul aici
         </a>
