@@ -5,7 +5,7 @@ import { Select } from "@code4ro/taskforce-fe-components";
 import "./MemberAccount.scss";
 
 import mockData from "../mockData/mockData";
-import ProfileHistory from "../ProfileHistory/ProfileHistory.js";
+import ProfileHistory from "../common/ProfileHistory/ProfileHistory.js";
 
 export const MemberAccount = ({ data }) => {
   const location = useLocation();

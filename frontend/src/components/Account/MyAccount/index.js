@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./MyAccount.scss";
-import ProfileHistory from "../ProfileHistory/ProfileHistory";
+import ProfileHistory from "../common/ProfileHistory/ProfileHistory";
 import mockData from "../mockData/mockData";
 export const MyAccount = ({ data }) => {
   return (
