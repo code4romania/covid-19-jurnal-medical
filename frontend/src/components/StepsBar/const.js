@@ -1,11 +1,11 @@
 export const STEPS_CONFIG = [
   {
-    label: "Contul Tău",
+    label: "Profilul Meu",
     URL: "/account"
   },
   {
     label: "Completează formularul de evaluare",
-    URL: "/self-evaluation"
+    URL: "/evaluation/self"
   },
   {
     label: "Adaugă-ți familia în cont",

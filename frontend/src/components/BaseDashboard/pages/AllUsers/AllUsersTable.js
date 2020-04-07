@@ -6,10 +6,9 @@ import CircleArrow from "../../components/CircleArrow";
 const AllUsersTable = () => {
   return (
     <div className="dashboard-box">
-      <h3>
+      <h3 className="mb-20">
         <strong>Toti utilizatorii</strong>
       </h3>
-      <br />
       <Table className="dashboard-table table info-table">
         <Thead>
           <Tr>

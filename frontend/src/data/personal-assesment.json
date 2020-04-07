@@ -5,116 +5,104 @@
   "form": [
     {
       "questionId": 1,
-      "questionText": "Ai avut febra 38 grade celsius sau mai mare?",
-      "type": "SINGLE_CHOICE",
+      "questionText": "Ai avut vreunul din simptomele de mai jos?",
+      "type": "MULTIPLE_CHOICE",
       "options": [
         {
-          "label": "Da",
+          "label": "Febra 38 de grade sau mai mare",
+          "value": 0
+        },
+        {
+          "label": "Durere in gat si/sau dificultate de a inghiti?",
           "value": 1
         },
         {
-          "label": "Nu",
-          "value": 0,
-          "nextQuestionId": 3
+          "label": "Ai avut tuse intensa?",
+          "value": 2
+        },
+        {
+          "label": "Dificultate in a respira",
+          "value": 3
+        },
+        {
+          "label": "Iti curge nasul?",
+          "value": 4
+        },
+        {
+          "type": "OTHER",
+          "label": "Alte simptome:",
+          "value": 5
         }
       ]
     },
     {
       "questionId": 2,
-      "questionText": "Din ce dată ai avut prima dată febră?",
-      "type": "FREE_TEXT",
-      "options": []
-    },
-    {
-      "questionId": 3,
-      "questionText": "Ai avut durere în gât și/sau dificultate în a înghiți?",
+      "questionText": "In momentul de fata te afli in izolare la domiciul?",
       "type": "SINGLE_CHOICE",
       "options": [
         {
-          "label": "Da",
+          "label": "Da, sunt in izolare, nu ies deloc din locuinta",
+          "value": 0
+        },
+        {
+          "label": "Stau mai mult pe acasa",
           "value": 1
         },
         {
-          "label": "Nu",
-          "value": 0,
-          "nextQuestionId": 5
+          "label": "Nu sunt in izolare",
+          "value": 2
+        },
+        {
+          "type": "OTHER",
+          "label": "Alte situatie:",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "questionId": 3,
+      "questionText": "Daca ai iesit de la ultima completare a formularului, salveaza cateva detalii despre deplasare",
+      "type": "MULTIPLE_CHOICE",
+      "options": [
+        {
+          "label": "Nu am iesit",
+          "value": 0
+        },
+        {
+          "type": "OTHER",
+          "label": "Motivul deplasarii",
+          "value": 1
+        },
+        {
+          "type": "OTHER",
+          "label": "Ora plecarii",
+          "value": 3
+        },
+        {
+          "type": "OTHER",
+          "label": "Ora sosiri",
+          "value": 4
         }
       ]
     },
     {
       "questionId": 4,
-      "questionText": "Din ce dată ai avut durere în gât și/sau dificultate în a înghiți?",
-      "type": "FREE_TEXT",
-      "options": []
+      "questionText": "Ai avut contact cu o persoana diagnosticata/confirmata cu noul coronavirus",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "label": "Da",
+          "value": 0
+        },
+        {
+          "label": "Nu",
+          "value": 1
+        }
+
+      ]
     },
     {
       "questionId": 5,
-      "questionText": "Ai avut tuse intensă?",
-      "type": "SINGLE_CHOICE",
-      "options": [
-        {
-          "label": "Da",
-          "value": 1
-        },
-        {
-          "label": "Nu",
-          "value": 0,
-          "nextQuestionId": 7
-        }
-      ]
-    },
-    {
-      "questionId": 6,
-      "questionText": "Din ce dată ai avut durere în gât și/sau dificultate în a înghiți?",
-      "type": "FREE_TEXT",
-      "options": []
-    },
-    {
-      "questionId": 7,
-      "questionText": "Ai avut dificultate în a respira?",
-      "type": "SINGLE_CHOICE",
-      "options": [
-        {
-          "label": "Da",
-          "value": 1
-        },
-        {
-          "label": "Nu",
-          "value": 0,
-          "nextQuestionId": 9
-        }
-      ]
-    },
-    {
-      "questionId": 8,
-      "questionText": "Din ce dată ai avut dificultate în a respira?",
-      "type": "FREE_TEXT",
-      "options": []
-    },
-    {
-      "questionId": 9,
-      "questionText": "Ți-a curs nasul?",
-      "type": "SINGLE_CHOICE",
-      "options": [
-        {
-          "label": "Da",
-          "value": 1
-        },
-        {
-          "label": "Nu",
-          "value": 0,
-          "nextQuestionId": 11
-        }
-      ]
-    },
-    {
-      "questionId": 10,
-      "questionText": "Din ce dată ţi-a curs nasul?",
-      "type": "FREE_TEXT",
-      "options": []
-    },
-    {
-      "questionId": 11,
       "type": "FINAL",
       "questionText": "Ce trebuie sa faci?",
       "options": [

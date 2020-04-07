@@ -6,6 +6,9 @@
   thead {
     font-size: 14px;
   }
+  td, th {
+    border: 0 !important;
+  }
 }
 
 .view-all {
@@ -37,4 +40,43 @@
   .last-column {
     width: 10px;
   }
+
+  &.bordered {
+    border-collapse: collapse;
+    td {
+      vertical-align: middle;
+      padding: 5px 10px;
+      border: 1px solid #E5E5E5;
+
+      &:first-child { border-left: 0;}
+      &:last-child { border-right: 0;}
+    }
+    th {
+      padding: 5px 10px;
+      border: 1px solid #E5E5E5;
+    }
+    tr:first-child {
+      td {
+        border-top: 0;
+      }
+    }
+    tr:last-child {
+      td {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+.resend-button {
+  background: none;
+  text-align: center;
+  display: block;
+  color: #6FCF97;
+  border: 1px solid #6FCF97;
+  margin-left: 20px;
+  padding: 3px 15px;
+}
+
+.border-0 {
+  border: 0 !important;
 }

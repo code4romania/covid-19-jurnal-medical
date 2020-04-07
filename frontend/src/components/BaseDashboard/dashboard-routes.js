@@ -1,6 +1,7 @@
 import Dashboard from "./pages/Dashboard";
 import CazuriRedFlag from "./pages/CazuriRedFlag";
 import AllUsers from "./pages/AllUsers";
+import Reports from "./pages/Reports";
 
 const dashboard_routes = [
   {
@@ -26,7 +27,8 @@ const dashboard_routes = [
     name: "Rapoarte transmise",
     path: "/dashboard/reports",
     className: "reports-menu-item",
-    icon: "reports-icon.svg"
+    icon: "reports-icon.svg",
+    component: Reports
   }
 ];
 export default dashboard_routes;

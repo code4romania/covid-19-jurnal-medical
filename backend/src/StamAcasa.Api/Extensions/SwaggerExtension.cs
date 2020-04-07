@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace StamAcasa.Api {
+namespace StamAcasa.Api.Extensions {
     public static class SwaggerExtension {
         public static IServiceCollection ConfigureSwagger(this IServiceCollection services, IConfiguration config) {
             var authorizeEndpoint = $"{config.GetValue<string>("IdentityServerUrl")}/connect/authorize";
@@ -39,7 +39,8 @@ namespace StamAcasa.Api {
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
                 //... and tell Swagger to use those XML comments.
-                o.IncludeXmlComments(xmlPath);
+                if (File.Exists(xmlPath))
+                    o.IncludeXmlComments(xmlPath);
             });
             return services;
         }

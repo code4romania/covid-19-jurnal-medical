@@ -2,13 +2,16 @@ import Home from "./components/Home";
 import About from "./components/About";
 import AddMember from "./components/AddMember";
 import SelfEvaluation from "./components/SelfEvaluation";
+import Account from "./components/Account";
+import OtherEvaluation from "./components/OtherEvaluation";
+
 import {
   signinCallback,
   signoutCallback,
   silentRefreshCallback
 } from "./api/auth";
-import BaseDashboard from "./components/BaseDashboard";
 
+import BaseDashboard from "./components/BaseDashboard";
 export const ROUTES = {
   base: {
     despre: {
@@ -43,8 +46,12 @@ export const ROUTES = {
   },
   home: {
     selfevaluation: {
-      path: "/self-evaluation",
+      path: "/evaluation/self",
       component: SelfEvaluation
+    },
+    otherevaluation: {
+      path: "/evaluation/other",
+      component: OtherEvaluation
     },
     addmember: {
       path: "/add-member",
@@ -52,7 +59,7 @@ export const ROUTES = {
     },
     account: {
       path: "/account",
-      component: () => "Placeholder account"
+      component: Account
     }
   }
 };

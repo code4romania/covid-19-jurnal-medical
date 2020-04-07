@@ -9,7 +9,7 @@ const userManagerSettings = {
   automaticSilentRenew: true,
   silent_redirect_uri: `${Constants.appUrl}/silent-refresh`,
   response_type: "id_token token",
-  scope: "openid email answersApi",
+  scope: "openid email answersApi usersApi",
   revokeAccessTokenOnSignout: true,
 
   userStore: new WebStorageStateStore({ store: sessionStorage }),

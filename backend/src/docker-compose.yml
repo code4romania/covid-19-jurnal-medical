@@ -10,7 +10,10 @@ services:
       - ASPNETCORE_URLS=http://+:80
     ports:
       - 5008:80
-    # volumes:
+    depends_on:
+      - postgres
+      - identityserver
+    # volumes: 
       #- ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
       #- ${HOME}/.aspnet/https:/root/.aspnet/https/
 
@@ -36,6 +39,9 @@ services:
         dockerfile: StamAcasa.IdentityServer/Dockerfile
     ports:
       - 5001:80
+    depends_on:
+      - postgres
+      - rabbitmq
 
   postgres:
     image: postgres
@@ -47,7 +53,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - ${HOME}/postgres_data:/var/lib/postgresql/data
 
   frontend:
     image:  ${DOCKER_REGISTRY-}stamacasa
@@ -62,9 +68,19 @@ services:
       CLIENT_ID: 'jsdocker'
     ports:
      - 5002:5002
+    depends_on:
+      - stamacasa.api
+      - identityserver
 
   stamacasa.email:
     image: ${DOCKER_REGISTRY-}stamacasa-email
     build:
         context: .
-        dockerfile: StamAcasa.EmailService/Dockerfile
+        dockerfile: StamAcasa.EmailService/Dockerfile    
+    environment:
+        RABBITMQ__USER: admin
+        RABBITMQ__PASSWORD: Corona2020
+        RABBITMQ__HOSTNAME: rabbitmq
+        RABBITMQ__PORT: 5672 
+    depends_on:
+      - rabbitmq
