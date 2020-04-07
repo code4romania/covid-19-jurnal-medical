@@ -85,6 +85,7 @@ namespace Api
 
             services.AddScoped<IFormService, FormService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAssessmentService, AssessmentService>();
 
             services.ConfigureSwagger(Configuration);
         }
