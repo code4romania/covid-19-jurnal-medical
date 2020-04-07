@@ -3,6 +3,7 @@ using System;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StamAcasa.Common;
@@ -10,9 +11,10 @@ using StamAcasa.Common;
 namespace StamAcasa.Common.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200404172037_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,26 +55,32 @@ namespace StamAcasa.Common.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
                     b.Property<int>("Age")
                         .HasColumnType("integer");
 
                     b.Property<string>("City")
                         .HasColumnType("text");
 
+                    b.Property<string>("Country")
+                        .HasColumnType("text");
+
                     b.Property<string>("County")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Disability")
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
+                    b.Property<string>("FullName")
+                        .HasColumnType("text");
+
                     b.Property<int>("Gender")
                         .HasColumnType("integer");
-
-                    b.Property<bool>("LivesWithOthers")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
 
                     b.Property<int?>("ParentId")
                         .HasColumnType("integer");
@@ -86,19 +94,7 @@ namespace StamAcasa.Common.Migrations
                     b.Property<int>("QuarantineStatus")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("QuarantineStatusOthers")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("RelationshipType")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("Smoker")
-                        .HasColumnType("boolean");
-
                     b.Property<string>("Sub")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Surname")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
