@@ -1,7 +1,7 @@
 {
-  "title": "autoevaluare",
   "formId": 1,
   "firstNodeId": 1,
+  "title": "Formularul tau",
   "form": [
     {
       "questionId": 1,
@@ -61,32 +61,55 @@
     },
     {
       "questionId": 3,
-      "questionText": "Daca ai iesit de la ultima completare a formularului, salveaza cateva detalii despre deplasare",
-      "type": "MULTIPLE_CHOICE",
+      "questionText": "Celalte persoane se afla in izolare la domiciul?",
+      "type": "SINGLE_CHOICE",
       "options": [
         {
-          "label": "Nu am iesit",
+          "label": "Da, sunt in izolare, nu ies deloc din locuinta",
           "value": 0
         },
         {
-          "type": "OTHER",
-          "label": "Motivul deplasarii",
+          "label": "Stau mai mult pe acasa",
           "value": 1
         },
         {
-          "type": "OTHER",
-          "label": "Ora plecarii",
-          "value": 3
+          "label": "Nu sunt in izolare",
+          "value": 2
         },
         {
           "type": "OTHER",
-          "label": "Ora sosiri",
-          "value": 4
+          "label": "Alte situatie:",
+          "value": 3
         }
       ]
     },
     {
       "questionId": 4,
+      "questionText": "Daca ai iesit de la ultima completare a formularului, salveaza cateva detalii despre deplasare",
+      "type": "MULTIPLE_CHOICE",
+      "options": [
+        {
+          "label": "Nu am iesit"
+        },
+        {
+          "type": "OTHER",
+          "label": "Motivul deplasarii",
+          "value": 0
+        },
+        {
+          "type": "OTHER",
+          "label": "Ora plecarii",
+          "value": 1
+        },
+        {
+          "type": "OTHER",
+          "label": "Ora sosiri",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "questionId": 5,
       "questionText": "Ai avut contact cu o persoana diagnosticata/confirmata cu noul coronavirus",
       "type": "SINGLE_CHOICE",
       "options": [
@@ -102,7 +125,7 @@
       ]
     },
     {
-      "questionId": 5,
+      "questionId": 6,
       "type": "FINAL",
       "questionText": "Ce trebuie sa faci?",
       "options": [
