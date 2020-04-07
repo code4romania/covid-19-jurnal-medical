@@ -27,7 +27,6 @@ namespace IdentityServer.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        // private readonly IEmailSender _emailSender;
         private readonly IQueueService _queue;
         private readonly IConfiguration _configuration;
 
@@ -35,14 +34,12 @@ namespace IdentityServer.Pages.Account
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            // IEmailSender emailSender,
             IQueueService queueService,
             IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            // _emailSender = emailSender;
             _queue = queueService;
             _configuration = configuration;
         }
@@ -125,17 +122,6 @@ namespace IdentityServer.Pages.Account
                             protocol: Request.Scheme);
 
                         await SendRegistrationEmail(user.UserName, callbackUrl);
-                        //await _emailSender.SendAsync(
-                        //    new Email
-                        //    {
-                        //        To = Input.Email,
-                        //        Subject = "Confirm your email",
-                        //        Content = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.",
-                        //        FromName = _configuration.GetValue<string>("AdminFromName"),
-                        //        FromEmail = _configuration.GetValue<string>("AdminFromEmail")
-                        //    },
-                        //    default
-                        //);
 
                         return RedirectToPage("RegisterConfirmation", new {email = Input.Email});
                     }
