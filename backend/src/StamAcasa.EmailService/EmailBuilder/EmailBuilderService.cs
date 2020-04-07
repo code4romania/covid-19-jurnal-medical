@@ -21,6 +21,7 @@ namespace StamAcasa.EmailService.EmailBuilder
         {
             _logger.LogInformation("Build email");
 
+            //TODO Cache templates to prevent storage read bottlenecks
             var filePath = _templateFileSelector.GetTemplatePath(emailRequest.TemplateType);
             using (var streamReader = File.OpenText(filePath))
             {
