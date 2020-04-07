@@ -16,7 +16,7 @@ const getPersonalData = function(profile) {
     comorbidities: {
       label: "Alte afectiuni",
       value: profile.preexistingMedicalCondition
-        ? profile.preexistingMedicalCondition
+        ? [profile.preexistingMedicalCondition]
         : []
     },
     inIsolation: {
