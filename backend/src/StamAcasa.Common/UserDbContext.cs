@@ -36,24 +36,7 @@ namespace StamAcasa.Common
             modelBuilder.Entity<Assessment>()
                 .HasIndex(a => a.Id)
                 .IsUnique();
-
-
-            modelBuilder.Entity<Assessment>().HasData(new Assessment()
-            {
-                Id = 1,
-                Version = 1,
-                AssessmentType = AssessmentType.NewUser,
-                Content = JsonFilesLibrary.GetAssessmentQ1()
-            });
             
-            modelBuilder.Entity<Assessment>().HasData(new Assessment()
-            {
-                Id = 2,
-                Version = 1,
-                AssessmentType = AssessmentType.UserWithProfileFilledIn,
-                Content = JsonFilesLibrary.GetAssessmentQ1A()
-            });
         }
-
     }
 }
