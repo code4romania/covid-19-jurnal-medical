@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./Account.scss";
 
@@ -6,15 +6,24 @@ import SidebarLayout from "../SidebarLayout";
 
 import MyAccount from "./MyAccount";
 import MemberAccount from "./MemberAccount";
+import Tabs from "./common/Tabs/Tabs";
 
 export const Account = () => {
-  const [selectedTab, setSelectedTab] = useState(1);
+  const tabs = [
+    {
+      id: 0,
+      title: "Profilul meu",
+      content: <MyAccount />
+    },
+    {
+      id: 1,
+      title: "Alte persoane",
+      content: <MemberAccount />
+    }
+  ];
   return (
     <SidebarLayout>
-      <button onClick={() => setSelectedTab(1)}>Profilul meu</button>
-      <button onClick={() => setSelectedTab(2)}>Alte persoane</button>
-      {selectedTab === 1 && <MyAccount />}
-      {selectedTab === 2 && <MemberAccount />}
+      <Tabs tabs={tabs} />
     </SidebarLayout>
   );
 };

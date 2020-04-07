@@ -9,9 +9,9 @@ const Table = ({ dataRows, headers, title }) => {
     return <div> Nu exista date</div>;
   }
 
-  const renderRow = item => {
+  const renderRow = (item, itemIndex) => {
     return (
-      <tr key={item.id}>
+      <tr key={itemIndex}>
         {Object.keys(item).map((key, index) => {
           if (key === "date") {
             return (

@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./ProfileHistory.scss";
-import ProfileDetails from "../common/ProfileDetails/ProfileDetails.js";
-import SymptomsHistoryTable from "../common/SymptomsHistoryTable/SymptomsHistoryTable.js";
+import ProfileDetails from "../ProfileDetails/ProfileDetails.js";
+import SymptomsHistoryTable from "../SymptomsHistoryTable/SymptomsHistoryTable.js";
 import { TemperatureChart } from "@code4ro/taskforce-fe-components";
 
-import Table from "../common/Table/Table";
+import Table from "../Table/Table";
 
 export const ProfileHistory = ({ data, isSelf }) => {
   const symptomsHeaders = [
