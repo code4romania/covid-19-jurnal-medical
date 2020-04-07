@@ -1,0 +1,17 @@
+.table-container {
+    .table {
+        border: none;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+    th {
+        font-weight: normal;
+        border: none;
+    }
+    td:first-child{
+       width: 200px;
+    }
+    th, td {
+        border: none !important;
+    }
+}
