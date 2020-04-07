@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@code4ro/taskforce-fe-components": "^1.0.6",
+    "@code4ro/taskforce-fe-components": "^1.0.9",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bulma": "^0.8.1",
@@ -31,6 +30,11 @@
       "pre-commit": "npm run lint"
     }
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(scss|png)$": "<rootDir>/src/__mocks__/styleMock.js"
+    }
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -47,8 +51,11 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/dom": "^7.2.0",
+    "@testing-library/react": "^9.5.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "husky": "^4.2.3",
