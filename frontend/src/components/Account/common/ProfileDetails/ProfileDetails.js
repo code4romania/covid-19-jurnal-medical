@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./ProfileDetails.scss";
 
@@ -26,9 +27,9 @@ const ProfileDetails = ({ fields, isSelf }) => {
     <div className="profile__container">
       {isSelf && (
         <div className="header">
-          <a className="link" href="#">
+          <Link className="link" to="#">
             Editare profil
-          </a>
+          </Link>
         </div>
       )}
       <div className="content">
@@ -58,13 +59,13 @@ const ProfileDetails = ({ fields, isSelf }) => {
           <strong>Alte persoane în grijă:</strong>
           {fields.others.length > 0
             ? fields.others.map((person, index) => (
-                <a
+                <Link
                   key={person.id}
                   className="link"
-                  href={`/account/other-members?personId=${person.id}`}
+                  to={`/account/other-members?personId=${person.id}`}
                 >
                   {person.name} {index !== fields.others.length - 1 && ","}
-                </a>
+                </Link>
               ))
             : " - "}
         </p>

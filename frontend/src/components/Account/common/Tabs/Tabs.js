@@ -21,6 +21,16 @@ export const Tabs = ({ tabs, defaultTab }) => {
       : `${tabs[selectedTab].url}`;
     history.push(url);
   }, []);
+  useEffect(() => {
+    return history.listen(location => {
+      // when clicking back from the browser's back button the visible tab needs to be set again
+      const locationTab = tabs.find(
+        tab => location.pathname.indexOf(tab.url) !== -1
+      );
+      const locationTabId = locationTab ? locationTab.id : 0;
+      setSelectedTab(locationTabId);
+    });
+  }, []);
   const handleTabClick = tab => {
     setSelectedTab(tab.id);
     history.push(tab.url);
