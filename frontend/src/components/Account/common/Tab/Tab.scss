@@ -1,5 +1,8 @@
 .tab {
   display: inline-block;
+   header, .hero-body {
+    width: 100%;
+  }
 }
 .tab .hero .hero-body .title {
     font-size: 30px;
