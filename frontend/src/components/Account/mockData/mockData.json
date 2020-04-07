@@ -150,6 +150,7 @@
     ],
     "otherMembers": [
         {
+            "id": "1",
             "profile": {
                 "name": {"label": "Nume si prenume", "value": "Camelia Petrescu"},
                 "phoneNumber": {"label": "Numar de telefon", "value": "-"},
@@ -296,6 +297,7 @@
             ]
         },
         {
+            "id": "2",
             "profile": {
                 "name": {"label": "Nume si prenume", "value": "Ioana Marinescu"},
                 "phoneNumber": {"label": "Numar de telefon", "value": "-"},

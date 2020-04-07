@@ -13,12 +13,14 @@ export const Account = () => {
     {
       id: 0,
       title: "Profilul meu",
-      content: <MyAccount />
+      content: <MyAccount />,
+      url: "/account/me"
     },
     {
       id: 1,
       title: "Alte persoane",
-      content: <MemberAccount />
+      content: <MemberAccount />,
+      url: "/account/other-members"
     }
   ];
   return (
