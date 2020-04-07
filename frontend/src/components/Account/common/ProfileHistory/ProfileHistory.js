@@ -32,7 +32,7 @@ export const ProfileHistory = ({ data, isSelf }) => {
         istoric al simptomelor sau al absenței acestora în perioada în care stai
         în izolare. Parcurge întrebările și răspunde cu atenție. Pe măsură ce
         completezi, această pagină se va popula cu istoricul răspunsurilor tale.
-        Poți completa{" "}
+        Poți completa
         {
           //todo: should set url once available
         }

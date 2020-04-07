@@ -34,7 +34,7 @@ const ProfileSummary = ({ profile, dependants }) => {
   return (
     <div>
       <b>
-        Nume: {profile.name} {profile.surname}{" "}
+        Nume: {profile.name} {profile.surname}
       </b>
       <PersonalDataTable personalData={getPersonalData(profile)} />
       <div>

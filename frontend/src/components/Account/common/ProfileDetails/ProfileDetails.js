@@ -11,20 +11,38 @@ const renderField = (field = {}) => {
   return (
     field.label && (
       <div className="profile__field" key={field.label}>
-        {" "}
         <strong> {field.label}:</strong> {processedValue}
       </div>
     )
   );
 };
 
+const renderFields = fields => {
+  return fields.map(renderField);
+};
+
 const ProfileDetails = ({ fields, isSelf }) => {
+  const leftColumnFields = [
+    fields.name,
+    fields.relationship,
+    fields.phoneNumber,
+    fields.location,
+    fields.age,
+    fields.gender
+  ];
+  const rightColumnFields = [
+    fields.smoking,
+    fields.comorbidities,
+    fields.livingAlone,
+    fields.inIsolation,
+    fields.othersInHouseholdIsolation
+  ];
   if (!fields || !Object.keys(fields).length) {
     return <div>Nu exista date</div>;
   }
 
   return (
-    <div className="profile__container">
+    <div className="profile">
       {isSelf && (
         <div className="header">
           {
@@ -36,25 +54,8 @@ const ProfileDetails = ({ fields, isSelf }) => {
         </div>
       )}
       <div className="content">
-        <div className="left">
-          {[
-            fields.name,
-            fields.relationship,
-            fields.phoneNumber,
-            fields.location,
-            fields.age,
-            fields.gender
-          ].map(field => renderField(field))}
-        </div>
-        <div className="right">
-          {[
-            fields.smoking,
-            fields.comorbidities,
-            fields.livingAlone,
-            fields.inIsolation,
-            fields.othersInHouseholdIsolation
-          ].map(field => renderField(field))}
-        </div>
+        <div className="left">{renderFields(leftColumnFields)}</div>
+        <div className="right">{renderFields(rightColumnFields)}</div>
       </div>
       <div className="footer">
         <hr />

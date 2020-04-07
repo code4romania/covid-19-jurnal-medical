@@ -45,7 +45,7 @@ export const MemberAccount = ({ data }) => {
   }
 
   return (
-    <div className="member-container">
+    <div className="member-profile">
       <p>
         Următorul formular te ajută să menții un istoric al simptomelor sau al
         absenței acestora în perioada în care persoanele pe care le ai în grijă
@@ -55,7 +55,7 @@ export const MemberAccount = ({ data }) => {
         recurent cu ele, le poți ajuta monitorizându-le sănătatea telefonic și
         marcând răspunsurile în aplicație
       </p>
-      <h1 className="member-select">
+      <h1 className="member-profile__select">
         <Select label={"Alege persona"} selectProps={props} options={options} />
       </h1>
       <ProfileHistory data={selectedMember} />;

@@ -29,7 +29,7 @@ export const Tabs = ({ tabs, defaultTab }) => {
   }, [history]);
   const handleTabClick = tab => {
     setSelectedTab(tab.id);
-    if (tab.clickHandler && typeof tab.clickHandler === "function") {
+    if (tab.clickHandler) {
       tab.clickHandler();
     }
   };
