@@ -7,7 +7,7 @@ using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services.Emailing;
 using StamAcasa.EmailService.EmailBuilder;
 
-namespace StamAcasa.EmailService
+namespace StamAcasa.EmailService.Worker
 {
     public class Worker : BackgroundService
     {
