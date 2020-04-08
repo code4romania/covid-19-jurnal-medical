@@ -18,15 +18,12 @@ const useTableFilter = items => {
   }, [items, filters]);
 
   const addOrRemove = (array, value) => {
-    var index = array.indexOf(value);
-
+    const index = array.indexOf(value);
     if (index === -1) {
-      array.push(value);
+      return [...array, value];
     } else {
-      array.splice(index, 1);
+      return array.filter(el => el !== value);
     }
-
-    return array;
   };
 
   const requestFilter = (column, value) => {
