@@ -9,7 +9,8 @@ using StamAcasa.Common.Models;
 
 namespace StamAcasa.Common.Services
 {
-    public class UserService : IUserService {
+    public class UserService : IUserService
+    {
         private readonly UserDbContext _context;
         private readonly IMapper _mapper;
 
@@ -19,9 +20,10 @@ namespace StamAcasa.Common.Services
             _mapper = mapper;
         }
 
-        private async Task<User> AddOrUpdateEntity(User user, object profileUpdateInfo)
+        private async Task<User> AddOrUpdateEntity(User user, UserProfileDTO profileUpdateInfo)
         {
-            if (user == null) {
+            if (user == null)
+            {
                 var newUserInfo = _mapper.Map<User>(profileUpdateInfo);
                 var saved = await _context.Users.AddAsync(newUserInfo);
                 await _context.SaveChangesAsync();
@@ -50,7 +52,7 @@ namespace StamAcasa.Common.Services
 
             dependentInfo.ParentId = parentUser.Id;
             User existingUserEntity = null;
-            if(dependentInfo.Id > 0) 
+            if (dependentInfo.Id > 0)
                 existingUserEntity = _context.Users.FirstOrDefault(u => u.Id == dependentInfo.Id);
 
             var profile = await AddOrUpdateEntity(existingUserEntity, dependentInfo);
@@ -59,11 +61,12 @@ namespace StamAcasa.Common.Services
 
         public async Task<UserInfo> GetUserInfo(string sub)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u=>u.Sub == sub);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Sub == sub);
             var result = _mapper.Map<UserInfo>(user);
             return result;
         }
-        public async Task<UserInfo> GetUserInfo(int id) {
+        public async Task<UserInfo> GetUserInfo(int id)
+        {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
             var result = _mapper.Map<UserInfo>(user);
             return result;
@@ -74,7 +77,8 @@ namespace StamAcasa.Common.Services
             var user = await _context.Users
                 .Include("DependentUsers")
                 .FirstOrDefaultAsync(u => u.Sub == sub);
-            var result = user.DependentUsers.Select(d=>_mapper.Map<UserInfo>(d));
+
+            var result = user?.DependentUsers?.Select(d => _mapper.Map<UserInfo>(d));
             return result;
         }
 
