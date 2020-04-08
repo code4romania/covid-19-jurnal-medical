@@ -46,6 +46,7 @@ resource "aws_route53_record" "root" {
 
 resource "aws_acm_certificate" "cert" {
   domain_name               = terraform.workspace == "production" ? local.domain_root : module.front-end_dns.fqdn
+<<<<<<< Updated upstream
   subject_alternative_names = terraform.workspace == "production" ? [module.front-end_dns.fqdn, module.api_dns.fqdn, module.postgres_dns.fqdn] : [module.api_dns.fqdn]
 =======
   subject_alternative_names = terraform.workspace == "production" ? [module.front-end_dns.fqdn, module.api_dns.fqdn,module.postgres_dns.fqdn ] : [module.api_dns.fqdn]
