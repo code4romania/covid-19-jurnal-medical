@@ -9,15 +9,12 @@ const FilterColumn = ({ name, values, handleSelect, selectedValues }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const ref = useRef();
-  const uniqueValues = values.filter((x, i, a) => a.indexOf(x) === i);
-
   useOutsideClick(ref, () => setIsVisible(false));
-
   useEffect(() => {
     setSearchResults(
-      uniqueValues.filter(item =>
-        item.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      values
+        .filter(item => item.toLowerCase().includes(searchTerm.toLowerCase()))
+        .filter((x, i, a) => a.indexOf(x) === i)
     );
   }, [searchTerm, values]);
 

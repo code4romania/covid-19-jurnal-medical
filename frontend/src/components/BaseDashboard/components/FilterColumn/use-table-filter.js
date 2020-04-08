@@ -3,11 +3,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const useTableFilter = items => {
-  const copy = { ...items[0] };
-  Object.keys(copy).forEach(key => (copy[key] = []));
-  const [filters, setFilters] = useState([]);
-
-  useEffect(() => setFilters(copy), [items[0]]);
+  const [filters, setFilters] = useState({});
+  useEffect(() => {
+    const columns = [];
+    Object.keys(items[0]).forEach(key => (columns[key] = []));
+    setFilters(columns);
+  }, [items[0]]);
 
   const filteredItems = React.useMemo(() => {
     return items.filter(item =>
@@ -27,8 +28,8 @@ const useTableFilter = items => {
   };
 
   const requestFilter = (column, value) => {
-    let selectedFilter = filters[column] ? filters[column] : [];
-    selectedFilter = addOrRemove(selectedFilter, value);
+    const selectedFilter = addOrRemove(filters[column] || [], value);
+
     setFilters({
       ...filters,
       [column]: selectedFilter
