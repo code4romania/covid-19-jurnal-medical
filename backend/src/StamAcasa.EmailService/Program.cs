@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services.Emailing;
 using StamAcasa.EmailService.EmailBuilder;
+using StamAcasa.EmailService.Worker;
 
 namespace StamAcasa.EmailService
 {
@@ -65,7 +66,9 @@ namespace StamAcasa.EmailService
                 services.AddTransient<IEmailBuilderService, EmailBuilderService>();
                 services.AddSingleton<IQueueService, QueueService>();
 
-                services.AddHostedService<Worker>();
+                services.AddTransient<IWorker, EmailWorker>();
+
+                services.AddHostedService<EmailService>();
             });
     }
 }

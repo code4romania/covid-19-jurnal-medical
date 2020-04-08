@@ -2,6 +2,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import AddMember from "./components/AddMember";
 import SelfEvaluation from "./components/SelfEvaluation";
+import Account from "./components/Account";
 import OtherEvaluation from "./components/OtherEvaluation";
 
 import {
@@ -58,7 +59,7 @@ export const ROUTES = {
     },
     account: {
       path: "/account",
-      component: () => "Placeholder account"
+      component: Account
     }
   }
 };

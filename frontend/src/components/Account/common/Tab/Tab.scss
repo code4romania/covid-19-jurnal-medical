@@ -1,0 +1,19 @@
+.tab {
+  display: inline-block;
+   header, .hero-body {
+    width: 100%;
+  }
+}
+.tab .hero .hero-body .title {
+    font-size: 30px;
+    font-family: "Titilium Web";
+    line-height: 46px;
+    font-weight: normal;
+    color: #828282;
+    border-bottom: 1px solid #E0E0E0;
+}
+.tab--active .hero .hero-body .title{
+    font-weight: bold;
+    color: #3C2653;
+    border-bottom: 1px solid #3C2653;
+}
