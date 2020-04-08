@@ -29,6 +29,8 @@ namespace StamAcasa.EmailService.EmailBuilder
                 template = FormatTemplate(template, emailRequest);
                 var emailModel = new Email
                 {
+                    FromName = "Admin Stam Acasa",
+                    FromEmail = "admin@stamacasa.ro",
                     To = emailRequest.Address,
                     Subject = "New Email",
                     Content = template

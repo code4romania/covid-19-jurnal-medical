@@ -1,13 +1,13 @@
 using IdentityServer.Data;
-using IdentityServerAspNetIdentity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StamAcasa.Common.Services.Emailing;
 using StamAcasa.IdentityServer;
+using StamAcasa.Common.Queue;
+using EasyNetQ;
 
 namespace IdentityServer
 {
@@ -74,13 +74,20 @@ namespace IdentityServer
                     );
                     break;
             }
+
+            services.AddSingleton(RabbitHutch.CreateBus(string.Format("host={0}:{1};username={2};password={3}",
+                                            Configuration.GetValue<string>("RabbitMQ:HostName"),
+                                            Configuration.GetValue<int>("RabbitMQ:Port").ToString(),
+                                            Configuration.GetValue<string>("RabbitMQ:User"),
+                                            Configuration.GetValue<string>("RabbitMQ:Password"))
+                ));
+            services.AddSingleton<IQueueService, QueueService>();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
