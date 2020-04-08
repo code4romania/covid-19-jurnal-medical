@@ -19,12 +19,14 @@ namespace StamAcasa.Api.Controllers
         private readonly IFileService _fileService;
         private readonly IFormService _formService;
         private readonly IUserService _userService;
+        private readonly IAssessmentService _assessmentService;
 
-        public FormController(IFileService fileService, IFormService formService, IUserService userService)
+        public FormController(IFileService fileService, IFormService formService, IUserService userService, IAssessmentService assessmentService)
         {
             _fileService = fileService;
             _formService = formService;
             _userService = userService;
+            _assessmentService = assessmentService;
         }
 
         [HttpGet]
@@ -39,6 +41,19 @@ namespace StamAcasa.Api.Controllers
                     await _formService.GetForms(subClaimValue) : 
                     await _formService.GetForms(id.Value);
             return new OkObjectResult(result);
+        }
+        
+        
+        [HttpGet("version")]
+        public async Task<IActionResult> GetVersion()
+        {
+            var subClaimValue = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+            if(subClaimValue==null)
+                return new UnauthorizedResult();
+
+            var assessment = await _assessmentService.GetAssessment(subClaimValue);
+            
+            return new OkObjectResult(assessment);
         }
 
         [HttpPost]
@@ -82,6 +97,5 @@ namespace StamAcasa.Api.Controllers
 
             return new OkObjectResult(string.Empty);
         }
-
     }
 }
