@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { ReactComponent as ArrowRightSvg } from "../../../../images/filter-icon.svg";
 import "./CircleArrow.scss";
 
 const CircleArrow = ({ type }) => (
   <div className={["circle", type].join(" ")}>
-    <img src={require("../../../../images/arrow-right.svg")} alt="" />
+    <ArrowRightSvg />
   </div>
 );
 

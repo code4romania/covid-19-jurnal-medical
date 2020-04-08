@@ -6,10 +6,9 @@ import CircleArrow from "../../components/CircleArrow";
 const CazuriRedFlagTable = () => {
   return (
     <div className="dashboard-box">
-      <h3>
+      <h3 className="mb-20">
         <strong>Cazuri red flag</strong>
       </h3>
-      <br />
       <Table className="dashboard-table table danger-table">
         <Thead>
           <Tr>
