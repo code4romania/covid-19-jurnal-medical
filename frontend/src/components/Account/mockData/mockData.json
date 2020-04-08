@@ -1,0 +1,447 @@
+{
+    "profile": {
+        "name": {"label": "Nume si prenume", "value": "Ion Petrescu"},
+        "phoneNumber": {"label": "Numar de telefon", "value": "0729999999"},
+        "location": {"label": "Judet, localitate", "value": "Iasi, Targu Frumos"},
+        "age": {"label": "Varsta in ani impliniti", "value": "33"},
+        "gender": {"label": "Genul", "value": "masculin"},
+        "smoking": {"label":"Fumator", "value": true},
+        "comorbidities": {"label": "Afectiuni agravante", "value": "Diabet, o boala de inima"},
+        "livingAlone": {"label": "Locuiesti singur", "value": false},
+        "inIsolation": {"label": "Izolare proprie la domiciliu", "value": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie"},
+        "othersInHouseholdIsolation": {"label": "Izolare alte persoane la domiciliu", "value": "Da, sunt in izolare, nu ies deloc din locuinta"},
+        "others": [
+            {
+              "name": "Camelia Petrescu",
+              "id": "1"
+            },
+            { "name": "Ioana Marinescu", "id": "2" }
+          ]
+    },
+    "temperature": [
+        {
+            "id": "134",
+            "date": "1584198000",
+            "temperature": 36.6
+          },
+          {
+            "id": "136",
+            "date": "1584284400",
+            "temperature": 39
+          },
+          {
+            "id": "139",
+            "date": "1584370800",
+            "temperature": 35
+          },
+          {
+            "id": "140",
+            "date": "1584543600",
+            "temperature": 35
+          },
+          {
+            "id": "141",
+            "date": "1584630000",
+            "temperature": 35
+          },
+          {
+            "id": "142",
+            "date": "1584716400",
+            "temperature": 35
+          },
+          {
+            "id": "143",
+            "date": "1584802800",
+            "temperature": 35
+          },
+          {
+            "id": "144",
+            "date": "1584889200",
+            "temperature": 39
+          },
+          {
+            "id": "145",
+            "date": "1584975600",
+            "temperature": 39
+          },
+          {
+            "id": "146",
+            "date": "1585062000",
+            "temperature": 39
+          }
+    ],
+    "symptoms": [
+        {
+            "date": "1585409621",
+            "soreThroat": true,
+            "cough": true,
+            "shortnessBreath": true,
+            "runningNose": true
+        },
+        {
+            "date": "1585409621",
+            "soreThroat": false,
+            "cough": false,
+            "shortnessBreath": false,
+            "runningNose": false
+        },
+        {
+            "date": "1585409621",
+            "soreThroat": true,
+            "cough": false,
+            "shortnessBreath": false,
+            "runningNose": false
+        },
+        {
+            "date": "1585409621",
+            "soreThroat": false,
+            "cough": false,
+            "shortnessBreath": false,
+            "runningNose": false
+        }
+    ],
+    "otherSymptoms": [
+        {
+           "date": "1585409621",
+            "otherSimptoms": "Frisoane și durere de cap."
+        },
+        {
+            "date": "1585409621",
+            "otherSimptoms": "Frisoane"
+        },
+        {
+            "date": "1585409621",
+            "otherSimptoms": "Niciun alt simptom"
+        },
+        {
+            "date": "1585409621",
+            "otherSimptoms": "Durere de cap și oboseala foarte mare"
+        }
+    ],
+    "outings": [
+        {
+            "date": "1585409621",
+            "Motivul deplasării": "Cumpărături",
+            "Ora plecării": "13:00",
+            "Ora sosirii": "14:30",
+            "Contact cu pacient": "Da"
+        },
+        {
+            "date": "1585409621",
+            "Motivul deplasării": "Farmacie",
+            "Ora plecării": "16:00",
+            "Ora sosirii": "17:00",
+            "Contact cu pacient": "Nu"
+        },
+        {
+            "date": "1585409621",
+            "Motivul deplasării": "-",
+            "Ora plecării": "-",
+            "Ora sosirii": "-",
+            "Contact cu pacient": "-"
+        },
+        {
+            "date": "1585409621",
+            "Motivul deplasării": "Cumpărături",
+            "Ora plecării": "13:00",
+            "Ora sosirii": "14:45",
+            "Contact cu pacient": "Nu"
+        }
+    ],
+    "otherMembers": [
+        {
+            "id": "1",
+            "profile": {
+                "name": {"label": "Nume si prenume", "value": "Camelia Petrescu"},
+                "phoneNumber": {"label": "Numar de telefon", "value": "-"},
+                "location": {"label": "Judet, localitate", "value": "Iasi, Pascani"},
+                "age": {"label": "Varsta in ani impliniti", "value": "82"},
+                "gender": {"label": "Genul", "value": "feminin"},
+                "smoking": {"label":"Fumator", "value": false},
+                "comorbidities": {"label": "Afectiuni agravante", "value": "Diabet"},
+                "livingAlone": {"label": "Locuiesti singur", "value": true},
+                "inIsolation": {"label": "Izolare proprie la domiciliu", "value": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie"},
+                "othersInHouseholdIsolation": {"label": "Izolare alte persoane la domiciliu", "value": "-"},
+                "relationship": {"label":"Tip de relatie", "value": "bunica"},
+                "others": []
+            },
+            "temperature": [
+                {
+                    "id": "134",
+                    "date": "1584198000",
+                    "temperature": 36.6
+                  },
+                  {
+                    "id": "136",
+                    "date": "1584284400",
+                    "temperature": 39
+                  },
+                  {
+                    "id": "139",
+                    "date": "1584370800",
+                    "temperature": 35
+                  },
+                  {
+                    "id": "140",
+                    "date": "1584543600",
+                    "temperature": 35
+                  },
+                  {
+                    "id": "141",
+                    "date": "1584630000",
+                    "temperature": 35
+                  },
+                  {
+                    "id": "142",
+                    "date": "1584716400",
+                    "temperature": 35
+                  },
+                  {
+                    "id": "143",
+                    "date": "1584802800",
+                    "temperature": 35
+                  },
+                  {
+                    "id": "144",
+                    "date": "1584889200",
+                    "temperature": 39
+                  },
+                  {
+                    "id": "145",
+                    "date": "1584975600",
+                    "temperature": 39
+                  },
+                  {
+                    "id": "146",
+                    "date": "1585062000",
+                    "temperature": 39
+                  }
+            ],
+            "symptoms": [
+                {
+                    "date": "1585409621",
+                    "soreThroat": true,
+                    "cough": false,
+                    "shortnessBreath": false,
+                    "runningNose": false
+                },
+                {
+                    "date": "1585409621",
+                    "soreThroat": true,
+                    "cough": false,
+                    "shortnessBreath": false,
+                    "runningNose": false
+                },
+                {
+                    "date": "1585409621",
+                    "soreThroat": true,
+                    "cough": false,
+                    "shortnessBreath": false,
+                    "runningNose": false
+                },
+                {
+                    "date": "1585409621",
+                    "soreThroat": true,
+                    "cough": false,
+                    "shortnessBreath": false,
+                    "runningNose": false
+                }
+            ],
+            "otherSymptoms": [
+                {
+                    "date": "1585409621",
+                    "otherSimptoms": "Frisoane și durere de cap."
+                },
+                {
+                    "date": "1585409621",
+                    "otherSimptoms": "Frisoane și durere de cap."
+                },
+                {
+                    "date": "1585409621",
+                    "otherSimptoms": "Frisoane și durere de cap."
+                },
+                {
+                    "date": "1585409621",
+                    "otherSimptoms": "Frisoane și durere de cap."
+                }
+            ],
+            "outings": [
+                {
+                    "date": "1585409621",
+                    "Motivul deplasării": "Cumpărături",
+                    "Ora plecării": "13:00",
+                    "Ora sosirii": "14:30",
+                    "Contact cu pacient": "Da"
+                },
+                {
+                    "date": "1585409621",
+                    "Motivul deplasării": "Farmacie",
+                    "Ora plecării": "16:00",
+                    "Ora sosirii": "17:00",
+                    "Contact cu pacient": "Nu"
+                },
+                {
+                    "date": "1585409621",
+                    "Motivul deplasării": "-",
+                    "Ora plecării": "-",
+                    "Ora sosirii": "-",
+                    "Contact cu pacient": "-"
+                },
+                {
+                    "date": "1585409621",
+                    "Motivul deplasării": "Cumpărături",
+                    "Ora plecării": "13:00",
+                    "Ora sosirii": "14:45",
+                    "Contact cu pacient": "Nu"
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "profile": {
+                "name": {"label": "Nume si prenume", "value": "Ioana Marinescu"},
+                "phoneNumber": {"label": "Numar de telefon", "value": "-"},
+                "location": {"label": "Judet, localitate", "value": "Iasi, Pascani"},
+                "age": {"label": "Varsta in ani impliniti", "value": "81"},
+                "gender": {"label": "Genul", "value": "feminin"},
+                "smoking": {"label":"Fumator", "value": false},
+                "comorbidities": {"label": "Afectiuni agravante", "value": "Diabet"},
+                "livingAlone": {"label": "Locuiesti singur", "value": true},
+                "inIsolation": {"label": "Izolare proprie la domiciliu", "value": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie"},
+                "othersInHouseholdIsolation": {"label": "Izolare alte persoane la domiciliu", "value": "-"},
+                "relationship": {"label":"Tip de relatie", "value": "matusa"},
+                "others": []
+            },
+            "temperature": [
+                {
+                    "id": "134",
+                    "date": "1584198000",
+                    "temperature": 36.6
+                  },
+                  {
+                    "id": "136",
+                    "date": "1584284400",
+                    "temperature": 39
+                  },
+                  {
+                    "id": "139",
+                    "date": "1584370800",
+                    "temperature": 35
+                  },
+                  {
+                    "id": "140",
+                    "date": "1584543600",
+                    "temperature": 35
+                  },
+                  {
+                    "id": "141",
+                    "date": "1584630000",
+                    "temperature": 35
+                  },
+                  {
+                    "id": "142",
+                    "date": "1584716400",
+                    "temperature": 35
+                  },
+                  {
+                    "id": "143",
+                    "date": "1584802800",
+                    "temperature": 35
+                  },
+                  {
+                    "id": "144",
+                    "date": "1584889200",
+                    "temperature": 39
+                  },
+                  {
+                    "id": "145",
+                    "date": "1584975600",
+                    "temperature": 39
+                  },
+                  {
+                    "id": "146",
+                    "date": "1585062000",
+                    "temperature": 39
+                  }
+            ],
+            "symptoms": [
+                {
+                    "date": "1585409621",
+                    "soreThroat": true,
+                    "cough": false,
+                    "shortnessBreath": false,
+                    "runningNose": false
+                },
+                {
+                    "date": "1585409621",
+                    "soreThroat": true,
+                    "cough": false,
+                    "shortnessBreath": false,
+                    "runningNose": false
+                },
+                {
+                    "date": "1585409621",
+                    "soreThroat": true,
+                    "cough": false,
+                    "shortnessBreath": false,
+                    "runningNose": false
+                },
+                {
+                    "date": "1585409621",
+                    "soreThroat": true,
+                    "cough": false,
+                    "shortnessBreath": false,
+                    "runningNose": false
+                }
+            ],
+            "otherSymptoms": [
+                {
+                    "date": "1585409621",
+                    "otherSimptoms": "Frisoane și durere de cap."
+                },
+                {
+                    "date": "1585409621",
+                    "otherSimptoms": "Frisoane și durere de cap."
+                },
+                {
+                    "date": "1585409621",
+                    "otherSimptoms": "Frisoane și durere de cap."
+                },
+                {
+                    "date": "1585409621",
+                    "otherSimptoms": "Frisoane și durere de cap."
+                }
+            ],
+            "outings": [
+                {
+                    "date": "1585409621",
+                    "Motivul deplasării": "Cumpărături",
+                    "Ora plecării": "13:00",
+                    "Ora sosirii": "14:30",
+                    "Contact cu pacient": "Da"
+                },
+                {
+                    "date": "1585409621",
+                    "Motivul deplasării": "Farmacie",
+                    "Ora plecării": "16:00",
+                    "Ora sosirii": "17:00",
+                    "Contact cu pacient": "Nu"
+                },
+                {
+                    "date": "1585409621",
+                    "Motivul deplasării": "-",
+                    "Ora plecării": "-",
+                    "Ora sosirii": "-",
+                    "Contact cu pacient": "-"
+                },
+                {
+                    "date": "1585409621",
+                    "Motivul deplasării": "Cumpărături",
+                    "Ora plecării": "13:00",
+                    "Ora sosirii": "14:45",
+                    "Contact cu pacient": "Nu"
+                }
+            ]
+        }
+    ]
+}
