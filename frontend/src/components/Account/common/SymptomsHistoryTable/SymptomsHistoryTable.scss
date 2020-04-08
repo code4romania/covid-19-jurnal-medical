@@ -1,0 +1,15 @@
+.result-history-table {
+    font-size: 14px;
+}
+.result-history-table thead tr th{
+    color: #3C2653 !important;
+    font-weight: normal;
+}
+td svg {
+    display: none;;
+}
+
+td:first-child {
+    font-weight: bold;;
+    width: 200px;
+}
