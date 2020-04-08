@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -43,7 +43,9 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            var identityUrl = Configuration.GetValue<string>("InternalIdentityServerUrl");
+
+            var identityUrl = Configuration.GetValue<string>("IdentityServerUrl");
+
             var apiSchemes = new List<ApiAuthenticationScheme>(); 
 
             Configuration.GetSection("ApiConfiguration").Bind(apiSchemes);
@@ -87,17 +89,23 @@ namespace Api
 
             services.AddPostgreSqlDbContext(Configuration);
 
+            //RegisterDbContexts(services);
+            
             services.AddScoped<IFormService, FormService>();
             services.AddScoped<IUserService, UserService>();
             services.AddSingleton<IAssessmentFormProvider, StaticFileAssessmentFormProvider>();
             services.AddScoped<IAssessmentService, AssessmentService>();
+            services.AddScoped<ICountiesService, CountiesService>();
 
             services.ConfigureSwagger(Configuration);
         }
 
-        public void Configure(IApplicationBuilder app, UserDbContext dbContext)
+        public void Configure(IApplicationBuilder app, UserDbContext dbContext, CountiesDbContext countiesDbContext)
         {
             dbContext.Database.Migrate();
+            countiesDbContext.Database.Migrate();
+
+            SeedData(countiesDbContext);
 
             app.UseRouting();
             app.UseExceptionHandler(appError =>
@@ -145,6 +153,19 @@ namespace Api
                 };
 
             });
+        }
+
+        private void RegisterDbContexts(IServiceCollection services)
+        {
+            using(var serviceProvider = services.BuildServiceProvider())
+            {
+                using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    var countiesContext = scope.ServiceProvider.GetService<CountiesDbContext>();
+
+                    DbInitializer.SeedCountiesCitiesData(countiesContext);
+                }
+            }
         }
     }
 }

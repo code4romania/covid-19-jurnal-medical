@@ -11,6 +11,8 @@ namespace StamAcasa.Api.Extensions
         {
             services.AddDbContextPool<UserDbContext>(options =>
                 options.UseNpgsql(config.GetConnectionString("UserDBConnection")));
+            services.AddDbContextPool<CountiesDbContext>(options =>
+                options.UseNpgsql(config.GetConnectionString("CountiesDBConnection")));
         }
     }
 }

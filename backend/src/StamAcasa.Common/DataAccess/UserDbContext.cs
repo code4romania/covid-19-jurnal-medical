@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 using StamAcasa.Common.Models;
 
 namespace StamAcasa.Common
@@ -9,8 +10,10 @@ namespace StamAcasa.Common
         {
 
         }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Form> Forms { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
