@@ -1,0 +1,28 @@
+.profile {
+    padding: 24px;
+    border: 1px solid #3C2653;
+    position: relative;
+    padding-top: 10px;
+    font-size: 14px;;
+
+    .header {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .content{
+        display: flex;
+    }
+    .left, .right {
+        flex: 1;
+    }
+    .left {
+        margin-right: 10px;
+    }
+    strong {
+        color: black;
+        font-weight: bold;
+    }
+    &__field {
+        margin-bottom: 10px;
+    }
+}

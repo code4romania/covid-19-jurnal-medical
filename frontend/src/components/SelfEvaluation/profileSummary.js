@@ -16,7 +16,7 @@ const getPersonalData = function(profile) {
     comorbidities: {
       label: "Alte afectiuni",
       value: profile.preexistingMedicalCondition
-        ? profile.preexistingMedicalCondition
+        ? [profile.preexistingMedicalCondition]
         : []
     },
     inIsolation: {
@@ -34,7 +34,7 @@ const ProfileSummary = ({ profile, dependants }) => {
   return (
     <div>
       <b>
-        Nume: {profile.name} {profile.surname}{" "}
+        Nume: {profile.name} {profile.surname}
       </b>
       <PersonalDataTable personalData={getPersonalData(profile)} />
       <div>
