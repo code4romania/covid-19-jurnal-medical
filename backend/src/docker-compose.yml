@@ -42,6 +42,8 @@ services:
     depends_on:
       - postgres
       - rabbitmq
+    container_name: identityserver
+    hostname: identityserver
 
   postgres:
     image: postgres
