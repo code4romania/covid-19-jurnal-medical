@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@code4ro/taskforce-fe-components": "^1.0.6",
+    "@code4ro/taskforce-fe-components": "^1.0.9",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bulma": "^0.8.1",
+    "date-fns": "^2.11.1",
     "chart.js": "^2.9.3",
     "oidc-client": "^1.10.1",
+    "query-string": "^6.12.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
@@ -24,11 +25,17 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint"
+    }
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(scss|png)$": "<rootDir>/src/__mocks__/styleMock.js"
     }
   },
   "eslintConfig": {
@@ -47,8 +54,11 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/dom": "^7.2.0",
+    "@testing-library/react": "^9.5.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "husky": "^4.2.3",

@@ -49,6 +49,14 @@ cd backend/src
 docker-compose up
 ```
 
+Alternatively:
+```
+cd backend/src
+docker-compose -f docker-compose-dep.yml up
+docker-compose -f docker-compose-services.yml -f docker-compose.override.yml up
+```
+Is also starting the frontend on port `5002`
+
 ### Frontend
 1. Install dependencies
 

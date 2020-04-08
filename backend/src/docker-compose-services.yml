@@ -8,6 +8,7 @@ services:
       dockerfile: StamAcasa.Api/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:80
+      - IdentityServerUrl=http://identityserver
     ports:
       - 5008:80
     depends_on:
@@ -21,8 +22,13 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:80
     build:
-        context: .
-        dockerfile: StamAcasa.IdentityServer/Dockerfile
+      context: .
+      dockerfile: StamAcasa.IdentityServer/Dockerfile
+    environment:
+        RABBITMQ__USER: admin
+        RABBITMQ__PASSWORD: Corona2020
+        RABBITMQ__HOSTNAME: rabbitmq
+        RABBITMQ__PORT: 5672
     ports:
       - 5001:80
 
@@ -47,3 +53,12 @@ services:
     build:
         context: .
         dockerfile: StamAcasa.EmailService/Dockerfile
+    environment:
+        RABBITMQ__USER: admin
+        RABBITMQ__PASSWORD: Corona2020
+        RABBITMQ__HOSTNAME: rabbitmq
+        RABBITMQ__PORT: 5672
+        SMTP__HOST: smtp.domain.com
+        SMTP__PORT: 587
+        SMTP__USER: email@domain.com
+        SMTP__PASSWORD: password

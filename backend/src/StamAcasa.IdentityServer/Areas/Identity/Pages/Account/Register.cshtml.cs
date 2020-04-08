@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using StamAcasa.Common.Models;
+using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services.Emailing;
 
 namespace IdentityServer.Pages.Account
@@ -26,20 +27,20 @@ namespace IdentityServer.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly IQueueService _queue;
         private readonly IConfiguration _configuration;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
+            IQueueService queueService,
             IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
+            _queue = queueService;
             _configuration = configuration;
         }
 
@@ -75,6 +76,20 @@ namespace IdentityServer.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+        private async Task SendRegistrationEmail(string userName, string callbackUrl) {
+            EmailRequestModel email = new EmailRequestModel()
+            {
+                Address = Input.Email,
+                PlaceholderContent = new Dictionary<string, string>(),
+                TemplateType = EmailTemplate.AccountConfirmation,
+                Type = "accountConfirmationTemplate"
+            };
+            email.PlaceholderContent.Add("name", userName);
+            email.PlaceholderContent.Add("confirmationLink", HtmlEncoder.Default.Encode(callbackUrl));
+
+            await _queue.PublishEmailRequest<EmailRequestModel>(email);
+        }
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -106,17 +121,7 @@ namespace IdentityServer.Pages.Account
                             values: new {area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl},
                             protocol: Request.Scheme);
 
-                        await _emailSender.SendAsync(
-                            new Email
-                            {
-                                To = Input.Email,
-                                Subject = "Confirm your email",
-                                Content = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.",
-                                FromName = _configuration.GetValue<string>("AdminFromName"),
-                                FromEmail = _configuration.GetValue<string>("AdminFromEmail")
-                            },
-                            default
-                        );
+                        await SendRegistrationEmail(user.UserName, callbackUrl);
 
                         return RedirectToPage("RegisterConfirmation", new {email = Input.Email});
                     }

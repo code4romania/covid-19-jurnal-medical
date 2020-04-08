@@ -7,7 +7,7 @@ using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services.Emailing;
 using StamAcasa.EmailService.EmailBuilder;
 
-namespace StamAcasa.EmailService
+namespace StamAcasa.EmailService.Worker
 {
     public class Worker : BackgroundService
     {
@@ -37,7 +37,6 @@ namespace StamAcasa.EmailService
 
 
                   _logger.LogInformation($"TO: {email.To}; Subject: {email.Subject}; Content: {email.Content}; Status: sending");
-
                   await _emailSender.SendAsync(email, cancellationToken);
 
                   _logger.LogInformation($"TO: {email.To}; Subject: {email.Subject}; Content: {email.Content}; Status: sent");

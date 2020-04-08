@@ -1,4 +1,4 @@
-version: '3.4'
+﻿version: '3.4'
 
 services:
   stamacasa.api:
@@ -83,5 +83,19 @@ services:
         RABBITMQ__USER: admin
         RABBITMQ__PASSWORD: Corona2020
         RABBITMQ__HOSTNAME: rabbitmq
+        RABBITMQ__PORT: 5672 
     depends_on:
+      - rabbitmq
+
+  stamacasa.jobscheduler:
+    image: ${DOCKER_REGISTRY-}stamacasa-jobscheduler
+    build:
+        context: .
+        dockerfile: StamAcasa.JobScheduler/Dockerfile    
+    environment:
+        RABBITMQ__USER: admin
+        RABBITMQ__PASSWORD: Corona2020
+        RABBITMQ__HOSTNAME: rabbitmq
+    depends_on:
+      - postgres
       - rabbitmq

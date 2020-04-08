@@ -1,0 +1,11 @@
+.tabs{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    .tab {
+        flex: 1;
+    }
+    @media (min-width: 457px) {
+        flex-direction: row;
+    }
+}
