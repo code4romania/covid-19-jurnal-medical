@@ -33,7 +33,11 @@ services:
   identityserver:
     image: ${DOCKER_REGISTRY-}stamacasa-identityserver
     environment:
-      - ASPNETCORE_URLS=http://+:80
+        ASPNETCORE_URLS: 'http://+:80'
+        RABBITMQ__USER: admin
+        RABBITMQ__PASSWORD: Corona2020
+        RABBITMQ__HOSTNAME: rabbitmq
+        RABBITMQ__PORT: 5672
     build:
         context: .
         dockerfile: StamAcasa.IdentityServer/Dockerfile
@@ -55,7 +59,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ${HOME}/postgres_data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
 
   frontend:
     image:  ${DOCKER_REGISTRY-}stamacasa
@@ -83,7 +87,11 @@ services:
         RABBITMQ__USER: admin
         RABBITMQ__PASSWORD: Corona2020
         RABBITMQ__HOSTNAME: rabbitmq
-        RABBITMQ__PORT: 5672 
+        RABBITMQ__PORT: 5672
+        SMTP__HOST: smtp.domain.com
+        SMTP__PORT: 587
+        SMTP__USER: email@domain.com
+        SMTP__PASSWORD: password
     depends_on:
       - rabbitmq
 

@@ -20,17 +20,18 @@ services:
   identityserver:
     image: ${DOCKER_REGISTRY-}stamacasa-identityserver
     environment:
-      - ASPNETCORE_URLS=http://+:80
-    build:
-      context: .
-      dockerfile: StamAcasa.IdentityServer/Dockerfile
-    environment:
+        ASPNETCORE_URLS: 'http://+:80'
         RABBITMQ__USER: admin
         RABBITMQ__PASSWORD: Corona2020
         RABBITMQ__HOSTNAME: rabbitmq
         RABBITMQ__PORT: 5672
+    build:
+      context: .
+      dockerfile: StamAcasa.IdentityServer/Dockerfile
     ports:
       - 5001:80
+    container_name: identityserver
+    hostname: identityserver
 
   frontend:
     image:  ${DOCKER_REGISTRY-}stamacasa
