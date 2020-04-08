@@ -62,7 +62,7 @@ resource "aws_ecs_task_definition" "main" {
       "secretOptions": null,
       "options": {
         "awslogs-group": "${aws_cloudwatch_log_group.main.name}",
-        "awslogs-region": "eu-central-1",
+        "awslogs-region": "${var.region}",
         "awslogs-stream-prefix": "ecs"
       }
     },

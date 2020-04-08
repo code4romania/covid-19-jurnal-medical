@@ -34,6 +34,7 @@ DOCUMENT
 resource "aws_iam_role_policy_attachment" "ecr_and_logs" {
   role       = aws_iam_role.ecs_execution.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+  #policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
 
 resource "aws_iam_role_policy_attachment" "use_ssm_parameter" {
@@ -56,21 +57,11 @@ data "aws_iam_policy_document" "use_ssm_parameter" {
   }
   statement {
     actions = [
-      "ssm:GetParameter*"
-    ]
-    #resources = [
-    #  aws_ssm_parameter.identitysrv_access_key_id.arn,
-    #  aws_ssm_parameter.identitysrv_secret_access_key.arn
-    #]
-    effect = "Allow"
-  }
-  statement {
-    actions = [
       "kms:Decrypt"
     ]
-    #resources = [
-    #  aws_kms_key.ssm_key.arn
-    #]
+    resources = [
+      aws_kms_key.ssm_key.arn
+    ]
     effect = "Allow"
   }
 }
@@ -99,6 +90,7 @@ module "front-end" {
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_FRONTEND
   prefix             = local.name
+  region             = var.region
 }
 
 module "api" {
@@ -122,6 +114,7 @@ module "api" {
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_API
   prefix             = local.name
+  region             = var.region
 }
 
 module "identitysrv" {
@@ -145,6 +138,7 @@ module "identitysrv" {
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_IDENTITYSERVER
   prefix             = local.name
+   region             = var.region
   /*secrets            = <<SECRETS
   [
     { "name": "AWS__APIKEY", "valueFrom": "${aws_ssm_parameter.identitysrv_access_key_id.arn}" },
@@ -172,5 +166,6 @@ module "postgres" {
   container_port     = 80
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_POSTGRES
-  prefix             = local.name  
+  prefix             = local.name
+  region             = var.region
 }
