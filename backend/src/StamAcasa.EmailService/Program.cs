@@ -37,7 +37,7 @@ namespace StamAcasa.EmailService
             {
 
                 var hostName = context.Configuration["RabbitMQ:HostName"];
-                var userName = context.Configuration["RabbitMQ:User"];
+                var userName = context.Configuration["RabbitMQ:UserName"];
                 var port = ushort.Parse(context.Configuration["RabbitMQ:Port"]);
                 var password = context.Configuration["RabbitMQ:Password"];
 
