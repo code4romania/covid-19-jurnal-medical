@@ -43,8 +43,9 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            var identityUrl = Configuration.GetValue<string>("IdentityServerUrl");
-            var apiSchemes = new List<ApiAuthenticationScheme>();
+            var identityUrl = Configuration.GetValue<string>("InternalIdentityServerUrl");
+            var apiSchemes = new List<ApiAuthenticationScheme>(); 
+
             Configuration.GetSection("ApiConfiguration").Bind(apiSchemes);
             var serviceBuilder = services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
             foreach (var authScheme in apiSchemes)
