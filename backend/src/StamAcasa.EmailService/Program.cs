@@ -1,4 +1,5 @@
 using EasyNetQ;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -62,6 +63,7 @@ namespace StamAcasa.EmailService
                     )
                 );
 
+                services.AddSingleton<IMemoryCache, MemoryCache>();
                 services.AddSingleton<ITemplateFileSelector, TemplateFileSelector>();
                 services.AddTransient<IEmailBuilderService, EmailBuilderService>();
                 services.AddSingleton<IQueueService, QueueService>();
