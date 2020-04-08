@@ -78,7 +78,7 @@ namespace StamAcasa.Common.Services
                 .Include("DependentUsers")
                 .FirstOrDefaultAsync(u => u.Sub == sub);
 
-            var result = user?.DependentUsers?.Select(d => _mapper.Map<UserInfo>(d));
+            var result = user?.DependentUsers?.Select(d => _mapper.Map<UserInfo>(d)) ?? new UserInfo[0];
             return result;
         }
 
