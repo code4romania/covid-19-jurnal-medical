@@ -57,11 +57,21 @@ data "aws_iam_policy_document" "use_ssm_parameter" {
   }
   statement {
     actions = [
+      "ssm:GetParameter*"
+    ]
+    #resources = [
+    #  aws_ssm_parameter.identitysrv_access_key_id.arn,
+    #  aws_ssm_parameter.identitysrv_secret_access_key.arn
+    #]
+    effect = "Allow"
+  }
+  statement {
+    actions = [
       "kms:Decrypt"
     ]
-    resources = [
-      aws_kms_key.ssm_key.arn
-    ]
+    #resources = [
+    #  aws_kms_key.ssm_key.arn
+    #]
     effect = "Allow"
   }
 }
@@ -90,7 +100,10 @@ module "front-end" {
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_FRONTEND
   prefix             = local.name
+<<<<<<< Updated upstream
   region             = var.region
+=======
+>>>>>>> Stashed changes
 }
 
 module "api" {
@@ -114,7 +127,10 @@ module "api" {
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_API
   prefix             = local.name
+<<<<<<< Updated upstream
   region             = var.region
+=======
+>>>>>>> Stashed changes
 }
 
 module "identitysrv" {
@@ -138,7 +154,10 @@ module "identitysrv" {
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_IDENTITYSERVER
   prefix             = local.name
+<<<<<<< Updated upstream
    region             = var.region
+=======
+>>>>>>> Stashed changes
   /*secrets            = <<SECRETS
   [
     { "name": "AWS__APIKEY", "valueFrom": "${aws_ssm_parameter.identitysrv_access_key_id.arn}" },
@@ -166,6 +185,5 @@ module "postgres" {
   container_port     = 80
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_POSTGRES
-  prefix             = local.name
-  region             = var.region
+  prefix             = local.name  
 }

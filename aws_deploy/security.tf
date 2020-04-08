@@ -52,8 +52,11 @@ resource "aws_security_group" "intra" {
     Name = "${local.name}-intra"
   }
 
+<<<<<<< Updated upstream
 }
 resource "aws_kms_key" "ssm_key" {
   description         = "${local.name} key for SSM parameters"
   enable_key_rotation = true
+=======
+>>>>>>> Stashed changes
 }

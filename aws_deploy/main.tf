@@ -39,6 +39,7 @@ locals {
 
   domain_postgres = "${var.workspace == "production" ? local.subdomains_postgres[0]
   : var.workspace == "staging" ? local.subdomains_postgres[1] : local.subdomains_postgres[2]}"
+<<<<<<< Updated upstream
 }
 
 terraform {
@@ -51,3 +52,8 @@ terraform {
     encrypt        = true
   }
 }
+=======
+
+
+}
+>>>>>>> Stashed changes
