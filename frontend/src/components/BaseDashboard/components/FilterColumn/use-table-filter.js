@@ -7,7 +7,7 @@ const useTableFilter = items => {
   Object.keys(copy).forEach(key => (copy[key] = []));
   const [filters, setFilters] = useState([]);
 
-  useEffect(() => setFilters(copy), []);
+  useEffect(() => setFilters(copy), [items[0]]);
 
   const filteredItems = React.useMemo(() => {
     return items.filter(item =>

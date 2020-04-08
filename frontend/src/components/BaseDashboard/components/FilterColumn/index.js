@@ -14,16 +14,12 @@ const FilterColumn = ({ name, values, handleSelect, selectedValues }) => {
   useOutsideClick(ref, () => setIsVisible(false));
 
   useEffect(() => {
-    setSearchResults(uniqueValues);
-  }, []);
-
-  useEffect(() => {
     setSearchResults(
       uniqueValues.filter(item =>
         item.toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
-  }, [searchTerm]);
+  }, [searchTerm, values]);
 
   const handleChange = event => {
     setSearchTerm(event.target.value);
