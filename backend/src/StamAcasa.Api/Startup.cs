@@ -88,8 +88,6 @@ namespace Api
             services.AddAutoMapper(typeof(Startup), typeof(UserDbContext));
 
             services.AddPostgreSqlDbContext(Configuration);
-
-            //RegisterDbContexts(services);
             
             services.AddScoped<IFormService, FormService>();
             services.AddScoped<IUserService, UserService>();
@@ -155,17 +153,9 @@ namespace Api
             });
         }
 
-        private void RegisterDbContexts(IServiceCollection services)
+        private void SeedData(CountiesDbContext countiesContext)
         {
-            using(var serviceProvider = services.BuildServiceProvider())
-            {
-                using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                {
-                    var countiesContext = scope.ServiceProvider.GetService<CountiesDbContext>();
-
-                    DbInitializer.SeedCountiesCitiesData(countiesContext);
-                }
-            }
+            DbInitializer.SeedCountiesCitiesData(countiesContext);
         }
     }
 }

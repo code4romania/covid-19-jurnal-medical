@@ -6,6 +6,10 @@
     <UserSecretsId>13e30793-8da9-45bb-ae6a-172d231d80de</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'SelfHost' ">
+    <StartAction>Project</StartAction>
+    <ApplicationURL>http://localhost:5002</ApplicationURL>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="EasyNetQ" Version="3.7.1" />
     <PackageReference Include="IdentityServer4.AspNetIdentity" Version="3.1.2" />

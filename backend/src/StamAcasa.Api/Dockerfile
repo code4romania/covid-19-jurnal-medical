@@ -20,13 +20,8 @@ RUN dotnet publish "StamAcasa.Api.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY ["StamAcasa.Api/StamAcasa.Api.xml", "StamAcasa.Api.XML"]
-<<<<<<< HEAD
 COPY ["StamAcasa.Common/CountiesImporter/counties.json", "data/counties.json"]
 COPY ["StamAcasa.Common/CountiesImporter/cities.json", "data/cities.json"]
-=======
-COPY ["StamAcasa.Common/CountiesImporter/counties.json", "counties.json"]
-COPY ["StamAcasa.Common/CountiesImporter/cities.json", "cities.json"]
->>>>>>> 2e9a296... #127
 COPY --from=publish /app/publish .
 
 RUN chmod -R 1744 /app

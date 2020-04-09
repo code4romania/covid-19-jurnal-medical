@@ -32,16 +32,8 @@
 
         <PackageReference Include="SendGrid" Version="9.13.1" />
     </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CountiesImporter\" />
-    <Folder Include="DataAccess\" />
-  </ItemGroup>
-<<<<<<< HEAD
-=======
-
-  <ItemGroup>
-    <Folder Include="CountiesImporter\" />
-  </ItemGroup>
->>>>>>> 1977232... WIP #127
+      <ItemGroup>
+        <Folder Include="CountiesImporter\" />
+        <Folder Include="DataAccess\" />
+      </ItemGroup>
 </Project>

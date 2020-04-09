@@ -9,8 +9,8 @@ namespace StamAcasa.Common.CountiesImporter
     public static class CountiesImporter
     {
 
-        private const string CountiesFilename = "judete.json";
-        private const string CitiesFilename = "orase.json";
+        private const string CountiesFilename = "data/counties.json";
+        private const string CitiesFilename = "data/cities.json";
 
         public static List<County> DeserializeCounties()
         {
