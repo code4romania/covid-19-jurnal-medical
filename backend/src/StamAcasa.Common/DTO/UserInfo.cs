@@ -7,6 +7,7 @@ namespace StamAcasa.Common.DTO {
         [JsonIgnore]
         public int? ParentId { get; set; }
         public string Name { get; set; }
+        [JsonIgnore]
         public string Email { get; set; }
         public string Surname { get; set; }
         public string PhoneNumber { get; set; }
