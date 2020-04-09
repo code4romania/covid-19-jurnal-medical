@@ -6,13 +6,14 @@ module "load-balancer" {
   subnets         = var.lb-subnets
   security_groups = var.lb-security_groups
   vpc_id          = var.vpc_id
+  certificate_arn = var.certificate_arn
 }
 
 resource "aws_ecs_service" "main" {
   name            = var.name
   cluster         = var.cluster
   task_definition = "${aws_ecs_task_definition.main.id}:${aws_ecs_task_definition.main.revision}"
-  desired_count   = 1
+  desired_count   = var.instance_count
   launch_type     = "FARGATE"
 
   network_configuration {
@@ -61,7 +62,7 @@ resource "aws_ecs_task_definition" "main" {
       "secretOptions": null,
       "options": {
         "awslogs-group": "${aws_cloudwatch_log_group.main.name}",
-        "awslogs-region": "${var.region}",
+        "awslogs-region": "eu-central-1",
         "awslogs-stream-prefix": "ecs"
       }
     },

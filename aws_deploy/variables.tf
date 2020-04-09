@@ -2,36 +2,43 @@ variable "az_count" {
   type    = number
   default = 2
 }
-variable "region" {
-  type = string
-  default = "eu-west-1"
-}
 
 variable "prefix" {
   type    = string
+<<<<<<< Updated upstream
   default = "stam-acasa"
-}
-
-variable "env" {
-  description = "environment DEV/Stage/Prod"
-  default = "dev"
+=======
+  default = "date-la-zi"
+>>>>>>> Stashed changes
 }
 
 variable "IMAGE_FRONTEND" {
   type = string
+  #default = "code4romania/stamacasa:develop"
   default = "code4romania/stamacasa:develop"
 }
 
 variable "IMAGE_API" {
   type = string
+  #default = "code4romania/stamacasa-api:develop"
   default = "code4romania/stamacasa-api:develop"
 }
 variable "IMAGE_IDENTITYSERVER" {
   type = string
+  #default = "code4romania/stamacasa-identityserver:develop"
   default = "code4romania/stamacasa-identityserver:develop"
 }
 variable "IMAGE_POSTGRES" {
   type = string
-  default = "postgres:default"
+  default = "postgres"
 }
-
+variable "region" {
+<<<<<<< Updated upstream
+  default = "eu-west-2"
+=======
+  default = "eu-west-1"
+>>>>>>> Stashed changes
+}
+variable "workspace" {
+  default = "develop"
+}
