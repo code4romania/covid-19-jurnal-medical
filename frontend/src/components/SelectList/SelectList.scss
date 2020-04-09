@@ -1,0 +1,15 @@
+.select-list {
+  display: flex;
+  flex-direction: column;
+  .select-option {
+    margin: 0.3em;
+    background: #ffffff;
+    border: 1px solid #e7e7e7;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.07);
+    border-radius: 4px;
+    padding: 0.5em;
+    &.selected {
+      background: #05d6c7; // Todo: needs review
+    }
+  }
+}

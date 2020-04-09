@@ -1,81 +1,229 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+import "./AddMember.scss";
 import {
-  Hero,
+  ListHeader,
   Button,
   Input,
-  Select,
-  RadioList
+  Select
 } from "@code4ro/taskforce-fe-components";
-import SidebarLayout from "../SidebarLayout";
-import "./AddMember.scss";
-export const AddMember = () => {
-  const [preexistingConditions, setPreexistingConditions] = useState(false);
-  const [disabilities, setDisabilities] = useState(false);
-  const [female, setFemale] = useState(true);
+import ProfileApi from "../../api/profileApi";
+import SelectList from "../SelectList";
 
-  //TODO: change with api endpoints responses when they are available
+const AddMember = () => {
   const options = {
     gender: [
+      { key: "", text: "Genul", disabled: true, selected: true },
       { key: "1", text: "Feminin" },
       { key: "2", text: "Masculin" }
     ],
-    relationship: {
-      female: [
-        { text: "", value: "" },
-        { text: "Bunică", value: "1" },
-        { text: "Mamă", value: "2" },
-        { text: "Fiica", value: "3" },
-        { text: "Soră", value: "4" },
-        { text: "Alt membru al familiei", value: "5" },
-        { text: "Persoană în grijă", value: "6" }
-      ],
-      male: [
-        { text: "", value: "" },
-        { text: "Bunic", value: "1" },
-        { text: "Tată", value: "2" },
-        { text: "Fiu", value: "3" },
-        { text: "Frate", value: "4" },
-        { text: "Alt membru al familiei", value: "5" },
-        { text: "Persoană în grijă", value: "6" }
-      ]
-    },
-    yesNo: [
-      { key: "true", value: "Da" },
-      { key: "false", value: "Nu" }
+    county: [
+      { key: "", text: "Judet", disabled: true, selected: true },
+      { key: "1", text: "București" }
     ],
-    preexistingConditions: [
-      { value: "1", text: "Boală cardiovasculară" },
+    relation: [
+      { value: "-1", text: "Tip relație", disabled: true, selected: true },
+      { value: "0", text: "Părinte" },
+      { value: "1", text: "Copil" },
+      { value: "2", text: "Bunic\\Bunică" },
+      { value: "3", text: "Vecin\\Vecină" },
+      { value: "4", text: "Altele" }
+    ],
+    city: [
+      { key: "", text: "Localitate", disabled: true, selected: true },
+      { key: "1", text: "București" }
+    ],
+    yesNo: [
+      { value: true, text: "Da" },
+      { value: false, text: "Nu" }
+    ],
+    preexistingMedicalCondition: [
+      {
+        value: "1",
+        text: "O boală de inimă (boală cardiovasculară, înclusiv hipertensiune"
+      },
       { value: "2", text: "Diabet" },
-      { value: "3", text: "Boală pulmonară" },
+      { value: "3", text: "O boală a plămânilor" },
       { value: "4", text: "Cancer" },
       { value: "5", text: "Altă boală cronică" }
     ],
-    isolation: [
-      { key: "1", value: "Auto izolare" },
-      { key: "2", value: "Carantină la domiciliu" },
-      { key: "3", value: "Carantină specializată" },
-      { key: "4", value: "Niciuna" }
+    quarantineStatus: [
+      { value: "1", text: "Da, sunt în izolare, nu ies deloc din locuință" },
+      {
+        value: "2",
+        text: "Stau mai mult pe acasă, dar mai ies atunci când este nevoie"
+      },
+      {
+        value: "3",
+        text: "Nu sunt în izolare și ies din locuință după program normal"
+      },
+      {
+        value: "4",
+        text: "Altă situație"
+      }
     ]
   };
 
-  const toggleSex = event => {
-    setFemale(event.target.value === "Feminin");
+  const [currentStep, setCurrentStep] = useState(0);
+  const [userData, setUserData] = useState({
+    name: "",
+    surname: "",
+    phoneNumber: "",
+    relationType: 0,
+    age: 0,
+    gender: 0,
+    smoker: false,
+    preexistingMedicalCondition: "",
+    livesWithOthers: false,
+    quarantineStatus: 0,
+    quarantineStatusOther: 0
+  });
+
+  const setUserDataField = (field, value) => {
+    setUserData({
+      ...userData,
+      [field]: value
+    });
   };
 
-  const togglePreexistingConditions = value => {
-    setPreexistingConditions(value === "Da");
-  };
+  const personalDataForm = (
+    <>
+      <ListHeader title="I. Date personale"></ListHeader>
+      <div className="user-profile-form-container">
+        <Input
+          type="text"
+          label={"Nume"}
+          usePlaceholder
+          defaultValue={userData.name}
+          onChange={({ currentTarget: { value } }) => {
+            setUserDataField("name", value);
+          }}
+        />
+        <Input
+          type="text"
+          label={"Prenume"}
+          usePlaceholder
+          defaultValue={userData.surname}
+          onChange={({ currentTarget: { value } }) => {
+            setUserDataField("surname", value);
+          }}
+        />
+        <Input
+          type="text"
+          label={"Număr de telefon"}
+          usePlaceholder
+          defaultValue={userData.phoneNumber}
+          onChange={({ currentTarget: { value } }) => {
+            setUserDataField("phoneNumber", value);
+          }}
+        />
+        <Select
+          placeholder="Tip de relație"
+          options={options.relation}
+          selectProps={{
+            onChange: ({ currentTarget: { selectedIndex } }) => {
+              setUserDataField("relationType", selectedIndex);
+            }
+          }}
+        ></Select>
+        <Select
+          placeholder="Judet"
+          options={options.county}
+          selectProps={{
+            onChange: ({ currentTarget: { selectedIndex } }) => {
+              setUserDataField("county", selectedIndex);
+            }
+          }}
+        ></Select>
+        <Select
+          placeholder="Localitate"
+          options={options.city}
+          selectProps={{
+            onChange: ({ currentTarget: { selectedIndex } }) => {
+              setUserDataField("city", selectedIndex);
+            }
+          }}
+        ></Select>
+        <Input
+          type="text"
+          label={"Vârstă în ani împliniți"}
+          usePlaceholder
+          value={userData.age}
+          onChange={({ currentTarget: { value } }) => {
+            setUserDataField("age", value);
+          }}
+        />
+        <Select
+          placeholder="Genul"
+          options={options.gender}
+          selectProps={{
+            onChange: ({ currentTarget: { selectedIndex } }) => {
+              setUserDataField("gender", selectedIndex);
+            }
+          }}
+        ></Select>
+      </div>
+    </>
+  );
+  const healthDataForm = (
+    <>
+      <ListHeader title="II. Date despre starea ta de sănătate"></ListHeader>
+      <ListHeader title="Ești fumător?"></ListHeader>
+      <SelectList
+        options={options.yesNo}
+        onChange={([value]) => setUserDataField("smoker", value)}
+      ></SelectList>
+      <ListHeader title="Ți-a spus vreun medic că ai oricare dintre următoarele afecțiuni?"></ListHeader>
+      <SelectList
+        options={options.preexistingMedicalCondition}
+        multiple={true}
+        onChange={value => {
+          setUserDataField(
+            "preexistingMedicalCondition",
+            value
+              .map(
+                key =>
+                  options.preexistingMedicalCondition.find(x => x.value === key)
+                    .text
+              )
+              .join(", ")
+          );
+        }}
+      ></SelectList>
+    </>
+  );
+  const contextDataForm = (
+    <>
+      <ListHeader title="III. Date despre contextul în care te afli"></ListHeader>
+      <ListHeader title="În momentul de față te afli în izolare la domiciliu?"></ListHeader>
+      <SelectList
+        options={options.quarantineStatus}
+        onChange={value =>
+          setUserDataField("quarantineStatus", parseInt(value, 10))
+        }
+      ></SelectList>
+      <ListHeader title="În momentul de față împarți locuința și cu alte persoane?"></ListHeader>
+      <SelectList
+        options={options.yesNo}
+        onChange={([value]) => setUserDataField("livesWithOthers", value)}
+      ></SelectList>
+      <ListHeader title="Celelalte persoane se află în izolare la domiciliu?"></ListHeader>
+      <SelectList
+        options={options.quarantineStatus}
+        onChange={value =>
+          setUserDataField("quarantineStatusOther", parseInt(value, 10))
+        }
+      ></SelectList>
+    </>
+  );
+  const steps = [personalDataForm, healthDataForm, contextDataForm];
 
-  const toggleDisabilities = value => {
-    setDisabilities(value === "Da");
-  };
-
-  const validateAge = event => {
-    const value = parseInt(event.target.value.replace(/[^0-9]+/g, ""));
-    // age range is between 0 and 110 - might be worth reconsidering?
-    const boundedValue = Math.min(110, Math.max(0, value));
-
-    event.target.value = isNaN(boundedValue) ? "" : boundedValue;
+  const nextStepHandler = () => {
+    if (currentStep < steps.length - 1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      ProfileApi.addDependant(userData);
+    }
   };
 
   const submitForm = e => {
@@ -84,90 +232,17 @@ export const AddMember = () => {
   };
 
   return (
-    <SidebarLayout>
-      <form onSubmit={submitForm}>
-        <div className="add-member">
-          <Hero
-            title="Creează cont pentru un membru al familiei"
-            subtitle="Înregistrează un membru al familiei care nu poate accesa platforma și ajută-l să își facă evaluarea zilnică a simptomelor COVID-19."
-          />
-          <Input label="Nume și prenume" type="text" required={true} />
-          <div className="columns">
-            <div className="column is-3">
-              <Input
-                label="Vârstă"
-                type="text"
-                onChange={validateAge}
-                required={true}
-              />
-            </div>
-            <div className="column is-3">
-              <Select
-                label="Gen"
-                options={options.gender}
-                selectProps={{
-                  onChange: toggleSex,
-                  className: "is-extended"
-                }}
-              />
-            </div>
-          </div>
-          <div className="columns">
-            <div className="column is-6">
-              <Select
-                label="Legătura familiala"
-                options={
-                  female
-                    ? options.relationship.female
-                    : options.relationship.male
-                }
-              />
-            </div>
-          </div>
-          <RadioList
-            label="Are condiții de sănătate preexistente?"
-            description="Spune-ne dacă suferă de anumte boli cronice, diabet, hipertensiune, etc."
-            type="horizontal"
-            options={options.yesNo}
-            onChange={togglePreexistingConditions}
-            required={true}
-          />
-          {preexistingConditions && (
-            <div className="column is-6 is-multiple">
-              <Select
-                label="Condiții de sănătate preexistente"
-                options={options.preexistingConditions}
-                selectProps={{ multiple: "multiple" }}
-              />
-            </div>
-          )}
-          <RadioList
-            label="Are anumite dizabilități?"
-            description="Spune-ne dacă sferă de anumite dizabilitati Ex locomotorii, mentale, de vorbire, etc."
-            type="horizontal"
-            options={options.yesNo}
-            onChange={toggleDisabilities}
-          />
-          {disabilities && (
-            <Input label="Dizabilități" type="text" required={true} />
-          )}
-          <RadioList
-            label="În ultima perioadă a fost în:"
-            type="horizontal"
-            options={options.isolation}
-          />
-
-          <div className="columns">
-            <div className="column is-4 is-offset-8">
-              <Button type="primary" size="medium" inputType="submit">
-                Adaugă
-              </Button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </SidebarLayout>
+    <form onSubmit={submitForm} className="user-profile-form">
+      {steps[currentStep]}
+      <Button type="button" onClick={nextStepHandler}>
+        Continuă
+      </Button>
+    </form>
   );
+};
+
+AddMember.propTypes = {
+  evaluateCallback: PropTypes.func
 };
 
 export default AddMember;
