@@ -1,23 +1,36 @@
-.select, select{
-    width: 100%
-}
+.user-profile-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  .user-profile-form-container {
+    width: 100%;
+    padding: 1rem;
+  }
 
-.add-member {
-    .subtitle {
-        &.is-2 {
-            font-size: 1rem;
-        }
+  * {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
 
-        &:not(:last-child) {
-            margin-bottom: 0.5rem;
-        }
-    }
+  input,
+  select,
+  option {
+    text-align: center;
+    width: 100%;
+  }
 
-    .is-multiple .select {
-        height: auto;
+  select {
+    text-align-last: center;
+  }
 
-        &:after {
-            display: none;
-        }
-    }
+  button {
+    background: #ffbd59;
+    width: 50%;
+  }
+  .list-header {
+    background: #3c2653;
+    text-align: center;
+  }
 }

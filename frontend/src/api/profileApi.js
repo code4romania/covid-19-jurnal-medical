@@ -10,6 +10,9 @@ const ProfileApi = {
     const result = await api.get("/profile/family");
 
     return result.data;
+  },
+  addDependant: async profile => {
+    await api.post("/profile/family", profile);
   }
 };
 
