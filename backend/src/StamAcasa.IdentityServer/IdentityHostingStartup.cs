@@ -2,6 +2,7 @@
 using IdentityServer.Data;
 using IdentityServerAspNetIdentity;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,7 @@ namespace IdentityServer
                 var emailConfirmation = context.Configuration.GetValue<bool>("EnableEmailConfirmation");
                 services.AddDefaultIdentity<ApplicationUser>(options =>
                         options.SignIn.RequireConfirmedAccount = emailConfirmation)
+                    .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
                 SeedData.EnsureSeedData(context.Configuration.GetConnectionString("ApplicationDbContextConnection"));

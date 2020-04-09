@@ -37,6 +37,10 @@ namespace IdentityServerAspNetIdentity
                     context.Database.Migrate();
 
                     var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                    var adminRole = CreateRole("Admin", roleManager);
+
                     var alice = userMgr.FindByNameAsync("alice@test.com").Result;
                     if (alice == null)
                     {
@@ -64,6 +68,14 @@ namespace IdentityServerAspNetIdentity
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
+
+                        result = userMgr.AddToRoleAsync(alice, adminRole.Name).Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+
+
                         Log.Debug("alice created");
                     }
                     else
@@ -99,6 +111,12 @@ namespace IdentityServerAspNetIdentity
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
+
+                        result = userMgr.AddToRoleAsync(bob, adminRole.Name).Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
                         Log.Debug("bob created");
                     }
                     else
@@ -107,6 +125,24 @@ namespace IdentityServerAspNetIdentity
                     }
                 }
             }
+        }
+
+        private static IdentityRole CreateRole(string roleName, RoleManager<IdentityRole> roleManager)
+        {
+            var role = roleManager.FindByNameAsync(roleName).Result;
+            if (role == null)
+            {
+                var identityRole = new IdentityRole(roleName);
+                var result = roleManager.CreateAsync(identityRole).Result;
+                if (!result.Succeeded)
+                {
+                    throw new Exception(result.Errors.First().Description);
+                }
+
+                return identityRole;
+            }
+
+            return role;
         }
     }
 }
