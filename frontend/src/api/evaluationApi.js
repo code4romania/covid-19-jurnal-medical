@@ -1,4 +1,3 @@
-// import selfEvaluation from "../data/personal-assesment.json";
 import otherEvaluation from "../data/other-assesment.json";
 import api from "./api";
 
