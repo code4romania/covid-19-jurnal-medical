@@ -100,10 +100,7 @@ module "front-end" {
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_FRONTEND
   prefix             = local.name
-<<<<<<< Updated upstream
   region             = var.region
-=======
->>>>>>> Stashed changes
 }
 
 module "api" {
@@ -127,10 +124,7 @@ module "api" {
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_API
   prefix             = local.name
-<<<<<<< Updated upstream
   region             = var.region
-=======
->>>>>>> Stashed changes
 }
 
 module "identitysrv" {
@@ -150,21 +144,10 @@ module "identitysrv" {
   certificate_arn = aws_acm_certificate.identitysrv.arn
 
   container_port     = 80
-  #task_role_arn      = aws_iam_role.ecs_instance.arn
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_IDENTITYSERVER
   prefix             = local.name
-<<<<<<< Updated upstream
-   region             = var.region
-=======
->>>>>>> Stashed changes
-  /*secrets            = <<SECRETS
-  [
-    { "name": "AWS__APIKEY", "valueFrom": "${aws_ssm_parameter.identitysrv_access_key_id.arn}" },
-    { "name": "AWS__SECRET", "valueFrom": "${aws_ssm_parameter.identitysrv_secret_access_key.arn}" }
-  ]
-SECRETS
-*/
+   region             = var.region  
 }
 module "postgres" {
   source = "./service"

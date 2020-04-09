@@ -65,9 +65,6 @@ variable "instance_count" {
   type    = number
   default = 1
 }
-<<<<<<< Updated upstream
 variable "region" {
   type = string
 }
-=======
->>>>>>> Stashed changes

@@ -5,11 +5,7 @@ variable "az_count" {
 
 variable "prefix" {
   type    = string
-<<<<<<< Updated upstream
   default = "stam-acasa"
-=======
-  default = "date-la-zi"
->>>>>>> Stashed changes
 }
 
 variable "IMAGE_FRONTEND" {
@@ -33,11 +29,7 @@ variable "IMAGE_POSTGRES" {
   default = "postgres"
 }
 variable "region" {
-<<<<<<< Updated upstream
   default = "eu-west-2"
-=======
-  default = "eu-west-1"
->>>>>>> Stashed changes
 }
 variable "workspace" {
   default = "develop"
