@@ -147,7 +147,7 @@ module "identitysrv" {
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_IDENTITYSERVER
   prefix             = local.name
-   region             = var.region  
+  region             = var.region  
 }
 module "postgres" {
   source = "./service"
