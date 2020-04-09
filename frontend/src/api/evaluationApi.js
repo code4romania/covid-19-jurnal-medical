@@ -1,4 +1,4 @@
-import selfEvaluation from "../data/personal-assesment.json";
+// import selfEvaluation from "../data/personal-assesment.json";
 import otherEvaluation from "../data/other-assesment.json";
 import api from "./api";
 
@@ -6,9 +6,10 @@ const EvaluationApi = {
   sendDependantEvaluationResult: (dependantId, formResults) =>
     api.post(`/form?id=${dependantId}`, formResults),
 
-  //in preparation for an api call so that nothing outside this method will change
-  // eslint-disable-next-line no-undef
-  getSelfEvaluationForm: async () => Promise.resolve(selfEvaluation),
+  getSelfEvaluationForm: async () => {
+    const res = await api.get("/form/version");
+    return JSON.parse(res.data.content);
+  },
 
   //in preparation for an api call so that nothing outside this method will change
   // eslint-disable-next-line no-undef
