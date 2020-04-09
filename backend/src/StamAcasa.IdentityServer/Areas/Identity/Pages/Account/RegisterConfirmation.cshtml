@@ -1,22 +1,18 @@
 ﻿@page
 @model IdentityServer.Pages.Account.RegisterConfirmationModel
 @{
-    ViewData["Title"] = "Register confirmation";
+    ViewData["Title"] = "Confirmare inregistrare";
 }
 
-<h1>@ViewData["Title"]</h1>
-@{
-    if (@Model.DisplayConfirmAccountLink)
-    {
-<p>
-    This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
-    Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
-</p>
-    }
-    else
-    {
-<p>
-     Vă rugăm să vă verificați căsuța de e-mail pentru finalizarea procesului de înregistrare.
-</p>
-    }
-}
+<div class="login-page">
+
+    <div class="login-form-wrapper">
+        <img src="~/stamacasa.svg" alt="logo" role="logo">
+        <div class="container __login-form-container">
+            <h1 class="subtitle is-size-2">Mulțumim!</h1>
+            <br/>
+            Vă rugăm să vă verificați căsuța de e-mail pentru finalizarea procesului de înregistrare.
+        </div>
+    </div>
+</div>
+
