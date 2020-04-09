@@ -1,16 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
-using NPOI.SS.UserModel;
-using NPOI.SS.Util;
-using NPOI.XSSF.UserModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NPOI.SS.UserModel;
+using NPOI.SS.Util;
+using NPOI.XSSF.UserModel;
 
-namespace StamAcasa.Api.Services.Excel {
+namespace StamAcasa.Common.Services.Excel {
     public partial class ExcelDocumentService : IExcelDocumentService {
 
         public class ExcelDocumentServiceOptions {
