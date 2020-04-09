@@ -6,6 +6,7 @@ import SymptomsHistoryTable from "../SymptomsHistoryTable/SymptomsHistoryTable.j
 import { TemperatureChart } from "@code4ro/taskforce-fe-components";
 
 import Table from "../Table/Table";
+import { Link } from "react-router-dom";
 
 export const ProfileHistory = ({ data, isSelf }) => {
   const symptomsHeaders = [
@@ -33,13 +34,7 @@ export const ProfileHistory = ({ data, isSelf }) => {
         în izolare. Parcurge întrebările și răspunde cu atenție. Pe măsură ce
         completezi, această pagină se va popula cu istoricul răspunsurilor tale.
         Poți completa
-        {
-          //todo: should set url once available
-        }
-        <a className="link" href="#">
-          formularul aici
-        </a>
-        .
+        <Link to="/evaluation/self"> formularul aici</Link>.
       </p>
       <h2 className="header">Istoric Simptome</h2>
       <div className="profile-history-content">

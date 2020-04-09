@@ -4,9 +4,8 @@ import Evaluation from "../Evaluation";
 import { Form } from "@code4ro/taskforce-fe-components";
 import FinishFormButton from "../Evaluation/finishFormButton";
 import IntroSelfEvaluation from "../SelfEvaluation/introSelfEvaluation";
-import IntroOtherEvaluation from "../OtherEvaluation/introOtherEvaluation";
 
-const EvaluationForm = ({ getForm, sendResults, introType }) => {
+const EvaluationForm = ({ getForm, sendResults }) => {
   const [started, setStarted] = useState(false);
   const [finished, setFinished] = useState(false);
   const [introData, setIntroData] = useState({});
@@ -15,9 +14,8 @@ const EvaluationForm = ({ getForm, sendResults, introType }) => {
   useEffect(() => {
     getForm().then(setEvaluationForm);
   }, [getForm]);
-  const evaluateCallback = (formState, options) => {
-    return options[0];
-  };
+
+  const evaluateCallback = (formState, options) => options[0];
 
   const onFinishingForm = result => {
     setFinished(true);
@@ -46,12 +44,7 @@ const EvaluationForm = ({ getForm, sendResults, introType }) => {
   } else {
     return (
       <Evaluation>
-        {introType === "SELF" && (
-          <IntroSelfEvaluation onFinish={onFinishingIntro} />
-        )}
-        {introType === "OTHER" && (
-          <IntroOtherEvaluation onFinish={onFinishingIntro} />
-        )}
+        <IntroSelfEvaluation onFinish={onFinishingIntro} />
       </Evaluation>
     );
   }

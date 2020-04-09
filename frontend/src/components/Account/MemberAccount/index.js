@@ -1,42 +1,45 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
-import queryString from "query-string";
+import { useParams } from "react-router-dom";
 import { Select } from "@code4ro/taskforce-fe-components";
 import "./MemberAccount.scss";
 
 import mockData from "../mockData/mockData";
 import ProfileHistory from "../common/ProfileHistory/ProfileHistory.js";
 
-export const MemberAccount = ({ data }) => {
-  const location = useLocation();
-  const familyMembers = data;
-  const defaultMember = familyMembers.length > 0 ? familyMembers[0] : undefined;
-  const [selectedMember, setSelectedMember] = useState(defaultMember);
+export const MemberAccount = ({ data: familyMembers }) => {
+  const { personId } = useParams();
+  const [selectedMember, setSelectedMember] = useState();
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    const queryParams = queryString.parse(location.search);
-    const personId = queryParams.personId;
-    const member =
-      familyMembers.find(member => member.id == personId) || defaultMember;
     setOptions(
-      data.map(person => {
-        return {
-          text: person.profile.name.value,
-          value: person.profile.name.value,
-          selected: person.id === member.id
-        };
-      })
+      familyMembers.map(person => ({
+        text: person.profile.name.value,
+        value: person.profile.name.value,
+        selected: selectedMember && person.id === selectedMember.id
+      }))
     );
-    setSelectedMember(member);
-  }, []);
+  }, [selectedMember, familyMembers]);
+
+  useEffect(() => {
+    if (!selectedMember) {
+      if (!personId && familyMembers.length) {
+        setSelectedMember(familyMembers[0]);
+      } else {
+        setSelectedMember(familyMembers.find(m => m.id === personId));
+      }
+    }
+  }, [selectedMember, personId, familyMembers]);
+
   const props = {
-    onChange: function(el) {
+    onChange: el => {
       const selectedPerson = familyMembers.find(
         person => person.profile.name.value === el.target.value
       );
-      setSelectedMember(selectedPerson ? selectedPerson : defaultMember);
+      if (selectedPerson) {
+        setSelectedMember(selectedPerson);
+      }
     }
   };
 
@@ -58,7 +61,7 @@ export const MemberAccount = ({ data }) => {
       <h1 className="member-profile__select">
         <Select label={"Alege persona"} selectProps={props} options={options} />
       </h1>
-      <ProfileHistory data={selectedMember} />;
+      {selectedMember && <ProfileHistory data={selectedMember} />}
     </div>
   );
 };

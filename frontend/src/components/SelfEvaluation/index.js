@@ -6,10 +6,7 @@ const SelfEvaluation = () => {
   return (
     <EvaluationForm
       getForm={EvaluationApi.getSelfEvaluationForm}
-      sendResults={formResults => {
-        EvaluationApi.sendSelfEvaluationResults(formResults);
-      }}
-      introType={"SELF"}
+      sendResults={EvaluationApi.sendSelfEvaluationResults}
     />
   );
 };

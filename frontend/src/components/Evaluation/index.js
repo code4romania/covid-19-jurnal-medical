@@ -12,9 +12,6 @@ const Evaluation = ({ children }) => {
           <TabTitle link={"/evaluation/self"}>
             <Hero title={"Formularul tau"} useFallbackIcon={true} />
           </TabTitle>
-          <TabTitle link={"/evaluation/other"}>
-            <Hero title={"Alte formulare"} useFallbackIcon={true} />
-          </TabTitle>
         </ul>
       </div>
       {children}

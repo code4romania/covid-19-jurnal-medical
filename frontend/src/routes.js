@@ -3,7 +3,6 @@ import About from "./components/About";
 import AddMember from "./components/AddMember";
 import SelfEvaluation from "./components/SelfEvaluation";
 import Account from "./components/Account";
-import OtherEvaluation from "./components/OtherEvaluation";
 
 import {
   signinCallback,
@@ -52,10 +51,6 @@ export const ROUTES = {
     selfevaluation: {
       path: "/evaluation/self",
       component: SelfEvaluation
-    },
-    otherevaluation: {
-      path: "/evaluation/other",
-      component: OtherEvaluation
     },
     addmember: {
       path: "/add-member",
