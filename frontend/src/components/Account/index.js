@@ -6,7 +6,7 @@ import SidebarLayout from "../SidebarLayout";
 
 import MyAccount from "./MyAccount";
 import MemberAccount from "./MemberAccount";
-import Tabs from "./common/Tabs/Tabs";
+import Tabs from "../Tabs/Tabs";
 import BasePage from "../BasePage";
 import { Hero } from "@code4ro/taskforce-fe-components";
 import StepsBar from "../StepsBar";
@@ -23,7 +23,8 @@ export const Account = () => {
       id: 1,
       title: "Alte persoane",
       content: <MemberAccount />,
-      url: "/account/other-members"
+      url: "/account/other-members/:personId?",
+      navUrl: "/account/other-members"
     }
   ];
   return (

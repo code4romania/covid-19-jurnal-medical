@@ -227,7 +227,7 @@ namespace StamAcasa.Common.Services.Excel {
 
             var headerStyle = (XSSFCellStyle)CreateCellStyle(wb);
 
-            headerStyle.GetFont().Boldweight = (short)FontBoldWeight.Bold;
+            headerStyle.GetFont().IsBold = true;
             headerStyle.Alignment = HorizontalAlignment.Center;
             headerStyle.WrapText = true;
 

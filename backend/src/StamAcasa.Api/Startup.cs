@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using AutoMapper;
+using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -44,7 +48,7 @@ namespace Api
         {
             services.AddControllers();
             var identityUrl = Configuration.GetValue<string>("InternalIdentityServerUrl");
-            var apiSchemes = new List<ApiAuthenticationScheme>(); 
+            var apiSchemes = new List<ApiAuthenticationScheme>();
 
             Configuration.GetSection("ApiConfiguration").Bind(apiSchemes);
             var serviceBuilder = services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
@@ -93,6 +97,8 @@ namespace Api
             services.AddScoped<IAssessmentService, AssessmentService>();
 
             services.ConfigureSwagger(Configuration);
+
+            services.AddProblemDetails(ConfigureProblemDetails);
         }
 
         public void Configure(IApplicationBuilder app, UserDbContext dbContext)
@@ -100,27 +106,7 @@ namespace Api
             dbContext.Database.Migrate();
 
             app.UseRouting();
-            app.UseExceptionHandler(appError =>
-            {
-                appError.Run(async context =>
-                {
-                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    context.Response.ContentType = "application/json";
-
-                    var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
-                    if (contextFeature != null)
-                    {
-                        var errorResponse = JsonConvert.SerializeObject(new
-                        {
-                            StatusCode = context.Response.StatusCode,
-                            Message = $"Internal Server Error. {contextFeature.Error.Message}"
-                        });
-                        context.Response.ContentLength = errorResponse.Length;
-                        await context.Response.WriteAsync(errorResponse, Encoding.UTF8);
-                    }
-                });
-            });
-
+            app.Use(CustomMiddleware);
             app.UseCors("default");
 
             app.UseAuthentication();
@@ -146,5 +132,46 @@ namespace Api
 
             });
         }
+
+        private void ConfigureProblemDetails(ProblemDetailsOptions options)
+        {
+            // This is the default behavior; only include exception details in a development environment.
+            options.IncludeExceptionDetails = (ctx, ex) => _environment.IsDevelopment();
+
+            // This will map NotImplementedException to the 501 Not Implemented status code.
+            options.MapToStatusCode<NotImplementedException>(StatusCodes.Status501NotImplemented);
+
+            // This will map HttpRequestException to the 503 Service Unavailable status code.
+            options.MapToStatusCode<HttpRequestException>(StatusCodes.Status503ServiceUnavailable);
+
+            // Because exceptions are handled polymorphically, this will act as a "catch all" mapping, which is why it's added last.
+            // If an exception other than NotImplementedException and HttpRequestException is thrown, this will handle it.
+            options.MapToStatusCode<Exception>(StatusCodes.Status500InternalServerError);
+        }
+
+        private Task CustomMiddleware(HttpContext context, Func<Task> next)
+        {
+            if (context.Request.Path.StartsWithSegments("/middleware", out _, out var remaining))
+            {
+                if (remaining.StartsWithSegments("/error"))
+                {
+                    throw new Exception("This is an exception thrown from middleware.");
+                }
+
+                if (remaining.StartsWithSegments("/status", out _, out remaining))
+                {
+                    var statusCodeString = remaining.Value.Trim('/');
+
+                    if (int.TryParse(statusCodeString, out var statusCode))
+                    {
+                        context.Response.StatusCode = statusCode;
+                        return Task.CompletedTask;
+                    }
+                }
+            }
+
+            return next();
+        }
     }
+
 }

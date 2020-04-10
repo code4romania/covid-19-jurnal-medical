@@ -4,11 +4,12 @@ import { useEffect } from "react";
 
 const useTableFilter = items => {
   const [filters, setFilters] = useState({});
+
   useEffect(() => {
     const columns = [];
     Object.keys(items[0]).forEach(key => (columns[key] = []));
     setFilters(columns);
-  }, [items[0]]);
+  }, [items]);
 
   const filteredItems = React.useMemo(() => {
     return items.filter(item =>
