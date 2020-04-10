@@ -9,6 +9,14 @@ output "DNS_PostGres" {
   value = "https://${module.postgres_dns.fqdn}"
 }
 
+output "DNS_EmailService" {
+  value = "https://${module.emailservice_dns.fqdn}"
+}
+
+output "DNS_JobScheduler" {
+  value = "https://${module.jobscheduler_dns.fqdn}"
+}
+
 output "DNS_API" {
   value = "https://${module.api_dns.fqdn}"
 }

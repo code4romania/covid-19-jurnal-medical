@@ -31,6 +31,20 @@ module "postgres_dns" {
   destination = [module.postgres.dns]
 }
 
+module "emailservice_dns" {
+  source      = "./dns"
+  zone_id     = data.aws_route53_zone.main.zone_id
+  domain      = local.domain_emailservice
+  destination = [module.emailservice.dns]
+}
+
+module "jobscheduler_dns" {
+  source      = "./dns"
+  zone_id     = data.aws_route53_zone.main.zone_id
+  domain      = local.domain_jobscheduler
+  destination = [module.jobscheduler.dns]
+}
+
 resource "aws_route53_record" "root" {
   count   = terraform.workspace == "production" ? 1 : 0
   zone_id = data.aws_route53_zone.main.zone_id
@@ -46,7 +60,7 @@ resource "aws_route53_record" "root" {
 
 resource "aws_acm_certificate" "cert" {
   domain_name               = terraform.workspace == "production" ? local.domain_root : module.front-end_dns.fqdn
-  subject_alternative_names = terraform.workspace == "production" ? [module.front-end_dns.fqdn, module.api_dns.fqdn, module.postgres_dns.fqdn] : [module.api_dns.fqdn]
+  subject_alternative_names = terraform.workspace == "production" ? [module.front-end_dns.fqdn, module.api_dns.fqdn, module.postgres_dns.fqdn, module.emailservice_dns.fqdn, module.jobscheduler_dns.fqdn] : [module.api_dns.fqdn]
 
   validation_method = "DNS"
   lifecycle {
@@ -65,6 +79,24 @@ resource "aws_acm_certificate" "identitysrv" {
 
 resource "aws_acm_certificate" "postgres" {
   domain_name = module.postgres_dns.fqdn
+
+  validation_method = "DNS"
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_acm_certificate" "emailservice" {
+  domain_name = module.emailservice_dns.fqdn
+
+  validation_method = "DNS"
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_acm_certificate" "jobscheduler" {
+  domain_name = module.jobscheduler_dns.fqdn
 
   validation_method = "DNS"
   lifecycle {

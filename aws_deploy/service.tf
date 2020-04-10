@@ -55,23 +55,23 @@ data "aws_iam_policy_document" "use_ssm_parameter" {
     resources = ["*"]
     effect    = "Allow"
   }
-  statement {
-    actions = [
-      "ssm:GetParameter*"
-    ]
+  #statement {
+  #  actions = [
+  #    "ssm:GetParameter*"
+  #  ]
     #resources = [
     #  aws_ssm_parameter.identitysrv_access_key_id.arn,
     #  aws_ssm_parameter.identitysrv_secret_access_key.arn
     #]
-    effect = "Allow"
-  }
+  #  effect = "Allow"
+  #}
   statement {
     actions = [
       "kms:Decrypt"
     ]
-    #resources = [
-    #  aws_kms_key.ssm_key.arn
-    #]
+    resources = [
+      aws_kms_key.ssm_key.arn
+    ]
     effect = "Allow"
   }
 }
@@ -101,13 +101,21 @@ module "front-end" {
   image              = var.IMAGE_FRONTEND
   prefix             = local.name
   region             = var.region
+  environment_variables = <<ENV
+  [
+    {
+      "name" : "REACT_APP_API_URL",
+      "value" : "https://${module.api_dns.fqdn}/api/v2"
+    }
+  ]
+ENV
+
 }
 
 module "api" {
   source = "./service"
 
   name           = "api"
-  #instance_count = terraform.workspace == "production" ? 50 : 1
 
   cluster         = aws_ecs_cluster.app.id
   vpc_id          = aws_vpc.main.id
@@ -149,6 +157,7 @@ module "identitysrv" {
   prefix             = local.name
   region             = var.region  
 }
+
 module "postgres" {
   source = "./service"
 
@@ -168,5 +177,52 @@ module "postgres" {
   container_port     = 80
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_POSTGRES
-  prefix             = local.name  
+  prefix             = local.name
+  region             = var.region  
+}
+
+module "emailservice" {
+  source = "./service"
+
+  name = "emailservice"
+
+  cluster         = aws_ecs_cluster.app.id
+  vpc_id          = aws_vpc.main.id
+  subnets         = aws_subnet.private.*.id
+  lb-subnets      = aws_subnet.public.*.id
+  security_groups = [aws_security_group.intra.id]
+  lb-security_groups = [
+    aws_security_group.intra.id,
+    aws_security_group.public.id
+  ]
+  certificate_arn = aws_acm_certificate.emailservice.arn
+
+  container_port     = 80
+  execution_role_arn = aws_iam_role.ecs_execution.arn
+  image              = var.IMAGE_EmailService
+  prefix             = local.name
+  region             = var.region
+}
+
+module "jobscheduler" {
+  source = "./service"
+
+  name = "jobscheduler"
+
+  cluster         = aws_ecs_cluster.app.id
+  vpc_id          = aws_vpc.main.id
+  subnets         = aws_subnet.private.*.id
+  lb-subnets      = aws_subnet.public.*.id
+  security_groups = [aws_security_group.intra.id]
+  lb-security_groups = [
+    aws_security_group.intra.id,
+    aws_security_group.public.id
+  ]
+  certificate_arn = aws_acm_certificate.jobscheduler.arn
+
+  container_port     = 80
+  execution_role_arn = aws_iam_role.ecs_execution.arn
+  image              = var.IMAGE_JobScheduler
+  prefix             = local.name
+  region             = var.region  
 }

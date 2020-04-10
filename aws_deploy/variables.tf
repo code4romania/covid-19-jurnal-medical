@@ -11,26 +11,36 @@ variable "prefix" {
 variable "IMAGE_FRONTEND" {
   type = string
   #default = "code4romania/stamacasa:develop"
-  default = "code4romania/stamacasa:develop"
+  #default = "code4romania/stamacasa:develop"
 }
 
 variable "IMAGE_API" {
   type = string
   #default = "code4romania/stamacasa-api:develop"
-  default = "code4romania/stamacasa-api:develop"
+  #default = "code4romania/stamacasa-api:develop"
 }
 variable "IMAGE_IDENTITYSERVER" {
   type = string
   #default = "code4romania/stamacasa-identityserver:develop"
-  default = "code4romania/stamacasa-identityserver:develop"
+  #default = "code4romania/stamacasa-identityserver:develop"
 }
 variable "IMAGE_POSTGRES" {
   type = string
   default = "postgres"
 }
+
+variable "IMAGE_EMAILSERVICE" {
+  type = string
+  #default = "code4romania/stamacasa-emailservice:develop"
+}
+
+variable "IMAGE_JOBSCHEDULER" {
+  type = string
+  #default = "code4romania/stamacsaa-jobscheduler:develop"
+}
 variable "region" {
   default = "eu-west-2"
 }
-variable "workspace" {
-  default = "develop"
-}
+#variable "workspace" {
+#  default = "develop"
+#}
