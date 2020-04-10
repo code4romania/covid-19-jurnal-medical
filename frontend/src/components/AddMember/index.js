@@ -2,15 +2,28 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./AddMember.scss";
 import {
-  ListHeader,
   Button,
   Input,
+  ListHeader,
   Select
 } from "@code4ro/taskforce-fe-components";
 import ProfileApi from "../../api/profileApi";
 import SelectList from "../SelectList";
 
-const AddMember = () => {
+const AddMember = ({
+  sendResults = userData => ProfileApi.addDependant(userData),
+  forYourself = false,
+  titles = {
+    healthInfo: "II. Date despre starea lor de sănătate",
+    smoker: "Este fumător?",
+    preexistingConditions:
+      "I-a spus vreun medic că are oricare dintre următoarele afecțiuni?",
+    context: "III. Date despre contextul în care se află",
+    quarantineStatus: "În momentul de față se află în izolare la domiciliu?",
+    livesWithOthersStatus:
+      "În momentul de față împarte locuința și cu alte persoane?"
+  }
+}) => {
   const options = {
     gender: [
       { key: "", text: "Genul", disabled: true, selected: true },
@@ -122,21 +135,23 @@ const AddMember = () => {
             setUserDataField("phoneNumber", value);
           }}
         />
-        <Select
-          placeholder="Tip de relație"
-          options={options.relation}
-          selectProps={{
-            onChange: ({ currentTarget: { selectedIndex } }) => {
-              setUserDataField("relationType", selectedIndex);
-            }
-          }}
-        ></Select>
+        {!forYourself && (
+          <Select
+            placeholder="Tip de relație"
+            options={options.relation}
+            selectProps={{
+              onChange: ({ currentTarget: { selectedIndex } }) => {
+                setUserDataField("relationType", selectedIndex);
+              }
+            }}
+          ></Select>
+        )}
         <Select
           placeholder="Judet"
           options={options.county}
           selectProps={{
             onChange: ({ currentTarget: { selectedIndex } }) => {
-              setUserDataField("county", selectedIndex);
+              setUserDataField("county", String(selectedIndex));
             }
           }}
         ></Select>
@@ -145,17 +160,17 @@ const AddMember = () => {
           options={options.city}
           selectProps={{
             onChange: ({ currentTarget: { selectedIndex } }) => {
-              setUserDataField("city", selectedIndex);
+              setUserDataField("city", String(selectedIndex));
             }
           }}
         ></Select>
         <Input
-          type="text"
+          type="number"
           label={"Vârstă în ani împliniți"}
           usePlaceholder
           value={userData.age}
           onChange={({ currentTarget: { value } }) => {
-            setUserDataField("age", value);
+            setUserDataField("age", parseInt(value));
           }}
         />
         <Select
@@ -170,15 +185,16 @@ const AddMember = () => {
       </div>
     </>
   );
+
   const healthDataForm = (
     <>
-      <ListHeader title="II. Date despre starea ta de sănătate"></ListHeader>
-      <ListHeader title="Ești fumător?"></ListHeader>
+      <ListHeader title={titles.healthInfo}></ListHeader>
+      <ListHeader title={titles.smoker}></ListHeader>
       <SelectList
         options={options.yesNo}
         onChange={([value]) => setUserDataField("smoker", value)}
       ></SelectList>
-      <ListHeader title="Ți-a spus vreun medic că ai oricare dintre următoarele afecțiuni?"></ListHeader>
+      <ListHeader title={titles.preexistingConditions}></ListHeader>
       <SelectList
         options={options.preexistingMedicalCondition}
         multiple={true}
@@ -199,15 +215,15 @@ const AddMember = () => {
   );
   const contextDataForm = (
     <>
-      <ListHeader title="III. Date despre contextul în care te afli"></ListHeader>
-      <ListHeader title="În momentul de față te afli în izolare la domiciliu?"></ListHeader>
+      <ListHeader title={titles.context}></ListHeader>
+      <ListHeader title={titles.quarantineStatus}></ListHeader>
       <SelectList
         options={options.quarantineStatus}
         onChange={value =>
           setUserDataField("quarantineStatus", parseInt(value, 10))
         }
       ></SelectList>
-      <ListHeader title="În momentul de față împarți locuința și cu alte persoane?"></ListHeader>
+      <ListHeader title={titles.livesWithOthersStatus}></ListHeader>
       <SelectList
         options={options.yesNo}
         onChange={([value]) => setUserDataField("livesWithOthers", value)}
@@ -227,7 +243,10 @@ const AddMember = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      ProfileApi.addDependant(userData);
+      if (forYourself) {
+        delete userData["relationType"];
+      }
+      sendResults(userData);
     }
   };
 
@@ -242,7 +261,9 @@ const AddMember = () => {
 };
 
 AddMember.propTypes = {
-  evaluateCallback: PropTypes.func
+  sendResults: PropTypes.func,
+  forYourself: PropTypes.bool,
+  titles: PropTypes.object
 };
 
 export default AddMember;

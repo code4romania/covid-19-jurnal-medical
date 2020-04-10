@@ -13,6 +13,10 @@ const ProfileApi = {
   },
   addDependant: async profile => {
     await api.post("/profile/family", profile);
+  },
+
+  createProfile: profile => {
+    api.post("/profile", profile);
   }
 };
 
