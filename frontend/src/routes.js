@@ -1,7 +1,7 @@
 import Home from "./components/Home";
 import About from "./components/About";
 import AddMember from "./components/AddMember";
-import SelfEvaluation from "./components/SelfEvaluation";
+import Evaluation from "./components/Evaluation";
 import Account from "./components/Account";
 
 import {
@@ -11,6 +11,7 @@ import {
 } from "./api/auth";
 
 import BaseDashboard from "./components/BaseDashboard";
+
 export const ROUTES = {
   base: {
     despre: {
@@ -49,8 +50,8 @@ export const ROUTES = {
   },
   home: {
     selfevaluation: {
-      path: "/evaluation/self",
-      component: SelfEvaluation
+      path: "/evaluation",
+      component: Evaluation
     },
     addmember: {
       path: "/add-member",

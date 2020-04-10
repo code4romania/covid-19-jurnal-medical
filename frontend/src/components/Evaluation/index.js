@@ -1,26 +1,30 @@
 import React from "react";
-import PropTypes from "prop-types";
 import SidebarLayout from "../SidebarLayout";
-import TabTitle from "./tabTitle";
-import { Hero } from "@code4ro/taskforce-fe-components";
+import Tabs from "../Tabs/Tabs";
+import SelfEvaluation from "./SelfEvaluation/SelfEvaluation";
+import MemberEvaluation from "./MemberEvaluation";
 
-const Evaluation = ({ children }) => {
+const Evaluation = () => {
+  const tabs = [
+    {
+      id: 0,
+      title: "Formularul tau",
+      content: <SelfEvaluation />,
+      url: "/evaluation/me"
+    },
+    {
+      id: 1,
+      title: "Alte persoane",
+      content: <MemberEvaluation />,
+      url: "/evaluation/other-members/:personId?",
+      navUrl: "/evaluation/other-members"
+    }
+  ];
   return (
     <SidebarLayout>
-      <div className={"tabs is-centered"}>
-        <ul>
-          <TabTitle link={"/evaluation/self"}>
-            <Hero title={"Formularul tau"} useFallbackIcon={true} />
-          </TabTitle>
-        </ul>
-      </div>
-      {children}
+      <Tabs tabs={tabs} />
     </SidebarLayout>
   );
 };
 
 export default Evaluation;
-
-Evaluation.propTypes = {
-  children: PropTypes.node.isRequired
-};

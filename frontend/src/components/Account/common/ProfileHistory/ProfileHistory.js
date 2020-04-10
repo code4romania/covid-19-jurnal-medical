@@ -34,7 +34,15 @@ export const ProfileHistory = ({ data, isSelf }) => {
         în izolare. Parcurge întrebările și răspunde cu atenție. Pe măsură ce
         completezi, această pagină se va popula cu istoricul răspunsurilor tale.
         Poți completa
-        <Link to="/evaluation/self"> formularul aici</Link>.
+        <Link
+          to={
+            isSelf ? "/evaluation/self" : `/evaluation/other-members/${data.id}`
+          }
+        >
+          {" "}
+          formularul aici
+        </Link>
+        .
       </p>
       <h2 className="header">Istoric Simptome</h2>
       <div className="profile-history-content">
@@ -67,6 +75,7 @@ ProfileHistory.defaultProps = {
 
 ProfileHistory.propTypes = {
   data: PropTypes.shape({
+    id: PropTypes.string,
     profile: PropTypes.object,
     temperature: PropTypes.array,
     symptoms: PropTypes.array,

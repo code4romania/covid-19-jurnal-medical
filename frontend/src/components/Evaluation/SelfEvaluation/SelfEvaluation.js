@@ -1,11 +1,11 @@
 import React from "react";
-import EvaluationApi from "../../api/evaluationApi";
-import EvaluationForm from "../Evaluation/evaluationForm";
+import EvaluationApi from "../../../api/evaluationApi";
+import EvaluationForm from "../evaluationForm";
 
 const SelfEvaluation = () => {
   return (
     <EvaluationForm
-      getForm={EvaluationApi.getSelfEvaluationForm}
+      getForm={EvaluationApi.getEvaluationForm}
       sendResults={EvaluationApi.sendSelfEvaluationResults}
     />
   );

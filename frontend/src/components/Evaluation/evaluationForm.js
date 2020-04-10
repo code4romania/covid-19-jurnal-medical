@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import Evaluation from "../Evaluation";
 import { Form } from "@code4ro/taskforce-fe-components";
 import FinishFormButton from "../Evaluation/finishFormButton";
-import IntroSelfEvaluation from "../SelfEvaluation/introSelfEvaluation";
+import IntroSelfEvaluation from "./SelfEvaluation/introSelfEvaluation";
 
 const EvaluationForm = ({ getForm, sendResults }) => {
   const [started, setStarted] = useState(false);
@@ -29,7 +28,7 @@ const EvaluationForm = ({ getForm, sendResults }) => {
 
   if (started) {
     return (
-      <Evaluation>
+      <>
         {evaluationFormData && (
           <Form
             data={evaluationFormData}
@@ -39,14 +38,10 @@ const EvaluationForm = ({ getForm, sendResults }) => {
         )}
         {evaluationFormData === null && <div>Formularul se incarca</div>}
         {finished && <FinishFormButton />}
-      </Evaluation>
+      </>
     );
   } else {
-    return (
-      <Evaluation>
-        <IntroSelfEvaluation onFinish={onFinishingIntro} />
-      </Evaluation>
-    );
+    return <IntroSelfEvaluation onFinish={onFinishingIntro} />;
   }
 };
 
