@@ -1,17 +1,18 @@
-import mockData from "../components/Account/mockData/mockData";
+import api from "./api";
 
 const ProfileApi = {
   get: async () => {
-    // TODO: change to api call when adding a member is available
-    // const result = await api.get("/profile");
+    const result = await api.get("/profile");
 
-    return mockData;
+    return result.data;
   },
   getDependants: async () => {
-    // TODO: change to api call when adding a member is available
-    // const result = await api.get("/profile/family");
+    const result = await api.get("/profile/family");
 
-    return mockData.otherMembers;
+    return result.data;
+  },
+  addDependant: async profile => {
+    await api.post("/profile/family", profile);
   }
 };
 
