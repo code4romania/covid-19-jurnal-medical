@@ -1,9 +1,8 @@
 import Home from "./components/Home";
 import About from "./components/About";
 import AddMember from "./components/AddMember";
-import SelfEvaluation from "./components/SelfEvaluation";
+import Evaluation from "./components/Evaluation";
 import Account from "./components/Account";
-import OtherEvaluation from "./components/OtherEvaluation";
 
 import {
   signinCallback,
@@ -12,6 +11,7 @@ import {
 } from "./api/auth";
 
 import BaseDashboard from "./components/BaseDashboard";
+
 export const ROUTES = {
   base: {
     despre: {
@@ -50,12 +50,8 @@ export const ROUTES = {
   },
   home: {
     selfevaluation: {
-      path: "/evaluation/self",
-      component: SelfEvaluation
-    },
-    otherevaluation: {
-      path: "/evaluation/other",
-      component: OtherEvaluation
+      path: "/evaluation",
+      component: Evaluation
     },
     addmember: {
       path: "/add-member",

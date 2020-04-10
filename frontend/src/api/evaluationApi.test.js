@@ -11,10 +11,4 @@ describe("EvaluationApi", () => {
 
     expect(mockApi.post).toHaveBeenCalledWith("/form", formResults);
   });
-
-  it("sends other evaluation form results", () => {
-    EvaluationApi.sendDependantEvaluationResult(11, formResults);
-
-    expect(mockApi.post).toHaveBeenCalledWith("/form?id=11", formResults);
-  });
 });

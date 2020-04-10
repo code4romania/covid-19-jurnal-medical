@@ -15,7 +15,7 @@ const StepsBar = () => {
             title={label}
             key={index}
             onClick={() => history.push(URL)}
-            active={URL === location.pathname}
+            active={location.pathname.includes(URL)}
           />
         ))}
       </List>

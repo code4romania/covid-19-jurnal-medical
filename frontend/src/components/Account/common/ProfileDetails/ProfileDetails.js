@@ -63,13 +63,16 @@ const ProfileDetails = ({ fields, isSelf }) => {
           <strong>Alte persoane în grijă:</strong>
           {fields.others.length > 0
             ? fields.others.map((person, index) => (
-                <Link
-                  key={person.id}
-                  className="link"
-                  to={`/account/other-members?personId=${person.id}`}
-                >
-                  {person.name} {index !== fields.others.length - 1 && ","}
-                </Link>
+                <>
+                  <Link
+                    key={person.id}
+                    className="link"
+                    to={`/account/other-members/${person.id}`}
+                  >
+                    {person.name}
+                  </Link>
+                  {index !== fields.others.length - 1 && ", "}
+                </>
               ))
             : " - "}
         </p>
