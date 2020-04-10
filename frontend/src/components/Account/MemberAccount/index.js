@@ -1,47 +1,50 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
-import queryString from "query-string";
+import {
+  Redirect,
+  Route,
+  Switch,
+  useHistory,
+  useParams
+} from "react-router-dom";
 import { Select } from "@code4ro/taskforce-fe-components";
 import "./MemberAccount.scss";
 
-import mockData from "../mockData/mockData";
 import ProfileHistory from "../common/ProfileHistory/ProfileHistory.js";
+import ProfileApi from "../../../api/profileApi";
 
-export const MemberAccount = ({ data }) => {
-  const location = useLocation();
-  const familyMembers = data;
-  const defaultMember = familyMembers.length > 0 ? familyMembers[0] : undefined;
-  const [selectedMember, setSelectedMember] = useState(defaultMember);
+export const MemberAccount = () => {
+  const { personId } = useParams();
+  const history = useHistory();
   const [options, setOptions] = useState([]);
+  const [familyMembers, setFamilyMembers] = useState([]);
 
   useEffect(() => {
-    const queryParams = queryString.parse(location.search);
-    const personId = queryParams.personId;
-    const member =
-      familyMembers.find(member => member.id == personId) || defaultMember;
-    setOptions(
-      data.map(person => {
-        return {
-          text: person.profile.name.value,
-          value: person.profile.name.value,
-          selected: person.id === member.id
-        };
-      })
-    );
-    setSelectedMember(member);
+    ProfileApi.getDependants().then(setFamilyMembers);
   }, []);
+
+  useEffect(() => {
+    setOptions(
+      familyMembers.map(person => ({
+        text: person.profile.name.value,
+        value: person.profile.name.value,
+        selected: person.id === personId
+      }))
+    );
+  }, [personId, familyMembers]);
+
   const props = {
-    onChange: function(el) {
+    onChange: el => {
       const selectedPerson = familyMembers.find(
         person => person.profile.name.value === el.target.value
       );
-      setSelectedMember(selectedPerson ? selectedPerson : defaultMember);
+      if (selectedPerson) {
+        history.replace(`/account/other-members/${selectedPerson.id}`);
+      }
     }
   };
 
   if (!familyMembers.length) {
-    return <div> Nu exista alti membrii</div>;
+    return <div> Nu exista alti membri</div>;
   }
 
   return (
@@ -56,20 +59,20 @@ export const MemberAccount = ({ data }) => {
         marcând răspunsurile în aplicație
       </p>
       <h1 className="member-profile__select">
-        <Select label={"Alege persona"} selectProps={props} options={options} />
+        <Select label="Alege persona" selectProps={props} options={options} />
       </h1>
-      <ProfileHistory data={selectedMember} />;
+      <Switch>
+        {familyMembers.map(member => (
+          <Route key={member.id} path={`/account/other-members/${member.id}`}>
+            <ProfileHistory data={member} />
+          </Route>
+        ))}
+        {familyMembers.length && (
+          <Redirect to={`/account/other-members/${familyMembers[0].id}`} />
+        )}
+      </Switch>
     </div>
   );
-};
-
-MemberAccount.defaultProps = {
-  //todo: change when api ready
-  data: mockData.otherMembers
-};
-
-MemberAccount.propTypes = {
-  data: PropTypes.array.isRequired
 };
 
 export default MemberAccount;
