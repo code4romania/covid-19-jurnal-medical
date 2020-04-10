@@ -1,24 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 import "./MyAccount.scss";
 import ProfileHistory from "../common/ProfileHistory/ProfileHistory";
-import mockData from "../mockData/mockData";
-export const MyAccount = ({ data }) => {
+import ProfileApi from "../../../api/profileApi";
+export const MyAccount = () => {
+  const [userProfile, setUserProfile] = useState();
+
+  useEffect(() => {
+    ProfileApi.get().then(setUserProfile);
+  }, []);
   return (
     <div className="account-container">
       <h1 className="account-header">Datele mele personale</h1>
-      <ProfileHistory data={data} isSelf={true} />
+      {userProfile && <ProfileHistory data={userProfile} isSelf={true} />}
     </div>
   );
-};
-
-MyAccount.defaultProps = {
-  //todo change when api ready
-  data: mockData
-};
-
-MyAccount.propTypes = {
-  data: PropTypes.object.isRequired
 };
 
 export default MyAccount;

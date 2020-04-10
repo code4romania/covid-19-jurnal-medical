@@ -78,9 +78,14 @@ export const AddMember = () => {
     event.target.value = isNaN(boundedValue) ? "" : boundedValue;
   };
 
+  const submitForm = e => {
+    // TODO: submit the form when endpoint available
+    e.preventDefault();
+  };
+
   return (
     <SidebarLayout>
-      <form>
+      <form onSubmit={submitForm}>
         <div className="add-member">
           <Hero
             title="Creează cont pentru un membru al familiei"
