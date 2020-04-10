@@ -36,7 +36,7 @@ export const ProfileHistory = ({ data, isSelf }) => {
         Poți completa
         <Link
           to={
-            isSelf ? "/evaluation/self" : `/evaluation/other-members/${data.id}`
+            isSelf ? "/evaluation/me" : `/evaluation/other-members/${data.id}`
           }
         >
           {" "}
