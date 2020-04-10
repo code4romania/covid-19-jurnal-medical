@@ -33,31 +33,31 @@ namespace StamAcasa.Api.Controllers
         public async Task<IActionResult> Get(int? id = null)
         {
             var subClaimValue = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if(subClaimValue==null)
+            if (subClaimValue == null)
                 return new UnauthorizedResult();
 
-            var result = 
-                id == null ? 
-                    await _formService.GetForms(subClaimValue) : 
+            var result =
+                id == null ?
+                    await _formService.GetForms(subClaimValue) :
                     await _formService.GetForms(id.Value);
             return new OkObjectResult(result);
         }
-        
-        
+
+
         [HttpGet("version")]
         public async Task<IActionResult> GetVersion()
         {
             var subClaimValue = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if(subClaimValue==null)
+            if (subClaimValue == null)
                 return new UnauthorizedResult();
 
             var assessment = await _assessmentService.GetAssessment(subClaimValue);
-            
+
             return new OkObjectResult(assessment);
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAnswer([FromBody]object content, [FromQuery]int? id=null)
+        public async Task<IActionResult> PostAnswer([FromBody]object content, [FromQuery]int? id = null)
         {
             var subClaimValue = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
             if (subClaimValue == null)
@@ -71,11 +71,19 @@ namespace StamAcasa.Api.Controllers
             form.Add("Timestamp", timestamp);
 
             var authenticatedUser = await _userService.GetUserInfo(subClaimValue);
-            
+            if (authenticatedUser == null)
+            {
+                return NotFound("Could not find authenticated user");
+            }
             if (id.HasValue)
             {
                 var currentUser = await _userService.GetUserInfo(id.Value);
-                if(currentUser.ParentId.HasValue && currentUser.ParentId!=authenticatedUser.Id)
+                if (currentUser == null)
+                {
+                    return NotFound($"Could not find user with id {id.Value}");
+                }
+
+                if (currentUser.ParentId.HasValue && currentUser.ParentId != authenticatedUser.Id)
                     return new ForbidResult();
             }
 
@@ -92,7 +100,7 @@ namespace StamAcasa.Api.Controllers
                 FormTypeId = form.formId.ToString()
             });
 
-            await _fileService.SaveRawData(contentToSave, 
+            await _fileService.SaveRawData(contentToSave,
                 $"{Guid.Parse(subClaimValue).ToString("N")}_{form.formId}_{timestamp.ToEpochTime()}.json");
 
             return new OkObjectResult(string.Empty);
