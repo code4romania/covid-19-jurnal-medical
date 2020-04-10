@@ -17,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="EmailBuilder\Resources\dailyReportTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="EmailBuilder\Resources\dailyAssessmentTemplate.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -31,6 +31,9 @@ namespace StamAcasa.EmailService.EmailBuilder
                 case EmailTemplate.StateEntity:
                     filePath = "stateEntityTemplate.html";
                     break;
+                case EmailTemplate.DailyReport:
+                    filePath = "dailyReportTemplate.html";
+                    break;
             }
 
             return Path.Combine(directory, filePath);

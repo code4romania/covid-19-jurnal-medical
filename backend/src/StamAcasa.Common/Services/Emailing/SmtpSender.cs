@@ -37,7 +37,7 @@ namespace StamAcasa.Common.Services.Emailing
                 };
                 if (email.Attachment != null)
                 {
-                    var attachment = new MimePart("image", "gif")
+                    var attachment = new MimePart("application","vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                     {
                         Content = new MimeContent(new MemoryStream(email.Attachment.Content)),
                         ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),

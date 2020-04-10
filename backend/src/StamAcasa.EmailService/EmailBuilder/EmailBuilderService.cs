@@ -20,6 +20,7 @@ namespace StamAcasa.EmailService.EmailBuilder
             _templateFileSelector = templateFileSelector;
             _memoryCache = memoryCache;
         }
+
         public async Task<Email> BuildEmail(EmailRequestModel emailRequest)
         {
             _logger.LogInformation("Build email");
@@ -28,10 +29,11 @@ namespace StamAcasa.EmailService.EmailBuilder
             template = FormatTemplate(template, emailRequest);
             var emailModel = new Email
             {
-                FromName = "Admin Stam Acasa",
+                FromName = emailRequest.SenderName,
                 FromEmail = "admin@stamacasa.ro",
                 To = emailRequest.Address,
-                Subject = "New Email",
+                Subject = emailRequest.Subject,
+                SenderName = emailRequest.SenderName,
                 Content = template
             };
 

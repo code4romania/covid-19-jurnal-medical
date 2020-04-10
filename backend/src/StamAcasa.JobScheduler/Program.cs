@@ -65,17 +65,6 @@ namespace StamAcasa.JobScheduler
                         s.TryAddTransient<IFormService, FormService>();
                         s.TryAddTransient<IAnswersExcelExporter, AnswersExcelExporter>();
                         s.TryAddTransient<IExcelDocumentService, ExcelDocumentService>();
-                        s.AddSingleton<IEmailSender>(ctx =>
-                            new SmtpSender(
-                                new SmtpOptions
-                                {
-                                    Host = "",
-                                    Port = 1000,
-                                    User = "",
-                                    Password = ""
-                                }
-                            )
-                        );
 
                         CountyEmailDistribution countyEmailDistribution = new CountyEmailDistribution();
                         hostContext.Configuration.GetSection(nameof(CountyEmailDistribution)).Bind(countyEmailDistribution);

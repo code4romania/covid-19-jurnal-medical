@@ -82,7 +82,9 @@ namespace IdentityServer.Pages.Account
                 Address = Input.Email,
                 PlaceholderContent = new Dictionary<string, string>(),
                 TemplateType = EmailTemplate.AccountConfirmation,
-                Type = "accountConfirmationTemplate"
+                Type = "accountConfirmationTemplate",
+                SenderName = "Admin Stam Acasa",
+                Subject = ""
             };
             email.PlaceholderContent.Add("name", userName);
             email.PlaceholderContent.Add("confirmationLink", HtmlEncoder.Default.Encode(callbackUrl));
@@ -92,7 +94,7 @@ namespace IdentityServer.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {

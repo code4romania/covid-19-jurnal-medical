@@ -1,14 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using StamAcasa.Common.DTO;
 using StamAcasa.Common.Models;
+using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services;
 using StamAcasa.Common.Services.Emailing;
 using StamAcasa.Common.Services.Excel;
@@ -19,20 +18,20 @@ namespace StamAcasa.Common.Notifications
     {
         private readonly ILogger<ResultNotificationsDispatch> _logger;
         private readonly IFormService _formService;
-        private readonly IEmailSender _emailSender;
+        private readonly IQueueService _queueService;
         private readonly IAnswersExcelExporter _answersExcelExporter;
         private readonly CountyEmailDistribution _countyEmailDistribution;
 
         public ResultNotificationsDispatch(ILogger<ResultNotificationsDispatch> logger,
             IFormService formService,
-            IEmailSender emailSender,
+            IQueueService queueService,
             IAnswersExcelExporter answersExcelExporter,
             CountyEmailDistribution countyEmailDistribution
         )
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _formService = formService;
-            _emailSender = emailSender;
+            _queueService = queueService;
             _answersExcelExporter = answersExcelExporter;
             _countyEmailDistribution = countyEmailDistribution;
         }
@@ -68,16 +67,17 @@ namespace StamAcasa.Common.Notifications
         {
             foreach (var contact in countyDistribution.EmailList)
             {
-                var email = new Email
+                var email = new EmailRequestModel
                 {
-                    Content = "Hello! These are today's forms.", //to be replaced with the HTML template
-                    FromEmail = _countyEmailDistribution.Sender,
-                    FromName = _countyEmailDistribution.SenderName,
+                    TemplateType = EmailTemplate.DailyReport,
+                    Type = "dailyReportTemplate",
+                    Address = contact,
                     Subject = $"{countyForms.Key}-{DateTime.Now:yyyyMMdd}",
-                    To = contact
+                    SenderName = _countyEmailDistribution.SenderName,
+                    PlaceholderContent = new Dictionary<string, string>()
                 };
                 email.Attachment = new EmailAttachment($"{countyForms.Key}-{DateTime.Now:yyyyMMdd}.xlsx", answers);
-                await _emailSender.SendAsync(email, CancellationToken.None);
+                await _queueService.PublishEmailRequest(email);
             }
         }
     }
