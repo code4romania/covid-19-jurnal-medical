@@ -4,6 +4,8 @@ import React from "react";
 import { options } from "./options";
 import PropTypes from "prop-types";
 
+const toArrayOfStringValues = value => (value ? [String(value)] : []);
+
 const Context = ({ userData, setUserDataField, titles }) => (
   <>
     <ListHeader title={titles.header} />
@@ -11,7 +13,7 @@ const Context = ({ userData, setUserDataField, titles }) => (
     <SelectList
       options={options.quarantineStatus}
       name="quarantineStatus"
-      value={[userData.quarantineStatus.toString()]}
+      value={toArrayOfStringValues(userData.quarantineStatus)}
       onChange={([value]) => setUserDataField("quarantineStatus", +value)}
     />
     <ListHeader title={titles.livesWithOthersStatus} />
@@ -25,7 +27,7 @@ const Context = ({ userData, setUserDataField, titles }) => (
     <SelectList
       options={options.quarantineStatus}
       name="quarantineStatusOther"
-      value={[userData.quarantineStatusOther.toString()]}
+      value={toArrayOfStringValues(userData.quarantineStatusOther)}
       onChange={([value]) => setUserDataField("quarantineStatusOther", +value)}
     />
   </>
