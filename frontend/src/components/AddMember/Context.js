@@ -4,17 +4,17 @@ import React from "react";
 import { options } from "./options";
 import PropTypes from "prop-types";
 
-const Context = ({ userData, setUserDataField }) => (
+const Context = ({ userData, setUserDataField, titles }) => (
   <>
-    <ListHeader title="III. Date despre contextul în care te afli" />
-    <ListHeader title="În momentul de față te afli în izolare la domiciliu?" />
+    <ListHeader title={titles.header} />
+    <ListHeader title={titles.quarantineStatus} />
     <SelectList
       options={options.quarantineStatus}
       name="quarantineStatus"
       value={[userData.quarantineStatus.toString()]}
       onChange={([value]) => setUserDataField("quarantineStatus", +value)}
     />
-    <ListHeader title="În momentul de față împarți locuința și cu alte persoane?" />
+    <ListHeader title={titles.livesWithOthersStatus} />
     <SelectList
       options={options.yesNo}
       name="livesWithOthers"
@@ -33,7 +33,12 @@ const Context = ({ userData, setUserDataField }) => (
 
 Context.propTypes = {
   userData: PropTypes.object.isRequired,
-  setUserDataField: PropTypes.func.isRequired
+  setUserDataField: PropTypes.func.isRequired,
+  titles: {
+    header: PropTypes.string.isRequired,
+    quarantineStatus: PropTypes.string.isRequired,
+    livesWithOthersStatus: PropTypes.string.isRequired
+  }
 };
 
 export default Context;
