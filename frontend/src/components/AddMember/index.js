@@ -19,9 +19,9 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
     relationshipType: 0,
     age: 0,
     gender: 0,
-    smoker: false,
+    smoker: null,
     preexistingMedicalCondition: [],
-    livesWithOthers: false,
+    livesWithOthers: null,
     quarantineStatus: 0,
     quarantineStatusOther: 0
   });
@@ -52,6 +52,15 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
       if (forYourself) {
         delete userData["relationType"];
       }
+
+      if (userData.smoker === null) {
+        userData.smoker = false;
+      }
+
+      if (userData.livesWithOthers === null) {
+        userData.livesWithOthers = false;
+      }
+
       sendResults(mapExistingConditions(userData));
     }
   };
