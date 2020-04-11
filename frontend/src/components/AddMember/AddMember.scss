@@ -14,15 +14,9 @@
     text-align: center;
   }
 
-  input,
-  select,
-  option {
-    text-align: center;
-    width: 100%;
-  }
-
-  select {
+  .select select:not([multiple]) {
     text-align-last: center;
+    padding: inherit;
   }
 
   button {
