@@ -1,20 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import "./SelectList.scss";
 
-const SelectList = ({ options, multiple = false, onChange }) => {
-  const [selectedItems, setSelectedItems] = useState([]);
+const SelectList = ({ name, options, value, multiple = false, onChange }) => {
   const selectItem = item => {
-    let nextState = null;
-    if (selectedItems.includes(item)) {
-      nextState = selectedItems.filter(selectedItem => selectedItem !== item);
-      setSelectedItems(nextState);
-      onChange(nextState);
-      return;
-    }
-    nextState = [...(multiple ? selectedItems : []), item];
-    setSelectedItems(nextState);
-    onChange(nextState);
+    const items = value.includes(item)
+      ? value.filter(selectedItem => !multiple || selectedItem !== item)
+      : [...(multiple ? value : []), item];
+    onChange(items);
   };
 
   return (
@@ -22,9 +15,9 @@ const SelectList = ({ options, multiple = false, onChange }) => {
       {options.map(option => {
         return (
           <div
-            key={`__select_option_${option.value}__${option.text}`}
+            key={`${name}__select_option_${option.value}__${option.text}`}
             className={`select-option ${
-              selectedItems.includes(option.value) ? "selected" : ""
+              value.includes(option.value) ? "selected" : ""
             }`}
             onClick={() => selectItem(option.value)}
           >
@@ -37,8 +30,10 @@ const SelectList = ({ options, multiple = false, onChange }) => {
 };
 
 SelectList.propTypes = {
-  options: PropTypes.array,
+  options: PropTypes.array.isRequired,
   multiple: PropTypes.bool,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.array.isRequired,
   onChange: PropTypes.func
 };
 
