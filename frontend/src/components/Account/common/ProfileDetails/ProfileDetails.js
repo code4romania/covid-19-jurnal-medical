@@ -68,7 +68,7 @@ ProfileDetails.propTypes = {
     relationshipType: PropTypes.number.isRequired
   }).isRequired,
   isSelf: PropTypes.bool,
-  children: PropTypes.shape
+  children: PropTypes.node
 };
 
 export default ProfileDetails;
