@@ -1,10 +1,4 @@
-import * as React from "react";
-import { Select } from "@code4ro/taskforce-fe-components";
-import EvaluationForm from "./evaluationForm";
-import EvaluationApi from "../../api/evaluationApi";
-import { useState } from "react";
-import { useEffect } from "react";
-import ProfileApi from "../../api/profileApi";
+import React, { useState, useEffect } from "react";
 import {
   Redirect,
   Route,
@@ -12,6 +6,11 @@ import {
   useHistory,
   useParams
 } from "react-router-dom";
+import { Select } from "@code4ro/taskforce-fe-components";
+
+import EvaluationForm from "./evaluationForm";
+import EvaluationApi from "../../api/evaluationApi";
+import ProfileApi from "../../api/profileApi";
 
 const MemberEvaluation = () => {
   const { personId } = useParams();
@@ -51,7 +50,7 @@ const MemberEvaluation = () => {
   return (
     <>
       <h1 className="member-profile__select">
-        <Select label="Alege persona" selectProps={props} options={options} />
+        <Select label="Alege persoana" selectProps={props} options={options} />
       </h1>
       <Switch>
         {familyMembers.map(member => (

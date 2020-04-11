@@ -12,7 +12,7 @@ const EvaluationApi = {
   sendSelfEvaluationResults: formResults => api.post("/form", formResults),
 
   sendEvaluationResults: (formResults, id) =>
-    api.post(`/form`, formResults, { params: { id } })
+    api.post("/form", formResults, { params: { id } })
 };
 
 export default EvaluationApi;

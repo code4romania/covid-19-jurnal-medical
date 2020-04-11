@@ -1,45 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+
+import { mapProfileDetails } from "./ProfileDetails.constants";
+
 import "./ProfileDetails.scss";
 
-const renderField = (field = {}) => {
-  let processedValue = field.value;
-  if (typeof field.value === "boolean") {
-    processedValue = field.value ? "Da" : "Nu";
-  }
-  return (
-    field.label && (
-      <div className="profile__field" key={field.label}>
-        <strong> {field.label}:</strong> {processedValue}
-      </div>
-    )
-  );
-};
-
-const renderFields = fields => {
-  return fields.map(renderField);
-};
-
-const ProfileDetails = ({ fields, isSelf }) => {
-  const leftColumnFields = [
-    fields.name,
-    fields.relationship,
-    fields.phoneNumber,
-    fields.location,
-    fields.age,
-    fields.gender
-  ];
-  const rightColumnFields = [
-    fields.smoking,
-    fields.comorbidities,
-    fields.livingAlone,
-    fields.inIsolation,
-    fields.othersInHouseholdIsolation
-  ];
-  if (!fields || !Object.keys(fields).length) {
+const ProfileDetails = ({
+  // eslint-disable-next-line no-unused-vars
+  fields: { id, ...profileDetails },
+  isSelf,
+  children
+}) => {
+  if (!profileDetails || !Object.keys(profileDetails).length) {
     return <div>Nu exista date</div>;
   }
+
+  const data = mapProfileDetails(profileDetails);
 
   return (
     <div className="profile">
@@ -54,82 +31,44 @@ const ProfileDetails = ({ fields, isSelf }) => {
         </div>
       )}
       <div className="content">
-        <div className="left">{renderFields(leftColumnFields)}</div>
-        <div className="right">{renderFields(rightColumnFields)}</div>
+        {data.map(({ label, value }) => (
+          <div className="profile__field" key={label}>
+            <strong>{label}:</strong> {value}
+          </div>
+        ))}
       </div>
       <div className="footer">
         <hr />
-        <p className="general-info__field">
-          <strong>Alte persoane în grijă:</strong>
-          {fields.others.length > 0
-            ? fields.others.map((person, index) => (
-                <>
-                  <Link
-                    key={person.id}
-                    className="link"
-                    to={`/account/other-members/${person.id}`}
-                  >
-                    {person.name}
-                  </Link>
-                  {index !== fields.others.length - 1 && ", "}
-                </>
-              ))
-            : " - "}
-        </p>
+        {children}
       </div>
     </div>
   );
 };
 
 ProfileDetails.defaultProps = {
-  isSelf: false
+  isSelf: false,
+  family: []
 };
 
 ProfileDetails.propTypes = {
   fields: PropTypes.shape({
-    name: PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
-      .isRequired,
-    relationship: PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string
-    }),
-    phoneNumber: PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string
-    }),
-    location: PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string
-    }).isRequired,
-    age: PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
-      .isRequired,
-    gender: PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string
-    }).isRequired,
-    smoking: PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.bool
-    }).isRequired,
-    comorbidities: PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string
-    }).isRequired,
-    livingAlone: PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.bool
-    }).isRequired,
-    inIsolation: PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string
-    }).isRequired,
-    othersInHouseholdIsolation: PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string
-    }).isRequired,
-    others: PropTypes.array
+    id: PropTypes.number,
+    name: PropTypes.string.isRequired,
+    surname: PropTypes.string.isRequired,
+    phoneNumber: PropTypes.string.isRequired,
+    age: PropTypes.number.isRequired,
+    gender: PropTypes.number.isRequired,
+    county: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    preexistingMedicalCondition: PropTypes.string.isRequired,
+    quarantineStatus: PropTypes.number.isRequired,
+    smoker: PropTypes.bool.isRequired,
+    livesWithOthers: PropTypes.bool.isRequired,
+    quarantineStatusOthers: PropTypes.number.isRequired,
+    relationshipType: PropTypes.number.isRequired
   }).isRequired,
-  isSelf: PropTypes.bool
+  isSelf: PropTypes.bool,
+  children: PropTypes.shape
 };
 
 export default ProfileDetails;

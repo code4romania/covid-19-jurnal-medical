@@ -40,9 +40,9 @@ const ProfileSummary = ({ profile, dependants }) => {
       <div>
         <b>Alte persoane in grija:</b>
         <ul>
-          {dependants.map(depedant => (
-            <li key={depedant.name}>
-              {depedant.name} {depedant.surname}
+          {dependants.map(dependant => (
+            <li key={dependant.id}>
+              {dependant.name} {dependant.surname}
             </li>
           ))}
         </ul>

@@ -1,28 +1,23 @@
 .profile {
-    padding: 24px;
-    border: 1px solid #3C2653;
-    position: relative;
-    padding-top: 10px;
-    font-size: 14px;;
+  padding: 24px;
+  border: 1px solid #3c2653;
+  position: relative;
+  padding-top: 10px;
+  font-size: 14px;
 
-    .header {
-        display: flex;
-        justify-content: flex-end;
-    }
-    .content{
-        display: flex;
-    }
-    .left, .right {
-        flex: 1;
-    }
-    .left {
-        margin-right: 10px;
-    }
-    strong {
-        color: black;
-        font-weight: bold;
-    }
-    &__field {
-        margin-bottom: 10px;
-    }
+  .header {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  strong {
+    color: black;
+    font-weight: bold;
+  }
+  &__field {
+    margin-bottom: 10px;
+  }
 }
