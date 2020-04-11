@@ -4,10 +4,10 @@ import { options } from "./options";
 import React from "react";
 import PropTypes from "prop-types";
 
-const Health = ({ userData, setUserDataField }) => (
+const Health = ({ userData, setUserDataField, titles }) => (
   <>
-    <ListHeader title="II. Date despre starea ta de sănătate" />
-    <ListHeader title="Ești fumător?" />
+    <ListHeader title={titles.healthInfo} />
+    <ListHeader title={titles.smoker} />
     <SelectList
       options={options.yesNo}
       name="smoker"
@@ -15,7 +15,7 @@ const Health = ({ userData, setUserDataField }) => (
       value={[userData.smoker]}
       onChange={([value]) => setUserDataField("smoker", value)}
     />
-    <ListHeader title="Ți-a spus vreun medic că ai oricare dintre următoarele afecțiuni?" />
+    <ListHeader title={titles.preexistingConditions} />
     <SelectList
       options={options.preexistingMedicalCondition}
       name="preexistingMedicalCondition"
@@ -30,7 +30,12 @@ const Health = ({ userData, setUserDataField }) => (
 
 Health.propTypes = {
   userData: PropTypes.object.isRequired,
-  setUserDataField: PropTypes.func.isRequired
+  setUserDataField: PropTypes.func.isRequired,
+  titles: {
+    healthInfo: PropTypes.string.isRequired,
+    smoker: PropTypes.string.isRequired,
+    preexistingConditions: PropTypes.string.isRequired
+  }
 };
 
 export default Health;

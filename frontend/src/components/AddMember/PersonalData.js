@@ -3,7 +3,11 @@ import React from "react";
 import { options } from "./options";
 import PropTypes from "prop-types";
 
-export const PersonalData = ({ userData, setUserDataField }) => (
+export const PersonalData = ({
+  userData,
+  setUserDataField,
+  showRelationship
+}) => (
   <>
     <ListHeader title="I. Date personale" />
     <div className="user-profile-form-container">
@@ -40,17 +44,19 @@ export const PersonalData = ({ userData, setUserDataField }) => (
           setUserDataField("phoneNumber", value);
         }}
       />
-      <Select
-        placeholder="Tip de relație"
-        options={options.relation}
-        selectProps={{
-          required: true,
-          name: "relationshipType",
-          onChange: ({ currentTarget: { selectedIndex } }) => {
-            setUserDataField("relationshipType", selectedIndex);
-          }
-        }}
-      />
+      {showRelationship && (
+        <Select
+          placeholder="Tip de relație"
+          options={options.relation}
+          selectProps={{
+            required: true,
+            name: "relationshipType",
+            onChange: ({ currentTarget: { selectedIndex } }) => {
+              setUserDataField("relationshipType", selectedIndex);
+            }
+          }}
+        />
+      )}
       <Select
         placeholder="Judet"
         options={options.county}
@@ -104,7 +110,8 @@ export const PersonalData = ({ userData, setUserDataField }) => (
 
 PersonalData.propTypes = {
   userData: PropTypes.object.isRequired,
-  setUserDataField: PropTypes.func.isRequired
+  setUserDataField: PropTypes.func.isRequired,
+  showRelationship: PropTypes.bool.isRequired
 };
 
 export default PersonalData;

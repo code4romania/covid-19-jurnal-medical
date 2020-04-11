@@ -8,8 +8,9 @@ import Health from "./Health";
 import Context from "./Context";
 import { options } from "./options";
 import { useHistory } from "react-router-dom";
+import titles from "./titles";
 
-const AddMember = () => {
+export const ProfileForm = ({ sendResults, forYourself }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [userData, setUserData] = useState({
     name: "",
@@ -18,13 +19,12 @@ const AddMember = () => {
     relationshipType: 0,
     age: 0,
     gender: 0,
-    smoker: false,
+    smoker: null,
     preexistingMedicalCondition: [],
-    livesWithOthers: false,
+    livesWithOthers: null,
     quarantineStatus: 0,
     quarantineStatusOther: 0
   });
-  const history = useHistory();
 
   const setUserDataField = (field, value) => {
     setUserData({
@@ -33,20 +33,35 @@ const AddMember = () => {
     });
   };
 
+  const mapExistingConditions = userData => {
+    return {
+      ...userData,
+      preexistingMedicalCondition: userData.preexistingMedicalCondition
+        .map(
+          key =>
+            options.preexistingMedicalCondition.find(x => x.value === key).text
+        )
+        .join(", ")
+    };
+  };
+
   const nextStepHandler = () => {
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
     } else {
-      ProfileApi.addDependant({
-        ...userData,
-        preexistingMedicalCondition: userData.preexistingMedicalCondition
-          .map(
-            key =>
-              options.preexistingMedicalCondition.find(x => x.value === key)
-                .text
-          )
-          .join(", ")
-      }).then(() => history.push("/account/me"));
+      if (forYourself) {
+        delete userData["relationType"];
+      }
+
+      if (userData.smoker === null) {
+        userData.smoker = false;
+      }
+
+      if (userData.livesWithOthers === null) {
+        userData.livesWithOthers = false;
+      }
+
+      sendResults(mapExistingConditions(userData));
     }
   };
 
@@ -55,16 +70,29 @@ const AddMember = () => {
     nextStepHandler();
   };
 
+  const titlesForForm = forYourself ? titles.forYourself : titles.forOthers;
   return (
     <form onSubmit={submitForm} className="user-profile-form">
       {currentStep === 1 && (
-        <PersonalData userData={userData} setUserDataField={setUserDataField} />
+        <PersonalData
+          userData={userData}
+          setUserDataField={setUserDataField}
+          showRelationship={!forYourself}
+        />
       )}
       {currentStep === 2 && (
-        <Health userData={userData} setUserDataField={setUserDataField} />
+        <Health
+          userData={userData}
+          setUserDataField={setUserDataField}
+          titles={titlesForForm.health}
+        />
       )}
       {currentStep === 3 && (
-        <Context userData={userData} setUserDataField={setUserDataField} />
+        <Context
+          userData={userData}
+          setUserDataField={setUserDataField}
+          titles={titlesForForm.context}
+        />
       )}
 
       <Button type="warning" inputType="submit">
@@ -74,8 +102,19 @@ const AddMember = () => {
   );
 };
 
-AddMember.propTypes = {
-  evaluateCallback: PropTypes.func
+const AddMember = () => {
+  const history = useHistory();
+
+  const sendResults = userData => {
+    ProfileApi.addDependant(userData).then(() => history.push("/account/me"));
+  };
+
+  return <ProfileForm sendResults={sendResults} forYourself={false} />;
+};
+
+ProfileForm.propTypes = {
+  sendResults: PropTypes.func.isRequired,
+  forYourself: PropTypes.bool.isRequired
 };
 
 export default AddMember;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./Account.scss";
 
@@ -10,8 +10,18 @@ import Tabs from "../Tabs/Tabs";
 import BasePage from "../BasePage";
 import { Hero } from "@code4ro/taskforce-fe-components";
 import StepsBar from "../StepsBar";
+import ProfileApi from "../../api/profileApi";
+import CreateProfile from "./CreateProfile";
 
 export const Account = () => {
+  const [userProfile, setUserProfile] = useState(null);
+
+  const updateProfileFromServer = () => {
+    ProfileApi.get().then(setUserProfile);
+  };
+
+  useEffect(updateProfileFromServer, []);
+
   const tabs = [
     {
       id: 0,
@@ -27,6 +37,21 @@ export const Account = () => {
       navUrl: "/account/other-members"
     }
   ];
+
+  const getContent = () => {
+    const loading = userProfile === null;
+    if (loading) {
+      return <div>Datele se incarca</div>;
+    }
+
+    const profileEmpty = userProfile.id === undefined;
+    if (profileEmpty) {
+      return <CreateProfile onFinish={updateProfileFromServer} />;
+    }
+
+    return <Tabs tabs={tabs} />;
+  };
+
   return (
     <BasePage>
       <Hero
@@ -35,9 +60,7 @@ export const Account = () => {
         useFallbackIcon={true}
       />
       <StepsBar />
-      <SidebarLayout>
-        <Tabs tabs={tabs} />
-      </SidebarLayout>
+      <SidebarLayout>{getContent()}</SidebarLayout>
     </BasePage>
   );
 };
