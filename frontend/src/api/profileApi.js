@@ -11,13 +11,9 @@ const ProfileApi = {
 
     return result.data;
   },
-  addDependant: async profile => {
-    await api.post("/profile/family", profile);
-  },
+  addDependant: profile => api.post("/profile/family", profile),
 
-  createProfile: profile => {
-    api.post("/profile", profile);
-  }
+  createProfile: profile => api.post("/profile", profile)
 };
 
 export default ProfileApi;

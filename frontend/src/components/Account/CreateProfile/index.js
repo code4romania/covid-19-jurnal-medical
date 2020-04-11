@@ -1,27 +1,17 @@
 import React from "react";
-import AddMember from "../../AddMember";
+import { ProfileForm } from "../../AddMember";
 import ProfileApi from "../../../api/profileApi";
+import PropTypes from "prop-types";
 
-const CreateProfile = () => {
-  const sendResults = userData => {
-    ProfileApi.createProfile(userData);
-  };
+const CreateProfile = ({ onFinish }) => {
+  const sendResults = userData =>
+    ProfileApi.createProfile(userData).then(onFinish);
 
-  const titles = {
-    healthInfo: "II. Date despre starea ta de sănătate",
-    smoker: "Ești fumător?",
-    preexistingConditions:
-      "Ți-a spus vreun medic că ai oricare dintre următoarele afecțiuni?",
-    context: "III. Date despre contextul în care te afli",
-    quarantineStatus: "În momentul de față te afli în izolare la domiciliu?",
-    livesWithOthersStatus:
-      "În momentul de față împarți locuința și cu alte persoane?",
-    quarantineStatusOther: "Celelalte persoane se află în izolare la domiciliu?"
-  };
+  return <ProfileForm sendResults={sendResults} forYourself={true} />;
+};
 
-  return (
-    <AddMember sendResults={sendResults} forYourself={true} titles={titles} />
-  );
+CreateProfile.propTypes = {
+  onFinish: PropTypes.func.isRequired
 };
 
 export default CreateProfile;

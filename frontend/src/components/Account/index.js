@@ -16,9 +16,11 @@ import CreateProfile from "./CreateProfile";
 export const Account = () => {
   const [userProfile, setUserProfile] = useState(null);
 
-  useEffect(() => {
+  const updateProfileFromServer = () => {
     ProfileApi.get().then(setUserProfile);
-  }, []);
+  };
+
+  useEffect(updateProfileFromServer, []);
 
   const tabs = [
     {
@@ -44,7 +46,7 @@ export const Account = () => {
 
     const profileEmpty = userProfile.id === undefined;
     if (profileEmpty) {
-      return <CreateProfile />;
+      return <CreateProfile onFinish={updateProfileFromServer} />;
     }
 
     return <Tabs tabs={tabs} />;
