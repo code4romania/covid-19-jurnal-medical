@@ -8,5 +8,6 @@ namespace StamAcasa.Common.DTO
         public string FormTypeId { get; set; }
         public DateTime Timestamp { get; set; }
         public int UserId { get; set; }
+        public UserInfo UserInfo { get; set; }
     }
 }

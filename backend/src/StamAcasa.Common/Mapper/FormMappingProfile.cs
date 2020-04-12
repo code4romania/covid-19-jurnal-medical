@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using AutoMapper;
 using StamAcasa.Common.DTO;
+using StamAcasa.Common.Models;
 
 namespace StamAcasa.Common.Mapper {
     public class FormMappingProfile : Profile {
@@ -17,6 +18,7 @@ namespace StamAcasa.Common.Mapper {
         public FormInfoMappingProfile()
         {
             CreateMap<Form, FormInfo>()
+            .ForMember(m => m.UserInfo, f => f.MapFrom(src => src.User))
             .ForMember(dest => dest.Content,
                 o => o.MapFrom(src => JsonSerializer.Serialize(src.Content, new JsonSerializerOptions())));
         }

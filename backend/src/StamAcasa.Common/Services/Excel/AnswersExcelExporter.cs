@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using StamAcasa.Common.Models;
 
-namespace StamAcasa.Api.Services.Excel {
+namespace StamAcasa.Common.Services.Excel {
     public class AnswersExcelExporter : IAnswersExcelExporter {
 
         IExcelDocumentService ExcelDocumentService { get; }
@@ -53,8 +51,11 @@ namespace StamAcasa.Api.Services.Excel {
 
                 var row = dataTable.NewRow();
 
-                foreach (var jProperty in jProperties) {
+                foreach (var jProperty in jProperties)
+                {
 
+                    if (jProperty.Name == "timestamp")
+                        continue;
                     if (jProperty.Name == "answers") {
 
                         var jAnswers = (JArray)jProperty.Value;
