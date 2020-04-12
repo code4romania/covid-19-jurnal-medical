@@ -35,9 +35,9 @@ namespace StamAcasa.Api.Controllers
             if (sub == null)
                 return new UnauthorizedResult();
 
-            var result = 
-                !id.HasValue ? 
-                    await _userService.GetUserInfo(sub) : 
+            var result =
+                !id.HasValue ?
+                    await _userService.GetUserInfo(sub) :
                     await _userService.GetUserInfo(id.Value);
             return new OkObjectResult(result);
         }
@@ -48,7 +48,8 @@ namespace StamAcasa.Api.Controllers
         /// <returns></returns>
         [HttpGet("family")]
         [Produces(typeof(IEnumerable<UserInfo>))]
-        public async Task<IActionResult> GetFamilyMembers() {
+        public async Task<IActionResult> GetFamilyMembers()
+        {
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
@@ -91,7 +92,8 @@ namespace StamAcasa.Api.Controllers
         /// <returns>Id of newly created entity.</returns>
         [HttpPost("family")]
         [Produces(typeof(int))]
-        public async Task<IActionResult> AddFamilyProfile(UserProfileDTO model) {
+        public async Task<IActionResult> AddFamilyProfile(UserProfileDTO model)
+        {
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
@@ -99,7 +101,10 @@ namespace StamAcasa.Api.Controllers
                 return new UnauthorizedResult();
 
             var result = await _userService.AddOrUpdateDependentInfo(model, sub);
-
+            if (result == null)
+            {
+                return NotFound($"Could not find parent user sub = {sub}");
+            }
             return new OkObjectResult(result.Id);
         }
 
@@ -130,7 +135,7 @@ namespace StamAcasa.Api.Controllers
             model.Id = id;
             var result = await _userService.AddOrUpdateDependentInfo(model, sub);
 
-            return new OkObjectResult(result!=null);
+            return new OkObjectResult(result != null);
         }
     }
 }

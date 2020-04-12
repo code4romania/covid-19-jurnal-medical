@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./MyAccount.scss";
 import ProfileHistory from "../common/ProfileHistory/ProfileHistory";
-import ProfileApi from "../../../api/profileApi";
+import MockProfileApi from "../../../api/mockProfileApi";
 export const MyAccount = () => {
   const [userProfile, setUserProfile] = useState();
 
   useEffect(() => {
-    ProfileApi.get().then(setUserProfile);
+    MockProfileApi.get().then(setUserProfile);
   }, []);
   return (
     <div className="account-container">
