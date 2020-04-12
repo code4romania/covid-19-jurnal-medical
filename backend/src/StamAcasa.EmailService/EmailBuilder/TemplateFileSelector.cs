@@ -18,23 +18,7 @@ namespace StamAcasa.EmailService.EmailBuilder
         {
             var targetDirectory = _configuration.GetValue<string>("TemplateFolder");
             var directory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), targetDirectory);
-
-            var filePath = string.Empty;
-            switch (template)
-            {
-                case EmailTemplate.AccountConfirmation:
-                    filePath = "accountConfirmationTemplate.html";
-                    break;
-                case EmailTemplate.DailyAssessment:
-                    filePath = "dailyAssessmentTemplate.html";
-                    break;
-                case EmailTemplate.StateEntity:
-                    filePath = "stateEntityTemplate.html";
-                    break;
-                case EmailTemplate.DailyReport:
-                    filePath = "dailyReportTemplate.html";
-                    break;
-            }
+            var filePath = EmailConstants.GetTemplatePath(template);
 
             return Path.Combine(directory, filePath);
         }

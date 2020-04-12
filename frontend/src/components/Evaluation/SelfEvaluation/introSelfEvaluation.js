@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import ProfileSummary from "./profileSummary";
 import ProfileApi from "../../../api/profileApi";
 import StartFormButton from "../startFormButton";
+import ProfileDetails from "../../Account/common/ProfileDetails/ProfileDetails";
+import ProfileOthers from "../../Account/common/ProfileOthers/ProfileOthers";
 
 const IntroSelfEvaluation = ({ onFinish }) => {
   const [userProfile, setUserProfile] = useState({});
@@ -16,7 +17,9 @@ const IntroSelfEvaluation = ({ onFinish }) => {
     <div>
       <StartFormButton onClick={onFinish} />
       {userProfile.id && (
-        <ProfileSummary profile={userProfile} dependants={dependants} />
+        <ProfileDetails fields={userProfile} isSelf>
+          <ProfileOthers family={dependants} />
+        </ProfileDetails>
       )}
     </div>
   );

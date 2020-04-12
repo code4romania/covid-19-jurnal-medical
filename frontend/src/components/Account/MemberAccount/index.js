@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {
-  Redirect,
-  Route,
-  Switch,
-  useHistory,
-  useParams
-} from "react-router-dom";
+import { Route, Switch, useHistory, useParams } from "react-router-dom";
 import { Select } from "@code4ro/taskforce-fe-components";
-import "./MemberAccount.scss";
 
 import ProfileHistory from "../common/ProfileHistory/ProfileHistory.js";
 import ProfileApi from "../../../api/profileApi";
+
+import { DESCRIPTION_TEXT } from "./constants.js";
+
+import "./MemberAccount.scss";
 
 export const MemberAccount = () => {
   const { personId } = useParams();
@@ -24,19 +21,24 @@ export const MemberAccount = () => {
 
   useEffect(() => {
     setOptions(
-      familyMembers.map(person => ({
-        text: person.profile.name.value,
-        value: person.profile.name.value,
-        selected: person.id === personId
+      familyMembers.map(({ name, surname, id }) => ({
+        text: `${name} ${surname}`,
+        value: `${id}`,
+        selected: id === personId
       }))
     );
+
+    if (familyMembers.length) {
+      history.replace(`/account/other-members/${familyMembers[0].id}`);
+    }
   }, [personId, familyMembers]);
 
   const props = {
-    onChange: el => {
+    onChange: ({ target: { value: selectedValue } }) => {
       const selectedPerson = familyMembers.find(
-        person => person.profile.name.value === el.target.value
+        ({ id }) => id === +selectedValue
       );
+
       if (selectedPerson) {
         history.replace(`/account/other-members/${selectedPerson.id}`);
       }
@@ -49,27 +51,16 @@ export const MemberAccount = () => {
 
   return (
     <div className="member-profile">
-      <p>
-        Următorul formular te ajută să menții un istoric al simptomelor sau al
-        absenței acestora în perioada în care persoanele pe care le ai în grijă
-        stau în izolare. Parcurge întrebările și răspunde cu atenție. Pe măsură
-        ce completezi, această pagină se va popula cu istoricul răspunsurilor
-        lor. Chiar dacă nu locuiești cu aceste persoane, dar ții legătura
-        recurent cu ele, le poți ajuta monitorizându-le sănătatea telefonic și
-        marcând răspunsurile în aplicație
-      </p>
+      <p>{DESCRIPTION_TEXT}</p>
       <h1 className="member-profile__select">
-        <Select label="Alege persona" selectProps={props} options={options} />
+        <Select label="Alege persoana" selectProps={props} options={options} />
       </h1>
       <Switch>
         {familyMembers.map(member => (
           <Route key={member.id} path={`/account/other-members/${member.id}`}>
-            <ProfileHistory data={member} />
+            <ProfileHistory data={member} family={familyMembers} />
           </Route>
         ))}
-        {familyMembers.length && (
-          <Redirect to={`/account/other-members/${familyMembers[0].id}`} />
-        )}
       </Switch>
     </div>
   );

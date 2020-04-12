@@ -12,20 +12,47 @@ import titles from "./titles";
 
 export const ProfileForm = ({ sendResults, forYourself }) => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [userData, setUserData] = useState({
-    name: "",
-    surname: "",
-    phoneNumber: "",
-    relationshipType: 0,
-    age: 0,
-    gender: 0,
-    smoker: null,
-    preexistingMedicalCondition: [],
-    livesWithOthers: null,
-    quarantineStatus: 0,
-    quarantineStatusOther: 0
-  });
+  const [userData, setUserData] = useState({});
 
+  const fieldsForYourself = [
+    "name",
+    "surname",
+    "phoneNumber",
+    "age",
+    "gender",
+    "county",
+    "city"
+  ];
+  const fieldsForDependant = [...fieldsForYourself, "relationshipType"];
+  const personalFields = forYourself ? fieldsForYourself : fieldsForDependant;
+
+  const healthFields = ["smoker", "preexistingMedicalCondition"];
+
+  const contextFields = [
+    "livesWithOthers",
+    "quarantineStatus",
+    "quarantineStatusOther"
+  ];
+
+  const fieldsCompleted = fields => {
+    return !fields.map(field => userData[field]).includes(undefined);
+  };
+
+  const canGoNext = () => {
+    if (currentStep === 1 && fieldsCompleted(personalFields)) {
+      return true;
+    }
+
+    if (currentStep === 2 && fieldsCompleted(healthFields)) {
+      return true;
+    }
+
+    if (currentStep === 3 && fieldsCompleted(contextFields)) {
+      return true;
+    }
+
+    return false;
+  };
   const setUserDataField = (field, value) => {
     setUserData({
       ...userData,
@@ -95,7 +122,7 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
         />
       )}
 
-      <Button type="warning" inputType="submit">
+      <Button type="warning" inputType="submit" disabled={!canGoNext()}>
         Continuă
       </Button>
     </form>

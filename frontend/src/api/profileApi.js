@@ -2,14 +2,14 @@ import api from "./api";
 
 const ProfileApi = {
   get: async () => {
-    const result = await api.get("/profile");
+    const { data } = await api.get("/profile");
 
-    return result.data;
+    return data;
   },
   getDependants: async () => {
-    const result = await api.get("/profile/family");
+    const { data } = await api.get("/profile/family");
 
-    return result.data;
+    return data;
   },
   addDependant: profile => api.post("/profile/family", profile),
 
