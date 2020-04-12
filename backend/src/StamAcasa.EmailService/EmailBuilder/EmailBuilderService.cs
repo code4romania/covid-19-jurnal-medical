@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
@@ -31,13 +32,12 @@ namespace StamAcasa.EmailService.EmailBuilder
                 FromName = "Admin Stam Acasa",
                 FromEmail = "admin@stamacasa.ro",
                 To = emailRequest.Address,
-                Subject = "New Email",
+                Subject = EmailConstants.GetSubject(emailRequest.TemplateType),
                 Content = template
             };
 
             return emailModel;
         }
-
         private async Task<string> GetTemplate(EmailTemplate templateType)
         {
             if (!_memoryCache.TryGetValue<string>(templateType, out string template))
