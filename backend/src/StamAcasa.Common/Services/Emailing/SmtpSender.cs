@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
@@ -26,13 +27,33 @@ namespace StamAcasa.Common.Services.Emailing
 
                 await client.AuthenticateAsync(_options.User, _options.Password, cancellationToken);
 
+                var body = new TextPart(TextFormat.Html) { Text = email.Content };
                 var message = new MimeMessage
                 {
                     Sender = new MailboxAddress(email.FromName, email.FromEmail),
                     Subject = email.Subject,
-                    Body = new TextPart(TextFormat.Html) { Text = email.Content },
+                    Body = body,
                     To = { new MailboxAddress(email.To) }
                 };
+                if (email.Attachment != null)
+                {
+                    var attachment = new MimePart("application","vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                    {
+                        Content = new MimeContent(new MemoryStream(email.Attachment.Content)),
+                        ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                        ContentTransferEncoding = ContentEncoding.Base64,
+                        FileName = email.Attachment.FileName
+                    };
+                    var multipart = new Multipart("mixed");
+                    multipart.Add(body);
+                    multipart.Add(attachment);
+
+                    message.Body = multipart;
+                }
+                else
+                {
+                    message.Body = body;
+                }
 
                 await client.SendAsync(message, cancellationToken);
                 await client.DisconnectAsync(true, cancellationToken);

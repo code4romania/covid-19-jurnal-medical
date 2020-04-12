@@ -5,10 +5,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using StamAcasa.Common;
+using StamAcasa.Common.Models;
 using StamAcasa.Common.Notifications;
 using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services;
+using StamAcasa.Common.Services.Emailing;
+using StamAcasa.Common.Services.Excel;
 using StamAcasa.JobScheduler.Extensions;
 using StamAcasa.JobScheduler.Jobs;
 
@@ -44,7 +48,7 @@ namespace StamAcasa.JobScheduler
                         userName,
                         password,
                         10, //default
-                        (x) => {}));
+                        (x) => { }));
 
                     services.TryAddScheduledJob<HealthCheckJob>();
                     services.TryAddScheduledJob<SendAssessmentReminderJob>(s =>
@@ -52,10 +56,19 @@ namespace StamAcasa.JobScheduler
                         s.TryAddTransient<AssessmentNotificationsDispatch>();
                         s.TryAddSingleton<IQueueService, QueueService>();
                         s.TryAddTransient<IUserService, UserService>();
+
                     });
+
                     services.TryAddScheduledJob<SendResultsNotificationJob>(s =>
                     {
                         s.TryAddTransient<ResultNotificationsDispatch>();
+                        s.TryAddTransient<IFormService, FormService>();
+                        s.TryAddTransient<IAnswersExcelExporter, AnswersExcelExporter>();
+                        s.TryAddTransient<IExcelDocumentService, ExcelDocumentService>();
+
+                        CountyEmailDistribution countyEmailDistribution = new CountyEmailDistribution();
+                        hostContext.Configuration.GetSection(nameof(CountyEmailDistribution)).Bind(countyEmailDistribution);
+                        s.TryAddSingleton(countyEmailDistribution);
                     });
                 });
     }

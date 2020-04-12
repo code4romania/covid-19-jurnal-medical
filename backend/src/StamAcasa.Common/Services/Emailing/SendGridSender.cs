@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using SendGrid;
@@ -31,6 +32,17 @@ namespace StamAcasa.Common.Services.Emailing
                 PlainTextContent = email.Content,
                 HtmlContent = email.Content
             };
+            if (email.Attachment != null)
+            {
+                message.Attachments = new List<Attachment>
+                {
+                    new Attachment
+                    {
+                        Filename = email.Attachment.FileName,
+                        Content = Convert.ToBase64String(email.Attachment.Content)
+                    }
+                };
+            }
 
             message.AddTo(new EmailAddress(email.To));
             message.SetClickTracking(_options.ClickTracking, _options.ClickTracking);

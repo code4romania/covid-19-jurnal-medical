@@ -25,7 +25,6 @@
     <ItemGroup>
         <ProjectReference Include="..\StamAcasa.Common\StamAcasa.Common.csproj" />
     </ItemGroup>
-
     <ItemGroup>
         <None Update="EmailBuilder\Resources\dailyAssessmentTemplate.html">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -34,6 +33,9 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="EmailBuilder\Resources\stateEntityTemplate.html">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="EmailBuilder\Resources\dailyReportTemplate.html">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
     </ItemGroup>
