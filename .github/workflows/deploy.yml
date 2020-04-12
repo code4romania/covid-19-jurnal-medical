@@ -181,7 +181,7 @@ jobs:
         run: |
           cd frontend
           docker build . \
-            --tag $IMAGE_FRONTEND:$GITHUB_SHA
+            --tag $IMAGE_FRONTEND:$GITHUB_SHA \
             --file Dockerfile
       - name: Upload Docker image
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
