@@ -27,7 +27,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd backend\src\StamAcasa.IdentityServer
+          cd backend/src/StamAcasa.IdentityServer
           docker build . \
             --tag $IMAGE_IDENTITYSERVER:$GITHUB_SHA \
             --file Dockerfile
@@ -65,7 +65,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd backend\src\StamAcasa.API
+          cd backend/src/StamAcasa.API
           docker build . \
             --tag $IMAGE_API:$GITHUB_SHA \
             --file Dockerfile
@@ -103,7 +103,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd backend\src\StamAcasa.EmailService
+          cd backend/src/StamAcasa.EmailService
           docker build . \
             --tag $IMAGE_EMAILSERVICE:$GITHUB_SHA \
             --file Dockerfile
@@ -141,7 +141,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd backend\src\StamAcasa.JobScheduler
+          cd backend/src/StamAcasa.JobScheduler
           docker build . \
             --tag $IMAGE_JOBSCHEDULER:$GITHUB_SHA \
             --file Dockerfile
