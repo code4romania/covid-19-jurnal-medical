@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using StamAcasa.Common.DTO;
 using StamAcasa.Common.Models;
 
@@ -13,11 +14,13 @@ namespace StamAcasa.Common.Services
     {
         private readonly UserDbContext _context;
         private readonly IMapper _mapper;
+        private readonly ILogger<UserService> _logger;
 
-        public UserService(UserDbContext context, IMapper mapper)
+        public UserService(UserDbContext context, IMapper mapper, ILogger<UserService> logger)
         {
             _context = context;
             _mapper = mapper;
+            _logger = logger;
         }
 
         private async Task<User> AddOrUpdateEntity(User user, UserProfileDTO profileUpdateInfo)
@@ -48,7 +51,10 @@ namespace StamAcasa.Common.Services
         {
             var parentUser = _context.Users.FirstOrDefault(u => u.Sub == parentSub);
             if (parentUser == null)
+            {
+                _logger.LogInformation($"Parent user id not found for sub = {parentSub}");
                 return null;
+            }
 
             dependentInfo.ParentId = parentUser.Id;
             User existingUserEntity = null;
