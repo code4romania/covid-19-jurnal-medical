@@ -27,10 +27,10 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd backend/src/StamAcasa.IdentityServer
+          cd backend/src
           docker build . \
             --tag $IMAGE_IDENTITYSERVER:$GITHUB_SHA \
-            --file Dockerfile
+            --file StamAcasa.IdentityServer/Dockerfile
       - name: Upload Docker image
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         run: |
@@ -65,10 +65,10 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd backend/src/StamAcasa.API
+          cd backend/src
           docker build . \
             --tag $IMAGE_API:$GITHUB_SHA \
-            --file Dockerfile
+            --file StamAcasa.Api/Dockerfile
       - name: Upload Docker image
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         run: |
@@ -103,10 +103,10 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd backend/src/StamAcasa.EmailService
+          cd backend/src
           docker build . \
             --tag $IMAGE_EMAILSERVICE:$GITHUB_SHA \
-            --file Dockerfile
+            --file StamAcasa.EmailService/Dockerfile
       - name: Upload Docker image
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         run: |
@@ -141,10 +141,10 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd backend/src/StamAcasa.JobScheduler
+          cd backend/src
           docker build . \
             --tag $IMAGE_JOBSCHEDULER:$GITHUB_SHA \
-            --file Dockerfile
+            --file StamAcasa.JobScheduler/Dockerfile
       - name: Upload Docker image
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         run: |
