@@ -26,8 +26,8 @@ const MemberEvaluation = () => {
   useEffect(() => {
     setOptions(
       familyMembers.map(person => ({
-        text: person.profile.name.value,
-        value: person.profile.name.value,
+        text: person.name,
+        value: person.name,
         selected: person.id === personId
       }))
     );
@@ -36,7 +36,7 @@ const MemberEvaluation = () => {
   const props = {
     onChange: el => {
       const selectedPerson = familyMembers.find(
-        person => person.profile.name.value === el.target.value
+        person => person.name === el.target.value
       );
       if (selectedPerson) {
         history.replace(`/evaluation/other-members/${selectedPerson.id}`);

@@ -1,173 +1,120 @@
 import React, { useState } from "react";
-import {
-  Hero,
-  Button,
-  Input,
-  Select,
-  RadioList
-} from "@code4ro/taskforce-fe-components";
-import SidebarLayout from "../SidebarLayout";
+import PropTypes from "prop-types";
 import "./AddMember.scss";
-export const AddMember = () => {
-  const [preexistingConditions, setPreexistingConditions] = useState(false);
-  const [disabilities, setDisabilities] = useState(false);
-  const [female, setFemale] = useState(true);
+import { Button } from "@code4ro/taskforce-fe-components";
+import ProfileApi from "../../api/profileApi";
+import PersonalData from "./PersonalData";
+import Health from "./Health";
+import Context from "./Context";
+import { options } from "./options";
+import { useHistory } from "react-router-dom";
+import titles from "./titles";
 
-  //TODO: change with api endpoints responses when they are available
-  const options = {
-    gender: [
-      { key: "1", text: "Feminin" },
-      { key: "2", text: "Masculin" }
-    ],
-    relationship: {
-      female: [
-        { text: "", value: "" },
-        { text: "Bunică", value: "1" },
-        { text: "Mamă", value: "2" },
-        { text: "Fiica", value: "3" },
-        { text: "Soră", value: "4" },
-        { text: "Alt membru al familiei", value: "5" },
-        { text: "Persoană în grijă", value: "6" }
-      ],
-      male: [
-        { text: "", value: "" },
-        { text: "Bunic", value: "1" },
-        { text: "Tată", value: "2" },
-        { text: "Fiu", value: "3" },
-        { text: "Frate", value: "4" },
-        { text: "Alt membru al familiei", value: "5" },
-        { text: "Persoană în grijă", value: "6" }
-      ]
-    },
-    yesNo: [
-      { key: "true", value: "Da" },
-      { key: "false", value: "Nu" }
-    ],
-    preexistingConditions: [
-      { value: "1", text: "Boală cardiovasculară" },
-      { value: "2", text: "Diabet" },
-      { value: "3", text: "Boală pulmonară" },
-      { value: "4", text: "Cancer" },
-      { value: "5", text: "Altă boală cronică" }
-    ],
-    isolation: [
-      { key: "1", value: "Auto izolare" },
-      { key: "2", value: "Carantină la domiciliu" },
-      { key: "3", value: "Carantină specializată" },
-      { key: "4", value: "Niciuna" }
-    ]
+export const ProfileForm = ({ sendResults, forYourself }) => {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [userData, setUserData] = useState({
+    name: "",
+    surname: "",
+    phoneNumber: "",
+    relationshipType: 0,
+    age: 0,
+    gender: 0,
+    smoker: null,
+    preexistingMedicalCondition: [],
+    livesWithOthers: null,
+    quarantineStatus: 0,
+    quarantineStatusOther: 0
+  });
+
+  const setUserDataField = (field, value) => {
+    setUserData({
+      ...userData,
+      [field]: value
+    });
   };
 
-  const toggleSex = event => {
-    setFemale(event.target.value === "Feminin");
+  const mapExistingConditions = userData => {
+    return {
+      ...userData,
+      preexistingMedicalCondition: userData.preexistingMedicalCondition
+        .map(
+          key =>
+            options.preexistingMedicalCondition.find(x => x.value === key).text
+        )
+        .join(", ")
+    };
   };
 
-  const togglePreexistingConditions = value => {
-    setPreexistingConditions(value === "Da");
-  };
+  const nextStepHandler = () => {
+    if (currentStep < 3) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      if (forYourself) {
+        delete userData["relationType"];
+      }
 
-  const toggleDisabilities = value => {
-    setDisabilities(value === "Da");
-  };
+      if (userData.smoker === null) {
+        userData.smoker = false;
+      }
 
-  const validateAge = event => {
-    const value = parseInt(event.target.value.replace(/[^0-9]+/g, ""));
-    // age range is between 0 and 110 - might be worth reconsidering?
-    const boundedValue = Math.min(110, Math.max(0, value));
+      if (userData.livesWithOthers === null) {
+        userData.livesWithOthers = false;
+      }
 
-    event.target.value = isNaN(boundedValue) ? "" : boundedValue;
+      sendResults(mapExistingConditions(userData));
+    }
   };
 
   const submitForm = e => {
-    // TODO: submit the form when endpoint available
     e.preventDefault();
+    nextStepHandler();
   };
 
+  const titlesForForm = forYourself ? titles.forYourself : titles.forOthers;
   return (
-    <SidebarLayout>
-      <form onSubmit={submitForm}>
-        <div className="add-member">
-          <Hero
-            title="Creează cont pentru un membru al familiei"
-            subtitle="Înregistrează un membru al familiei care nu poate accesa platforma și ajută-l să își facă evaluarea zilnică a simptomelor COVID-19."
-          />
-          <Input label="Nume și prenume" type="text" required={true} />
-          <div className="columns">
-            <div className="column is-3">
-              <Input
-                label="Vârstă"
-                type="text"
-                onChange={validateAge}
-                required={true}
-              />
-            </div>
-            <div className="column is-3">
-              <Select
-                label="Gen"
-                options={options.gender}
-                selectProps={{
-                  onChange: toggleSex,
-                  className: "is-extended"
-                }}
-              />
-            </div>
-          </div>
-          <div className="columns">
-            <div className="column is-6">
-              <Select
-                label="Legătura familiala"
-                options={
-                  female
-                    ? options.relationship.female
-                    : options.relationship.male
-                }
-              />
-            </div>
-          </div>
-          <RadioList
-            label="Are condiții de sănătate preexistente?"
-            description="Spune-ne dacă suferă de anumte boli cronice, diabet, hipertensiune, etc."
-            type="horizontal"
-            options={options.yesNo}
-            onChange={togglePreexistingConditions}
-            required={true}
-          />
-          {preexistingConditions && (
-            <div className="column is-6 is-multiple">
-              <Select
-                label="Condiții de sănătate preexistente"
-                options={options.preexistingConditions}
-                selectProps={{ multiple: "multiple" }}
-              />
-            </div>
-          )}
-          <RadioList
-            label="Are anumite dizabilități?"
-            description="Spune-ne dacă sferă de anumite dizabilitati Ex locomotorii, mentale, de vorbire, etc."
-            type="horizontal"
-            options={options.yesNo}
-            onChange={toggleDisabilities}
-          />
-          {disabilities && (
-            <Input label="Dizabilități" type="text" required={true} />
-          )}
-          <RadioList
-            label="În ultima perioadă a fost în:"
-            type="horizontal"
-            options={options.isolation}
-          />
+    <form onSubmit={submitForm} className="user-profile-form">
+      {currentStep === 1 && (
+        <PersonalData
+          userData={userData}
+          setUserDataField={setUserDataField}
+          showRelationship={!forYourself}
+        />
+      )}
+      {currentStep === 2 && (
+        <Health
+          userData={userData}
+          setUserDataField={setUserDataField}
+          titles={titlesForForm.health}
+        />
+      )}
+      {currentStep === 3 && (
+        <Context
+          userData={userData}
+          setUserDataField={setUserDataField}
+          titles={titlesForForm.context}
+        />
+      )}
 
-          <div className="columns">
-            <div className="column is-4 is-offset-8">
-              <Button type="primary" size="medium" inputType="submit">
-                Adaugă
-              </Button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </SidebarLayout>
+      <Button type="warning" inputType="submit">
+        Continuă
+      </Button>
+    </form>
   );
+};
+
+const AddMember = () => {
+  const history = useHistory();
+
+  const sendResults = userData => {
+    ProfileApi.addDependant(userData).then(() => history.push("/account/me"));
+  };
+
+  return <ProfileForm sendResults={sendResults} forYourself={false} />;
+};
+
+ProfileForm.propTypes = {
+  sendResults: PropTypes.func.isRequired,
+  forYourself: PropTypes.bool.isRequired
 };
 
 export default AddMember;
