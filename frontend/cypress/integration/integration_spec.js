@@ -1,0 +1,74 @@
+import authDetails from "../support/authDetails.json";
+describe("Stam Acasa", function() {
+  const BEARER_TOKEN = "something-really-secret";
+  const mockLogin = () => {
+    authDetails.access_token = BEARER_TOKEN;
+    window.sessionStorage.setItem(
+      "oidc.user:http://localhost:5001:js",
+      JSON.stringify(authDetails)
+    );
+  };
+
+  describe("Main logged in journeys", () => {
+    const stubProfile = data => {
+      cy.routeUseAuth(
+        {
+          method: "GET",
+          url: "http://localhost:5008/api/profile",
+          response: data
+        },
+        BEARER_TOKEN
+      );
+    };
+
+    beforeEach(() => {
+      mockLogin();
+      cy.server();
+    });
+
+    it("can create it's own profile", function() {
+      cy.routeUseAuth(
+        {
+          method: "POST",
+          url: "http://localhost:5008/api/profile",
+          response: "fixture:profile.json"
+        },
+        BEARER_TOKEN
+      );
+      stubProfile("");
+      cy.visit("/");
+      cy.visit("/account/me");
+      cy.get("[name='nume'").type("Ion");
+      cy.get("[name='surname'").type("Popescu");
+      cy.get("[name='phoneNumber'").type("1234");
+      cy.get("[name='county'").select("București");
+      cy.get("[name='city'").select("București");
+      cy.get("[name='age'").type("41");
+      cy.get("[name='gender'").select("1");
+      cy.contains("Continuă").click();
+
+      cy.get("[name='smoker']")
+        .contains("Da")
+        .click();
+      cy.get("[name='preexistingMedicalCondition']")
+        .contains("Diabet")
+        .click();
+      cy.contains("Continuă").click();
+
+      cy.get("[name='quarantineStatus']")
+        .contains("Altă situație")
+        .click();
+      cy.get("[name='livesWithOthers']")
+        .contains("Da")
+        .click();
+      cy.get("[name='quarantineStatusOther']")
+        .contains("Altă situație")
+        .click();
+
+      stubProfile("fixture:profile.json");
+      cy.contains("Continuă").click();
+
+      expect(true).to.equal(true);
+    });
+  });
+});

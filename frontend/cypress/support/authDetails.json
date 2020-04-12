@@ -1,0 +1,20 @@
+{
+  "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IlhPcTFLelpudDY1YjZTa2pxS1FWaEEiLCJ0eXAiOiJKV1QifQ.eyJuYmYiOjE1ODY3MDIzODYsImV4cCI6MTU4NjcwMjY4NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAxIiwiYXVkIjoianMiLCJub25jZSI6IjAyYTdhMjYyYmE1YTRjYWJhYmFlMjNiNWVlYWMyYWM5IiwiaWF0IjoxNTg2NzAyMzg2LCJhdF9oYXNoIjoiQzN6X0VOT3o3VXlaMHVQaHVoS3lxZyIsInNfaGFzaCI6ImNXSF9SZHJIcHhrdVFJLVo5eHJpd3ciLCJzaWQiOiJObk5wUzFzc0tFb194OUdPU2tEY0FBIiwic3ViIjoiM2EwODI0NWMtZTljYy00ZjIyLThkMmYtNmRmMzY1MDRjMzZkIiwiYXV0aF90aW1lIjoxNTg2NzAyMzg2LCJpZHAiOiJsb2NhbCIsImFtciI6WyJwd2QiXX0.E88NmSLN_BvdgH-iSUCjqjxVoIOwJOXg5n_Zu9JANRAIjpYDuLI0xg4oRAGMUc4h2E1cgiqdJ5X2ASZw5pCBz6eibDDxQhOwutZMTppK0ZkngS3BmxUj1atVN2QaVSXqnz7CvZjNN4_hmeukGwONXyFITgYEd8_HG-eVAyNpLJGVz-0VCR8V3mDjSA9VbytpNFQrqgKY5wF1wSK59X6AJl6PKLMZDrGQUDMl6ifKRgMusAyugHXJRZSNE4Q1Ehe8Yqedim0-YlFypjxSLAAce_NNaF_G_vdztFG_vP_8rj15c6CUberTzy0wlwkASbHj3YhPpzLT6QFdVDiUcZy5Xg",
+  "session_state": "0rZBG20zsxTNaYChDE_PA70u2F0w9tYtuEp4tJJnvHg.zRqTfFHTmfwAJGsIVp2plw",
+  "access_token": "wtbvvSFValn_YdaBhbfKeUW67ygtL0L_BFoELl9YlFc",
+  "token_type": "Bearer",
+  "scope": "openid email answersApi usersApi",
+  "profile": {
+    "s_hash": "cWH_RdrHpxkuQI-Z9xriww",
+    "sid": "NnNpS1ssKEo_x9GOSkDcAA",
+    "sub": "3a08245c-e9cc-4f22-8d2f-6df36504c36d",
+    "auth_time": 1586702386,
+    "idp": "local",
+    "amr": [
+      "pwd"
+    ],
+    "email": "alice@test.com",
+    "email_verified": "true"
+  },
+  "expires_at": 1586705987
+}
