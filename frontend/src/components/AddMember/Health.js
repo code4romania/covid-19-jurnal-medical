@@ -19,7 +19,11 @@ const Health = ({ userData, setUserDataField, titles }) => (
     <SelectList
       options={options.preexistingMedicalCondition}
       name="preexistingMedicalCondition"
-      value={userData.preexistingMedicalCondition}
+      value={
+        userData.preexistingMedicalCondition
+          ? userData.preexistingMedicalCondition
+          : []
+      }
       multiple={true}
       onChange={value => {
         setUserDataField("preexistingMedicalCondition", value);
