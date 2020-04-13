@@ -11,7 +11,7 @@ const titles = {
       quarantineStatus: "În momentul de față te afli în izolare la domiciliu?",
       livesWithOthersStatus:
         "În momentul de față împarți locuința și cu alte persoane?",
-      quarantineStatusOther:
+      quarantineStatusOthers:
         "Celelalte persoane se află în izolare la domiciliu?"
     }
   },

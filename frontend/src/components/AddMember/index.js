@@ -32,7 +32,7 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
   const contextFields = [
     "livesWithOthers",
     "quarantineStatus",
-    "quarantineStatusOther"
+    "quarantineStatusOthers"
   ];
 
   const fieldsCompleted = fields => {
