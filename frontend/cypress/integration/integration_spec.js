@@ -1,7 +1,9 @@
 import authDetails from "../support/authDetails.json";
+import "../../public/env-config";
+
 describe("Stam Acasa", function() {
-  const API_URL = Cypress.env("API_URL");
-  const IDP_URL = Cypress.env("IDP_URL");
+  const API_URL = window._env_.REACT_APP_API_URL;
+  const IDP_URL = window._env_.REACT_APP_IDP_URL;
 
   const BEARER_TOKEN = "something-really-secret";
   const mockLogin = () => {

@@ -1,9 +1,5 @@
 {
   "chromeWebSecurity": false,
   "baseUrl": "http://localhost:3000",
-  "video": false,
-  "env": {
-    "API_URL": "http://localhost:5008",
-    "IDP_URL": "http://localhost:5001"
-  }
+  "video": false
 }
