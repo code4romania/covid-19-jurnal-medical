@@ -69,7 +69,7 @@ namespace StamAcasa.Common.Notifications
             {
                 var email = new EmailRequestModel
                 {
-                    TemplateType = EmailTemplate.DailyReport,
+                    TemplateType = EmailTemplate.StateEntity,
                     Type = "dailyReportTemplate",
                     Address = contact,
                     Subject = $"{countyForms.Key}-{DateTime.Now:yyyyMMdd}",

@@ -4,7 +4,6 @@
     {
         AccountConfirmation,  
         DailyAssessment, 
-        StateEntity,
-        DailyReport
+        StateEntity
     }
 }
