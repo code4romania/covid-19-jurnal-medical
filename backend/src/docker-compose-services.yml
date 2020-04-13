@@ -63,3 +63,13 @@ services:
         SMTP__PORT: 587
         SMTP__USER: email@domain.com
         SMTP__PASSWORD: password
+
+  stamacasa.jobscheduler:
+    image: ${DOCKER_REGISTRY-}stamacasa-jobscheduler
+    build:
+        context: .
+        dockerfile: StamAcasa.JobScheduler/Dockerfile    
+    environment:
+        RABBITMQ__USER: admin
+        RABBITMQ__PASSWORD: Corona2020
+        RABBITMQ__HOSTNAME: rabbitmq
