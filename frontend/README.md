@@ -87,3 +87,13 @@ If you run the app locally, simply edit the `.env` file with the correct values,
 ```
 npm start
 ```
+
+### Running browser tests
+[cypress](https://www.cypress.io/) is for browser testing - more details how it works [here](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html)
+
+The tests are setup to stub the calls to `/api`. The setup also also for verification like the use of authentication or the data sent to the server. The login is "faked" by setting the a item in the session storage emulating the one setup by the openid js client. This means that the backend doesnt need to run.
+
+#### Commands
+ * if the local server is already running: `npm run browserTest`
+ * to start the local server just for the test run: `npm run startAndBrowserTest`
+ * to run the tests in a real browser and see what happens: `npm run cy:open`
