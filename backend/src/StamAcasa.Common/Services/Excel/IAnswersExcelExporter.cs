@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using StamAcasa.Common.Models;
 
-namespace StamAcasa.Api.Services.Excel {
+namespace StamAcasa.Common.Services.Excel {
     public interface IAnswersExcelExporter {
 
         byte[] AnswersToExcel(JArray jAnswerForms, AnswersExcelTemplateTypes template = AnswersExcelTemplateTypes.SingleRowPerForm)

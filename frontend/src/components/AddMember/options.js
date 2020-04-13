@@ -32,7 +32,8 @@ export const options = {
     { value: "Diabet", text: "Diabet" },
     { value: "O boală a plămânilor", text: "O boală a plămânilor" },
     { value: "Cancer", text: "Cancer" },
-    { value: "Altă boală cronică", text: "Altă boală cronică" }
+    { value: "Altă boală cronică", text: "Altă boală cronică" },
+    { value: "Niciuna de mai sus", text: "Niciuna de mai sus" }
   ],
   quarantineStatus: [
     { value: "1", text: "Da, sunt în izolare, nu ies deloc din locuință" },
