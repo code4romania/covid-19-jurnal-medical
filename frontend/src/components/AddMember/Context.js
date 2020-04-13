@@ -26,9 +26,9 @@ const Context = ({ userData, setUserDataField, titles }) => (
     <ListHeader title="Celelalte persoane se află în izolare la domiciliu?" />
     <SelectList
       options={options.quarantineStatus}
-      name="quarantineStatusOther"
-      value={toArrayOfStringValues(userData.quarantineStatusOther)}
-      onChange={([value]) => setUserDataField("quarantineStatusOther", +value)}
+      name="quarantineStatusOthers"
+      value={toArrayOfStringValues(userData.quarantineStatusOthers)}
+      onChange={([value]) => setUserDataField("quarantineStatusOthers", +value)}
     />
   </>
 );
