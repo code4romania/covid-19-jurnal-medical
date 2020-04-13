@@ -237,7 +237,7 @@ jobs:
           IMAGE_IDENTITYSERVER  = "$IMAGE_IDENTITYSERVER:$GITHUB_SHA"
           IMAGE_EMAILSERVICE = "$IMAGE_EMAILSERVICE:$GITHUB_SHA"
           IMAGE_JOBSCHEDULER = "$IMAGE_JOBSCHEDULER:$GITHUB_SHA"
-          IMAGE_POSTGRES = "POSTGRES          
+          IMAGE_POSTGRES = "POSTGRES"          
           EOF
           cat aws_deploy/github.tfvars
 
