@@ -6,6 +6,7 @@ import ProfileApi from "../../api/profileApi";
 import PersonalData from "./PersonalData";
 import Health from "./Health";
 import Context from "./Context";
+import SidebarLayout from "../SidebarLayout";
 import { options } from "./options";
 import { useHistory } from "react-router-dom";
 import titles from "./titles";
@@ -99,33 +100,35 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
 
   const titlesForForm = forYourself ? titles.forYourself : titles.forOthers;
   return (
-    <form onSubmit={submitForm} className="user-profile-form">
-      {currentStep === 1 && (
-        <PersonalData
-          userData={userData}
-          setUserDataField={setUserDataField}
-          showRelationship={!forYourself}
-        />
-      )}
-      {currentStep === 2 && (
-        <Health
-          userData={userData}
-          setUserDataField={setUserDataField}
-          titles={titlesForForm.health}
-        />
-      )}
-      {currentStep === 3 && (
-        <Context
-          userData={userData}
-          setUserDataField={setUserDataField}
-          titles={titlesForForm.context}
-        />
-      )}
+    <SidebarLayout>
+      <form onSubmit={submitForm} className="user-profile-form">
+        {currentStep === 1 && (
+          <PersonalData
+            userData={userData}
+            setUserDataField={setUserDataField}
+            showRelationship={!forYourself}
+          />
+        )}
+        {currentStep === 2 && (
+          <Health
+            userData={userData}
+            setUserDataField={setUserDataField}
+            titles={titlesForForm.health}
+          />
+        )}
+        {currentStep === 3 && (
+          <Context
+            userData={userData}
+            setUserDataField={setUserDataField}
+            titles={titlesForForm.context}
+          />
+        )}
 
-      <Button type="warning" inputType="submit" disabled={!canGoNext()}>
-        Continuă
-      </Button>
-    </form>
+        <Button type="warning" inputType="submit" disabled={!canGoNext()}>
+          Continuă
+        </Button>
+      </form>
+    </SidebarLayout>
   );
 };
 
