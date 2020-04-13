@@ -24,19 +24,19 @@ locals {
   ]
   subdomains_postgres = [
     "postgres.${local.domain_root}",                       # PROD
-    "staging-postgres${local.domain_root}",               # STAGING
+    "staging-postgres.${local.domain_root}",               # STAGING
     "${terraform.workspace}-postgres.${local.domain_root}" # DEVS
   ]
 
   subdomains_emailservice = [
     "emailservice.${local.domain_root}",                       # PROD
-    "staging-emailservice${local.domain_root}",               # STAGING
+    "staging-emailservice.${local.domain_root}",               # STAGING
     "${terraform.workspace}-emailservice.${local.domain_root}" # DEVS
   ]
 
   subdomains_jobscheduler = [
     "jobscheduler.${local.domain_root}",                       # PROD
-    "staging-jobscheduler${local.domain_root}",               # STAGING
+    "staging-jobscheduler.${local.domain_root}",               # STAGING
     "${terraform.workspace}-jobscheduler.${local.domain_root}" # DEVS
   ]
 
