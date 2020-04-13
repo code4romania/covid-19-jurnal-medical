@@ -25,7 +25,7 @@ const MemberEvaluation = () => {
   useEffect(() => {
     setOptions(
       familyMembers.map(person => ({
-        text: person.name,
+        text: `${person.name} ${person.surname}`,
         value: person.name,
         selected: person.id === personId
       }))
