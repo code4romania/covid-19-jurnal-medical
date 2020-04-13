@@ -17,8 +17,8 @@ export const FIELDS_LABELS = {
 };
 
 const GENDER_DICT = {
-  0: "feminin",
-  1: "masculin"
+  1: "feminin",
+  2: "masculin"
 };
 
 const BOOL_DICT = {
@@ -26,15 +26,25 @@ const BOOL_DICT = {
   1: "Da"
 };
 
+const QUARANTINE_STATUS_DICT= {
+  1: "Da, sunt în izolare, nu ies deloc din locuință",
+  2: "Stau mai mult pe acasă, dar mai ies atunci când este nevoie",
+  3: "Nu sunt în izolare și ies din locuință după program normal",
+  4: "Altă situație"
+}
+
+
+
 const FIELDS_DICT = {
-  gender: GENDER_DICT
+  gender: GENDER_DICT,
+  quarantineStatus: QUARANTINE_STATUS_DICT,
+  quarantineStatusOthers: QUARANTINE_STATUS_DICT
 };
 
-// TODO add dicts for other fields? (quarantineStatus, quarantineStatusOthers)
-const fieldsWithDict = ["gender"];
+const fieldsWithDict = ["gender", "quarantineStatus", "quarantineStatusOthers"];
 
 const mapProfileDetails = data => {
-  return Object.entries(FIELDS_LABELS).map(([key, label]) => {
+  return Object.entries(FIELDS_LABELS).filter(([key, label])=>data[key] !== undefined).map(([key, label]) => {
     const fieldValue = data[key];
     const mappedItem = {
       label,
