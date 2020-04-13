@@ -199,7 +199,7 @@ module "emailservice" {
 
   container_port     = 80
   execution_role_arn = aws_iam_role.ecs_execution.arn
-  image              = var.IMAGE_EmailService
+  image              = var.IMAGE_EMAILSERVICE
   prefix             = local.name
   region             = var.region
 }
@@ -222,7 +222,7 @@ module "jobscheduler" {
 
   container_port     = 80
   execution_role_arn = aws_iam_role.ecs_execution.arn
-  image              = var.IMAGE_JobScheduler
+  image              = var.IMAGE_JOBSCHEDULER
   prefix             = local.name
   region             = var.region  
 }
