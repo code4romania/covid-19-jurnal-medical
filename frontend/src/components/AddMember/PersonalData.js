@@ -1,4 +1,9 @@
-import { Input, ListHeader, Select } from "@code4ro/taskforce-fe-components";
+import {
+  Input,
+  ListHeader,
+  Select,
+  DropdownSearch
+} from "@code4ro/taskforce-fe-components";
 import React from "react";
 import { options } from "./options";
 import PropTypes from "prop-types";
@@ -57,15 +62,11 @@ export const PersonalData = ({
           }}
         />
       )}
-      <Select
-        placeholder="Judet"
+      <DropdownSearch
+        title={"Judet"}
         options={options.county}
-        selectProps={{
-          required: true,
-          name: "county",
-          onChange: ({ currentTarget: { selectedIndex } }) => {
-            setUserDataField("county", options.county[selectedIndex].value);
-          }
+        onSelect={option => {
+          setUserDataField("county", option.value);
         }}
       />
       <Select
