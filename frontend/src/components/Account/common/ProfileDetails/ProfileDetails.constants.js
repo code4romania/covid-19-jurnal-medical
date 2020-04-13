@@ -26,14 +26,12 @@ const BOOL_DICT = {
   1: "Da"
 };
 
-const QUARANTINE_STATUS_DICT= {
+const QUARANTINE_STATUS_DICT = {
   1: "Da, sunt în izolare, nu ies deloc din locuință",
   2: "Stau mai mult pe acasă, dar mai ies atunci când este nevoie",
   3: "Nu sunt în izolare și ies din locuință după program normal",
   4: "Altă situație"
-}
-
-
+};
 
 const FIELDS_DICT = {
   gender: GENDER_DICT,
@@ -44,28 +42,30 @@ const FIELDS_DICT = {
 const fieldsWithDict = ["gender", "quarantineStatus", "quarantineStatusOthers"];
 
 const mapProfileDetails = data => {
-  return Object.entries(FIELDS_LABELS).filter(([key, label])=>data[key] !== undefined).map(([key, label]) => {
-    const fieldValue = data[key];
-    const mappedItem = {
-      label,
-      value:
-        typeof fieldValue === "boolean" ? BOOL_DICT[+fieldValue] : fieldValue
-    };
+  return Object.entries(FIELDS_LABELS)
+    .filter(([key]) => data[key] !== undefined)
+    .map(([key, label]) => {
+      const fieldValue = data[key];
+      const mappedItem = {
+        label,
+        value:
+          typeof fieldValue === "boolean" ? BOOL_DICT[+fieldValue] : fieldValue
+      };
 
-    if (key === "name") {
-      return { ...mappedItem, value: `${data.name} ${data.surname}` };
-    }
+      if (key === "name") {
+        return { ...mappedItem, value: `${data.name} ${data.surname}` };
+      }
 
-    if (key === "location") {
-      return { ...mappedItem, value: `${data.county}, ${data.city}` };
-    }
+      if (key === "location") {
+        return { ...mappedItem, value: `${data.county}, ${data.city}` };
+      }
 
-    if (fieldsWithDict.includes(key)) {
-      return { ...mappedItem, value: FIELDS_DICT[key][fieldValue] };
-    }
+      if (fieldsWithDict.includes(key)) {
+        return { ...mappedItem, value: FIELDS_DICT[key][fieldValue] };
+      }
 
-    return mappedItem;
-  });
+      return mappedItem;
+    });
 };
 
 export { mapProfileDetails };
