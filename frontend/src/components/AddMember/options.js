@@ -1,13 +1,15 @@
+import cities from "./cities";
+
 export const options = {
   gender: [
     { value: "", text: "Genul", disabled: true, selected: true },
     { value: "1", text: "Feminin" },
     { value: "2", text: "Masculin" }
   ],
-  county: [
-    { value: "", text: "Judet", disabled: true, selected: true },
-    { value: "București", text: "București" }
-  ],
+  county: Object.keys(cities).map(county => ({
+    label: county,
+    value: county
+  })),
   relation: [
     { value: "", text: "Tip relație", disabled: true, selected: true },
     { value: "0", text: "Părinte" },
