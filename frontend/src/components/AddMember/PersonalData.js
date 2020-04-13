@@ -7,107 +7,114 @@ import {
 import React from "react";
 import { options } from "./options";
 import PropTypes from "prop-types";
+import cities from "./cities.json";
 
 export const PersonalData = ({
   userData,
   setUserDataField,
   showRelationship
-}) => (
-  <>
-    <ListHeader title="I. Date personale" />
-    <div className="user-profile-form-container">
-      <Input
-        type="text"
-        label={"Nume"}
-        name="nume"
-        required
-        usePlaceholder
-        value={userData.name}
-        onChange={({ currentTarget: { value } }) => {
-          setUserDataField("name", value);
-        }}
-      />
-      <Input
-        type="text"
-        label={"Prenume"}
-        name="surname"
-        required
-        usePlaceholder
-        value={userData.surname}
-        onChange={({ currentTarget: { value } }) => {
-          setUserDataField("surname", value);
-        }}
-      />
-      <Input
-        type="tel"
-        label={"Număr de telefon"}
-        name="phoneNumber"
-        required
-        usePlaceholder
-        value={userData.phoneNumber}
-        onChange={({ currentTarget: { value } }) => {
-          setUserDataField("phoneNumber", value);
-        }}
-      />
-      {showRelationship && (
+}) => {
+  const getCitiesFor = county =>
+    county ? cities[county].map(city => ({ label: city, value: city })) : [];
+
+  return (
+    <>
+      <ListHeader title="I. Date personale" />
+      <div className="user-profile-form-container">
+        <Input
+          type="text"
+          label={"Nume"}
+          name="nume"
+          required
+          usePlaceholder
+          value={userData.name}
+          onChange={({ currentTarget: { value } }) => {
+            setUserDataField("name", value);
+          }}
+        />
+        <Input
+          type="text"
+          label={"Prenume"}
+          name="surname"
+          required
+          usePlaceholder
+          value={userData.surname}
+          onChange={({ currentTarget: { value } }) => {
+            setUserDataField("surname", value);
+          }}
+        />
+        <Input
+          type="tel"
+          label={"Număr de telefon"}
+          name="phoneNumber"
+          required
+          usePlaceholder
+          value={userData.phoneNumber}
+          onChange={({ currentTarget: { value } }) => {
+            setUserDataField("phoneNumber", value);
+          }}
+        />
+        {showRelationship && (
+          <Select
+            placeholder="Tip de relație"
+            options={options.relation}
+            selectProps={{
+              required: true,
+              name: "relationshipType",
+              onChange: ({ currentTarget: { selectedIndex } }) => {
+                setUserDataField("relationshipType", selectedIndex);
+              }
+            }}
+          />
+        )}
+        <div className={"field"}>
+          <DropdownSearch
+            title={"Judet"}
+            options={options.county}
+            onSelect={option => {
+              setUserDataField("county", option.value);
+            }}
+          />
+        </div>
+        <div className={"field"}>
+          <DropdownSearch
+            title={"Localitatea"}
+            options={getCitiesFor(userData.county)}
+            onSelect={option => {
+              setUserDataField("city", option.value);
+            }}
+          />
+        </div>
+
+        <Input
+          type="number"
+          label={"Vârstă în ani împliniți"}
+          name="age"
+          required
+          usePlaceholder
+          value={userData.age}
+          step={1}
+          min="0"
+          max="120"
+          onChange={({ currentTarget: { value } }) => {
+            setUserDataField("age", +value);
+          }}
+        />
         <Select
-          placeholder="Tip de relație"
-          options={options.relation}
+          placeholder="Genul"
+          options={options.gender}
           selectProps={{
             required: true,
-            name: "relationshipType",
+            name: "gender",
             onChange: ({ currentTarget: { selectedIndex } }) => {
-              setUserDataField("relationshipType", selectedIndex);
+              setUserDataField("gender", selectedIndex);
             }
           }}
         />
-      )}
-      <DropdownSearch
-        title={"Judet"}
-        options={options.county}
-        onSelect={option => {
-          setUserDataField("county", option.value);
-        }}
-      />
-      <Select
-        placeholder="Localitate"
-        options={options.city}
-        selectProps={{
-          required: true,
-          name: "city",
-          onChange: ({ currentTarget: { selectedIndex } }) => {
-            setUserDataField("city", options.city[selectedIndex].value);
-          }
-        }}
-      />
-      <Input
-        type="number"
-        label={"Vârstă în ani împliniți"}
-        name="age"
-        required
-        usePlaceholder
-        value={userData.age}
-        step={1}
-        min="0"
-        max="120"
-        onChange={({ currentTarget: { value } }) => {
-          setUserDataField("age", +value);
-        }}
-      />
-      <Select
-        placeholder="Genul"
-        options={options.gender}
-        selectProps={{
-          required: true,
-          name: "gender",
-          onChange: ({ currentTarget: { selectedIndex } }) => {
-            setUserDataField("gender", selectedIndex);
-          }
-        }}
-      />
-    </div>
-  </>
-);
+      </div>
+    </>
+  );
+};
 
 PersonalData.propTypes = {
   userData: PropTypes.object.isRequired,
