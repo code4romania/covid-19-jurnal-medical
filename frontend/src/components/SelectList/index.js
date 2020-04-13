@@ -11,7 +11,7 @@ const SelectList = ({ name, options, value, multiple = false, onChange }) => {
   };
 
   return (
-    <div className="select-list" name={name}>
+    <div className="select-list" data-testid={name}>
       {options.map(option => {
         return (
           <div

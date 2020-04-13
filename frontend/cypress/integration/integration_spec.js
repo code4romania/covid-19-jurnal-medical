@@ -50,28 +50,26 @@ describe("Stam Acasa", function() {
       cy.get("[name='gender'").select("1");
       cy.contains("Continuă").click();
 
-      cy.get("[name='smoker']")
+      cy.get("[data-testid='smoker']")
         .contains("Da")
         .click();
-      cy.get("[name='preexistingMedicalCondition']")
+      cy.get("[data-testid='preexistingMedicalCondition']")
         .contains("Diabet")
         .click();
       cy.contains("Continuă").click();
 
-      cy.get("[name='quarantineStatus']")
+      cy.get("[data-testid='quarantineStatus']")
         .contains("Altă situație")
         .click();
-      cy.get("[name='livesWithOthers']")
+      cy.get("[data-testid='livesWithOthers']")
         .contains("Da")
         .click();
-      cy.get("[name='quarantineStatusOther']")
+      cy.get("[data-testid='quarantineStatusOther']")
         .contains("Altă situație")
         .click();
 
       stubProfile("fixture:profile.json");
       cy.contains("Continuă").click();
-
-      expect(true).to.equal(true);
     });
   });
 });
