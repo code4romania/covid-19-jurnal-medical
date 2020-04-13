@@ -67,6 +67,8 @@ namespace StamAcasa.Api.Controllers
             if (form.formId == null)
                 return new BadRequestResult();
 
+            //leaving this as local time, but we should either use UTC
+            //or store DateTimeOffset instead of DateTime
             var timestamp = DateTime.Now;
             form.Add("Timestamp", timestamp);
 

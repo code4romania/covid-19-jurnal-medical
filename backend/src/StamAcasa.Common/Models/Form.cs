@@ -2,9 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
-using StamAcasa.Common.Models;
 
-namespace StamAcasa.Common
+namespace StamAcasa.Common.Models
 {
     public class Form
     {

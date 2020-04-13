@@ -34,6 +34,7 @@ DOCUMENT
 resource "aws_iam_role_policy_attachment" "ecr_and_logs" {
   role       = aws_iam_role.ecs_execution.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+  #policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
 
 resource "aws_iam_role_policy_attachment" "use_ssm_parameter" {
@@ -54,7 +55,16 @@ data "aws_iam_policy_document" "use_ssm_parameter" {
     resources = ["*"]
     effect    = "Allow"
   }
-
+  #statement {
+  #  actions = [
+  #    "ssm:GetParameter*"
+  #  ]
+    #resources = [
+    #  aws_ssm_parameter.identitysrv_access_key_id.arn,
+    #  aws_ssm_parameter.identitysrv_secret_access_key.arn
+    #]
+  #  effect = "Allow"
+  #}
   statement {
     actions = [
       "kms:Decrypt"
@@ -84,27 +94,28 @@ module "front-end" {
     aws_security_group.intra.id,
     aws_security_group.public.id
   ]
+  certificate_arn = aws_acm_certificate.cert.arn
 
-  container_port        = 80
-  execution_role_arn    = aws_iam_role.ecs_execution.arn
-  image                 = var.IMAGE_FRONTEND
-  prefix                = local.name
+  container_port     = 80
+  execution_role_arn = aws_iam_role.ecs_execution.arn
+  image              = var.IMAGE_FRONTEND
+  prefix             = local.name
   region             = var.region
-## Uncomment these lines to pass the API URL to the frontend (and other variables)
-#  environment_variables = <<ENV
-#  [
-#    {
-#      "name" : "REACT_APP_API_URL",
-#      "value" : "https://${module.api_dns.fqdn}"
-#    }
-#  ]
-#ENV
+  environment_variables = <<ENV
+  [
+    {
+      "name" : "REACT_APP_API_URL",
+      "value" : "https://${module.api_dns.fqdn}/api/v2"
+    }
+  ]
+ENV
+
 }
 
 module "api" {
   source = "./service"
 
-  name = "api"
+  name           = "api"
 
   cluster         = aws_ecs_cluster.app.id
   vpc_id          = aws_vpc.main.id
@@ -115,11 +126,12 @@ module "api" {
     aws_security_group.intra.id,
     aws_security_group.public.id
   ]
+  certificate_arn = aws_acm_certificate.cert.arn
 
-  container_port        = 80
-  execution_role_arn    = aws_iam_role.ecs_execution.arn
-  image                 = var.IMAGE_API
-  prefix                = local.name
+  container_port     = 80
+  execution_role_arn = aws_iam_role.ecs_execution.arn
+  image              = var.IMAGE_API
+  prefix             = local.name
   region             = var.region
 }
 
@@ -137,12 +149,13 @@ module "identitysrv" {
     aws_security_group.intra.id,
     aws_security_group.public.id
   ]
+  certificate_arn = aws_acm_certificate.identitysrv.arn
 
   container_port     = 80
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_IDENTITYSERVER
   prefix             = local.name
-  region             = var.region
+  region             = var.region  
 }
 
 module "postgres" {
@@ -159,10 +172,57 @@ module "postgres" {
     aws_security_group.intra.id,
     aws_security_group.public.id
   ]
+  certificate_arn = aws_acm_certificate.postgres.arn
 
-  container_port     = 5432
+  container_port     = 80
   execution_role_arn = aws_iam_role.ecs_execution.arn
   image              = var.IMAGE_POSTGRES
   prefix             = local.name
+  region             = var.region  
+}
+
+module "emailservice" {
+  source = "./service"
+
+  name = "emailservice"
+
+  cluster         = aws_ecs_cluster.app.id
+  vpc_id          = aws_vpc.main.id
+  subnets         = aws_subnet.private.*.id
+  lb-subnets      = aws_subnet.public.*.id
+  security_groups = [aws_security_group.intra.id]
+  lb-security_groups = [
+    aws_security_group.intra.id,
+    aws_security_group.public.id
+  ]
+  certificate_arn = aws_acm_certificate.emailservice.arn
+
+  container_port     = 80
+  execution_role_arn = aws_iam_role.ecs_execution.arn
+  image              = var.IMAGE_EmailService
+  prefix             = local.name
   region             = var.region
+}
+
+module "jobscheduler" {
+  source = "./service"
+
+  name = "jobscheduler"
+
+  cluster         = aws_ecs_cluster.app.id
+  vpc_id          = aws_vpc.main.id
+  subnets         = aws_subnet.private.*.id
+  lb-subnets      = aws_subnet.public.*.id
+  security_groups = [aws_security_group.intra.id]
+  lb-security_groups = [
+    aws_security_group.intra.id,
+    aws_security_group.public.id
+  ]
+  certificate_arn = aws_acm_certificate.jobscheduler.arn
+
+  container_port     = 80
+  execution_role_arn = aws_iam_role.ecs_execution.arn
+  image              = var.IMAGE_JobScheduler
+  prefix             = local.name
+  region             = var.region  
 }
