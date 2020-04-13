@@ -5,8 +5,48 @@ export const options = {
     { value: "2", text: "Masculin" }
   ],
   county: [
-    { value: "", text: "Judet", disabled: true, selected: true },
-    { value: "București", text: "București" }
+    { value: 1, label: "Dolj" },
+    { value: 2, label: "Bacău" },
+    { value: 3, label: "Harghita" },
+    { value: 4, label: "Bistrița-Năsăud" },
+    { value: 5, label: "Dîmbovița" },
+    { value: 6, label: "Suceava" },
+    { value: 7, label: "Botoșani" },
+    { value: 8, label: "Brașov" },
+    { value: 9, label: "București" },
+    { value: 10, label: "Brăila" },
+    { value: 11, label: "Hunedoara" },
+    { value: 12, label: "Teleorman" },
+    { value: 13, label: "Covasna" },
+    { value: 14, label: "Tulcea" },
+    { value: 15, label: "Timiș" },
+    { value: 16, label: "Buzău" },
+    { value: 17, label: "Prahova" },
+    { value: 18, label: "Ilfov" },
+    { value: 19, label: "Neamț" },
+    { value: 20, label: "Cluj" },
+    { value: 21, label: "Alba" },
+    { value: 22, label: "Giurgiu" },
+    { value: 23, label: "Argeș" },
+    { value: 24, label: "Călărași" },
+    { value: 25, label: "Bihor" },
+    { value: 26, label: "Iași" },
+    { value: 27, label: "Vâcea" },
+    { value: 28, label: "Vrancea" },
+    { value: 29, label: "Arad" },
+    { value: 30, label: "Ialomița" },
+    { value: 31, label: "Caraș-Severin" },
+    { value: 32, label: "Galați" },
+    { value: 33, label: "Gorj" },
+    { value: 34, label: "Constanța" },
+    { value: 35, label: "Satu Mare" },
+    { value: 36, label: "Maramureș" },
+    { value: 37, label: "Mehedinți" },
+    { value: 38, label: "Sălaj" },
+    { value: 39, label: "Vaslui" },
+    { value: 40, label: "Mureș" },
+    { value: 41, label: "Sibiu" },
+    { value: 42, label: "Olt" }
   ],
   relation: [
     { value: "", text: "Tip relație", disabled: true, selected: true },
@@ -17,8 +57,11 @@ export const options = {
     { value: "4", text: "Altele" }
   ],
   city: [
-    { value: "", text: "Localitate", disabled: true, selected: true },
-    { value: "București", text: "București" }
+    { value: "București", label: "București1" },
+    { value: "București1", label: "București2" },
+    { value: "București2", label: "București3" },
+    { value: "București3", label: "București4" }
+
   ],
   yesNo: [
     { value: true, text: "Da" },

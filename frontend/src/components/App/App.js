@@ -22,7 +22,7 @@ const App = () => {
             if (method) {
               method();
             }
-            return <Redirect key={path} from={path} to="/account" />;
+            return <Redirect key={path} from={path} to="/" />;
           }}
         />
       ))}

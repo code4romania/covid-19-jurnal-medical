@@ -1,4 +1,4 @@
-import { Input, ListHeader, Select } from "@code4ro/taskforce-fe-components";
+import { Input, ListHeader,Select, DropdownSearch  } from "@code4ro/taskforce-fe-components";
 import React from "react";
 import { options } from "./options";
 import PropTypes from "prop-types";
@@ -57,28 +57,8 @@ export const PersonalData = ({
           }}
         />
       )}
-      <Select
-        placeholder="Judet"
-        options={options.county}
-        selectProps={{
-          required: true,
-          name: "county",
-          onChange: ({ currentTarget: { selectedIndex } }) => {
-            setUserDataField("county", options.county[selectedIndex].value);
-          }
-        }}
-      />
-      <Select
-        placeholder="Localitate"
-        options={options.city}
-        selectProps={{
-          required: true,
-          name: "city",
-          onChange: ({ currentTarget: { selectedIndex } }) => {
-            setUserDataField("city", options.city[selectedIndex].value);
-          }
-        }}
-      />
+      <DropdownSearch className="field" title={"Judet"} options={options.county} onSelect={() => {}} />
+      <DropdownSearch className="field" title={"Oras"} options={options.city} onSelect={() => {}} />
       <Input
         type="number"
         label={"Vârstă în ani împliniți"}
