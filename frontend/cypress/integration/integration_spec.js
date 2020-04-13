@@ -1,10 +1,13 @@
 import authDetails from "../support/authDetails.json";
 describe("Stam Acasa", function() {
+  const API_URL = Cypress.env("API_URL");
+  const IDP_URL = Cypress.env("IDP_URL");
+
   const BEARER_TOKEN = "something-really-secret";
   const mockLogin = () => {
     authDetails.access_token = BEARER_TOKEN;
     window.sessionStorage.setItem(
-      "oidc.user:http://localhost:5001:js",
+      `oidc.user:${IDP_URL}:js`,
       JSON.stringify(authDetails)
     );
   };
@@ -14,7 +17,7 @@ describe("Stam Acasa", function() {
       cy.routeUseAuth(
         {
           method: "GET",
-          url: "http://localhost:5008/api/profile",
+          url: `${API_URL}/api/profile`,
           response: data
         },
         BEARER_TOKEN
@@ -30,7 +33,7 @@ describe("Stam Acasa", function() {
       cy.routeUseAuth(
         {
           method: "POST",
-          url: "http://localhost:5008/api/profile",
+          url: `${API_URL}/api/profile`,
           response: "fixture:profile.json"
         },
         BEARER_TOKEN
