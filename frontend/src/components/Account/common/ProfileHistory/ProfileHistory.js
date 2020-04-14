@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
@@ -10,6 +10,7 @@ import SymptomsHistoryTable from "../SymptomsHistoryTable/SymptomsHistoryTable.j
 import ProfileOthers from "../ProfileOthers/ProfileOthers";
 
 import mockData from "../../mockData/mockData";
+import EvaluationApi from "../../../../api/evaluationApi";
 
 import { buildHistory } from "./ProfileHistoryBuilder";
 
@@ -22,10 +23,17 @@ import {
 
 import "./ProfileHistory.scss";
 
-export const ProfileHistory = ({ data, family, evaluation, isSelf }) => {
+export const ProfileHistory = ({ data, family, isSelf }) => {
+  const [evaluationResults, setEvaluationResults] = useState();
   let history = { temperature: [] };
 
-  if (evaluation) history = buildHistory(evaluation);
+  useEffect(() => {
+    EvaluationApi.getEvaluationResults(data.id).then(res => {
+      setEvaluationResults(res);
+    });
+  }, []);
+
+  if (evaluationResults) history = buildHistory(evaluationResults);
   return (
     <div className="profile-history-container">
       <ProfileDetails fields={data} isSelf={isSelf}>
