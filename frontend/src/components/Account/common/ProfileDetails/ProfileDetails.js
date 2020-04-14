@@ -61,7 +61,7 @@ ProfileDetails.propTypes = {
     county: PropTypes.string,
     city: PropTypes.string,
     preexistingMedicalCondition: PropTypes.string,
-    quarantineStatus: PropTypes.number,
+    quarantineStatus: PropTypes.string,
     smoker: PropTypes.bool,
     livesWithOthers: PropTypes.bool,
     quarantineStatusOthers: PropTypes.number,
