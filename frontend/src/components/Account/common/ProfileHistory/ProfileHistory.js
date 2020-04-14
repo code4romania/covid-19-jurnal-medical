@@ -86,7 +86,6 @@ ProfileHistory.propTypes = {
     outings: PropTypes.array
   }).isRequired,
   family: PropTypes.array,
-  evaluation: PropTypes.array,
   isSelf: PropTypes.bool
 };
 
