@@ -14,7 +14,7 @@ services:
         # HTTP management UI
       - 15672:15672
 
-  stamacasa.api:
+  api:
     image: code4romania/stamacasa-api:staging
     environment:
       ASPNETCORE_URLS: "${ASPNETCORE_URLS}"
@@ -26,6 +26,7 @@ services:
       - 5008:80
     depends_on:
       - identityserver
+      - rabbitmq
 
   identityserver:
     image: code4romania/stamacasa-identityserver:staging
@@ -40,6 +41,8 @@ services:
       - 5001:80
     container_name: identityserver
     hostname: identityserver
+    depends_on: 
+      - rabbitmq
 
   frontend:
     image:  code4romania/stamacasa-frontend:staging
@@ -52,24 +55,29 @@ services:
     ports:
      - 5002:5002
     depends_on:
-      - stamacasa.api
+      - api
+      - identityserver
 
   stamacasa.email:
     image: code4romania/stamacasa-emailservice:staging
     environment:
-        RABBITMQ__USER: "${RABBITMQ_USER}"
-        RABBITMQ__PASSWORD: "${RABBITMQ_PASSWORD}"
-        RABBITMQ__HOSTNAME: "${RABBITMQ_HOSTNAME}"
-        RABBITMQ__PORT: "${RABBITMQ_PORT}"
-        SMTP__HOST: "${SMTP_HOST}"
-        SMTP__PORT: "${SMTP_PORT}"
-        SMTP__USER: "${SMTP_USER}"
-        SMTP__PASSWORD: "${SMTP_PASSWORD}"
+      RABBITMQ__USER: "${RABBITMQ_USER}"
+      RABBITMQ__PASSWORD: "${RABBITMQ_PASSWORD}"
+      RABBITMQ__HOSTNAME: "${RABBITMQ_HOSTNAME}"
+      RABBITMQ__PORT: "${RABBITMQ_PORT}"
+      SMTP__HOST: "${SMTP_HOST}"
+      SMTP__PORT: "${SMTP_PORT}"
+      SMTP__USER: "${SMTP_USER}"
+      SMTP__PASSWORD: "${SMTP_PASSWORD}"
+    depends_on:
+      - rabbitmq 
 
   stamacasa.jobscheduler:
     image: code4romania/stamacasa-jobscheduler:staging
     environment:
-        RABBITMQ__USER: "${RABBITMQ_USER}"
-        RABBITMQ__PASSWORD: "${RABBITMQ_PASSWORD}"
-        RABBITMQ__HOSTNAME: "${RABBITMQ_HOSTNAME}"
-        RABBITMQ__PORT: "${RABBITMQ_PORT}"
+      RABBITMQ__USER: "${RABBITMQ_USER}"
+      RABBITMQ__PASSWORD: "${RABBITMQ_PASSWORD}"
+      RABBITMQ__HOSTNAME: "${RABBITMQ_HOSTNAME}"
+      RABBITMQ__PORT: "${RABBITMQ_PORT}"
+    depends_on: 
+      - rabbitmq
