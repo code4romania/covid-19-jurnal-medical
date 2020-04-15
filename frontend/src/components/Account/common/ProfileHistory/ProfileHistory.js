@@ -24,11 +24,11 @@ import {
 import "./ProfileHistory.scss";
 
 export const ProfileHistory = ({ data, family, isSelf }) => {
-  const [history, setHistory] = useState({ temperature: [] });
+  const [history, setHistory] = useState(null);
 
   useEffect(() => {
     EvaluationApi.getEvaluationResults(data.id).then(res => {
-      if (res) {
+      if (res && res.length > 0) {
         setHistory(buildHistory(res));
       }
     });
@@ -51,27 +51,31 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
         </Link>
         .
       </p>
-      <h2 className="header">Istoric Simptome</h2>
-      <div className="profile-history-content">
-        <TemperatureChart
-          results={history.temperature}
-          title="Monitorizare temperatura"
-        />
-      </div>
-      <SymptomsHistoryTable
-        symptomsData={history.symptoms}
-        headers={SYMPTOMS_HEADERS}
-        title="Istoric"
-      />
-      <hr />
-      <Table
-        dataRows={history.otherSymptoms}
-        headers={OTHER_SYMPTOMS_HEADERS}
-        title="Alte Simptome"
-      />
-      <hr />
-      <h2 className="header">Istoric deplasări </h2>
-      <Table dataRows={mockData.outings} headers={OUTINGS_HEADERS} />
+      {history && (
+        <>
+          <h2 className="header">Istoric Simptome</h2>
+          <div className="profile-history-content">
+            <TemperatureChart
+              results={history.temperature}
+              title="Monitorizare temperatura"
+            />
+          </div>
+          <SymptomsHistoryTable
+            symptomsData={history.symptoms}
+            headers={SYMPTOMS_HEADERS}
+            title="Istoric"
+          />
+          <hr />
+          <Table
+            dataRows={history.otherSymptoms}
+            headers={OTHER_SYMPTOMS_HEADERS}
+            title="Alte Simptome"
+          />
+          <hr />
+          <h2 className="header">Istoric deplasări </h2>
+          <Table dataRows={mockData.outings} headers={OUTINGS_HEADERS} />
+        </>
+      )}
     </div>
   );
 };
