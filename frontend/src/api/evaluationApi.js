@@ -15,7 +15,7 @@ const EvaluationApi = {
     api.post("/form", formResults, { params: { id } }),
 
   getEvaluationResults: async userId => {
-    const { data } = await api.get(`form?id=${userId}`);
+    const { data } = await api.get(`/form?id=${userId}`);
 
     return data;
   }

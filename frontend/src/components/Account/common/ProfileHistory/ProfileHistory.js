@@ -24,16 +24,16 @@ import {
 import "./ProfileHistory.scss";
 
 export const ProfileHistory = ({ data, family, isSelf }) => {
-  const [evaluationResults, setEvaluationResults] = useState();
-  let history = { temperature: [] };
+  const [history, setHistory] = useState({ temperature: [] });
 
   useEffect(() => {
     EvaluationApi.getEvaluationResults(data.id).then(res => {
-      setEvaluationResults(res);
+      if (res) {
+        setHistory(buildHistory(res));
+      }
     });
   }, []);
 
-  if (evaluationResults) history = buildHistory(evaluationResults);
   return (
     <div className="profile-history-container">
       <ProfileDetails fields={data} isSelf={isSelf}>
