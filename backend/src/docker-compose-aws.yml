@@ -2,12 +2,12 @@ version: '3.4'
 
 services:
   rabbitmq:
-    image: rabbitmq
+    image: rabbitmq:management
     restart: always
     container_name: rabbitmq
     environment: 
-      RABBITMQ_DEFAULT_USER: "${RABBITMQ_USER}"
-      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD}"
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
     ports:
        # The standard AMQP protocol port
       - 5672:5672
@@ -17,11 +17,11 @@ services:
   api:
     image: code4romania/stamacasa-api:staging
     environment:
-      ASPNETCORE_URLS: "${ASPNETCORE_URLS}"
-      IdentityServerUrl: "${IDENTITYSERVERURL}"
-      InternalIdentityServerUrl: "${IDENTITYSERVERURL}"
-      CONNECTIONSTRINGS__USERDBCONNECTION: "${API_CONNECTIONSTRINGS_USERDBCONNECTION}"
-      ALLOWEDCORSORIGINS: "${API_ALLOWEDCORSORIGINS}"
+      ASPNETCORE_URLS: ${ASPNETCORE_URLS}
+      IdentityServerUrl: ${IDENTITYSERVERURL}
+      InternalIdentityServerUrl: ${IDENTITYSERVERURL}
+      ConnectionStrings__UserDBConnection: ${API_CONNECTIONSTRINGS_USERDBCONNECTION}
+      AllowedCorsOrigins: ${API_ALLOWEDCORSORIGINS}
     ports:
       - 5008:80
     depends_on:
@@ -31,12 +31,12 @@ services:
   identityserver:
     image: code4romania/stamacasa-identityserver:staging
     environment:
-        ASPNETCORE_URLS: "${ASPNETCORE_URLS}"
-        RABBITMQ__USER: "${RABBITMQ_USER}"
-        RABBITMQ__PASSWORD: "${RABBITMQ_PASSWORD}"
-        RABBITMQ__HOSTNAME: "${RABBITMQ_HOSTNAME}"
-        RABBITMQ__PORT: "${RABBITMQ_PORT}"
-        CONNECTIONSTRINGS__APPLICATIONDBCONTEXTCONNECTION: "${IS_CONNECTIONSTRINGS_APPLICATIONDBCONTEXTCONNECTION}"
+        ASPNETCORE_URLS: ${ASPNETCORE_URLS}
+        RABBITMQ__USER: ${RABBITMQ_USER}
+        RABBITMQ__PASSWORD: ${RABBITMQ_PASSWORD}
+        RABBITMQ__HOSTNAME: ${RABBITMQ_HOSTNAME}
+        RABBITMQ__PORT: ${RABBITMQ_PORT}
+        ConnectionStrings__ApplicationDbContextConnection: ${IS_CONNECTIONSTRINGS_APPLICATIONDBCONTEXTCONNECTION}
     ports:
       - 5001:80
     container_name: identityserver
@@ -48,10 +48,10 @@ services:
     image:  code4romania/stamacasa-frontend:staging
     container_name: stamacasa-frontend
     environment:
-      REACT_APP_IDP_URL: "${FE_REACT_APP_IDP_URL}"
-      REACT_APP_URL: "${FE_REACT_APP_URL}"
-      REACT_APP_API_URL: "${FE_REACT_APP_API_URL}"
-      CLIENT_ID: "${FE_CLIENT_ID}"
+      REACT_APP_IDP_URL: ${FE_REACT_APP_IDP_URL}
+      REACT_APP_URL: ${FE_REACT_APP_URL}
+      REACT_APP_API_URL: ${FE_REACT_APP_API_URL}
+      CLIENT_ID: ${FE_CLIENT_ID}
     ports:
      - 5002:5002
     depends_on:
@@ -61,23 +61,23 @@ services:
   stamacasa.email:
     image: code4romania/stamacasa-emailservice:staging
     environment:
-      RABBITMQ__USER: "${RABBITMQ_USER}"
-      RABBITMQ__PASSWORD: "${RABBITMQ_PASSWORD}"
-      RABBITMQ__HOSTNAME: "${RABBITMQ_HOSTNAME}"
-      RABBITMQ__PORT: "${RABBITMQ_PORT}"
-      SMTP__HOST: "${SMTP_HOST}"
-      SMTP__PORT: "${SMTP_PORT}"
-      SMTP__USER: "${SMTP_USER}"
-      SMTP__PASSWORD: "${SMTP_PASSWORD}"
+      RABBITMQ__USER: ${RABBITMQ_USER}
+      RABBITMQ__PASSWORD: ${RABBITMQ_PASSWORD}
+      RABBITMQ__HOSTNAME: ${RABBITMQ_HOSTNAME}
+      RABBITMQ__PORT: ${RABBITMQ_PORT}
+      SMTP__HOST: ${SMTP_HOST}
+      SMTP__PORT: ${SMTP_PORT}
+      SMTP__USER: ${SMTP_USER}
+      SMTP__PASSWORD: ${SMTP_PASSWORD}
     depends_on:
       - rabbitmq 
 
   stamacasa.jobscheduler:
     image: code4romania/stamacasa-jobscheduler:staging
     environment:
-      RABBITMQ__USER: "${RABBITMQ_USER}"
-      RABBITMQ__PASSWORD: "${RABBITMQ_PASSWORD}"
-      RABBITMQ__HOSTNAME: "${RABBITMQ_HOSTNAME}"
-      RABBITMQ__PORT: "${RABBITMQ_PORT}"
+      RABBITMQ__USER: ${RABBITMQ_USER}
+      RABBITMQ__PASSWORD: ${RABBITMQ_PASSWORD}
+      RABBITMQ__HOSTNAME: ${RABBITMQ_HOSTNAME}
+      RABBITMQ__PORT: ${RABBITMQ_PORT}
     depends_on: 
       - rabbitmq
