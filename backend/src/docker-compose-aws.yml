@@ -37,6 +37,7 @@ services:
         RABBITMQ__HOSTNAME: ${RABBITMQ_HOSTNAME}
         RABBITMQ__PORT: ${RABBITMQ_PORT}
         ConnectionStrings__ApplicationDbContextConnection: ${IS_CONNECTIONSTRINGS_APPLICATIONDBCONTEXTCONNECTION}
+        IdentityServerPublicOrigin: ${IS_IdentityServerPublicOrigin}
     ports:
       - 5001:80
     container_name: identityserver
