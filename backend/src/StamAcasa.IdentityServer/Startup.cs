@@ -30,6 +30,12 @@ namespace IdentityServer
             services.AddControllersWithViews();
             var builder = services.AddIdentityServer(options =>
                 {
+                    var publicOrigin = Configuration["IdentityServerPublicOrigin"];
+                    if (!string.IsNullOrEmpty(publicOrigin))
+                    {
+                        options.PublicOrigin = publicOrigin;
+                    }
+
                     options.UserInteraction.LoginUrl = "/account/login";
                     options.UserInteraction.LogoutUrl = "/account/logout";
 
