@@ -59,7 +59,9 @@ export const Account = () => {
         subtitle="Pentru a te putea ajuta iata ce ai la dispozitie in contul tau:"
         useFallbackIcon={true}
       />
-      <StepsBar />
+      <StepsBar
+        isProfileComplete={userProfile !== null && userProfile.id !== undefined}
+      />
       <SidebarLayout>{getContent()}</SidebarLayout>
     </BasePage>
   );
