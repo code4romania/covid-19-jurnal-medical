@@ -61,18 +61,6 @@ const getSymptomsParameters = form => {
 
 const getAnswers = answers => {
   const [
-    ,
-    ,
-    ,
-    ,
-    ,
-    ,
-    ,
-    ,
-    ,
-    ,
-    ,
-    ,
     hadFever,
     feverDate,
     hadSoreThroat,
@@ -85,7 +73,7 @@ const getAnswers = answers => {
     runningNoseDate,
     hadOtherSymptoms,
     otherSymptomsDescription
-  ] = answers;
+  ] = answers.slice(12);
 
   return {
     hadFever,
