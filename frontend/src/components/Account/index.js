@@ -8,7 +8,7 @@ import { sel as userSel } from "../../store/ducks/user";
 const AccountWithAuth = () => {
   const isAuthenticated = useSelector(userSel.user);
 
-  return isAuthenticated ? <Account isAuthenticated={isAuthenticated} /> : null;
+  return isAuthenticated ? <Account /> : null;
 };
 
 export default AccountWithAuth;
