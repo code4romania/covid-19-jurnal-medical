@@ -19,9 +19,9 @@ namespace StamAcasa.EmailService.EmailBuilder
 
         private static Dictionary<EmailTemplate, string> subjects = new Dictionary<EmailTemplate, string>()
         {
-            { EmailTemplate.AccountConfirmation, "Account confirmation subject"},
-            { EmailTemplate.DailyAssessment, "Daily assessment subject"},
-            { EmailTemplate.StateEntity, "State entity subject"}
+            { EmailTemplate.AccountConfirmation, "Bine ai venit! #stamacasa impreună și în siguranță!"},
+            { EmailTemplate.DailyAssessment, "Un minut pe zi pentru o viață liniștită. Chestionar zilnic de evaluare"},
+            { EmailTemplate.StateEntity, "Rezultate evaluare persoane autoizolare"}
         };
 
         private static Dictionary<EmailTemplate, string> templatePaths = new Dictionary<EmailTemplate, string>()
