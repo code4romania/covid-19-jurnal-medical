@@ -100,35 +100,33 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
 
   const titlesForForm = forYourself ? titles.forYourself : titles.forOthers;
   return (
-    <SidebarLayout>
-      <form onSubmit={submitForm} className="user-profile-form">
-        {currentStep === 1 && (
-          <PersonalData
-            userData={userData}
-            setUserDataField={setUserDataField}
-            showRelationship={!forYourself}
-          />
-        )}
-        {currentStep === 2 && (
-          <Health
-            userData={userData}
-            setUserDataField={setUserDataField}
-            titles={titlesForForm.health}
-          />
-        )}
-        {currentStep === 3 && (
-          <Context
-            userData={userData}
-            setUserDataField={setUserDataField}
-            titles={titlesForForm.context}
-          />
-        )}
+    <form onSubmit={submitForm} className="user-profile-form">
+      {currentStep === 1 && (
+        <PersonalData
+          userData={userData}
+          setUserDataField={setUserDataField}
+          showRelationship={!forYourself}
+        />
+      )}
+      {currentStep === 2 && (
+        <Health
+          userData={userData}
+          setUserDataField={setUserDataField}
+          titles={titlesForForm.health}
+        />
+      )}
+      {currentStep === 3 && (
+        <Context
+          userData={userData}
+          setUserDataField={setUserDataField}
+          titles={titlesForForm.context}
+        />
+      )}
 
-        <Button type="warning" inputType="submit" disabled={!canGoNext()}>
-          Continuă
-        </Button>
-      </form>
-    </SidebarLayout>
+      <Button type="warning" inputType="submit" disabled={!canGoNext()}>
+        Continuă
+      </Button>
+    </form>
   );
 };
 
@@ -139,7 +137,11 @@ const AddMember = () => {
     ProfileApi.addDependant(userData).then(() => history.push("/account/me"));
   };
 
-  return <ProfileForm sendResults={sendResults} forYourself={false} />;
+  return (
+    <SidebarLayout>
+      <ProfileForm sendResults={sendResults} forYourself={false} />
+    </SidebarLayout>
+  );
 };
 
 ProfileForm.propTypes = {
