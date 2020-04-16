@@ -47,7 +47,7 @@ const UserHomePage = ({ isAuthenticated }) => {
 };
 
 UserHomePage.propTypes = {
-  isAuthenticated: PropTypes.bool,
-}
+  isAuthenticated: PropTypes.bool
+};
 
 export default UserHomePage;
