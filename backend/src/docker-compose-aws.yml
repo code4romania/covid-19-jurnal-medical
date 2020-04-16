@@ -21,7 +21,7 @@ services:
       IdentityServerUrl: ${IDENTITYSERVERURL}
       InternalIdentityServerUrl: ${IDENTITYSERVERURL}
       ConnectionStrings__UserDBConnection: ${API_CONNECTIONSTRINGS_USERDBCONNECTION}
-      AllowedCorsOrigins: ${API_ALLOWEDCORSORIGINS}
+      AllowedCorsOrigins__0: ${API_ALLOWEDCORSORIGINS}
       SwaggerOidcClientName: ${API_SwaggerOidcClientName}
     ports:
       - 5008:80
