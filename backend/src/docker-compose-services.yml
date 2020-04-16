@@ -73,3 +73,4 @@ services:
         RABBITMQ__USER: admin
         RABBITMQ__PASSWORD: Corona2020
         RABBITMQ__HOSTNAME: rabbitmq
+        RABBITMQ__PORT: 5672
