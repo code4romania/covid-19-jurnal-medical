@@ -12,7 +12,13 @@ const EvaluationApi = {
   sendSelfEvaluationResults: formResults => api.post("/form", formResults),
 
   sendEvaluationResults: (formResults, id) =>
-    api.post("/form", formResults, { params: { id } })
+    api.post("/form", formResults, { params: { id } }),
+
+  getEvaluationResults: async userId => {
+    const { data } = await api.get(`/form?id=${userId}`);
+
+    return data;
+  }
 };
 
 export default EvaluationApi;
