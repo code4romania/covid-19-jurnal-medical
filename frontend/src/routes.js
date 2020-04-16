@@ -38,6 +38,7 @@ export const ROUTES = {
     },
     postlogout: {
       path: "/post-logout",
+      redirect: "/",
       method: signoutCallback
     },
     silentrefresh: {
