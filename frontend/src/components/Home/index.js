@@ -7,7 +7,12 @@ import { sel as userSel } from "../../store/ducks/user";
 
 const Home = () => {
   const isAuthenticated = useSelector(userSel.user);
-  const page = isAuthenticated ? <UserHomePage /> : <DefaultHomePage />;
+  const page = isAuthenticated ? (
+    <UserHomePage isAuthenticated />
+  ) : (
+    <DefaultHomePage />
+  );
+
   return <BasePage>{page}</BasePage>;
 };
 
