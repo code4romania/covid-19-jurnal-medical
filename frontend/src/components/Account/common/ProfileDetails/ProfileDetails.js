@@ -53,19 +53,19 @@ ProfileDetails.defaultProps = {
 ProfileDetails.propTypes = {
   fields: PropTypes.shape({
     id: PropTypes.number,
-    name: PropTypes.string.isRequired,
-    surname: PropTypes.string.isRequired,
-    phoneNumber: PropTypes.string.isRequired,
-    age: PropTypes.number.isRequired,
-    gender: PropTypes.number.isRequired,
-    county: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    preexistingMedicalCondition: PropTypes.string.isRequired,
-    quarantineStatus: PropTypes.string.isRequired,
-    smoker: PropTypes.bool.isRequired,
-    livesWithOthers: PropTypes.bool.isRequired,
-    quarantineStatusOthers: PropTypes.number.isRequired,
-    relationshipType: PropTypes.number.isRequired
+    name: PropTypes.string,
+    surname: PropTypes.string,
+    phoneNumber: PropTypes.string,
+    age: PropTypes.number,
+    gender: PropTypes.number,
+    county: PropTypes.string,
+    city: PropTypes.string,
+    preexistingMedicalCondition: PropTypes.string,
+    quarantineStatus: PropTypes.string,
+    smoker: PropTypes.bool,
+    livesWithOthers: PropTypes.bool,
+    quarantineStatusOthers: PropTypes.number,
+    relationshipType: PropTypes.number
   }).isRequired,
   isSelf: PropTypes.bool,
   children: PropTypes.node
