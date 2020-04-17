@@ -4,47 +4,61 @@ using System.Data;
 using Newtonsoft.Json.Linq;
 using StamAcasa.Common.Models;
 
-namespace StamAcasa.Common.Services.Excel {
-    public class AnswersExcelExporter : IAnswersExcelExporter {
+namespace StamAcasa.Common.Services.Excel
+{
+    public class AnswersExcelExporter : IAnswersExcelExporter
+    {
 
         IExcelDocumentService ExcelDocumentService { get; }
 
-        public AnswersExcelExporter(IExcelDocumentService excelDocumentService) {
+        public AnswersExcelExporter(IExcelDocumentService excelDocumentService)
+        {
             ExcelDocumentService = excelDocumentService;
         }
 
-        public byte[] AnswersToExcel(IList<JObject> jAnswerForms, AnswersExcelTemplateTypes template = AnswersExcelTemplateTypes.SingleRowPerForm) {
+        public byte[] AnswersToExcel(IList<JObject> jAnswerForms, AnswersExcelTemplateTypes template = AnswersExcelTemplateTypes.SingleRowPerForm)
+        {
 
             DataTable dataTable = null;
 
-            if (template == AnswersExcelTemplateTypes.MultipleRowsPerForm) {
+            if (template == AnswersExcelTemplateTypes.MultipleRowsPerForm)
+            {
                 dataTable = AnswersToExcelMultipleRowsPerForm(jAnswerForms);
-            } else {
+            }
+            else
+            {
                 dataTable = AnswersToExcelSingleRowPerForm(jAnswerForms);
             }
 
             return ExcelDocumentService.DataTableToXlsxFile(dataTable, "Answers");
         }
 
-        DataTable AnswersToExcelSingleRowPerForm(IList<JObject> jAnswerForms) {
+        DataTable AnswersToExcelSingleRowPerForm(IList<JObject> jAnswerForms)
+        {
 
             var dataTable = new DataTable();
 
-            foreach (var jAnswerForm in jAnswerForms) {
+            foreach (var jAnswerForm in jAnswerForms)
+            {
 
                 var jProperties = jAnswerForm.Properties();
 
-                foreach (var jProperty in jProperties) {
-                    if (jProperty.Name == "answers") {
+                foreach (var jProperty in jProperties)
+                {
+                    if (jProperty.Name == "answers")
+                    {
 
                         var jAnswers = (JArray)jProperty.Value;
 
-                        for(int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++) {
+                        for (int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++)
+                        {
                             CreatePrimitiveColumn(dataTable, $"answerId{questionIndex + 1}", JTokenType.String);
                             CreatePrimitiveColumn(dataTable, $"questionText{questionIndex + 1}", JTokenType.String);
                             CreatePrimitiveColumn(dataTable, $"answer{questionIndex + 1}", JTokenType.String);
                         }
-                    } else {
+                    }
+                    else
+                    {
                         CreatePrimitiveColumn(dataTable, jProperty);
                     }
                 }
@@ -56,11 +70,13 @@ namespace StamAcasa.Common.Services.Excel {
 
                     if (jProperty.Name == "timestamp")
                         continue;
-                    if (jProperty.Name == "answers") {
+                    if (jProperty.Name == "answers")
+                    {
 
                         var jAnswers = (JArray)jProperty.Value;
 
-                        for (int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++) {
+                        for (int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++)
+                        {
 
                             var jAnswer = jAnswers[questionIndex];
 
@@ -73,7 +89,9 @@ namespace StamAcasa.Common.Services.Excel {
                             var answer = CastJToken(jAnswer["answer"]);
                             row[$"answer{questionIndex + 1}"] = answer ?? DBNull.Value;
                         }
-                    } else {
+                    }
+                    else
+                    {
                         var value = CastJToken(jProperty.Value);
                         row[jProperty.Name] = value ?? DBNull.Value;
                     }
@@ -85,14 +103,17 @@ namespace StamAcasa.Common.Services.Excel {
             return dataTable;
         }
 
-        DataTable AnswersToExcelMultipleRowsPerForm(IList<JObject> jAnswerForms) {
+        DataTable AnswersToExcelMultipleRowsPerForm(IList<JObject> jAnswerForms)
+        {
             var dataTable = new DataTable();
 
-            foreach (var jAnswerForm in jAnswerForms) {
+            foreach (var jAnswerForm in jAnswerForms)
+            {
 
                 var jProperties = jAnswerForm.Properties();
 
-                foreach (var jProperty in jProperties) {
+                foreach (var jProperty in jProperties)
+                {
                     CreatePrimitiveColumn(dataTable, jProperty);
                 }
 
@@ -102,12 +123,15 @@ namespace StamAcasa.Common.Services.Excel {
 
                 var jAnswers = (JArray)jAnswerForm["answers"];
 
-                for (int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++) {
+                for (int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++)
+                {
 
                     var row = dataTable.NewRow();
 
-                    foreach (var jProperty in jProperties) {
-                        if (jProperty.Name != "answers") {
+                    foreach (var jProperty in jProperties)
+                    {
+                        if (jProperty.Name != "answers")
+                        {
                             var value = CastJToken(jProperty.Value);
                             row[jProperty.Name] = value ?? DBNull.Value;
                         }
@@ -132,24 +156,34 @@ namespace StamAcasa.Common.Services.Excel {
         }
 
 
-        object CastJToken(JToken value) {
-
+        object CastJToken(JToken value)
+        {
             var jType = value.Type;
 
-            if (jType == JTokenType.Boolean) {
+            if (jType == JTokenType.Boolean)
+            {
                 return (bool?)value;
-            } else if (jType == JTokenType.Date) {
+            }
+            else if (jType == JTokenType.Date)
+            {
                 return (DateTime?)value;
-            } else if (jType == JTokenType.Float) {
+            }
+            else if (jType == JTokenType.Float)
+            {
                 return (double?)value;
-            } else if (jType == JTokenType.Integer) {
+            }
+            else if (jType == JTokenType.Integer)
+            {
                 return (long?)value;
-            } else {
+            }
+            else
+            {
                 return (string)value;
             }
         }
 
-        void CreatePrimitiveColumn(DataTable dataTable, JProperty jProperty) {
+        void CreatePrimitiveColumn(DataTable dataTable, JProperty jProperty)
+        {
 
             if (dataTable.Columns.Contains(jProperty.Name))
                 return;
@@ -159,28 +193,41 @@ namespace StamAcasa.Common.Services.Excel {
             CreatePrimitiveColumn(dataTable, jProperty.Name, jType);
         }
 
-        void CreatePrimitiveColumn(DataTable dataTable, string name, JTokenType jType) {
+        void CreatePrimitiveColumn(DataTable dataTable, string name, JTokenType jType)
+        {
 
             if (dataTable.Columns.Contains(name))
                 return;
 
             Type dataType;
 
-            if (jType == JTokenType.Array || jType == JTokenType.Object) {
+            if (jType == JTokenType.Array || jType == JTokenType.Object)
+            {
                 return;
-            } else if (jType == JTokenType.Boolean) {
+            }
+            else if (jType == JTokenType.Boolean)
+            {
                 dataType = typeof(bool);
-            } else if (jType == JTokenType.Date) {
+            }
+            else if (jType == JTokenType.Date)
+            {
                 dataType = typeof(DateTime);
-            } else if (jType == JTokenType.Float) {
+            }
+            else if (jType == JTokenType.Float)
+            {
                 dataType = typeof(double);
-            } else if (jType == JTokenType.Integer) {
+            }
+            else if (jType == JTokenType.Integer)
+            {
                 dataType = typeof(long);
-            } else {
+            }
+            else
+            {
                 dataType = typeof(string);
             }
 
-            dataTable.Columns.Add(new DataColumn() {
+            dataTable.Columns.Add(new DataColumn()
+            {
                 ColumnName = name,
                 DataType = dataType,
                 AllowDBNull = true
