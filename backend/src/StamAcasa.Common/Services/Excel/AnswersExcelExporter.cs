@@ -158,6 +158,8 @@ namespace StamAcasa.Common.Services.Excel
 
         object CastJToken(JToken value)
         {
+            if (value == null)
+                return DBNull.Value;
             var jType = value.Type;
 
             if (jType == JTokenType.Boolean)
