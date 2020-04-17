@@ -47,6 +47,7 @@ namespace IdentityServer.Pages.Account
         [BindProperty]
         public InputModel Input { get; set; }
 
+        [FromQuery]
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
@@ -92,7 +93,7 @@ namespace IdentityServer.Pages.Account
             await _queue.PublishEmailRequest<EmailRequestModel>(email);
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync([FromQuery] string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
