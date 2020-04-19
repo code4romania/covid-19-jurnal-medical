@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
-using StamAcasa.Common.Models;
+using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services.Emailing;
 
 namespace IdentityServer.Pages.Account
@@ -18,17 +19,14 @@ namespace IdentityServer.Pages.Account
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEmailSender _emailSender;
-        private readonly IConfiguration _configuration;
+        private readonly IQueueService _queue;
 
         public ForgotPasswordModel(
             UserManager<ApplicationUser> userManager,
-            IEmailSender emailSender,
-            IConfiguration configuration)
+            IQueueService queueService)
         {
             _userManager = userManager;
-            _emailSender = emailSender;
-            _configuration = configuration;
+            _queue = queueService;
         }
 
         [BindProperty]
@@ -62,22 +60,29 @@ namespace IdentityServer.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendAsync(
-                    new Email
-                    {
-                        To = Input.Email,
-                        Subject = "Reset Password",
-                        Content = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.",
-                        FromName = _configuration.GetValue<string>("AdminFromName"),
-                        FromEmail = _configuration.GetValue<string>("AdminFromEmail")
-                    },
-                    default
-                );
+                await SendPasswordResetEmail(user.UserName, callbackUrl);
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
 
             return Page();
+        }
+
+        private async Task SendPasswordResetEmail(string userName, string callbackUrl)
+        {
+            EmailRequestModel email = new EmailRequestModel()
+            {
+                Address = Input.Email,
+                PlaceholderContent = new Dictionary<string, string>(),
+                TemplateType = EmailTemplate.ResetPassword,
+                Type = "resetPasswordTemplate",
+                SenderName = "Reset Password",
+                Subject = ""
+            };
+            email.PlaceholderContent.Add("name", userName);
+            email.PlaceholderContent.Add("resetPasswordLink", HtmlEncoder.Default.Encode(callbackUrl));
+
+            await _queue.PublishEmailRequest<EmailRequestModel>(email);
         }
     }
 }
