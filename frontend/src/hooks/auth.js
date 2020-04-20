@@ -16,12 +16,12 @@ export const useAuth = () => {
   useEffect(() => {
     dispatch(userAc.setUser({ user: null, pending: true }));
 
-    const isLoggedIn = Object.keys(sessionStorage).find((key) =>
+    const isLoggedIn = Object.keys(sessionStorage).find(key =>
       key.includes("oidc.user")
     );
 
     if (isLoggedIn) {
-      getUser().then((user) =>
+      getUser().then(user =>
         dispatch(userAc.setUser({ user, pending: false }))
       );
     } else {
@@ -31,7 +31,8 @@ export const useAuth = () => {
 
   useEffect(() => {
     clearStale();
-    const userLoaded = (user) => dispatch(userAc.setUser({ user, pending: false }));
+    const userLoaded = user =>
+      dispatch(userAc.setUser({ user, pending: false }));
     const userUnloaded = () => dispatch(userAc.setUser({ user: null }));
 
     registerUserLoaded(userLoaded);

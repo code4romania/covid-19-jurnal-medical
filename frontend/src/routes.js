@@ -43,7 +43,7 @@ export const ROUTES = {
     },
     registercomplete: {
       path: "/register-complete",
-      redirect: "/",
+      redirect: "/"
     }
   },
   home: {
