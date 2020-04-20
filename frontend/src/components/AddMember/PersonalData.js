@@ -44,11 +44,13 @@ export const PersonalData = ({
           }}
         />
         <Input
-          type="number"
           label={"Număr de telefon"}
           name="phoneNumber"
-          min={10}
-          max={13}
+          type="tel"
+          pattern="00[0-9]*"
+          title="00xxxxxxxxxxx *doar cifre"
+          minlength="10"
+          maxlength="13"
           required
           usePlaceholder
           value={userData.phoneNumber}
