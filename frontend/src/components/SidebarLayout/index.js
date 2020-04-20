@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import {
   Instruments,
   InstrumentsItem,
-  Hero,
-  SearchInput
+  Hero
 } from "@code4ro/taskforce-fe-components";
 import { instrumentsItems } from "./const";
 
@@ -15,7 +14,6 @@ const SidebarLayout = ({ children }) => {
       <aside className="column is-4">
         <Instruments layout="column">
           <Hero useFallbackIcon title="Instrumente utile" />
-          <SearchInput placeholder="caută informații aici" />
           {instrumentsItems.map((item, index) => (
             <InstrumentsItem
               key={index}

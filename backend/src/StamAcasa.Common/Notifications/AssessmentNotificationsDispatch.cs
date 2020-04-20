@@ -24,7 +24,7 @@ namespace StamAcasa.Common.Notifications
         {
             var userInfos = await UserService.GetAll();
             var notifications = userInfos.Select(CreateEmailRequest);
-            var qTasks = notifications.Select(n => _queueService.PublishNotification(n));
+            var qTasks = notifications.Select(n => _queueService.PublishEmailRequest(n));
             await Task.WhenAll(qTasks);
         }
 

@@ -47,6 +47,7 @@ namespace IdentityServer.Pages.Account
         [BindProperty]
         public InputModel Input { get; set; }
 
+        [FromQuery]
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
@@ -59,14 +60,14 @@ namespace IdentityServer.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Câmpul {0} trebuie să aibă lungimea între minim {2} și maximum {1} caractere.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Setează parola")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirmă parola")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Câmpurile de parolă și confirmare parolă nu sunt identice.")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -92,7 +93,7 @@ namespace IdentityServer.Pages.Account
             await _queue.PublishEmailRequest<EmailRequestModel>(email);
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync([FromQuery] string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();

@@ -13,7 +13,7 @@ const App = () => {
 
   return (
     <Switch>
-      {oidcRoutes.map(({ path, method }) => (
+      {oidcRoutes.map(({ path, method, redirect }) => (
         <Route
           key={path}
           exact
@@ -22,7 +22,9 @@ const App = () => {
             if (method) {
               method();
             }
-            return <Redirect key={path} from={path} to="/account" />;
+            return (
+              <Redirect key={path} from={path} to={redirect || "/account"} />
+            );
           }}
         />
       ))}
