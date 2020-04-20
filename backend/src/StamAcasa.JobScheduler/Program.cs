@@ -16,6 +16,7 @@ using StamAcasa.Common.Models;
 using StamAcasa.Common.Notifications;
 using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services;
+using StamAcasa.Common.Services.Assessment;
 using StamAcasa.Common.Services.Excel;
 using StamAcasa.JobScheduler.Extensions;
 using StamAcasa.JobScheduler.Jobs;
@@ -85,6 +86,7 @@ namespace StamAcasa.JobScheduler
 
                     services.TryAddScheduledJob<SendResultsNotificationJob>(s =>
                     {
+                        s.TryAddSingleton<IAssessmentFormProvider, StaticFileAssessmentFormProvider>();
                         s.TryAddTransient<ResultNotificationsDispatch>();
                         s.TryAddTransient<IFormService, FormService>();
                         s.TryAddTransient<IAnswersExcelExporter, AnswersExcelExporter>();

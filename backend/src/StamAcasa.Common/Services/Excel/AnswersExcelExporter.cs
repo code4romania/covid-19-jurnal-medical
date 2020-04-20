@@ -1,19 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using StamAcasa.Common.Models;
+using StamAcasa.Common.Services.Assessment;
 
 namespace StamAcasa.Common.Services.Excel
 {
     public class AnswersExcelExporter : IAnswersExcelExporter
     {
-
         IExcelDocumentService ExcelDocumentService { get; }
-
-        public AnswersExcelExporter(IExcelDocumentService excelDocumentService)
+        private readonly Dictionary<string, string> _singleChoiceOptionsMap = new Dictionary<string, string>();
+        public AnswersExcelExporter(IExcelDocumentService excelDocumentService, IAssessmentFormProvider assessmentFormProvider)
         {
             ExcelDocumentService = excelDocumentService;
+            var formNewUser = assessmentFormProvider.GetFormNewUser().GetAwaiter().GetResult();
+            var formFollowUp = assessmentFormProvider.GetFormFollowUp().GetAwaiter().GetResult();
+            FillSingleChoiceMapFromFormString(formNewUser);
+            FillSingleChoiceMapFromFormString(formFollowUp);
+
+        }
+
+        private void FillSingleChoiceMapFromFormString(string formNewUser)
+        {
+            var jObject = JObject.FromObject(JsonConvert.DeserializeObject<dynamic>(formNewUser));
+
+            var formId = jObject["formId"].ToString();
+            var singleChoiceQuestions = jObject.SelectTokens("$.form[?(@.type== 'SINGLE_CHOICE')]");
+
+            foreach (var question in singleChoiceQuestions)
+            {
+                var questionId = question["questionId"].ToString();
+                foreach (var option in question["options"])
+                {
+                    var optionValue = option["value"].ToString();
+                    var optionLabel = option["label"].ToString();
+
+                    _singleChoiceOptionsMap.Add($"{formId}_{questionId}_{optionValue}".ToLower(), optionLabel);
+                }
+            }
         }
 
         public byte[] AnswersToExcel(IList<JObject> jAnswerForms, AnswersExcelTemplateTypes template = AnswersExcelTemplateTypes.SingleRowPerForm)
@@ -52,7 +78,7 @@ namespace StamAcasa.Common.Services.Excel
 
                         for (int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++)
                         {
-                            CreatePrimitiveColumn(dataTable, $"answerId{questionIndex + 1}", JTokenType.String);
+                            CreatePrimitiveColumn(dataTable, $"questionId{questionIndex + 1}", JTokenType.String);
                             CreatePrimitiveColumn(dataTable, $"questionText{questionIndex + 1}", JTokenType.String);
                             CreatePrimitiveColumn(dataTable, $"answer{questionIndex + 1}", JTokenType.String);
                         }
@@ -64,10 +90,13 @@ namespace StamAcasa.Common.Services.Excel
                 }
 
                 var row = dataTable.NewRow();
-
+                var formId = "";
                 foreach (var jProperty in jProperties)
                 {
-
+                    if (jProperty.Name == "formId")
+                    {
+                        formId = jProperty.Value.ToString();
+                    }
                     if (jProperty.Name == "timestamp")
                         continue;
                     if (jProperty.Name == "answers")
@@ -80,14 +109,24 @@ namespace StamAcasa.Common.Services.Excel
 
                             var jAnswer = jAnswers[questionIndex];
 
-                            var answerId = CastJToken(jAnswer["id"]);
-                            row[$"answerId{questionIndex + 1}"] = answerId ?? DBNull.Value;
+                            var questionId = CastJToken(jAnswer["id"]);
+                            row[$"questionId{questionIndex + 1}"] = questionId ?? DBNull.Value;
 
                             var questionText = CastJToken(jAnswer["questionText"]);
                             row[$"questionText{questionIndex + 1}"] = questionText ?? DBNull.Value;
 
                             var answer = CastJToken(jAnswer["answer"]);
-                            row[$"answer{questionIndex + 1}"] = answer ?? DBNull.Value;
+
+                            var (isSingleOptionAnswer, newText) = MapAnswer(formId, questionId?.ToString(), answer);
+                            if (isSingleOptionAnswer)
+                            {
+                                row[$"answer{questionIndex + 1}"] = string.IsNullOrEmpty(newText.ToString()) ? DBNull.Value : newText;
+                            }
+                            else
+                            {
+                                row[$"answer{questionIndex + 1}"] = answer ?? DBNull.Value;
+                            }
+
                         }
                     }
                     else
@@ -117,12 +156,12 @@ namespace StamAcasa.Common.Services.Excel
                     CreatePrimitiveColumn(dataTable, jProperty);
                 }
 
-                CreatePrimitiveColumn(dataTable, $"answerId", JTokenType.String);
-                CreatePrimitiveColumn(dataTable, $"questionText", JTokenType.String);
-                CreatePrimitiveColumn(dataTable, $"answer", JTokenType.String);
+                CreatePrimitiveColumn(dataTable, "questionId", JTokenType.String);
+                CreatePrimitiveColumn(dataTable, "questionText", JTokenType.String);
+                CreatePrimitiveColumn(dataTable, "answer", JTokenType.String);
 
                 var jAnswers = (JArray)jAnswerForm["answers"];
-
+                var formId = jAnswerForm["formId"].ToString();
                 for (int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++)
                 {
 
@@ -130,6 +169,9 @@ namespace StamAcasa.Common.Services.Excel
 
                     foreach (var jProperty in jProperties)
                     {
+                        if (jProperty.Name == "timestamp")
+                            continue;
+
                         if (jProperty.Name != "answers")
                         {
                             var value = CastJToken(jProperty.Value);
@@ -139,14 +181,24 @@ namespace StamAcasa.Common.Services.Excel
 
                     var jAnswer = jAnswers[questionIndex];
 
-                    var answerId = CastJToken(jAnswer["id"]);
-                    row[$"answerId"] = answerId ?? DBNull.Value;
+                    var questionId = CastJToken(jAnswer["id"]);
+                    row["questionId"] = questionId ?? DBNull.Value;
 
                     var questionText = CastJToken(jAnswer["questionText"]);
-                    row[$"questionText"] = questionText ?? DBNull.Value;
+                    row["questionText"] = questionText ?? DBNull.Value;
 
                     var answer = CastJToken(jAnswer["answer"]);
-                    row[$"answer"] = answer ?? DBNull.Value;
+
+                    var (isSingleOptionAnswer, newText) = MapAnswer(formId, questionId?.ToString(), answer);
+
+                    if (isSingleOptionAnswer)
+                    {
+                        row["answer"] = string.IsNullOrEmpty(newText.ToString()) ? DBNull.Value : newText;
+                    }
+                    else
+                    {
+                        row["answer"] = answer ?? DBNull.Value;
+                    }
 
                     dataTable.Rows.Add(row);
                 }
@@ -155,7 +207,16 @@ namespace StamAcasa.Common.Services.Excel
             return dataTable;
         }
 
+        private (bool isSingleOptionAnswer, object newText) MapAnswer(string formId, string questionId, object answer)
+        {
+            var key = $"{formId}_{questionId}_{answer}".ToLower();
+            if (_singleChoiceOptionsMap.ContainsKey(key))
+            {
+                return (true, _singleChoiceOptionsMap[key]);
+            }
 
+            return (false, answer);
+        }
         object CastJToken(JToken value)
         {
             if (value == null)
