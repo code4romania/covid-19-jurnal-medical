@@ -17,6 +17,16 @@ export const PersonalData = ({
   const getCitiesFor = county =>
     county ? cities[county].map(city => ({ label: city, value: city })) : [];
 
+  const selectOption = (options, value) => {
+    return options.map(option => {
+      return {
+        value: option.value,
+        text: option.text,
+        selected: (option.selected = +option.value === value)
+      };
+    });
+  };
+
   return (
     <>
       <ListHeader title="I. Date personale" />
@@ -28,6 +38,7 @@ export const PersonalData = ({
           required
           usePlaceholder
           value={userData.name}
+          defaultValue={userData.name}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("name", value);
           }}
@@ -39,6 +50,7 @@ export const PersonalData = ({
           required
           usePlaceholder
           value={userData.surname}
+          defaultValue={userData.surname}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("surname", value);
           }}
@@ -50,6 +62,7 @@ export const PersonalData = ({
           required
           usePlaceholder
           value={userData.phoneNumber}
+          defaultValue={userData.phoneNumber}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("phoneNumber", value);
           }}
@@ -57,7 +70,7 @@ export const PersonalData = ({
         {showRelationship && (
           <Select
             placeholder="Tip de relație"
-            options={options.relation}
+            options={selectOption(options.relation, userData.relationshipType)}
             selectProps={{
               required: true,
               name: "relationshipType",
@@ -93,6 +106,7 @@ export const PersonalData = ({
           required
           usePlaceholder
           value={userData.age}
+          defaultValue={userData.age}
           step={1}
           min="0"
           max="120"
@@ -102,7 +116,7 @@ export const PersonalData = ({
         />
         <Select
           placeholder="Genul"
-          options={options.gender}
+          options={selectOption(options.gender, userData.gender)}
           selectProps={{
             required: true,
             name: "gender",
