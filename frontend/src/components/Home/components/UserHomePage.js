@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-
+import PropTypes from "prop-types";
 import { Hero } from "@code4ro/taskforce-fe-components";
+
 import StepsBar from "../../StepsBar";
-import { ROUTES } from "../../../routes";
-import ProfileApi from "../../../api/profileApi";
 import AuthenticatedRoute from "../../AuthenticatedRoute";
 
-const UserHomePage = () => {
+import { ROUTES } from "../../../routes";
+import ProfileApi from "../../../api/profileApi";
+import useAuthHomeRedirect from "../../../hooks/redirect";
+
+const UserHomePage = ({ isAuthenticated }) => {
+  useAuthHomeRedirect(isAuthenticated);
   const [userProfile, setUserProfile] = useState(null);
 
   const updateProfileFromServer = () => {
@@ -40,6 +44,10 @@ const UserHomePage = () => {
       ))}
     </>
   );
+};
+
+UserHomePage.propTypes = {
+  isAuthenticated: PropTypes.bool
 };
 
 export default UserHomePage;
