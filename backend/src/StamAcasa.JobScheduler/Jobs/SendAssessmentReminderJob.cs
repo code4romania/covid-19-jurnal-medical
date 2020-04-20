@@ -24,7 +24,7 @@ namespace StamAcasa.JobScheduler.Jobs
         {
             try
             {
-                await _notificationsDispatch.Process();
+                await _notificationsDispatch.Process().ConfigureAwait(false);
             }
             catch (Exception exception)
             {

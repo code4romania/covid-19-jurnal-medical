@@ -56,9 +56,13 @@ export const PersonalData = ({
           }}
         />
         <Input
-          type="tel"
           label={"Număr de telefon"}
           name="phoneNumber"
+          type="tel"
+          pattern="(?:00|07)[0-9]*"
+          title="07xxxxxxxx sau 00xxxxxxxxxx - doar cifre"
+          minLength="10"
+          maxLength="13"
           required
           usePlaceholder
           value={userData.phoneNumber}
