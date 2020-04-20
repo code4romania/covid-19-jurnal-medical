@@ -67,19 +67,12 @@ namespace StamAcasa.JobScheduler
                     services.AddDbContextPool<UserDbContext>(options =>
                         options.UseNpgsql(hostContext.Configuration.GetConnectionString("UserDBConnection")));
 
-                    var hostName = hostContext.Configuration["RabbitMQ:HostName"];
-                    var userName = hostContext.Configuration["RabbitMQ:User"];
-                    var port = ushort.Parse(hostContext.Configuration["RabbitMQ:Port"]);
-                    var password = hostContext.Configuration["RabbitMQ:Password"];
-
-                    services.TryAddSingleton(sp => RabbitHutch.CreateBus(
-                        hostName,
-                        port,
-                        "/",
-                        userName,
-                        password,
-                        10, //default
-                        (x) => { }));
+                    services.AddSingleton(RabbitHutch.CreateBus(string.Format("host={0}:{1};username={2};password={3}",
+                        hostContext.Configuration.GetValue<string>("RabbitMQ:HostName"),
+                        hostContext.Configuration.GetValue<int>("RabbitMQ:Port").ToString(),
+                        hostContext.Configuration.GetValue<string>("RabbitMQ:User"),
+                        hostContext.Configuration.GetValue<string>("RabbitMQ:Password"))
+                    ));
 
                     services.TryAddScheduledJob<HealthCheckJob>();
                     services.TryAddScheduledJob<SendAssessmentReminderJob>(s =>
