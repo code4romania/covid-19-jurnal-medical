@@ -1,0 +1,91 @@
+version: '3.4'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    restart: always
+    container_name: rabbitmq
+    environment: 
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    ports:
+       # The standard AMQP protocol port
+      - 5672:5672
+        # HTTP management UI
+      - 15672:15672
+
+  api:
+    image: code4romania/stamacasa-api:staging
+    environment:
+      ASPNETCORE_URLS: ${ASPNETCORE_URLS}
+      IdentityServerUrl: ${IDENTITYSERVERURL}
+      InternalIdentityServerUrl: ${IDENTITYSERVERURL}
+      ConnectionStrings__UserDBConnection: ${API_CONNECTIONSTRINGS_USERDBCONNECTION}
+      AllowedCorsOrigins__0: ${API_ALLOWEDCORSORIGINS}
+      SwaggerOidcClientName: ${API_SwaggerOidcClientName}
+    ports:
+      - 5008:80
+    depends_on:
+      - identityserver
+      - rabbitmq
+
+  identityserver:
+    image: code4romania/stamacasa-identityserver:staging
+    environment:
+        ASPNETCORE_URLS: ${ASPNETCORE_URLS}
+        RABBITMQ__USER: ${RABBITMQ_USER}
+        RABBITMQ__PASSWORD: ${RABBITMQ_PASSWORD}
+        RABBITMQ__HOSTNAME: ${RABBITMQ_HOSTNAME}
+        RABBITMQ__PORT: ${RABBITMQ_PORT}
+        ConnectionStrings__ApplicationDbContextConnection: ${IS_CONNECTIONSTRINGS_APPLICATIONDBCONTEXTCONNECTION}
+        IdentityServerPublicOrigin: ${IS_IdentityServerPublicOrigin}
+        ClientApplications__3__AllowedCorsOrigins__0: ${IS_ClientApplications__3__AllowedCorsOrigins__0}
+        ClientApplications__3__PostLogoutRedirectUris__0: ${IS_ClientApplications__3__PostLogoutRedirectUris__0}
+        ClientApplications__3__RedirectUris__0: ${IS_ClientApplications__3__RedirectUris__0}
+        ClientApplications__3__RedirectUris__1: ${IS_ClientApplications__3__RedirectUris__1}
+        ClientApplications__4__AllowedCorsOrigins__0: ${IS_ClientApplications__4__AllowedCorsOrigins__0}
+        ClientApplications__4__RedirectUris__0: ${IS_ClientApplications__4__RedirectUris__0}
+    ports:
+      - 5001:80
+    container_name: identityserver
+    hostname: identityserver
+    depends_on: 
+      - rabbitmq
+
+  frontend:
+    image:  code4romania/stamacasa-frontend:staging
+    container_name: stamacasa-frontend
+    environment:
+      REACT_APP_IDP_URL: ${FE_REACT_APP_IDP_URL}
+      REACT_APP_URL: ${FE_REACT_APP_URL}
+      REACT_APP_API_URL: ${FE_REACT_APP_API_URL}
+      CLIENT_ID: ${FE_CLIENT_ID}
+    ports:
+     - 5002:5002
+    depends_on:
+      - api
+      - identityserver
+
+  stamacasa.email:
+    image: code4romania/stamacasa-emailservice:staging
+    environment:
+      RABBITMQ__USER: ${RABBITMQ_USER}
+      RABBITMQ__PASSWORD: ${RABBITMQ_PASSWORD}
+      RABBITMQ__HOSTNAME: ${RABBITMQ_HOSTNAME}
+      RABBITMQ__PORT: ${RABBITMQ_PORT}
+      SMTP__HOST: ${SMTP_HOST}
+      SMTP__PORT: ${SMTP_PORT}
+      SMTP__USER: ${SMTP_USER}
+      SMTP__PASSWORD: ${SMTP_PASSWORD}
+    depends_on:
+      - rabbitmq 
+
+  stamacasa.jobscheduler:
+    image: code4romania/stamacasa-jobscheduler:staging
+    environment:
+      RABBITMQ__USER: ${RABBITMQ_USER}
+      RABBITMQ__PASSWORD: ${RABBITMQ_PASSWORD}
+      RABBITMQ__HOSTNAME: ${RABBITMQ_HOSTNAME}
+      RABBITMQ__PORT: ${RABBITMQ_PORT}
+    depends_on: 
+      - rabbitmq
