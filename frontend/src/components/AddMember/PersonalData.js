@@ -48,9 +48,9 @@ export const PersonalData = ({
           name="phoneNumber"
           type="tel"
           pattern="00[0-9]*"
-          title="00xxxxxxxxxxx *doar cifre"
-          minlength="10"
-          maxlength="13"
+          title="00xxxxxxxxxx - doar cifre"
+          minLength="10"
+          maxLength="13"
           required
           usePlaceholder
           value={userData.phoneNumber}
