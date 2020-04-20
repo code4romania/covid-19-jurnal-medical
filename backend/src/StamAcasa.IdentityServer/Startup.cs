@@ -84,7 +84,7 @@ namespace IdentityServer
             services.AddSingleton(RabbitHutch.CreateBus(string.Format("host={0}:{1};username={2};password={3}",
                                             Configuration.GetValue<string>("RabbitMQ:HostName"),
                                             Configuration.GetValue<int>("RabbitMQ:Port").ToString(),
-                                            Configuration.GetValue<string>("RabbitMQ:UserName"),
+                                            Configuration.GetValue<string>("RabbitMQ:User"),
                                             Configuration.GetValue<string>("RabbitMQ:Password"))
                 ));
             services.AddSingleton<IQueueService, QueueService>();
