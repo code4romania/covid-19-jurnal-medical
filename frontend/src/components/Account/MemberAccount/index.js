@@ -20,17 +20,17 @@ export const MemberAccount = () => {
   }, []);
 
   useEffect(() => {
+    if (!personId && familyMembers.length) {
+      history.replace(`/account/other-members/${familyMembers[0].id}`);
+    }
+
     setOptions(
       familyMembers.map(({ name, surname, id }) => ({
         text: `${name} ${surname}`,
         value: `${id}`,
-        selected: id === personId
+        selected: id === +personId
       }))
     );
-
-    if (familyMembers.length) {
-      history.replace(`/account/other-members/${familyMembers[0].id}`);
-    }
   }, [personId, familyMembers]);
 
   const props = {
