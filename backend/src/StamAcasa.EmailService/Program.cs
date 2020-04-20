@@ -73,7 +73,7 @@ namespace StamAcasa.EmailService
                 services.AddSingleton(RabbitHutch.CreateBus(string.Format("host={0}:{1};username={2};password={3}",
                     context.Configuration.GetValue<string>("RabbitMQ:HostName"),
                     context.Configuration.GetValue<int>("RabbitMQ:Port").ToString(),
-                    context.Configuration.GetValue<string>("RabbitMQ:User"),
+                    context.Configuration.GetValue<string>("RabbitMQ:UserName"),
                     context.Configuration.GetValue<string>("RabbitMQ:Password"))
                 ));
 
