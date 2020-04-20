@@ -15,10 +15,14 @@ export const sel = {
 
 export default createReducer(
   {
-    [ac.setUser]: (state, payload) => ({
+    [ac.setUser]: (state, { user, pending }) => ({
       ...state,
-      user: payload
+      user,
+      pending
     })
   },
-  {}
+  {
+    user: null,
+    pending: null
+  }
 );
