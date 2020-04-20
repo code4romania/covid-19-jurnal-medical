@@ -4,6 +4,7 @@
     {
         AccountConfirmation,  
         DailyAssessment, 
-        StateEntity
+        StateEntity,
+        ResetPassword
     }
 }
