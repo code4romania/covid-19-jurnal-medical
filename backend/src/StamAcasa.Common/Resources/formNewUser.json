@@ -1,13 +1,13 @@
 {
-  "formId": 103,
+  "formId": 1,
   "title": "Ai simptome?",
   "firstNodeId": 1,
   "form": [
       {
           "questionId": 1,
           "nextQuestionId": 2,
-          "questionText": "Ai avut febra 38 grade celsius sau mai mare?",
-          "questionType": "SINGLE_CHOICE",
+          "questionText": "Ai avut febră 38 grade celsius sau mai mare?",
+          "type": "SINGLE_CHOICE",
           "options": [
               {
                   "label": "Da",
@@ -24,18 +24,13 @@
           "questionId": 2,
           "nextQuestionId": 3,
           "questionText": "Din ce dată ai avut prima dată febră?",
-          "questionType": "INPUT",
-          "options": [
-              {
-                  "optionType": "date"
-              }
-          ]
+          "type": "DATE_PICKER"
       },
       {
           "questionId": 3,
           "nextQuestionId": 4,
           "questionText": "Ai avut durere în gât și/sau dificultate în a înghiți?",
-          "questionType": "SINGLE_CHOICE",
+          "type": "SINGLE_CHOICE",
           "options": [
               {
                   "label": "Da",
@@ -52,18 +47,13 @@
           "questionId": 4,
           "nextQuestionId": 5,
           "questionText": "Din ce dată ai avut durere în gât și/sau dificultate în a înghiți?",
-          "questionType": "INPUT",
-          "options": [
-              {
-                  "optionType": "date"
-              }
-          ]
+          "type": "DATE_PICKER"
       },
       {
           "questionId": 5,
           "nextQuestionId": 6,
           "questionText": "Ai avut tuse intensă?",
-          "questionType": "SINGLE_CHOICE",
+          "type": "SINGLE_CHOICE",
           "options": [
               {
                   "label": "Da",
@@ -80,18 +70,13 @@
           "questionId": 6,
           "nextQuestionId": 7,
           "questionText": "Din ce data ai avut tuse?",
-          "questionType": "INPUT",
-          "options": [
-              {
-                  "optionType": "date"
-              }
-          ]
+          "type": "DATE_PICKER"
       },
       {
           "questionId": 7,
           "nextQuestionId": 8,
           "questionText": "Ai avut dificultate în a respira?",
-          "questionType": "SINGLE_CHOICE",
+          "type": "SINGLE_CHOICE",
           "options": [
               {
                   "label": "Da",
@@ -108,18 +93,13 @@
           "questionId": 8,
           "nextQuestionId": 9,
           "questionText": "Din ce dată ai avut dificultate în a respira?",
-          "questionType": "INPUT",
-          "options": [
-              {
-                  "optionType": "date"
-              }
-          ]
+          "type": "DATE_PICKER"
       },
       {
           "questionId": 9,
           "nextQuestionId": 10,
           "questionText": "Ți-a curs nasul?",
-          "questionType": "SINGLE_CHOICE",
+          "type": "SINGLE_CHOICE",
           "options": [
               {
                   "label": "Da",
@@ -136,18 +116,13 @@
           "questionId": 10,
           "nextQuestionId": 11,
           "questionText": "Din ce dată ţi-a curs nasul?",
-          "questionType": "INPUT",
-          "options": [
-              {
-                  "optionType": "date"
-              }
-          ]
+          "type": "DATE_PICKER"
       },
       {
           "questionId": 11,
           "nextQuestionId": 12,
-          "questionText": "Alte simptome",
-          "questionType": "SINGLE_CHOICE",
+          "questionText": "Alte simptome:",
+          "type": "SINGLE_CHOICE",
           "options": [
               {
                   "label": "Da",
@@ -163,9 +138,9 @@
       {
           "questionId": 12,
           "nextQuestionId": 13,
-          "questionText": "Te rugam sa le descrii",
-          "questionType": "INPUT",
-          "options": [
+          "questionText": "Te rugăm să le descrii",
+          "type": "INPUT",
+          "options": [ 
               {
                   "optionType": "string"
               }
@@ -175,19 +150,23 @@
           "questionId": 13,
           "nextQuestionId": 14,
           "questionText": "În momentul de față, te afli în izolare la domiciliu?",
-          "questionType": "SINGLE_CHOICE",
+          "type": "SINGLE_CHOICE",
           "options": [
               {
-                  "label": "Da, sunt in izolare - nu ies deloc din locuinta"
+                  "label": "Da, sunt in izolare - nu ies deloc din locuinta",
+                  "value": 0
               },
               {
-                  "label": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie"
+                  "label": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
+                  "value": 1
               },
               {
-                  "label": "Nu sunt in izolare si ies din locuinta dupa program normal"
+                  "label": "Nu sunt in izolare si ies din locuinta dupa program normal",
+                  "value": 2
               },
               {
-                  "label": "Alta situatie"
+                  "label": "Alta situatie",
+                  "value": 3
               }
           ]
       },
@@ -195,7 +174,7 @@
           "questionId": 14,
           "nextQuestionId": 15,
           "questionText": "În momentul de față, împarți locuința și cu alte persoane?",
-          "questionType": "SINGLE_CHOICE",
+          "type": "SINGLE_CHOICE",
           "options": [
               {
                   "label": "Da",
@@ -212,19 +191,23 @@
           "questionId": 15,
           "nextQuestionId": 16,
           "questionText": "Celelalte persoane din locuință se află în izolare la domiciliu?",
-          "questionType": "SINGLE_CHOICE",
+          "type": "SINGLE_CHOICE",
           "options": [
               {
-                  "label": "Da, sunt in izolare - nu ies deloc din locuinta"
+                  "label": "Da, sunt in izolare - nu ies deloc din locuinta",
+                  "value": 0
               },
               {
-                  "label": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie"
+                  "label": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
+                  "value": 1
               },
               {
-                  "label": "Nu sunt in izolare si ies din locuinta dupa program normal"
+                  "label": "Nu sunt in izolare si ies din locuinta dupa program normal",
+                  "value": 2
               },
               {
-                  "label": "Alta situatie"
+                  "label": "Alta situatie",
+                  "value": 3
               }
           ]
       },
@@ -232,7 +215,7 @@
           "questionId": 16,
           "nextQuestionId": 17,
           "questionText": "Ai ieșit din casă de la ultima completare a formularului?",
-          "questionType": "SINGLE_CHOICE",
+          "type": "SINGLE_CHOICE",
           "options": [
               {
                   "label": "Da",
@@ -249,7 +232,7 @@
           "questionId": 17,
           "nextQuestionId": 18,
           "questionText": "Care a fost motivul deplasării?",
-          "questionType": "INPUT",
+          "type": "INPUT",
           "options": [ 
               {
                   "optionType": "string"
@@ -260,29 +243,19 @@
           "questionId": 18,
           "nextQuestionId": 19,
           "questionText": "Ora plecării:",
-          "questionType": "INPUT",
-          "options": [ 
-              {
-                  "optionType": "date"
-              }
-          ]
+          "type": "DATE_PICKER"
       },
       {
           "questionId": 19,
           "nextQuestionId": 20,
           "questionText": "Ora sosirii:",
-          "questionType": "INPUT",
-          "options": [ 
-              {
-                  "optionType": "date"
-              }
-          ]
+          "type": "DATE_PICKER"
       },
       {
           "questionId": 20,
-          "nextQuestionId": 0,
-          "questionText": "Ai fost în contact direct cu o persoană diagnosticată/ confirmată cu noul coronavirus?",
-          "questionType": "FINAL",
+          "nextQuestionId": 21,
+          "questionText": "Ai fost în contact direct cu o persoană diagnosticată/confirmată cu noul coronavirus?",
+          "type": "SINGLE_CHOICE",
           "options": [ 
               {
                   "label": "Da",
@@ -293,6 +266,18 @@
                   "value": false
               }
           ]
+      },
+      {
+        "questionId": 21,
+        "nextQuestionId": 0,
+        "questionText": "Mulțumim!",
+        "type": "FINAL",
+        "options": [
+          {
+            "label": "Mulțumim că ai completat formularul!",
+            "value": 0
+          }
+        ]
       }
   ]
 }
