@@ -78,7 +78,7 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
       name: "relationshipType",
       required: false
     }
-];
+  ];
   const personalFields = forYourself ? fieldsForYourself : fieldsForDependant;
 
   const healthFields = [
@@ -108,7 +108,9 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
   ];
 
   const fieldsCompleted = fields => {
-    return fields.filter(field => field.required && userData[field.name] === undefined).length === 0;
+    return (
+      fields.filter(field => field.required && userData[field.name] === undefined ).length === 0
+    );
   };
 
   const canGoNext = () => {
