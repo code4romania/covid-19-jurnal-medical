@@ -37,17 +37,11 @@ const UpdateProfile = ({
 UpdateProfile.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      id: PropTypes.number,
-      profileDetails: PropTypes.object,
-      isSelf: PropTypes.bool
-    })
-  })
-};
-
-UpdateProfile.defaultProps = {
-  location: {
-    state: { id: 0, profileDetails: {}, isSelf: false }
-  }
+      id: PropTypes.number.isRequired,
+      profileDetails: PropTypes.object.isRequired,
+      isSelf: PropTypes.bool.isRequired
+    }).isRequired
+  }).isRequired
 };
 
 export default UpdateProfile;
