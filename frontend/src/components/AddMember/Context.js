@@ -23,20 +23,19 @@ const Context = ({ userData, setUserDataField, titles }) => (
       value={[userData.livesWithOthers]}
       onChange={([value]) => setUserDataField("livesWithOthers", value)}
     />
-    {
-      userData.livesWithOthers && (
-        <div>
-          <ListHeader title="Celelalte persoane se află în izolare la domiciliu?" />
-          <SelectList
-            options={options.quarantineStatus}
-            name="quarantineStatusOthers"
-            value={toArrayOfStringValues(userData.quarantineStatusOthers)}
-            onChange={([value]) => setUserDataField("quarantineStatusOthers", +value)}
-          />
+    {userData.livesWithOthers && (
+      <div>
+        <ListHeader title="Celelalte persoane se află în izolare la domiciliu?" />
+        <SelectList
+          options={options.quarantineStatus}
+          name="quarantineStatusOthers"
+          value={toArrayOfStringValues(userData.quarantineStatusOthers)}
+          onChange={([value]) =>
+            setUserDataField("quarantineStatusOthers", +value)
+          }
+        />
       </div>
-      )
-    }
-  
+    )}
   </>
 );
 
