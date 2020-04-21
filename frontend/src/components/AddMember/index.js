@@ -16,27 +16,103 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
   const [userData, setUserData] = useState({});
 
   const fieldsForYourself = [
-    "name",
-    "surname",
-    "phoneNumber",
-    "age",
-    "gender",
-    "county",
-    "city"
+    {
+      name: "name",
+      required: true
+    },
+    {
+      name: "surname",
+      required: true
+    },
+    {
+      name: "phoneNumber",
+      required: true
+    },
+    {
+      name: "age",
+      required: true
+    },
+    {
+      name: "gender",
+      required: true
+    },
+    {
+      name: "county",
+      required: true
+    },
+    {
+      name: "city",
+      required: true
+    }
   ];
-  const fieldsForDependant = [...fieldsForYourself, "relationshipType"];
+  const fieldsForDependant = [
+    {
+      name: "name",
+      required: true
+    },
+    {
+      name: "surname",
+      required: true
+    },
+    {
+      name: "phoneNumber",
+      required: false
+    },
+    {
+      name: "age",
+      required: true
+    },
+    {
+      name: "gender",
+      required: true
+    },
+    {
+      name: "county",
+      required: true
+    },
+    {
+      name: "city",
+      required: true
+    },
+    {
+      name: "relationshipType",
+      required: false
+    }
+  ];
   const personalFields = forYourself ? fieldsForYourself : fieldsForDependant;
 
-  const healthFields = ["smoker", "preexistingMedicalCondition"];
+  const healthFields = [
+    {
+      name: "smoker",
+      required: true
+    },
+    {
+      name: "preexistingMedicalCondition",
+      required: true
+    }
+  ];
 
   const contextFields = [
-    "livesWithOthers",
-    "quarantineStatus",
-    "quarantineStatusOthers"
+    {
+      name: "livesWithOthers",
+      required: true
+    },
+    {
+      name: "quarantineStatus",
+      required: true
+    },
+    {
+      name: "quarantineStatusOthers",
+      required: userData.livesWithOthers ? true : false
+    }
   ];
 
   const fieldsCompleted = fields => {
-    return !fields.map(field => userData[field]).includes(undefined);
+    return (
+      fields.filter(
+        field => field.required && userData[field.name] === undefined
+      ).length === 0
+    );
   };
 
   const canGoNext = () => {
@@ -105,7 +181,7 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
         <PersonalData
           userData={userData}
           setUserDataField={setUserDataField}
-          showRelationship={!forYourself}
+          isForFamilyMember={!forYourself}
         />
       )}
       {currentStep === 2 && (
