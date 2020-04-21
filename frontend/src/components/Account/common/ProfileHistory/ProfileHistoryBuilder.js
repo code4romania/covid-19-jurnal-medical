@@ -1,5 +1,4 @@
 const TRUE = "true";
-const yesAnswer = "0";
 
 export const buildHistory = rawData => {
   const data = rawData.map(({ content }) => JSON.parse(content));
@@ -32,7 +31,7 @@ export const buildHistory = rawData => {
       tryAddSymptom(result.symptoms, symptom, ++seedId)
     );
 
-    if (form.hadOtherSymptoms.answer === yesAnswer) {
+    if (form.hadOtherSymptoms.answer === TRUE) {
       result.otherSymptoms.push({
         date: timestamp / 1000,
         otherSimptoms: form.otherSymptomsDescription.answer
