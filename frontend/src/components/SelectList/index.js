@@ -3,11 +3,30 @@ import PropTypes from "prop-types";
 import "./SelectList.scss";
 
 const SelectList = ({ name, options, value, multiple = false, onChange }) => {
-  const selectItem = item => {
-    const items = value.includes(item)
-      ? value.filter(selectedItem => !multiple || selectedItem !== item)
-      : [...(multiple ? value : []), item];
-    onChange(items);
+  const mutuallyExclusiveValues = options
+    .filter(option => option.mutuallyExclusive)
+    .map(option => option.value);
+
+  const unselectItem = item =>
+    value.filter(selectedItem => !multiple || selectedItem !== item);
+
+  const unselectMutuallyExclusiveItems = () =>
+    value.filter(selectItem => !mutuallyExclusiveValues.includes(selectItem));
+
+  const selectItem = item => [
+    ...(multiple ? unselectMutuallyExclusiveItems() : []),
+    item
+  ];
+
+  const handleClick = option => {
+    const item = option.value;
+    const isSelected = value.includes(item);
+
+    if (option.mutuallyExclusive) {
+      onChange(isSelected ? [] : [item]);
+    } else {
+      onChange(isSelected ? unselectItem(item) : selectItem(item));
+    }
   };
 
   return (
@@ -19,7 +38,7 @@ const SelectList = ({ name, options, value, multiple = false, onChange }) => {
             className={`select-option ${
               value.includes(option.value) ? "selected" : ""
             }`}
-            onClick={() => selectItem(option.value)}
+            onClick={() => handleClick(option)}
           >
             {option.text}
           </div>
@@ -30,11 +49,21 @@ const SelectList = ({ name, options, value, multiple = false, onChange }) => {
 };
 
 SelectList.propTypes = {
-  options: PropTypes.array.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.bool
+      ]).isRequired,
+      text: PropTypes.string.isRequired,
+      mutuallyExclusive: PropTypes.bool
+    })
+  ).isRequired,
   multiple: PropTypes.bool,
   name: PropTypes.string.isRequired,
   value: PropTypes.array.isRequired,
-  onChange: PropTypes.func
+  onChange: PropTypes.func.isRequired
 };
 
 export default SelectList;
