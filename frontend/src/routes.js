@@ -1,6 +1,7 @@
 import Home from "./components/Home";
 import About from "./components/About";
 import AddMember from "./components/AddMember";
+import UpdateProfile from "./components/UpdateProfile";
 import Evaluation from "./components/Evaluation";
 import Account from "./components/Account";
 
@@ -58,6 +59,10 @@ export const ROUTES = {
     addmember: {
       path: "/add-member",
       component: AddMember
+    },
+    updateprofile: {
+      path: "/update-profile",
+      component: UpdateProfile
     }
   }
 };

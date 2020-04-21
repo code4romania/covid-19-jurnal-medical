@@ -17,7 +17,7 @@ namespace StamAcasa.Common.DTO {
         public string City { get; set; }
         public int Age { get; set; }
         public Gender Gender { get; set; }
-        public string PreexistingMedicalCondition { get; set; }
+        public string[] PreexistingMedicalCondition { get; set; }
         public QuarantineStatus QuarantineStatus { get; set; }
         public bool Smoker { get; set; }
         public bool LivesWithOthers { get; set; }
