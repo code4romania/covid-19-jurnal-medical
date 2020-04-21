@@ -86,7 +86,7 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
       name: "smoker",
       required: true
     },
-    { 
+    {
       name: "preexistingMedicalCondition",
       required: true
     }
@@ -109,7 +109,9 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
 
   const fieldsCompleted = fields => {
     return (
-      fields.filter(field => field.required && userData[field.name] === undefined ).length === 0
+      fields.filter(
+        field => field.required && userData[field.name] === undefined
+      ).length === 0
     );
   };
 
