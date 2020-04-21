@@ -10,9 +10,9 @@ using Serilog.Enrichers;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 
-namespace Api
+namespace StamAcasa.Api
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {

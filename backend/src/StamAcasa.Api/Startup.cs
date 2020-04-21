@@ -27,7 +27,7 @@ using StamAcasa.Common.Services.Assessment;
 using StamAcasa.Common.Services.Excel;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace Api
+namespace StamAcasa.Api
 {
     public class Startup
     {
