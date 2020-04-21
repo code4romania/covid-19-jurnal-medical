@@ -9,10 +9,9 @@ export const SYMPTOMS_HEADERS = [
 export const OTHER_SYMPTOMS_HEADERS = ["Data/ora", "Simptome semnalate"];
 
 export const OUTINGS_HEADERS = [
-  "Data/Ora",
   "Motivul deplasării",
-  "Ora plecării",
-  "Ora sosirii",
+  "Data/Ora plecării",
+  "Data/Ora sosirii",
   "Contact cu pacient"
 ];
 
