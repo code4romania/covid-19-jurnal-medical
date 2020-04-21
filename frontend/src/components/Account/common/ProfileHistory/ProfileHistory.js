@@ -9,7 +9,6 @@ import ProfileDetails from "../ProfileDetails/ProfileDetails.js";
 import SymptomsHistoryTable from "../SymptomsHistoryTable/SymptomsHistoryTable.js";
 import ProfileOthers from "../ProfileOthers/ProfileOthers";
 
-import mockData from "../../mockData/mockData";
 import EvaluationApi from "../../../../api/evaluationApi";
 
 import { buildHistory } from "./ProfileHistoryBuilder";
@@ -73,7 +72,7 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
           />
           <hr />
           <h2 className="header">Istoric deplasări </h2>
-          <Table dataRows={mockData.outings} headers={OUTINGS_HEADERS} />
+          <Table dataRows={history.outings} headers={OUTINGS_HEADERS} />
         </>
       )}
     </div>
