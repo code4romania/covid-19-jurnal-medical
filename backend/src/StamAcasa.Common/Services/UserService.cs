@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -92,6 +93,19 @@ namespace StamAcasa.Common.Services
         {
             var users = await _context.Users.ToListAsync();
             var result = users.Select(_mapper.Map<UserInfo>);
+            return result;
+        }
+
+        public async Task<IEnumerable<UserInfo>> GetAllParents()
+        {
+            var parents = new ConcurrentQueue<User>();
+            await _context.Users.ForEachAsync(u =>
+            {
+                if (!u.ParentId.HasValue)
+                    parents.Enqueue(u);
+            });
+
+            var result = parents.Select(_mapper.Map<UserInfo>);
             return result;
         }
     }
