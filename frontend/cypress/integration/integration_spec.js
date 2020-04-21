@@ -26,6 +26,27 @@ describe("Stam Acasa", function() {
       );
     };
 
+    const stubDependants = data => {
+      cy.routeUseAuth(
+        {
+          method: "GET",
+          url: `${API_URL}/api/profile/family`,
+          response: data
+        },
+        BEARER_TOKEN
+      );
+    };
+
+    const stubFormResponses = (data, userId) => {
+      cy.routeUseAuth(
+        {
+          method: "GET",
+          url: `${API_URL}/api/form?id=${userId}`,
+          response: data
+        },
+        BEARER_TOKEN
+      );
+    };
     beforeEach(() => {
       mockLogin();
       cy.server();
@@ -39,17 +60,19 @@ describe("Stam Acasa", function() {
           response: "fixture:profile.json"
         },
         BEARER_TOKEN
-      );
+      ).as("postProfile");
       stubProfile("");
       cy.visit("/");
       cy.visit("/account/me");
-      cy.get("[name='nume'").type("Ion");
-      cy.get("[name='surname'").type("Popescu");
-      cy.get("[name='phoneNumber'").type("1234");
-      cy.get("[name='county'").select("București");
-      cy.get("[name='city'").select("București");
-      cy.get("[name='age'").type("41");
-      cy.get("[name='gender'").select("1");
+      cy.get("[name='nume']").type("Ion");
+      cy.get("[name='surname']").type("Popescu");
+      cy.get("[name='phoneNumber']").type("1234");
+      cy.contains("Judet").click();
+      cy.contains("Alba").click();
+      cy.contains("Localitatea").click();
+      cy.contains("Abrud").click();
+      cy.get("[name='age']").type("41");
+      cy.get("[name='gender']").select("1");
       cy.contains("Continuă").click();
 
       cy.get("[data-testid='smoker']")
@@ -66,12 +89,41 @@ describe("Stam Acasa", function() {
       cy.get("[data-testid='livesWithOthers']")
         .contains("Da")
         .click();
-      cy.get("[data-testid='quarantineStatusOther']")
+      cy.get("[data-testid='quarantineStatusOthers']")
         .contains("Altă situație")
         .click();
 
       stubProfile("fixture:profile.json");
       cy.contains("Continuă").click();
+
+      cy.wait("@postProfile")
+        .its("requestBody")
+        .should("deep.equal", {
+          name: "Ion",
+          surname: "Popescu",
+          phoneNumber: "1234",
+          county: "Alba",
+          city: "Abrud",
+          age: 41,
+          gender: 1,
+          preexistingMedicalCondition: "Diabet",
+          quarantineStatus: 4,
+          smoker: true,
+          livesWithOthers: true,
+          quarantineStatusOthers: 4
+        });
+    });
+
+    it("shows the profile with history", function() {
+      stubProfile("fixture:profile.json");
+      stubDependants({});
+      stubFormResponses("fixture:formAnswerHistory.json", "1");
+
+      cy.visit("/account/me");
+
+      cy.contains("Istoric deplasări");
+      cy.get("table").contains("Plimbare");
+      cy.get("table").contains("Cumparaturi");
     });
   });
 });
