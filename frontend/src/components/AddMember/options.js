@@ -12,11 +12,11 @@ export const options = {
   })),
   relation: [
     { value: "", text: "Tip relație", disabled: true, selected: true },
-    { value: "0", text: "Părinte" },
-    { value: "1", text: "Copil" },
-    { value: "2", text: "Bunic\\Bunică" },
-    { value: "3", text: "Vecin\\Vecină" },
-    { value: "4", text: "Altele" }
+    { value: "1", text: "Părinte" },
+    { value: "2", text: "Copil" },
+    { value: "3", text: "Bunic\\Bunică" },
+    { value: "4", text: "Vecin\\Vecină" },
+    { value: "5", text: "Altele" }
   ],
   city: [
     { value: "", text: "Localitate", disabled: true, selected: true },
