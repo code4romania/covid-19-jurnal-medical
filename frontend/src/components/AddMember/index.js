@@ -103,7 +103,7 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
     },
     {
       name: "quarantineStatusOthers",
-      required: true
+      required: userData.livesWithOthers ? true : false
     }
   ];
 
