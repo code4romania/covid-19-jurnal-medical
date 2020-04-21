@@ -12,7 +12,7 @@ import cities from "./cities.json";
 export const PersonalData = ({
   userData,
   setUserDataField,
-  showRelationship
+  isForFamilyMember
 }) => {
   const getCitiesFor = county =>
     county ? cities[county].map(city => ({ label: city, value: city })) : [];
@@ -63,7 +63,7 @@ export const PersonalData = ({
           title="07xxxxxxxx sau 00xxxxxxxxxx - doar cifre"
           minLength="10"
           maxLength="13"
-          required
+          required={!isForFamilyMember}
           usePlaceholder
           value={userData.phoneNumber}
           defaultValue={userData.phoneNumber}
@@ -71,7 +71,7 @@ export const PersonalData = ({
             setUserDataField("phoneNumber", value);
           }}
         />
-        {showRelationship && (
+        {isForFamilyMember && (
           <Select
             placeholder="Tip de relație"
             options={selectOption(options.relation, userData.relationshipType)}
@@ -137,7 +137,7 @@ export const PersonalData = ({
 PersonalData.propTypes = {
   userData: PropTypes.object.isRequired,
   setUserDataField: PropTypes.func.isRequired,
-  showRelationship: PropTypes.bool.isRequired
+  isForFamilyMember: PropTypes.bool.isRequired
 };
 
 export default PersonalData;
