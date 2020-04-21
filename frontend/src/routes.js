@@ -23,10 +23,6 @@ export const ROUTES = {
       path: "/dashboard",
       component: BaseDashboard
     },
-    account: {
-      path: "/account",
-      component: Account
-    },
     home: {
       path: "/",
       component: Home
@@ -47,10 +43,15 @@ export const ROUTES = {
       method: silentRefreshCallback
     },
     registercomplete: {
-      path: "/register-complete"
+      path: "/register-complete",
+      redirect: "/"
     }
   },
   home: {
+    account: {
+      path: "/account",
+      component: Account
+    },
     selfevaluation: {
       path: "/evaluation",
       component: Evaluation
