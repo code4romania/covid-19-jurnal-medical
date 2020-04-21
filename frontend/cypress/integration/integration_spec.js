@@ -124,6 +124,8 @@ describe("Stam Acasa", function() {
       cy.contains("Istoric deplasări");
       cy.get("table").contains("Plimbare");
       cy.get("table").contains("Cumparaturi");
+
+      cy.contains("Tuse intensa?");
     });
   });
 });

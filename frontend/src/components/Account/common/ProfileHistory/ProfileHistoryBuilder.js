@@ -119,7 +119,7 @@ const getAnswers = answers => {
 };
 
 const tryAddSymptom = (symptoms, symptomParameter, id) => {
-  if (symptomParameter.hadSymptom.answer !== "0") {
+  if (symptomParameter.hadSymptom.answer !== TRUE) {
     return;
   }
 
