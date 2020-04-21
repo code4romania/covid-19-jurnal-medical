@@ -1,4 +1,6 @@
 const TRUE = "true";
+const yesAnswer = "0";
+
 export const buildHistory = rawData => {
   const data = rawData.map(({ content }) => JSON.parse(content));
   if (!data) {
@@ -11,19 +13,20 @@ export const buildHistory = rawData => {
     otherSymptoms: [],
     outings: []
   };
-  const yesAnswer = "0";
   let seedId = 100;
 
   data.forEach(({ RootElement: { answers: answersList, timestamp } }) => {
     const form = getAnswers(answersList);
 
-    if (form.hadFever.answer === yesAnswer) {
-      let feverDate = new Date(form.feverDate.answer).getTime() / 1000;
-      result.temperature.push({
-        date: feverDate,
-        temperature: 38
-      });
-    }
+    let feverDate =
+      form.hadFever.answer === TRUE
+        ? new Date(form.feverDate.answer).getTime()
+        : timestamp;
+
+    result.temperature.push({
+      date: feverDate / 1000,
+      temperature: form.hadFever.answer === TRUE ? 38 : 37
+    });
 
     getSymptomsParameters(form).forEach(symptom =>
       tryAddSymptom(result.symptoms, symptom, ++seedId)
