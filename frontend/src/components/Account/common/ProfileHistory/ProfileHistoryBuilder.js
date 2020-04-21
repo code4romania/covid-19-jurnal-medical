@@ -76,47 +76,29 @@ const getSymptomsParameters = form => {
 };
 
 const getAnswers = answers => {
-  const [
-    hadFever,
-    feverDate,
-    hadSoreThroat,
-    soreThroatDate,
-    hadCough,
-    coughDate,
-    hadShortnessBreath,
-    shortnessBreathDate,
-    hadRunningNose,
-    runningNoseDate,
-    hadOtherSymptoms,
-    otherSymptomsDescription
-  ] = answers.slice(0, 12);
-
-  const [
-    hasOuting,
-    outingPurpose,
-    outingStartTime,
-    outingEndTime,
-    positiveContact
-  ] = answers.slice(15);
+  const answersById = Object.assign(
+    {},
+    ...answers.map(answer => ({ [answer.id]: answer }))
+  );
 
   return {
-    hadFever,
-    feverDate,
-    hadSoreThroat,
-    soreThroatDate,
-    hadCough,
-    coughDate,
-    hadShortnessBreath,
-    shortnessBreathDate,
-    hadRunningNose,
-    runningNoseDate,
-    hadOtherSymptoms,
-    otherSymptomsDescription,
-    hasOuting,
-    outingPurpose,
-    outingStartTime,
-    outingEndTime,
-    positiveContact
+    hadFever: answersById[1],
+    feverDate: answersById[2],
+    hadSoreThroat: answersById[3],
+    soreThroatDate: answersById[4],
+    hadCough: answersById[5],
+    coughDate: answersById[6],
+    hadShortnessBreath: answersById[7],
+    shortnessBreathDate: answersById[8],
+    hadRunningNose: answersById[9],
+    runningNoseDate: answersById[10],
+    hadOtherSymptoms: answersById[11],
+    otherSymptomsDescription: answersById[12],
+    hasOuting: answersById[16],
+    outingPurpose: answersById[17],
+    outingStartTime: answersById[18],
+    outingEndTime: answersById[19],
+    positiveContact: answersById[20]
   };
 };
 
