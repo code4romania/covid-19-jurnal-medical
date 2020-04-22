@@ -26,16 +26,16 @@ namespace StamAcasa.Common.Services
 
         private async Task<User> AddOrUpdateEntity(User user, UserProfileDTO profileUpdateInfo)
         {
+            var newUserInfo = _mapper.Map<User>(profileUpdateInfo);
             if (user == null)
             {
-                var newUserInfo = _mapper.Map<User>(profileUpdateInfo);
                 var saved = await _context.Users.AddAsync(newUserInfo);
                 await _context.SaveChangesAsync();
                 return saved.Entity;
             }
 
             var contextEntry = _context.Entry<User>(user);
-            contextEntry.CurrentValues.SetValues(profileUpdateInfo);
+            contextEntry.CurrentValues.SetValues(newUserInfo);
             _context.Users.Update(user);
             var result = await _context.SaveChangesAsync();
             return result > 0 ? user : null;
