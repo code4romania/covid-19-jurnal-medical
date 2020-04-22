@@ -13,7 +13,12 @@ const ProfileApi = {
   },
   addDependant: profile => api.post("/profile/family", profile),
 
-  createProfile: profile => api.post("/profile", profile)
+  updateFamilyProfile: (id, profile) =>
+    api.put(`/profile/family/${id}`, profile),
+
+  createProfile: profile => api.post("/profile", profile),
+
+  updateProfile: (id, profile) => api.put(`/profile/${id}`, profile)
 };
 
 export default ProfileApi;

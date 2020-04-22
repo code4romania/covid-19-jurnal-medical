@@ -242,14 +242,14 @@
       {
           "questionId": 18,
           "nextQuestionId": 19,
-          "questionText": "Ora plecării:",
-          "type": "DATE_PICKER"
+          "questionText": "Data și ora plecării:",
+          "type": "DATE_TIME_PICKER"
       },
       {
           "questionId": 19,
           "nextQuestionId": 20,
-          "questionText": "Ora sosirii:",
-          "type": "DATE_PICKER"
+          "questionText": "Data și ora sosirii:",
+          "type": "DATE_TIME_PICKER"
       },
       {
           "questionId": 20,

@@ -7,13 +7,16 @@ import PersonalData from "./PersonalData";
 import Health from "./Health";
 import Context from "./Context";
 import SidebarLayout from "../SidebarLayout";
-import { options } from "./options";
 import { useHistory } from "react-router-dom";
 import titles from "./titles";
 
-export const ProfileForm = ({ sendResults, forYourself }) => {
+export const ProfileForm = ({
+  sendResults,
+  forYourself,
+  currentUserData = {}
+}) => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(currentUserData);
 
   const fieldsForYourself = [
     {
@@ -137,18 +140,6 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
     });
   };
 
-  const mapExistingConditions = userData => {
-    return {
-      ...userData,
-      preexistingMedicalCondition: userData.preexistingMedicalCondition
-        .map(
-          key =>
-            options.preexistingMedicalCondition.find(x => x.value === key).text
-        )
-        .join(", ")
-    };
-  };
-
   const nextStepHandler = () => {
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
@@ -165,7 +156,7 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
         userData.livesWithOthers = false;
       }
 
-      sendResults(mapExistingConditions(userData));
+      sendResults(userData);
     }
   };
 
@@ -222,7 +213,8 @@ const AddMember = () => {
 
 ProfileForm.propTypes = {
   sendResults: PropTypes.func.isRequired,
-  forYourself: PropTypes.bool.isRequired
+  forYourself: PropTypes.bool.isRequired,
+  currentUserData: PropTypes.object
 };
 
 export default AddMember;

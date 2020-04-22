@@ -108,6 +108,34 @@ namespace StamAcasa.Api.Controllers
             return new OkObjectResult(result.Id);
         }
 
+        /// <summary>
+        /// Updates a profile.
+        /// </summary>
+        /// <param name="id">User id.</param>
+        /// <param name="model">User profile.</param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> UpdateProfile(int id, [FromBody] UserProfileDTO model)
+        {
+            if (!ModelState.IsValid)
+                return new BadRequestObjectResult(ModelState.Values);
+            var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+            if (sub == null)
+                return new UnauthorizedResult();
+
+            var currentUser = await _userService.GetUserInfo(sub);
+            if (id != currentUser.Id)
+            {
+                return new StatusCodeResult(StatusCodes.Status403Forbidden);
+            }
+
+            model.Sub = sub;
+            model.Id = id;
+            var result = await _userService.AddOrUpdateUserInfo(model);
+
+            return new OkObjectResult(result != null);
+        }
 
         /// <summary>
         /// Updates a family member profile.
