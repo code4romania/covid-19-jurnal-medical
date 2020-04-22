@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using StamAcasa.Common.DTO;
 using StamAcasa.Common.Models;
@@ -10,13 +10,11 @@ namespace StamAcasa.Common.Services
     public class AssessmentService : IAssessmentService
     {
         private readonly UserDbContext _dbContext;
-        private readonly IMapper _mapper;
         private readonly IAssessmentFormProvider _formProvider;
 
-        public AssessmentService(IUserService userService, UserDbContext dbContext, IMapper mapper, IAssessmentFormProvider formProvider)
+        public AssessmentService(UserDbContext dbContext, IAssessmentFormProvider formProvider)
         {
             _dbContext = dbContext;
-            _mapper = mapper;
             _formProvider = formProvider;
         }
 
@@ -24,12 +22,23 @@ namespace StamAcasa.Common.Services
         {
             var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Sub == userSub);
 
-            var formNewUser = await _formProvider.GetFormNewUser();
-            var formFollowUp = await _formProvider.GetFormFollowUp();
+            if (UserIsNew(user) || HasNotCompletedAnyForm(user.Forms))
+            {
+                return new AssessmentDTO
+                {
+                    Content = await _formProvider.GetFormNewUser()
+                };
+            }
+
             return new AssessmentDTO
             {
-                Content = UserIsNew(user) ? formNewUser : formFollowUp
+                Content = await _formProvider.GetFormFollowUp()
             };
+        }
+
+        private bool HasNotCompletedAnyForm(HashSet<Form> userForms)
+        {
+            return userForms.Count == 0;
         }
 
         private bool UserIsNew(User userInfo)
