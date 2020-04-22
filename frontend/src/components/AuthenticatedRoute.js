@@ -4,18 +4,23 @@ import { Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { sel as userSel } from "../store/ducks/user";
 
-const AuthenticatedRoute = ({ component: Component, props: componentProps, ...rest }) => {
+const AuthenticatedRoute = ({
+  component: Component,
+  props: componentProps,
+  ...rest
+}) => {
   const isAuthenticated = useSelector(userSel.user);
-  return isAuthenticated ? <Route {...rest} 
-    render={(props) => (
-      <Component {...componentProps} {...props} /> 
-    )
-    }
-    /> : null;
+  return isAuthenticated ? (
+    <Route
+      {...rest}
+      render={props => <Component {...componentProps} {...props} />}
+    />
+  ) : null;
 };
 
 AuthenticatedRoute.propTypes = {
-  component: PropTypes.any
+  component: PropTypes.any,
+  props: PropTypes.any
 };
 
 export default AuthenticatedRoute;

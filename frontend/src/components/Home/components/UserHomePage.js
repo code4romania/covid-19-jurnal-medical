@@ -22,12 +22,14 @@ const UserHomePage = ({ isAuthenticated }) => {
   useEffect(() => updateProfileFromServer(), []);
 
   const { home } = ROUTES;
-  const onProfileUpdated = (profileData) => {
+
+  // TODO: to be refactored
+  const onProfileUpdated = profileData => {
     setUserProfile(profileData);
-  }
-  home['account'].props = {
+  };
+  home["account"].props = {
     onProfileUpdated
-  }
+  };
   const homeRoutes = Object.values(home);
   updateProfileFromServer();
   return (

@@ -11,15 +11,15 @@ export const MyAccount = () => {
 
   const getUserDetails = () => {
     ProfileApi.get().then(setUserProfile);
-  }
+  };
 
   const getUserDependantsDetails = () => {
     ProfileApi.getDependants().then(setFamilyMembers);
-  }
+  };
 
-  useEffect(() => getUserDetails() , []);
+  useEffect(() => getUserDetails(), []);
 
-  useEffect(() => getUserDependantsDetails() , []);
+  useEffect(() => getUserDependantsDetails(), []);
 
   return (
     <div className="account-container">
