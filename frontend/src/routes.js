@@ -50,8 +50,7 @@ export const ROUTES = {
     account: {
       path: "/account",
       component: Account,
-      props: {
-      }
+      props: {}
     },
     selfevaluation: {
       path: "/evaluation",
