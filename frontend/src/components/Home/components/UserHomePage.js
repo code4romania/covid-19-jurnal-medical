@@ -27,7 +27,7 @@ const UserHomePage = ({ isAuthenticated }) => {
     <>
       <Hero
         title="Ce pași ai de urmat"
-        subtitle="Pentru a te putea ajuta iata ce ai la dispozitie in contul tau:"
+        subtitle="Pentru a te putea ajuta iată ce ai la dispoziție în contul tău:"
         useFallbackIcon={true}
       />
       <StepsBar
