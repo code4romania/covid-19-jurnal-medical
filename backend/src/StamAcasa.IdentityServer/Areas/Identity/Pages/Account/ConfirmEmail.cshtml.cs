@@ -45,8 +45,8 @@ namespace IdentityServer.Pages.Account
             var result = await _userManager.ConfirmEmailAsync(user, code);
             Success = result.Succeeded;
             RedirectUrl = returnUrl;
-            StatusMessage = result.Succeeded ? 
-                "Mulțumim pentru confirmarea adresei de e-mail. Veți fi redirecționat către aplicație." : 
+            StatusMessage = result.Succeeded ?
+                "Mulțumim pentru confirmarea adresei de e-mail. Vei fi redirecționat(ă) către aplicație." :
                 "Eroare la confirmarea adresei de email.";
             if (!string.IsNullOrEmpty(returnUrl))
                 await _signInManager.SignInAsync(user, isPersistent: false);
