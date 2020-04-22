@@ -28,7 +28,7 @@ export const redirect = (location = "/account") => {
   };
 };
 
-/** Add a redirect parameter after signin (e.g. ~/redirect?uri=evaluation)*/
+/** Add a redirect parameter to be accessed after signin (e.g. ~/redirect?uri=evaluation)*/
 export const redirectSignin = () => {
   let data = null;
   let urlSearchParams = new URLSearchParams(document.location.search);
