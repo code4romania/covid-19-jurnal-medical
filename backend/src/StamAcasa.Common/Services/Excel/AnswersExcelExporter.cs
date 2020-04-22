@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using Newtonsoft.Json;
@@ -97,8 +97,6 @@ namespace StamAcasa.Common.Services.Excel
                     {
                         formId = jProperty.Value.ToString();
                     }
-                    if (jProperty.Name == "timestamp")
-                        continue;
                     if (jProperty.Name == "answers")
                     {
 
@@ -169,9 +167,6 @@ namespace StamAcasa.Common.Services.Excel
 
                     foreach (var jProperty in jProperties)
                     {
-                        if (jProperty.Name == "timestamp")
-                            continue;
-
                         if (jProperty.Name != "answers")
                         {
                             var value = CastJToken(jProperty.Value);
