@@ -14,7 +14,7 @@ const EvaluationForm = ({ getForm, sendResults }) => {
     getForm().then(setEvaluationForm);
   }, [getForm]);
 
-  const evaluateCallback = (formState, options) => options[0];
+  const evaluateCallback = (_formState, options) => options[0];
 
   const onFinishingForm = result => {
     setFinished(true);

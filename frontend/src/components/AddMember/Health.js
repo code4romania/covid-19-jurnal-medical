@@ -45,11 +45,11 @@ const Health = ({ userData, setUserDataField, titles }) => {
 Health.propTypes = {
   userData: PropTypes.object.isRequired,
   setUserDataField: PropTypes.func.isRequired,
-  titles: {
+  titles: PropTypes.shape({
     healthInfo: PropTypes.string.isRequired,
     smoker: PropTypes.string.isRequired,
     preexistingConditions: PropTypes.string.isRequired
-  }
+  })
 };
 
 export default Health;
