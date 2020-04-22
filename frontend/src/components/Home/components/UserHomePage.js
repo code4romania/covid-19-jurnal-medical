@@ -27,7 +27,7 @@ const UserHomePage = ({ isAuthenticated }) => {
   const onProfileUpdated = profileData => {
     setUserProfile(profileData);
   };
-  home["account"].props = {
+  home.account.props = {
     onProfileUpdated
   };
   const homeRoutes = Object.values(home);
