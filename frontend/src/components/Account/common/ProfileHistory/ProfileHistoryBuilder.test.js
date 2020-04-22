@@ -1,8 +1,7 @@
 import { buildHistory } from "./ProfileHistoryBuilder";
 
-const feverStartedDate = "2020-04-15";
-const feverStartDateInSeconds = 1586908800;
-
+const FORM_TIMESTAMP_IN_SECS = 1587469954;
+const FORM_TIMESTAMP = FORM_TIMESTAMP_IN_SECS * 1000;
 const answerBuilder = () => {
   return {
     RootElement: {
@@ -16,7 +15,7 @@ const answerBuilder = () => {
         },
         {
           id: 2,
-          answer: feverStartedDate,
+          answer: "2020-04-15",
           questionText: "Din ce dată ai avut prima dată febră?"
         },
         {
@@ -60,12 +59,13 @@ const answerBuilder = () => {
         },
         {
           id: 11,
-          answer: "false",
+          answer: "true",
           questionText: "Alte simptome:"
         },
         {
           id: 12,
-          questionText: "Te rugăm să le descrii"
+          questionText: "Te rugăm să le descrii",
+          answer: "durere de cap"
         },
         {
           id: 13,
@@ -113,7 +113,7 @@ const answerBuilder = () => {
         }
       ],
       Timestamp: "2020-04-21T11:52:34.863564+00:00",
-      timestamp: 1587469954697
+      timestamp: FORM_TIMESTAMP
     }
   };
 };
@@ -122,29 +122,26 @@ const expectedAnswerBuilder = () => {
   return {
     temperature: [
       {
-        date: feverStartDateInSeconds,
+        date: FORM_TIMESTAMP_IN_SECS,
         temperature: 38
       }
     ],
     symptoms: [
       {
-        date: 1586390400,
-        id: 101,
-        cough: false,
-        runningNose: false,
-        shortnessBreath: false,
-        soreThroat: true
-      },
-      {
-        date: 1586476800,
-        id: 102,
+        id: FORM_TIMESTAMP_IN_SECS,
+        date: FORM_TIMESTAMP_IN_SECS,
         cough: true,
         runningNose: false,
         shortnessBreath: false,
-        soreThroat: false
+        soreThroat: true
       }
     ],
-    otherSymptoms: [],
+    otherSymptoms: [
+      {
+        date: FORM_TIMESTAMP_IN_SECS,
+        otherSimptoms: "durere de cap"
+      }
+    ],
     outings: [
       {
         "Contact cu pacient": "Nu",

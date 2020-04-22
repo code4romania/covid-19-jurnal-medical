@@ -12,28 +12,29 @@ export const buildHistory = rawData => {
     otherSymptoms: [],
     outings: []
   };
-  let seedId = 100;
 
   data.forEach(({ RootElement: { answers: answersList, timestamp } }) => {
     const form = getAnswers(answersList);
 
-    let feverDate =
-      form.hadFever.answer === TRUE
-        ? new Date(form.feverDate.answer).getTime()
-        : timestamp;
+    const formTimestampInSeconds = Math.floor(timestamp / 1000);
 
     result.temperature.push({
-      date: feverDate / 1000,
+      date: formTimestampInSeconds,
       temperature: form.hadFever.answer === TRUE ? 38 : 37
     });
 
-    getSymptomsParameters(form).forEach(symptom =>
-      tryAddSymptom(result.symptoms, symptom, ++seedId)
-    );
+    result.symptoms.push({
+      id: formTimestampInSeconds,
+      date: formTimestampInSeconds,
+      soreThroat: form.hadSoreThroat.answer === TRUE,
+      cough: form.hadCough.answer === TRUE,
+      shortnessBreath: form.hadShortnessBreath.answer === TRUE,
+      runningNose: form.hadRunningNose.answer === TRUE
+    });
 
     if (form.hadOtherSymptoms.answer === TRUE) {
       result.otherSymptoms.push({
-        date: timestamp / 1000,
+        date: formTimestampInSeconds,
         otherSimptoms: form.otherSymptomsDescription.answer
       });
     }
@@ -50,31 +51,6 @@ export const buildHistory = rawData => {
   return result;
 };
 
-const getSymptomsParameters = form => {
-  return [
-    {
-      hadSymptom: form.hadSoreThroat,
-      symptomDate: form.soreThroatDate,
-      symptomName: "soreThroat"
-    },
-    {
-      hadSymptom: form.hadCough,
-      symptomDate: form.coughDate,
-      symptomName: "cough"
-    },
-    {
-      hadSymptom: form.hadShortnessBreath,
-      symptomDate: form.shortnessBreathDate,
-      symptomName: "shortnessBreath"
-    },
-    {
-      hadSymptom: form.hadRunningNose,
-      symptomDate: form.runningNoseDate,
-      symptomName: "runningNose"
-    }
-  ];
-};
-
 const getAnswers = answers => {
   const answersById = Object.assign(
     {},
@@ -83,15 +59,10 @@ const getAnswers = answers => {
 
   return {
     hadFever: answersById[1],
-    feverDate: answersById[2],
     hadSoreThroat: answersById[3],
-    soreThroatDate: answersById[4],
     hadCough: answersById[5],
-    coughDate: answersById[6],
     hadShortnessBreath: answersById[7],
-    shortnessBreathDate: answersById[8],
     hadRunningNose: answersById[9],
-    runningNoseDate: answersById[10],
     hadOtherSymptoms: answersById[11],
     otherSymptomsDescription: answersById[12],
     hasOuting: answersById[16],
@@ -100,28 +71,4 @@ const getAnswers = answers => {
     outingEndTime: answersById[19],
     positiveContact: answersById[20]
   };
-};
-
-const tryAddSymptom = (symptoms, symptomParameter, id) => {
-  if (symptomParameter.hadSymptom.answer !== TRUE) {
-    return;
-  }
-
-  const date = new Date(symptomParameter.symptomDate.answer).getTime() / 1000;
-  const symptomOnDate = symptoms.find(s => s.date === date);
-
-  if (symptomOnDate) {
-    symptomOnDate[symptomParameter.symptomName] = true;
-  } else {
-    let symptom = {
-      id: id,
-      date,
-      soreThroat: false,
-      cough: false,
-      shortnessBreath: false,
-      runningNose: false
-    };
-    symptom[symptomParameter.symptomName] = true;
-    symptoms.push(symptom);
-  }
 };
