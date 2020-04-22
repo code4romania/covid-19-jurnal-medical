@@ -17,9 +17,10 @@ export const MyAccount = () => {
     ProfileApi.getDependants().then(setFamilyMembers);
   };
 
-  useEffect(() => getUserDetails(), []);
-
-  useEffect(() => getUserDependantsDetails(), []);
+  useEffect(() => {
+    getUserDetails();
+    getUserDependantsDetails();
+  }, []);
 
   return (
     <div className="account-container">
