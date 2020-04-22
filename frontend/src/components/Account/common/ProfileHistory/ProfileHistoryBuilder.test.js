@@ -143,10 +143,10 @@ const expectedAnswerBuilder = () => {
     ],
     outings: [
       {
-        "Contact cu pacient": false,
-        "Data/Ora plecării": "2020-04-16",
-        "Data/Ora sosirii": "2020-04-15",
-        "Motivul deplasării": "Plimbare"
+        contact: false,
+        startTime: "2020-04-16",
+        endTime: "2020-04-15",
+        purpose: "Plimbare"
       }
     ]
   };

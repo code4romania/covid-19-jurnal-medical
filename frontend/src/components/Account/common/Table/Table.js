@@ -24,8 +24,10 @@ const Table = ({ dataRows, headers, title }) => {
   const renderRow = (item, itemIndex) => {
     return (
       <tr key={itemIndex}>
-        {Object.keys(item).map((key, index) => {
-          return <td key={index}>{formatCell(key, item[key])}</td>;
+        {headers.map((header, index) => {
+          return (
+            <td key={index}>{formatCell(header.field, item[header.field])}</td>
+          );
         })}
       </tr>
     );
@@ -37,7 +39,8 @@ const Table = ({ dataRows, headers, title }) => {
       <table className="table">
         <thead>
           <tr>
-            {headers.length && headers.map(item => <th key={item}>{item}</th>)}
+            {headers.length &&
+              headers.map(item => <th key={item.label}>{item.label}</th>)}
           </tr>
         </thead>
         <tbody>{dataRows.map(renderRow)}</tbody>

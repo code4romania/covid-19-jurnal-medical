@@ -39,10 +39,10 @@ export const buildHistory = rawData => {
     }
     if (form.hasOuting.answer === TRUE) {
       result.outings.push({
-        "Motivul deplasării": form.outingPurpose.answer,
-        "Data/Ora plecării": form.outingStartTime.answer,
-        "Data/Ora sosirii": form.outingEndTime.answer,
-        "Contact cu pacient": form.positiveContact.answer === TRUE
+        purpose: form.outingPurpose.answer,
+        startTime: form.outingStartTime.answer,
+        endTime: form.outingEndTime.answer,
+        contact: form.positiveContact.answer === TRUE
       });
     }
   });
