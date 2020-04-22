@@ -73,8 +73,14 @@ const mapProfileDetails = data => {
         return { ...mappedItem, value: FIELDS_DICT[key][+fieldValue] };
       }
 
-      if(fieldsWithPartialMap.includes(key) && FIELDS_PARTIAL_MAP_DICT[key][+fieldValue] !== undefined){
-        return { ...mappedItem, value: FIELDS_PARTIAL_MAP_DICT[key][+fieldValue] };
+      if (
+        fieldsWithPartialMap.includes(key) &&
+        FIELDS_PARTIAL_MAP_DICT[key][+fieldValue] !== undefined
+      ) {
+        return {
+          ...mappedItem,
+          value: FIELDS_PARTIAL_MAP_DICT[key][+fieldValue]
+        };
       }
 
       return mappedItem;
