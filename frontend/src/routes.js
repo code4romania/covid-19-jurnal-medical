@@ -13,18 +13,17 @@ import {
 
 import { signoutCallback, silentRefreshCallback } from "./api/auth";
 
-import BaseDashboard from "./components/BaseDashboard";
-
 export const ROUTES = {
   base: {
     despre: {
       path: "/despre",
       component: About
     },
-    dashboard: {
-      path: "/dashboard",
-      component: BaseDashboard
-    },
+    // TODO Uncomment when dashboard is needed again
+    // dashboard: {
+    //   path: "/dashboard",
+    //   component: BaseDashboard
+    // },
     home: {
       path: "/",
       component: Home
