@@ -88,5 +88,6 @@ services:
       RABBITMQ__HOSTNAME: ${RABBITMQ_HOSTNAME}
       RABBITMQ__PORT: ${RABBITMQ_PORT}
       ConnectionStrings__UserDBConnection: ${JOB_CONNECTIONSTRINGS_USERDBCONNECTION}
+      UserProfileUrls__evaluation: ${JOB_USERPROFILEURLS_EVALUATION}
     depends_on: 
       - rabbitmq
