@@ -27,14 +27,18 @@ const TABS = [
   }
 ];
 
-export const Account = () => {
+export const Account = ({ onProfileUpdated }) => {
   const [userProfile, setUserProfile] = useState(null);
 
+  
   const updateProfileFromServer = () => {
-    ProfileApi.get().then(setUserProfile);
+    ProfileApi.get().then(data => {
+      setUserProfile(data);
+      onProfileUpdated(data);
+    });
   };
 
-  useEffect(() => updateProfileFromServer(), []);
+  useEffect(() => updateProfileFromServer() , []);
 
   const getContent = () => {
     const loading = userProfile === null;
@@ -43,6 +47,7 @@ export const Account = () => {
     }
 
     const profileEmpty = userProfile.id === undefined;
+
     if (profileEmpty) {
       return <CreateProfile onFinish={updateProfileFromServer} />;
     }

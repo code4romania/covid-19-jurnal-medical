@@ -49,7 +49,9 @@ export const ROUTES = {
   home: {
     account: {
       path: "/account",
-      component: Account
+      component: Account,
+      props: {
+      }
     },
     selfevaluation: {
       path: "/evaluation",

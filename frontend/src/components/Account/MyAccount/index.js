@@ -6,16 +6,20 @@ import ProfileApi from "../../../api/profileApi";
 import "./MyAccount.scss";
 
 export const MyAccount = () => {
-  const [userProfile, setUserProfile] = useState();
+  const [userProfile, setUserProfile] = useState(null);
   const [familyMembers, setFamilyMembers] = useState();
 
-  useEffect(() => {
+  const getUserDetails = () => {
     ProfileApi.get().then(setUserProfile);
-  }, []);
+  }
 
-  useEffect(() => {
+  const getUserDependantsDetails = () => {
     ProfileApi.getDependants().then(setFamilyMembers);
-  }, []);
+  }
+
+  useEffect(() => getUserDetails() , []);
+
+  useEffect(() => getUserDependantsDetails() , []);
 
   return (
     <div className="account-container">
