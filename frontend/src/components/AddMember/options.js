@@ -32,7 +32,11 @@ export const options = {
     { value: "3", text: "O boală a plămânilor" },
     { value: "4", text: "Cancer" },
     { value: "5", text: "Altă boală cronică" },
-    { value: "6", text: "Niciuna de mai sus", mutuallyExclusive: true }
+    { 
+      value: "6",
+      text: "Niciuna de mai sus",
+      mutuallyExclusive: true
+    }
   ],
   quarantineStatus: [
     { value: "1", text: "Da, sunt în izolare, nu ies deloc din locuință" },

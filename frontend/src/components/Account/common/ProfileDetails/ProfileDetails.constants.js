@@ -45,7 +45,8 @@ const PREEXISTING_MEDICAL_CONDITION_MAP = {
 
 const FIELDS_PARTIAL_MAP_DICT = {
   preexistingMedicalCondition: PREEXISTING_MEDICAL_CONDITION_MAP
-}
+};
+
 const fieldsWithDict = ["gender", "quarantineStatus", "quarantineStatusOthers"];
 const fieldsWithPartialMap = ["preexistingMedicalCondition"];
 
