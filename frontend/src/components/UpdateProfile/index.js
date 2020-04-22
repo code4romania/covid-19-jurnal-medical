@@ -4,6 +4,7 @@ import ProfileApi from "../../api/profileApi";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import SidebarLayout from "../SidebarLayout";
+import { mapPreExistMedCondTexts } from "../../utils";
 
 const UpdateProfile = ({
   location: {
@@ -17,7 +18,14 @@ const UpdateProfile = ({
         history.push("/account/me")
       );
     } else {
-      ProfileApi.updateFamilyProfile(id, userData).then(() =>
+      const preexistingMedicalCondition = mapPreExistMedCondTexts(
+        userData.preexistingMedicalCondition
+      );
+      const formattedUserData = {
+        ...userData,
+        preexistingMedicalCondition
+      };
+      ProfileApi.updateFamilyProfile(id, formattedUserData).then(() =>
         history.push(`/account/other-members/${id}`)
       );
     }
