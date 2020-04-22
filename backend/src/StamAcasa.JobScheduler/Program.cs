@@ -99,6 +99,6 @@ namespace StamAcasa.JobScheduler
                         hostContext.Configuration.GetSection(nameof(CountyEmailDistribution)).Bind(countyEmailDistribution);
                         s.TryAddSingleton(countyEmailDistribution);
                     });
-                });
+                }).UseSerilog();
     }
 }

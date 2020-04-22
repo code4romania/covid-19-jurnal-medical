@@ -28,15 +28,15 @@ export const options = {
   ],
   preexistingMedicalCondition: [
     {
-      value: "O boală de inimă (boală cardiovasculară, inclusiv hipertensiune)",
+      value: "1",
       text: "O boală de inimă (boală cardiovasculară, inclusiv hipertensiune)"
     },
-    { value: "Diabet", text: "Diabet" },
-    { value: "O boală a plămânilor", text: "O boală a plămânilor" },
-    { value: "Cancer", text: "Cancer" },
-    { value: "Altă boală cronică", text: "Altă boală cronică" },
+    { value: "2", text: "Diabet" },
+    { value: "3", text: "O boală a plămânilor" },
+    { value: "4", text: "Cancer" },
+    { value: "5", text: "Altă boală cronică" },
     {
-      value: "Niciuna de mai sus",
+      value: "6",
       text: "Niciuna de mai sus",
       mutuallyExclusive: true
     }
