@@ -1,5 +1,10 @@
+import format from "date-fns/format";
+import { ro } from "date-fns/locale";
 const TRUE = "true";
 
+const formatDateTimeForOuting = dateAsISOString => {
+  return format(new Date(dateAsISOString), "d MMM HH:mm", { locale: ro });
+};
 export const buildHistory = rawData => {
   const data = rawData.map(({ content }) => JSON.parse(content));
   if (!data) {
@@ -40,8 +45,8 @@ export const buildHistory = rawData => {
     if (form.hasOuting.answer === TRUE) {
       result.outings.push({
         purpose: form.outingPurpose.answer,
-        startTime: form.outingStartTime.answer,
-        endTime: form.outingEndTime.answer,
+        startTime: formatDateTimeForOuting(form.outingStartTime.answer),
+        endTime: formatDateTimeForOuting(form.outingEndTime.answer),
         contact: form.positiveContact.answer === TRUE
       });
     }
