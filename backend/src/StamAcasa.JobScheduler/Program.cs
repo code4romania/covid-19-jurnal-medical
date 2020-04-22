@@ -82,6 +82,9 @@ namespace StamAcasa.JobScheduler
                         s.TryAddSingleton<IQueueService, QueueService>();
                         s.TryAddTransient<IUserService, UserService>();
 
+                        UserProfileUrls userProfileUrls = new UserProfileUrls();
+                        hostContext.Configuration.GetSection(nameof(UserProfileUrls)).Bind(userProfileUrls);
+                        s.TryAddSingleton(userProfileUrls);
                     });
 
                     services.TryAddScheduledJob<SendResultsNotificationJob>(s =>
@@ -96,6 +99,6 @@ namespace StamAcasa.JobScheduler
                         hostContext.Configuration.GetSection(nameof(CountyEmailDistribution)).Bind(countyEmailDistribution);
                         s.TryAddSingleton(countyEmailDistribution);
                     });
-                });
+                }).UseSerilog();
     }
 }

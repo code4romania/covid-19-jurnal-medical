@@ -4,14 +4,14 @@ import AddMember from "./components/AddMember";
 import UpdateProfile from "./components/UpdateProfile";
 import Evaluation from "./components/Evaluation";
 import Account from "./components/Account";
-
 import {
-  signinCallback,
-  signoutCallback,
-  silentRefreshCallback
-} from "./api/auth";
+  redirect,
+  redirectPromise,
+  redirectSignin,
+  redirectSigninCallback
+} from "./redirect";
 
-import BaseDashboard from "./components/BaseDashboard";
+import { signoutCallback, silentRefreshCallback } from "./api/auth";
 
 export const ROUTES = {
   base: {
@@ -19,10 +19,11 @@ export const ROUTES = {
       path: "/despre",
       component: About
     },
-    dashboard: {
-      path: "/dashboard",
-      component: BaseDashboard
-    },
+    // TODO Uncomment when dashboard is needed again
+    // dashboard: {
+    //   path: "/dashboard",
+    //   component: BaseDashboard
+    // },
     home: {
       path: "/",
       component: Home
@@ -31,20 +32,23 @@ export const ROUTES = {
   oidc: {
     signin: {
       path: "/signin-oidc",
-      method: signinCallback
+      method: redirectSigninCallback
+    },
+    redirect: {
+      path: "/redirect",
+      method: redirectSignin
     },
     postlogout: {
       path: "/post-logout",
-      redirect: "/",
-      method: signoutCallback
+      method: redirectPromise(signoutCallback, "/")
     },
     silentrefresh: {
       path: "/silent-refresh",
-      method: silentRefreshCallback
+      method: redirectPromise(silentRefreshCallback)
     },
     registercomplete: {
       path: "/register-complete",
-      redirect: "/"
+      method: redirect("/")
     }
   },
   home: {

@@ -39,7 +39,16 @@ const FIELDS_DICT = {
   quarantineStatusOthers: QUARANTINE_STATUS_DICT
 };
 
+const PREEXISTING_MEDICAL_CONDITION_MAP = {
+  6: "Nu exista"
+};
+
+const FIELDS_PARTIAL_MAP_DICT = {
+  preexistingMedicalCondition: PREEXISTING_MEDICAL_CONDITION_MAP
+};
+
 const fieldsWithDict = ["gender", "quarantineStatus", "quarantineStatusOthers"];
+const fieldsWithPartialMap = ["preexistingMedicalCondition"];
 
 const mapProfileDetails = data => {
   return Object.entries(FIELDS_LABELS)
@@ -61,7 +70,17 @@ const mapProfileDetails = data => {
       }
 
       if (fieldsWithDict.includes(key)) {
-        return { ...mappedItem, value: FIELDS_DICT[key][fieldValue] };
+        return { ...mappedItem, value: FIELDS_DICT[key][+fieldValue] };
+      }
+
+      if (
+        fieldsWithPartialMap.includes(key) &&
+        FIELDS_PARTIAL_MAP_DICT[key][+fieldValue] !== undefined
+      ) {
+        return {
+          ...mappedItem,
+          value: FIELDS_PARTIAL_MAP_DICT[key][+fieldValue]
+        };
       }
 
       return mappedItem;
