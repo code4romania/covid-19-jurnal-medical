@@ -97,12 +97,12 @@ const answerBuilder = () => {
         },
         {
           id: 18,
-          answer: "2020-04-16",
+          answer: "2020-04-16T12:15",
           questionText: "Ora plecării:"
         },
         {
           id: 19,
-          answer: "2020-04-15",
+          answer: "2020-04-16T14:30",
           questionText: "Ora sosirii:"
         },
         {
@@ -144,8 +144,8 @@ const expectedAnswerBuilder = () => {
     outings: [
       {
         contact: false,
-        startTime: "2020-04-16",
-        endTime: "2020-04-15",
+        startTime: "16 apr 12:15",
+        endTime: "16 apr 14:30",
         purpose: "Plimbare"
       }
     ]
