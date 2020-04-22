@@ -24,7 +24,6 @@ export const buildHistory = rawData => {
     });
 
     result.symptoms.push({
-      id: formTimestampInSeconds,
       date: formTimestampInSeconds,
       soreThroat: form.hadSoreThroat.answer === TRUE,
       cough: form.hadCough.answer === TRUE,
@@ -40,10 +39,10 @@ export const buildHistory = rawData => {
     }
     if (form.hasOuting.answer === TRUE) {
       result.outings.push({
-        "Motivul deplasării": form.outingPurpose.answer,
-        "Data/Ora plecării": form.outingStartTime.answer,
-        "Data/Ora sosirii": form.outingEndTime.answer,
-        "Contact cu pacient": form.positiveContact.answer === TRUE ? "Da" : "Nu"
+        purpose: form.outingPurpose.answer,
+        startTime: form.outingStartTime.answer,
+        endTime: form.outingEndTime.answer,
+        contact: form.positiveContact.answer === TRUE
       });
     }
   });
