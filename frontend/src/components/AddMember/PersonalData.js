@@ -86,7 +86,7 @@ export const PersonalData = ({
         )}
         <div className={"field"}>
           <DropdownSearch
-            title={"Judet"}
+            title={"Județ"}
             options={options.county}
             onSelect={option => {
               setUserDataField("county", option.value);
@@ -95,7 +95,7 @@ export const PersonalData = ({
         </div>
         <div className={"field"}>
           <DropdownSearch
-            title={"Localitatea"}
+            title={"Localitate"}
             options={getCitiesFor(userData.county)}
             onSelect={option => {
               setUserDataField("city", option.value);
@@ -119,7 +119,7 @@ export const PersonalData = ({
           }}
         />
         <Select
-          placeholder="Genul"
+          placeholder="Gen"
           options={selectOption(options.gender, userData.gender)}
           selectProps={{
             required: true,

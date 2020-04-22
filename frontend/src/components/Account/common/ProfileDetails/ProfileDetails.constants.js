@@ -1,18 +1,18 @@
 // fields are grouped by row
 export const FIELDS_LABELS = {
-  name: "Nume si prenume",
-  smoker: "Fumator",
+  name: "Nume și prenume",
+  smoker: "Fumător",
 
-  phoneNumber: "Numar de telefon",
-  preexistingMedicalCondition: "Afectiuni agravante",
+  phoneNumber: "Număr de telefon",
+  preexistingMedicalCondition: "Afecțiuni agravante",
 
-  location: "Judet, localitate",
-  livesWithOthers: "Locuiesti singur",
+  location: "Județ, localitate",
+  livesWithOthers: "Locuiești singur",
 
-  age: "Varsta in ani impliniti",
+  age: "Vârstă în ani împliniți",
   quarantineStatus: "Izolare proprie la domiciliu",
 
-  gender: "Genul",
+  gender: "Gen",
   quarantineStatusOthers: "Izolare alte persoane la domiciliu"
 };
 

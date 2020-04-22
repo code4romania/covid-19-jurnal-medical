@@ -5,5 +5,5 @@ export const DESCRIPTION_TEXT = `
   ce completezi, această pagină se va popula cu istoricul răspunsurilor
   lor. Chiar dacă nu locuiești cu aceste persoane, dar ții legătura
   recurent cu ele, le poți ajuta monitorizându-le sănătatea telefonic și
-  marcând răspunsurile în aplicație
+  marcând răspunsurile în aplicație.
 `;

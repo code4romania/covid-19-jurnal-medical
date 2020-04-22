@@ -38,7 +38,7 @@ const ProfileDetails = ({
       <div className="content">
         {data.map(({ label, value }) => (
           <div className="profile__field" key={label}>
-            <strong>{label}:</strong>
+            <strong>{label}: </strong>
             {Array.isArray(value) ? value.join(", ") : value}
           </div>
         ))}
