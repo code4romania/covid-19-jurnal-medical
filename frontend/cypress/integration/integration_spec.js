@@ -126,6 +126,9 @@ describe("Stam Acasa", function() {
       cy.get("table").contains("Cumparaturi");
 
       cy.contains("Tuse intensa?");
+
+      cy.contains("Alte Simptome");
+      cy.get("table").contains("durere de cap");
     });
   });
 });

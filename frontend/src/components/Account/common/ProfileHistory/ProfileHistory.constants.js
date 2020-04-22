@@ -1,18 +1,24 @@
 export const SYMPTOMS_HEADERS = [
-  "Data/Ora",
-  "Durere in gat si/sau dificultate in a inghiti?",
-  "Tuse intensa?",
-  "Dificultate in a respira?",
-  "Îți curge nasul?"
+  { label: "Data/Ora", field: "date" },
+  {
+    label: "Durere in gat si/sau dificultate in a inghiti?",
+    field: "soreThroat"
+  },
+  { label: "Tuse intensa?", field: "cough" },
+  { label: "Dificultate in a respira?", field: "shortnessBreath" },
+  { label: "Îți curge nasul?", field: "runningNose" }
 ];
 
-export const OTHER_SYMPTOMS_HEADERS = ["Data/ora", "Simptome semnalate"];
+export const OTHER_SYMPTOMS_HEADERS = [
+  { label: "Data/ora", field: "date" },
+  { label: "Simptome semnalate", field: "otherSimptoms" }
+];
 
 export const OUTINGS_HEADERS = [
-  "Motivul deplasării",
-  "Data/Ora plecării",
-  "Data/Ora sosirii",
-  "Contact cu pacient"
+  { label: "Motivul deplasării", field: "purpose" },
+  { label: "Data/Ora plecării", field: "startTime" },
+  { label: "Data/Ora sosirii", field: "endTime" },
+  { label: "Contact cu pacient", field: "contact" }
 ];
 
 export const DESCRIPTION_TEXT = `
