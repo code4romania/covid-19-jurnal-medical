@@ -19,9 +19,17 @@ const UserHomePage = ({ isAuthenticated }) => {
     }
   };
 
-  useEffect(updateProfileFromServer, []);
+  useEffect(() => updateProfileFromServer(), []);
 
   const { home } = ROUTES;
+
+  // TODO: to be refactored
+  const onProfileUpdated = profileData => {
+    setUserProfile(profileData);
+  };
+  home.account.props = {
+    onProfileUpdated
+  };
   const homeRoutes = Object.values(home);
   return (
     <>
@@ -34,10 +42,11 @@ const UserHomePage = ({ isAuthenticated }) => {
         isProfileComplete={userProfile !== null && userProfile.id !== undefined}
       />
 
-      {homeRoutes.map(({ path, component, extraProps }) => (
+      {homeRoutes.map(({ path, component, props, extraProps }) => (
         <AuthenticatedRoute
           path={path}
           component={component}
+          props={props}
           key={path}
           {...extraProps}
         />
