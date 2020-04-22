@@ -12,10 +12,20 @@ import cities from "./cities.json";
 export const PersonalData = ({
   userData,
   setUserDataField,
-  showRelationship
+  isForFamilyMember
 }) => {
   const getCitiesFor = county =>
     county ? cities[county].map(city => ({ label: city, value: city })) : [];
+
+  const selectOption = (options, value) => {
+    return options.map(option => {
+      return {
+        value: option.value,
+        text: option.text,
+        selected: (option.selected = +option.value === value)
+      };
+    });
+  };
 
   return (
     <>
@@ -28,6 +38,7 @@ export const PersonalData = ({
           required
           usePlaceholder
           value={userData.name}
+          defaultValue={userData.name}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("name", value);
           }}
@@ -39,6 +50,7 @@ export const PersonalData = ({
           required
           usePlaceholder
           value={userData.surname}
+          defaultValue={userData.surname}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("surname", value);
           }}
@@ -51,17 +63,18 @@ export const PersonalData = ({
           title="07xxxxxxxx sau 00xxxxxxxxxx - doar cifre"
           minLength="10"
           maxLength="13"
-          required
+          required={!isForFamilyMember}
           usePlaceholder
           value={userData.phoneNumber}
+          defaultValue={userData.phoneNumber}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("phoneNumber", value);
           }}
         />
-        {showRelationship && (
+        {isForFamilyMember && (
           <Select
             placeholder="Tip de relație"
-            options={options.relation}
+            options={selectOption(options.relation, userData.relationshipType)}
             selectProps={{
               required: true,
               name: "relationshipType",
@@ -97,6 +110,7 @@ export const PersonalData = ({
           required
           usePlaceholder
           value={userData.age}
+          defaultValue={userData.age}
           step={1}
           min="0"
           max="120"
@@ -106,7 +120,7 @@ export const PersonalData = ({
         />
         <Select
           placeholder="Genul"
-          options={options.gender}
+          options={selectOption(options.gender, userData.gender)}
           selectProps={{
             required: true,
             name: "gender",
@@ -123,7 +137,7 @@ export const PersonalData = ({
 PersonalData.propTypes = {
   userData: PropTypes.object.isRequired,
   setUserDataField: PropTypes.func.isRequired,
-  showRelationship: PropTypes.bool.isRequired
+  isForFamilyMember: PropTypes.bool.isRequired
 };
 
 export default PersonalData;

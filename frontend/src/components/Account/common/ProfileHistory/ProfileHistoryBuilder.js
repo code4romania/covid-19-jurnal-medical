@@ -1,10 +1,16 @@
+const TRUE = "true";
 export const buildHistory = rawData => {
   const data = rawData.map(({ content }) => JSON.parse(content));
   if (!data) {
     return;
   }
 
-  const result = { temperature: [], symptoms: [], otherSymptoms: [] };
+  const result = {
+    temperature: [],
+    symptoms: [],
+    otherSymptoms: [],
+    outings: []
+  };
   const yesAnswer = "0";
   let seedId = 100;
 
@@ -27,6 +33,14 @@ export const buildHistory = rawData => {
       result.otherSymptoms.push({
         date: timestamp / 1000,
         otherSimptoms: form.otherSymptomsDescription.answer
+      });
+    }
+    if (form.hasOuting.answer === TRUE) {
+      result.outings.push({
+        "Motivul deplasării": form.outingPurpose.answer,
+        "Data/Ora plecării": form.outingStartTime.answer,
+        "Data/Ora sosirii": form.outingEndTime.answer,
+        "Contact cu pacient": form.positiveContact.answer === TRUE ? "Da" : "Nu"
       });
     }
   });
@@ -73,7 +87,15 @@ const getAnswers = answers => {
     runningNoseDate,
     hadOtherSymptoms,
     otherSymptomsDescription
-  ] = answers.slice(12);
+  ] = answers.slice(0, 12);
+
+  const [
+    hasOuting,
+    outingPurpose,
+    outingStartTime,
+    outingEndTime,
+    positiveContact
+  ] = answers.slice(15);
 
   return {
     hadFever,
@@ -87,12 +109,17 @@ const getAnswers = answers => {
     hadRunningNose,
     runningNoseDate,
     hadOtherSymptoms,
-    otherSymptomsDescription
+    otherSymptomsDescription,
+    hasOuting,
+    outingPurpose,
+    outingStartTime,
+    outingEndTime,
+    positiveContact
   };
 };
 
 const tryAddSymptom = (symptoms, symptomParameter, id) => {
-  if (symptomParameter.hadSymptom.answer !== "0") {
+  if (symptomParameter.hadSymptom.answer !== TRUE) {
     return;
   }
 
