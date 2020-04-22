@@ -6,7 +6,6 @@ import { TemperatureChart } from "@code4ro/taskforce-fe-components";
 import Table from "../Table/Table";
 
 import ProfileDetails from "../ProfileDetails/ProfileDetails.js";
-import SymptomsHistoryTable from "../SymptomsHistoryTable/SymptomsHistoryTable.js";
 import ProfileOthers from "../ProfileOthers/ProfileOthers";
 
 import EvaluationApi from "../../../../api/evaluationApi";
@@ -59,8 +58,8 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
               title="Monitorizare temperatura"
             />
           </div>
-          <SymptomsHistoryTable
-            symptomsData={history.symptoms}
+          <Table
+            dataRows={history.symptoms}
             headers={SYMPTOMS_HEADERS}
             title="Istoric"
           />

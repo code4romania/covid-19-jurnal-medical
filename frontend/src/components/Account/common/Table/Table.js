@@ -4,6 +4,18 @@ import format from "date-fns/format";
 import fromUnixTime from "date-fns/fromUnixTime";
 import "./Table.scss";
 
+const formatCell = (key, value) => {
+  if (key === "date") {
+    return format(fromUnixTime(value), "dd.MM.yyyy / HH:mm");
+  }
+
+  if (value === true || value === false) {
+    return value ? "Da" : "Nu";
+  }
+
+  return value;
+};
+
 const Table = ({ dataRows, headers, title }) => {
   if (!dataRows || !Object.keys(dataRows).length) {
     return <div> Nu exista date</div>;
@@ -13,14 +25,7 @@ const Table = ({ dataRows, headers, title }) => {
     return (
       <tr key={itemIndex}>
         {Object.keys(item).map((key, index) => {
-          if (key === "date") {
-            return (
-              <td key={index}>
-                {format(fromUnixTime(item.date), "dd.MM.yyyy / HH:mm")}
-              </td>
-            );
-          }
-          return <td key={index}>{item[key]}</td>;
+          return <td key={index}>{formatCell(key, item[key])}</td>;
         })}
       </tr>
     );

@@ -128,7 +128,6 @@ const expectedAnswerBuilder = () => {
     ],
     symptoms: [
       {
-        id: FORM_TIMESTAMP_IN_SECS,
         date: FORM_TIMESTAMP_IN_SECS,
         cough: true,
         runningNose: false,
@@ -144,7 +143,7 @@ const expectedAnswerBuilder = () => {
     ],
     outings: [
       {
-        "Contact cu pacient": "Nu",
+        "Contact cu pacient": false,
         "Data/Ora plecării": "2020-04-16",
         "Data/Ora sosirii": "2020-04-15",
         "Motivul deplasării": "Plimbare"
