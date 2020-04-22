@@ -97,12 +97,12 @@ const answerBuilder = () => {
         },
         {
           id: 18,
-          answer: "2020-04-16",
+          answer: "2020-04-16T12:15",
           questionText: "Ora plecării:"
         },
         {
           id: 19,
-          answer: "2020-04-15",
+          answer: "2020-04-16T14:30",
           questionText: "Ora sosirii:"
         },
         {
@@ -128,7 +128,6 @@ const expectedAnswerBuilder = () => {
     ],
     symptoms: [
       {
-        id: FORM_TIMESTAMP_IN_SECS,
         date: FORM_TIMESTAMP_IN_SECS,
         cough: true,
         runningNose: false,
@@ -144,10 +143,10 @@ const expectedAnswerBuilder = () => {
     ],
     outings: [
       {
-        "Contact cu pacient": "Nu",
-        "Data/Ora plecării": "2020-04-16",
-        "Data/Ora sosirii": "2020-04-15",
-        "Motivul deplasării": "Plimbare"
+        contact: false,
+        startTime: "16 apr 12:15",
+        endTime: "16 apr 14:30",
+        purpose: "Plimbare"
       }
     ]
   };

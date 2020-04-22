@@ -1,5 +1,10 @@
+import format from "date-fns/format";
+import { ro } from "date-fns/locale";
 const TRUE = "true";
 
+const formatDateTimeForOuting = dateAsISOString => {
+  return format(new Date(dateAsISOString), "d MMM HH:mm", { locale: ro });
+};
 export const buildHistory = rawData => {
   const data = rawData.map(({ content }) => JSON.parse(content));
   if (!data) {
@@ -24,7 +29,6 @@ export const buildHistory = rawData => {
     });
 
     result.symptoms.push({
-      id: formTimestampInSeconds,
       date: formTimestampInSeconds,
       soreThroat: form.hadSoreThroat.answer === TRUE,
       cough: form.hadCough.answer === TRUE,
@@ -40,10 +44,10 @@ export const buildHistory = rawData => {
     }
     if (form.hasOuting.answer === TRUE) {
       result.outings.push({
-        "Motivul deplasării": form.outingPurpose.answer,
-        "Data/Ora plecării": form.outingStartTime.answer,
-        "Data/Ora sosirii": form.outingEndTime.answer,
-        "Contact cu pacient": form.positiveContact.answer === TRUE ? "Da" : "Nu"
+        purpose: form.outingPurpose.answer,
+        startTime: formatDateTimeForOuting(form.outingStartTime.answer),
+        endTime: formatDateTimeForOuting(form.outingEndTime.answer),
+        contact: form.positiveContact.answer === TRUE
       });
     }
   });
