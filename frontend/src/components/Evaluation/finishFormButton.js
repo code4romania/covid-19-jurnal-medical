@@ -14,7 +14,7 @@ const FinishFormButton = () => {
         size={"large"}
         inverted={true}
       >
-        Intoarce-te la pagina principala
+        Întoarce-te la pagina principală
       </Button>
     </div>
   );
