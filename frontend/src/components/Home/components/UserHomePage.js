@@ -31,7 +31,6 @@ const UserHomePage = ({ isAuthenticated }) => {
     onProfileUpdated
   };
   const homeRoutes = Object.values(home);
-  updateProfileFromServer();
   return (
     <>
       <Hero
