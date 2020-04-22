@@ -20,7 +20,7 @@ namespace StamAcasa.Common.Services
 
         public async Task<AssessmentDTO> GetAssessment(string userSub)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Sub == userSub);
+            var user = await _dbContext.Users.Include(x => x.Forms).FirstOrDefaultAsync(u => u.Sub == userSub);
 
             if (UserIsNew(user) || HasNotCompletedAnyForm(user.Forms))
             {
