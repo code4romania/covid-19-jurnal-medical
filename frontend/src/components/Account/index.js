@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import PropTypes from "prop-types";
 import "./Account.scss";
 
 import SidebarLayout from "../SidebarLayout";
@@ -27,11 +27,14 @@ const TABS = [
   }
 ];
 
-export const Account = () => {
+export const Account = ({ onProfileUpdated }) => {
   const [userProfile, setUserProfile] = useState(null);
 
   const updateProfileFromServer = () => {
-    ProfileApi.get().then(setUserProfile);
+    ProfileApi.get().then(data => {
+      setUserProfile(data);
+      onProfileUpdated(data);
+    });
   };
 
   useEffect(() => updateProfileFromServer(), []);
@@ -43,6 +46,7 @@ export const Account = () => {
     }
 
     const profileEmpty = userProfile.id === undefined;
+
     if (profileEmpty) {
       return <CreateProfile onFinish={updateProfileFromServer} />;
     }
@@ -51,6 +55,10 @@ export const Account = () => {
   };
 
   return <SidebarLayout>{getContent()}</SidebarLayout>;
+};
+
+Account.propTypes = {
+  onProfileUpdated: PropTypes.func.isRequired
 };
 
 export default Account;

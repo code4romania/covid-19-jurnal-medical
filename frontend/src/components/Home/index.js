@@ -8,7 +8,6 @@ import { sel as userSel } from "../../store/ducks/user";
 
 const Home = () => {
   const { user, pending } = useSelector(userSel.state);
-
   if (!user && [null, true].includes(pending)) {
     return (
       <BasePage>
