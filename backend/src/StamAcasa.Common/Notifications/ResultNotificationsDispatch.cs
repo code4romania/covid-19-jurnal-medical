@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -53,7 +56,20 @@ namespace StamAcasa.Common.Notifications
         private async Task SendEmailsForCounty(IGrouping<string, FormInfo> forms)
         {
             var jArray =
-                JArray.FromObject(forms.Select(c => JsonConvert.DeserializeObject<dynamic>(c.Content).RootElement).ToList());
+                JArray.FromObject(forms.Select(c =>
+                {
+                    var deserializedFormContent = JsonConvert.DeserializeObject<dynamic>(c.Content);
+
+                    dynamic formInfo = new ExpandoObject();
+                    formInfo.Name = c.UserInfo.Name;
+                    formInfo.City = c.UserInfo.City;
+                    formInfo.County = c.UserInfo.County;
+                    formInfo.PhoneNumber = c.UserInfo.PhoneNumber;
+                    formInfo.Comorbidities = string.Join(",", c.UserInfo.PreexistingMedicalCondition);
+                    formInfo.answers = deserializedFormContent.RootElement.answers;
+                    formInfo.formId = deserializedFormContent.RootElement.formId;
+                    return formInfo;
+                }).ToList());
             var excelFile = _answersExcelExporter.AnswersToExcel(jArray);
             var countyDistribution = _countyEmailDistribution.CountyDistributions
                 .FirstOrDefault(c => c.County == forms.Key);
