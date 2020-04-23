@@ -22,7 +22,7 @@ namespace StamAcasa.EmailService
         {
             const string loggerTemplate = @"{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u4}]<{ThreadId}> [{SourceContext:l}] {Message:lj}{NewLine}{Exception}";
             var baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            var logfile = Path.Combine(baseDir, "App_Data", "logs", "log.txt");
+            var logfile = Path.Combine(baseDir, "logs", "log.txt");
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .Enrich.With(new ThreadIdEnricher())
@@ -70,19 +70,12 @@ namespace StamAcasa.EmailService
             .ConfigureServices((context, services) =>
             {
 
-                var hostName = context.Configuration["RabbitMQ:HostName"];
-                var userName = context.Configuration["RabbitMQ:UserName"];
-                var port = ushort.Parse(context.Configuration["RabbitMQ:Port"]);
-                var password = context.Configuration["RabbitMQ:Password"];
-
-                services.AddSingleton(RabbitHutch.CreateBus(
-                    hostName,
-                    port,
-                    "/",
-                    userName,
-                    password,
-                    10, //default
-                    (x) => { }));
+                services.AddSingleton(RabbitHutch.CreateBus(string.Format("host={0}:{1};username={2};password={3}",
+                    context.Configuration.GetValue<string>("RabbitMQ:HostName"),
+                    context.Configuration.GetValue<int>("RabbitMQ:Port").ToString(),
+                    context.Configuration.GetValue<string>("RabbitMQ:User"),
+                    context.Configuration.GetValue<string>("RabbitMQ:Password"))
+                ));
 
                 services.AddSingleton<IEmailSender>(ctx =>
                     new SmtpSender(

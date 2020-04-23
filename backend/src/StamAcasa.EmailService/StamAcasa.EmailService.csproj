@@ -26,6 +26,9 @@
         <ProjectReference Include="..\StamAcasa.Common\StamAcasa.Common.csproj" />
     </ItemGroup>
     <ItemGroup>
+        <None Update="EmailBuilder\Resources\resetPasswordTemplate.html">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
         <None Update="EmailBuilder\Resources\dailyAssessmentTemplate.html">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>

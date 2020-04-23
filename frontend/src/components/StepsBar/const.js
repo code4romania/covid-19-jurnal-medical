@@ -1,6 +1,6 @@
 export const STEPS_CONFIG = [
   {
-    label: "Profilul Meu",
+    label: "Profilul meu",
     URL: "/account"
   },
   {

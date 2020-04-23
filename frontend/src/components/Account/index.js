@@ -1,14 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import "./Account.scss";
 
-import Account from "./Account";
+import SidebarLayout from "../SidebarLayout";
+import Tabs from "../Tabs/Tabs";
 
-import { useSelector } from "react-redux";
-import { sel as userSel } from "../../store/ducks/user";
+import MyAccount from "./MyAccount";
+import MemberAccount from "./MemberAccount";
+import CreateProfile from "./CreateProfile";
 
-const AccountWithAuth = () => {
-  const isAuthenticated = useSelector(userSel.user);
+import ProfileApi from "../../api/profileApi";
 
-  return isAuthenticated ? <Account /> : null;
+const TABS = [
+  {
+    id: 0,
+    title: "Profilul meu",
+    content: <MyAccount />,
+    url: "/account/me"
+  },
+  {
+    id: 1,
+    title: "Alte persoane",
+    content: <MemberAccount />,
+    url: "/account/other-members/:personId?",
+    navUrl: "/account/other-members"
+  }
+];
+
+export const Account = ({ onProfileUpdated }) => {
+  const [userProfile, setUserProfile] = useState(null);
+
+  const updateProfileFromServer = () => {
+    ProfileApi.get().then(data => {
+      setUserProfile(data);
+      onProfileUpdated(data);
+    });
+  };
+
+  useEffect(() => updateProfileFromServer(), []);
+
+  const getContent = () => {
+    const loading = userProfile === null;
+    if (loading) {
+      return <div>Datele se incarca</div>;
+    }
+
+    const profileEmpty = userProfile.id === undefined;
+
+    if (profileEmpty) {
+      return <CreateProfile onFinish={updateProfileFromServer} />;
+    }
+
+    return <Tabs tabs={TABS} />;
+  };
+
+  return <SidebarLayout>{getContent()}</SidebarLayout>;
 };
 
-export default AccountWithAuth;
+Account.propTypes = {
+  onProfileUpdated: PropTypes.func.isRequired
+};
+
+export default Account;

@@ -14,7 +14,7 @@ const ProfileItems = () => {
     <span className="account-items">
       {user ? (
         <>
-          <NavLink to="/">Contul meu</NavLink>
+          <NavLink to="/account">Contul meu</NavLink>
           <div className="account-separator" />
           <button onClick={handleLogout}>Logout</button>
         </>
@@ -23,7 +23,7 @@ const ProfileItems = () => {
           <a
             href={`${Constants.idpUrl}/identity/account/register?returnUrl=${window.location}register-complete`}
           >
-            Inregistrare
+            Înregistrare
           </a>
           <div className="account-separator" />
           <button onClick={handleLogin}>Login</button>

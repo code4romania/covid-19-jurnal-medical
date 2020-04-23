@@ -30,5 +30,17 @@ export const instrumentsItems = [
     title: "Află ce ai de făcut în orice situație",
     ctaText: "Ce trebuie să fac",
     ctaLink: "https://cetrebuiesafac.ro/"
+  },
+  {
+    color: "red",
+    title: "Vrei să ajuți. Intră aici",
+    ctaText: "Donează prin RoHelp",
+    ctaLink: "https://rohelp.ro/"
+  },
+  {
+    color: "blue",
+    title: "Ești în afara țării și ai nevoie de ajutor?",
+    ctaText: "Intră pe DiasporaHub",
+    ctaLink: "https://diasporahub.ro/"
   }
 ];

@@ -20,20 +20,26 @@ const ProfileDetails = ({
 
   return (
     <div className="profile">
-      {isSelf && (
-        <div className="header">
-          {
-            //todo: should set url once available
-          }
-          <Link className="link" to="#">
-            Editare profil
-          </Link>
-        </div>
-      )}
+      <div className="header">
+        <Link
+          className="link"
+          to={{
+            pathname: "/update-profile",
+            state: {
+              id,
+              profileDetails,
+              isSelf
+            }
+          }}
+        >
+          Editare profil
+        </Link>
+      </div>
       <div className="content">
         {data.map(({ label, value }) => (
           <div className="profile__field" key={label}>
-            <strong>{label}:</strong> {value}
+            <strong>{label}: </strong>
+            {Array.isArray(value) ? value.join(", ") : value}
           </div>
         ))}
       </div>
@@ -60,7 +66,7 @@ ProfileDetails.propTypes = {
     gender: PropTypes.number,
     county: PropTypes.string,
     city: PropTypes.string,
-    preexistingMedicalCondition: PropTypes.string,
+    preexistingMedicalCondition: PropTypes.array,
     quarantineStatus: PropTypes.string,
     smoker: PropTypes.bool,
     livesWithOthers: PropTypes.bool,

@@ -1,32 +1,53 @@
+import format from "date-fns/format";
+import { ro } from "date-fns/locale";
+const TRUE = "true";
+
+const formatDateTimeForOuting = dateAsISOString => {
+  return format(new Date(dateAsISOString), "d MMM HH:mm", { locale: ro });
+};
 export const buildHistory = rawData => {
   const data = rawData.map(({ content }) => JSON.parse(content));
   if (!data) {
     return;
   }
 
-  const result = { temperature: [], symptoms: [], otherSymptoms: [] };
-  const yesAnswer = "0";
-  let seedId = 100;
+  const result = {
+    temperature: [],
+    symptoms: [],
+    otherSymptoms: [],
+    outings: []
+  };
 
   data.forEach(({ RootElement: { answers: answersList, timestamp } }) => {
     const form = getAnswers(answersList);
 
-    if (form.hadFever.answer === yesAnswer) {
-      let feverDate = new Date(form.feverDate.answer).getTime() / 1000;
-      result.temperature.push({
-        date: feverDate,
-        temperature: 38
+    const formTimestampInSeconds = Math.floor(timestamp / 1000);
+
+    result.temperature.push({
+      date: formTimestampInSeconds,
+      temperature: form.hadFever.answer === TRUE ? 38 : 37
+    });
+
+    result.symptoms.push({
+      date: formTimestampInSeconds,
+      soreThroat: form.hadSoreThroat.answer === TRUE,
+      cough: form.hadCough.answer === TRUE,
+      shortnessBreath: form.hadShortnessBreath.answer === TRUE,
+      runningNose: form.hadRunningNose.answer === TRUE
+    });
+
+    if (form.hadOtherSymptoms.answer === TRUE) {
+      result.otherSymptoms.push({
+        date: formTimestampInSeconds,
+        otherSimptoms: form.otherSymptomsDescription.answer
       });
     }
-
-    getSymptomsParameters(form).forEach(symptom =>
-      tryAddSymptom(result.symptoms, symptom, ++seedId)
-    );
-
-    if (form.hadOtherSymptoms.answer === yesAnswer) {
-      result.otherSymptoms.push({
-        date: timestamp / 1000,
-        otherSimptoms: form.otherSymptomsDescription.answer
+    if (form.hasOuting.answer === TRUE) {
+      result.outings.push({
+        purpose: form.outingPurpose.answer,
+        startTime: formatDateTimeForOuting(form.outingStartTime.answer),
+        endTime: formatDateTimeForOuting(form.outingEndTime.answer),
+        contact: form.positiveContact.answer === TRUE
       });
     }
   });
@@ -34,83 +55,24 @@ export const buildHistory = rawData => {
   return result;
 };
 
-const getSymptomsParameters = form => {
-  return [
-    {
-      hadSymptom: form.hadSoreThroat,
-      symptomDate: form.soreThroatDate,
-      symptomName: "soreThroat"
-    },
-    {
-      hadSymptom: form.hadCough,
-      symptomDate: form.coughDate,
-      symptomName: "cough"
-    },
-    {
-      hadSymptom: form.hadShortnessBreath,
-      symptomDate: form.shortnessBreathDate,
-      symptomName: "shortnessBreath"
-    },
-    {
-      hadSymptom: form.hadRunningNose,
-      symptomDate: form.runningNoseDate,
-      symptomName: "runningNose"
-    }
-  ];
-};
-
 const getAnswers = answers => {
-  const [
-    hadFever,
-    feverDate,
-    hadSoreThroat,
-    soreThroatDate,
-    hadCough,
-    coughDate,
-    hadShortnessBreath,
-    shortnessBreathDate,
-    hadRunningNose,
-    runningNoseDate,
-    hadOtherSymptoms,
-    otherSymptomsDescription
-  ] = answers.slice(12);
+  const answersById = Object.assign(
+    {},
+    ...answers.map(answer => ({ [answer.id]: answer }))
+  );
 
   return {
-    hadFever,
-    feverDate,
-    hadSoreThroat,
-    soreThroatDate,
-    hadCough,
-    coughDate,
-    hadShortnessBreath,
-    shortnessBreathDate,
-    hadRunningNose,
-    runningNoseDate,
-    hadOtherSymptoms,
-    otherSymptomsDescription
+    hadFever: answersById[1],
+    hadSoreThroat: answersById[3],
+    hadCough: answersById[5],
+    hadShortnessBreath: answersById[7],
+    hadRunningNose: answersById[9],
+    hadOtherSymptoms: answersById[11],
+    otherSymptomsDescription: answersById[12],
+    hasOuting: answersById[16],
+    outingPurpose: answersById[17],
+    outingStartTime: answersById[18],
+    outingEndTime: answersById[19],
+    positiveContact: answersById[20]
   };
-};
-
-const tryAddSymptom = (symptoms, symptomParameter, id) => {
-  if (symptomParameter.hadSymptom.answer !== "0") {
-    return;
-  }
-
-  const date = new Date(symptomParameter.symptomDate.answer).getTime() / 1000;
-  const symptomOnDate = symptoms.find(s => s.date === date);
-
-  if (symptomOnDate) {
-    symptomOnDate[symptomParameter.symptomName] = true;
-  } else {
-    let symptom = {
-      id: id,
-      date,
-      soreThroat: false,
-      cough: false,
-      shortnessBreath: false,
-      runningNose: false
-    };
-    symptom[symptomParameter.symptomName] = true;
-    symptoms.push(symptom);
-  }
 };

@@ -4,6 +4,18 @@ import format from "date-fns/format";
 import fromUnixTime from "date-fns/fromUnixTime";
 import "./Table.scss";
 
+const formatCell = (key, value) => {
+  if (key === "date") {
+    return format(fromUnixTime(value), "dd.MM.yyyy / HH:mm");
+  }
+
+  if (value === true || value === false) {
+    return value ? "Da" : "Nu";
+  }
+
+  return value;
+};
+
 const Table = ({ dataRows, headers, title }) => {
   if (!dataRows || !Object.keys(dataRows).length) {
     return <div> Nu exista date</div>;
@@ -12,15 +24,10 @@ const Table = ({ dataRows, headers, title }) => {
   const renderRow = (item, itemIndex) => {
     return (
       <tr key={itemIndex}>
-        {Object.keys(item).map((key, index) => {
-          if (key === "date") {
-            return (
-              <td key={index}>
-                {format(fromUnixTime(item.date), "dd.MM.yyyy / HH:mm")}
-              </td>
-            );
-          }
-          return <td key={index}>{item[key]}</td>;
+        {headers.map((header, index) => {
+          return (
+            <td key={index}>{formatCell(header.field, item[header.field])}</td>
+          );
         })}
       </tr>
     );
@@ -32,7 +39,8 @@ const Table = ({ dataRows, headers, title }) => {
       <table className="table">
         <thead>
           <tr>
-            {headers.length && headers.map(item => <th key={item}>{item}</th>)}
+            {headers.length &&
+              headers.map(item => <th key={item.label}>{item.label}</th>)}
           </tr>
         </thead>
         <tbody>{dataRows.map(renderRow)}</tbody>

@@ -7,36 +7,115 @@ import PersonalData from "./PersonalData";
 import Health from "./Health";
 import Context from "./Context";
 import SidebarLayout from "../SidebarLayout";
-import { options } from "./options";
 import { useHistory } from "react-router-dom";
 import titles from "./titles";
 
-export const ProfileForm = ({ sendResults, forYourself }) => {
+export const ProfileForm = ({
+  sendResults,
+  forYourself,
+  currentUserData = {}
+}) => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(currentUserData);
 
   const fieldsForYourself = [
-    "name",
-    "surname",
-    "phoneNumber",
-    "age",
-    "gender",
-    "county",
-    "city"
+    {
+      name: "name",
+      required: true
+    },
+    {
+      name: "surname",
+      required: true
+    },
+    {
+      name: "phoneNumber",
+      required: true
+    },
+    {
+      name: "age",
+      required: true
+    },
+    {
+      name: "gender",
+      required: true
+    },
+    {
+      name: "county",
+      required: true
+    },
+    {
+      name: "city",
+      required: true
+    }
   ];
-  const fieldsForDependant = [...fieldsForYourself, "relationshipType"];
+  const fieldsForDependant = [
+    {
+      name: "name",
+      required: true
+    },
+    {
+      name: "surname",
+      required: true
+    },
+    {
+      name: "phoneNumber",
+      required: false
+    },
+    {
+      name: "age",
+      required: true
+    },
+    {
+      name: "gender",
+      required: true
+    },
+    {
+      name: "county",
+      required: true
+    },
+    {
+      name: "city",
+      required: true
+    },
+    {
+      name: "relationshipType",
+      required: false
+    }
+  ];
   const personalFields = forYourself ? fieldsForYourself : fieldsForDependant;
 
-  const healthFields = ["smoker", "preexistingMedicalCondition"];
+  const healthFields = [
+    {
+      name: "smoker",
+      required: true
+    },
+    {
+      name: "preexistingMedicalCondition",
+      required: true
+    }
+  ];
 
   const contextFields = [
-    "livesWithOthers",
-    "quarantineStatus",
-    "quarantineStatusOthers"
+    {
+      name: "livesWithOthers",
+      required: true
+    },
+    {
+      name: "quarantineStatus",
+      required: true
+    },
+    {
+      name: "quarantineStatusOthers",
+      required: userData.livesWithOthers ? true : false
+    }
   ];
 
   const fieldsCompleted = fields => {
-    return !fields.map(field => userData[field]).includes(undefined);
+    return (
+      fields.filter(
+        field => field.required && userData[field.name] === undefined
+      ).length === 0
+    );
   };
 
   const canGoNext = () => {
@@ -61,18 +140,6 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
     });
   };
 
-  const mapExistingConditions = userData => {
-    return {
-      ...userData,
-      preexistingMedicalCondition: userData.preexistingMedicalCondition
-        .map(
-          key =>
-            options.preexistingMedicalCondition.find(x => x.value === key).text
-        )
-        .join(", ")
-    };
-  };
-
   const nextStepHandler = () => {
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
@@ -89,7 +156,7 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
         userData.livesWithOthers = false;
       }
 
-      sendResults(mapExistingConditions(userData));
+      sendResults(userData);
     }
   };
 
@@ -105,7 +172,7 @@ export const ProfileForm = ({ sendResults, forYourself }) => {
         <PersonalData
           userData={userData}
           setUserDataField={setUserDataField}
-          showRelationship={!forYourself}
+          isForFamilyMember={!forYourself}
         />
       )}
       {currentStep === 2 && (
@@ -146,7 +213,8 @@ const AddMember = () => {
 
 ProfileForm.propTypes = {
   sendResults: PropTypes.func.isRequired,
-  forYourself: PropTypes.bool.isRequired
+  forYourself: PropTypes.bool.isRequired,
+  currentUserData: PropTypes.object
 };
 
 export default AddMember;

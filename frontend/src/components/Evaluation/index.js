@@ -8,7 +8,7 @@ const Evaluation = () => {
   const tabs = [
     {
       id: 0,
-      title: "Formularul tau",
+      title: "Formularul tău",
       content: <SelfEvaluation />,
       url: "/evaluation/me"
     },

@@ -12,11 +12,11 @@ export const options = {
   })),
   relation: [
     { value: "", text: "Tip relație", disabled: true, selected: true },
-    { value: "0", text: "Părinte" },
-    { value: "1", text: "Copil" },
-    { value: "2", text: "Bunic\\Bunică" },
-    { value: "3", text: "Vecin\\Vecină" },
-    { value: "4", text: "Altele" }
+    { value: "1", text: "Părinte" },
+    { value: "2", text: "Copil" },
+    { value: "3", text: "Bunic\\Bunică" },
+    { value: "4", text: "Vecin\\Vecină" },
+    { value: "5", text: "Altele" }
   ],
   city: [
     { value: "", text: "Localitate", disabled: true, selected: true },
@@ -28,14 +28,18 @@ export const options = {
   ],
   preexistingMedicalCondition: [
     {
-      value: "O boală de inimă (boală cardiovasculară, inclusiv hipertensiune)",
+      value: "1",
       text: "O boală de inimă (boală cardiovasculară, inclusiv hipertensiune)"
     },
-    { value: "Diabet", text: "Diabet" },
-    { value: "O boală a plămânilor", text: "O boală a plămânilor" },
-    { value: "Cancer", text: "Cancer" },
-    { value: "Altă boală cronică", text: "Altă boală cronică" },
-    { value: "Niciuna de mai sus", text: "Niciuna de mai sus" }
+    { value: "2", text: "Diabet" },
+    { value: "3", text: "O boală a plămânilor" },
+    { value: "4", text: "Cancer" },
+    { value: "5", text: "Altă boală cronică" },
+    {
+      value: "6",
+      text: "Niciuna de mai sus",
+      mutuallyExclusive: true
+    }
   ],
   quarantineStatus: [
     { value: "1", text: "Da, sunt în izolare, nu ies deloc din locuință" },

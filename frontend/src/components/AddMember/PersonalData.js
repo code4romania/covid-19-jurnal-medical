@@ -12,10 +12,20 @@ import cities from "./cities.json";
 export const PersonalData = ({
   userData,
   setUserDataField,
-  showRelationship
+  isForFamilyMember
 }) => {
   const getCitiesFor = county =>
     county ? cities[county].map(city => ({ label: city, value: city })) : [];
+
+  const selectOption = (options, value) => {
+    return options.map(option => {
+      return {
+        value: option.value,
+        text: option.text,
+        selected: (option.selected = +option.value === value)
+      };
+    });
+  };
 
   return (
     <>
@@ -28,6 +38,7 @@ export const PersonalData = ({
           required
           usePlaceholder
           value={userData.name}
+          defaultValue={userData.name}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("name", value);
           }}
@@ -39,25 +50,31 @@ export const PersonalData = ({
           required
           usePlaceholder
           value={userData.surname}
+          defaultValue={userData.surname}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("surname", value);
           }}
         />
         <Input
-          type="tel"
           label={"Număr de telefon"}
           name="phoneNumber"
-          required
+          type="tel"
+          pattern="(?:00|07)[0-9]*"
+          title="07xxxxxxxx sau 00xxxxxxxxxx - doar cifre"
+          minLength="10"
+          maxLength="13"
+          required={!isForFamilyMember}
           usePlaceholder
           value={userData.phoneNumber}
+          defaultValue={userData.phoneNumber}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("phoneNumber", value);
           }}
         />
-        {showRelationship && (
+        {isForFamilyMember && (
           <Select
             placeholder="Tip de relație"
-            options={options.relation}
+            options={selectOption(options.relation, userData.relationshipType)}
             selectProps={{
               required: true,
               name: "relationshipType",
@@ -69,7 +86,7 @@ export const PersonalData = ({
         )}
         <div className={"field"}>
           <DropdownSearch
-            title={"Judet"}
+            title={"Județ"}
             options={options.county}
             onSelect={option => {
               setUserDataField("county", option.value);
@@ -78,7 +95,7 @@ export const PersonalData = ({
         </div>
         <div className={"field"}>
           <DropdownSearch
-            title={"Localitatea"}
+            title={"Localitate"}
             options={getCitiesFor(userData.county)}
             onSelect={option => {
               setUserDataField("city", option.value);
@@ -93,6 +110,7 @@ export const PersonalData = ({
           required
           usePlaceholder
           value={userData.age}
+          defaultValue={userData.age}
           step={1}
           min="0"
           max="120"
@@ -101,8 +119,8 @@ export const PersonalData = ({
           }}
         />
         <Select
-          placeholder="Genul"
-          options={options.gender}
+          placeholder="Gen"
+          options={selectOption(options.gender, userData.gender)}
           selectProps={{
             required: true,
             name: "gender",
@@ -119,7 +137,7 @@ export const PersonalData = ({
 PersonalData.propTypes = {
   userData: PropTypes.object.isRequired,
   setUserDataField: PropTypes.func.isRequired,
-  showRelationship: PropTypes.bool.isRequired
+  isForFamilyMember: PropTypes.bool.isRequired
 };
 
 export default PersonalData;

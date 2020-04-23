@@ -37,7 +37,7 @@ export const FOOTER_LINKS = {
     }
   ],
   rightColumn: [
-    { URL: "https://cemafac.ro/", label: "Ce mă fac" },
+    { URL: "https://cetrebuiesafac.ro/", label: "Ce trebuie să fac" },
     { URL: "https://datelazi.ro/", label: "Date la zi" },
     { URL: "https://diasporahub.ro/", label: "Diaspora Hub" },
     { URL: "https://rohelp.ro/", label: "Ro Help" },

@@ -36,7 +36,7 @@ export const unregisterUserUnloaded = callback => {
   userManager.events.removeUserUnloaded(callback);
 };
 
-export const signin = () => userManager.signinRedirect();
+export const signin = (data = null) => userManager.signinRedirect(data);
 export const signinCallback = () => userManager.signinRedirectCallback();
 export const signout = () => userManager.signoutRedirect();
 export const signoutCallback = () => userManager.signoutRedirectCallback();
