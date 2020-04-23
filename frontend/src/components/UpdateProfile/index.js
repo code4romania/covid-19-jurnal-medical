@@ -13,18 +13,19 @@ const UpdateProfile = ({
 }) => {
   const history = useHistory();
   const sendResults = userData => {
+    const preexistingMedicalCondition = mapPreExistMedCondTexts(
+      userData.preexistingMedicalCondition
+    );
+    const formattedUserData = {
+      ...userData,
+      preexistingMedicalCondition
+    };
+
     if (isSelf) {
-      ProfileApi.updateProfile(id, userData).then(() =>
+      ProfileApi.updateProfile(id, formattedUserData).then(() =>
         history.push("/account/me")
       );
     } else {
-      const preexistingMedicalCondition = mapPreExistMedCondTexts(
-        userData.preexistingMedicalCondition
-      );
-      const formattedUserData = {
-        ...userData,
-        preexistingMedicalCondition
-      };
       ProfileApi.updateFamilyProfile(id, formattedUserData).then(() =>
         history.push(`/account/other-members/${id}`)
       );
