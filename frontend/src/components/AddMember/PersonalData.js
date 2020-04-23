@@ -36,6 +36,7 @@ export const PersonalData = ({
           label={"Nume"}
           name="nume"
           required
+          pattern="[A-Za-z ]{1,32}"
           usePlaceholder
           value={userData.name}
           defaultValue={userData.name}
@@ -48,6 +49,7 @@ export const PersonalData = ({
           label={"Prenume"}
           name="surname"
           required
+          pattern="[A-Za-z ]{1,32}"
           usePlaceholder
           value={userData.surname}
           defaultValue={userData.surname}
