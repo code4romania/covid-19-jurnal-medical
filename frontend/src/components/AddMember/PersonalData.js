@@ -89,8 +89,8 @@ export const PersonalData = ({
           pattern="(?:00|07)[0-9]*"
           title="07xxxxxxxx sau 00xxxxxxxxxx - doar cifre"
           validationMessages={phoneValidationMessages}
-          minLength="10"
-          maxLength="13"
+          minLength={10}
+          maxLength={13}
           required={!isForFamilyMember}
           usePlaceholder
           value={userData.phoneNumber}
