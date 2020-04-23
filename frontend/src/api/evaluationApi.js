@@ -4,8 +4,15 @@ const EvaluationApi = {
   sendDependantEvaluationResult: (dependantId, formResults) =>
     api.post(`/form?id=${dependantId}`, formResults),
 
-  getEvaluationForm: async () => {
-    const res = await api.get("/form/version");
+  getEvaluationForm: async userId => {
+    let res;
+
+    if (userId) {
+      res = await api.get(`/form/version?userId=${userId}`);
+    } else {
+      res = await api.get(`/form/version`);
+    }
+
     return JSON.parse(res.data.content);
   },
 

@@ -45,13 +45,13 @@ namespace StamAcasa.Api.Controllers
 
 
         [HttpGet("version")]
-        public async Task<IActionResult> GetVersion()
+        public async Task<IActionResult> GetVersion([FromQuery(Name = "userId")] int? userId)
         {
             var subClaimValue = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
             if (subClaimValue == null)
                 return new UnauthorizedResult();
 
-            var assessment = await _assessmentService.GetAssessment(subClaimValue);
+            var assessment = await _assessmentService.GetAssessment(subClaimValue, userId);
 
             return new OkObjectResult(assessment);
         }

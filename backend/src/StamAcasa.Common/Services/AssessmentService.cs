@@ -18,11 +18,9 @@ namespace StamAcasa.Common.Services
             _formProvider = formProvider;
         }
 
-        public async Task<AssessmentDTO> GetAssessment(string userSub)
+        public async Task<AssessmentDTO> GetAssessment(string userSub, int? userId)
         {
-            var user = await _dbContext.Users
-                .Include(x => x.Forms)
-                .FirstOrDefaultAsync(u => u.Sub == userSub);
+            var user = await GetUser(userSub, userId);
 
             if (UserIsNew(user) || HasNotCompletedAnyForm(user.Forms))
             {
@@ -36,6 +34,23 @@ namespace StamAcasa.Common.Services
             {
                 Content = await _formProvider.GetFormFollowUp()
             };
+        }
+
+        private async Task<User> GetUser(string userSub, int? userId)
+        {
+            if (userId.HasValue)
+            {
+                return await _dbContext.Users
+                     .Include(x => x.Forms)
+                     .Include(x => x.ParentUser)
+                     .FirstOrDefaultAsync(u => u.Id == userId && u.ParentUser.Sub == userSub);
+            }
+
+            var user = await _dbContext.Users
+                .Include(x => x.Forms)
+                .FirstOrDefaultAsync(u => u.Sub == userSub);
+
+            return user;
         }
 
         private bool HasNotCompletedAnyForm(HashSet<Form> userForms)
