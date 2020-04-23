@@ -56,7 +56,7 @@ namespace StamAcasa.Common.Notifications
 
             //we should check if there's a rate limit for the SendGrid service, or maybe we should add a delay for SMTP sender
             await Task.WhenAll(tasks);
-        }    
+        }
 
         private async Task SendEmailsForList(IEnumerable<FormInfo> forms, ResultsNotificationEmailData emailData)
         {
@@ -95,7 +95,7 @@ namespace StamAcasa.Common.Notifications
                     SenderName = _countyEmailDistribution.SenderName,
                     PlaceholderContent = new Dictionary<string, string>
                     {
-                        { "location", emailData.Location } 
+                        { "location", emailData.Location }
                     }
                 };
                 email.Attachment = new EmailAttachment($"{emailData.FileName}.xlsx", answers);
@@ -107,12 +107,19 @@ namespace StamAcasa.Common.Notifications
         {
             var countyDistribution = _countyEmailDistribution.CountyDistributions
                                 .FirstOrDefault(c => c.County == county);
+            if (countyDistribution == null)
+            {
+                _logger.LogWarning("Could not find CountyDistributions for county = {0}", county);
+                return  new ResultsNotificationEmailData();
+            }
+
             var countyEmailData = new ResultsNotificationEmailData
             {
                 EmailList = countyDistribution.EmailList,
                 FileName = $"{county}-{DateTime.Now:yyyyMMdd}",
                 Location = $"judetul {county}"
             };
+
             return countyEmailData;
         }
 
