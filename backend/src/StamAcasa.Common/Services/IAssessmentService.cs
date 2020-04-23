@@ -5,6 +5,6 @@ namespace StamAcasa.Common.Services
 {
     public interface IAssessmentService
     {
-        Task<AssessmentDTO> GetAssessment(string userSub);
+        Task<AssessmentDTO> GetAssessment(string userSub, int? userId);
     }
 }

@@ -2,10 +2,10 @@
 {
     public enum RelationshipTypes
     {
-        Parent,
-        Child,
-        Grandparent,
-        Neighbor,
-        Other
+        Parent = 1,
+        Child = 2,
+        Grandparent = 3,
+        Neighbor = 4,
+        Other = 0
     }
 }
