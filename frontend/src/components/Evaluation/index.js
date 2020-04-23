@@ -1,7 +1,7 @@
 import React from "react";
 import SidebarLayout from "../SidebarLayout";
 import Tabs from "../Tabs/Tabs";
-import SelfEvaluation from "./SelfEvaluation/SelfEvaluation";
+import SelfEvaluation from "./selfEvaluation";
 import MemberEvaluation from "./MemberEvaluation";
 
 const Evaluation = () => {
