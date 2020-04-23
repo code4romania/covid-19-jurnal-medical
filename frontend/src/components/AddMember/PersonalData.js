@@ -114,8 +114,8 @@ export const PersonalData = ({
           value={userData.age}
           defaultValue={userData.age}
           step={1}
-          min="0"
-          max="120"
+          min={0}
+          max={120}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("age", +value);
           }}
