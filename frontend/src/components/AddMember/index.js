@@ -158,7 +158,15 @@ export const ProfileForm = ({
         userData.livesWithOthers = false;
       }
 
-      sendResults(userData);
+      const preexistingMedicalCondition = mapPreExistMedCondTexts(
+        userData.preexistingMedicalCondition
+      );
+      const formattedUserData = {
+        ...userData,
+        preexistingMedicalCondition
+      };
+
+      sendResults(formattedUserData);
     }
   };
 
@@ -208,14 +216,7 @@ const AddMember = () => {
   const history = useHistory();
 
   const sendResults = userData => {
-    const preexistingMedicalCondition = mapPreExistMedCondTexts(
-      userData.preexistingMedicalCondition
-    );
-    const formattedUserData = {
-      ...userData,
-      preexistingMedicalCondition
-    };
-    ProfileApi.addDependant(formattedUserData).then(({ data: id }) =>
+    ProfileApi.addDependant(userData).then(({ data: id }) =>
       history.push(`/account/other-members/${id}`)
     );
   };
