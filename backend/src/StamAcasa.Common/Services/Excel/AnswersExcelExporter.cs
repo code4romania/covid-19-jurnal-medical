@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using Newtonsoft.Json;
@@ -37,7 +37,7 @@ namespace StamAcasa.Common.Services.Excel
                     var optionValue = option["value"].ToString();
                     var optionLabel = option["label"].ToString();
 
-                    _singleChoiceOptionsMap.Add($"{formId}_{questionId}_{optionValue}".ToLower(), optionLabel);
+                    _singleChoiceOptionsMap.TryAdd($"{formId}_{questionId}_{optionValue}".ToLower(), optionLabel);
                 }
             }
         }
@@ -97,6 +97,8 @@ namespace StamAcasa.Common.Services.Excel
                     {
                         formId = jProperty.Value.ToString();
                     }
+                    if (jProperty.Name == "timestamp")
+                        continue;
                     if (jProperty.Name == "answers")
                     {
 
@@ -167,6 +169,9 @@ namespace StamAcasa.Common.Services.Excel
 
                     foreach (var jProperty in jProperties)
                     {
+                        if (jProperty.Name == "timestamp")
+                            continue;
+
                         if (jProperty.Name != "answers")
                         {
                             var value = CastJToken(jProperty.Value);
