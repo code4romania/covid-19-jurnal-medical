@@ -95,7 +95,8 @@ namespace StamAcasa.Common.Notifications
                     SenderName = _countyEmailDistribution.SenderName,
                     PlaceholderContent = new Dictionary<string, string>
                     {
-                        { "location", emailData.Location }
+                        { "location", emailData.Location },
+                        { "date", DateTime.Today.ToString("dd-MM-yyyy") }
                     }
                 };
                 email.Attachment = new EmailAttachment($"{emailData.FileName}.xlsx", answers);
@@ -110,7 +111,7 @@ namespace StamAcasa.Common.Notifications
             if (countyDistribution == null)
             {
                 _logger.LogWarning("Could not find CountyDistributions for county = {0}", county);
-                return  new ResultsNotificationEmailData();
+                return new ResultsNotificationEmailData();
             }
 
             var countyEmailData = new ResultsNotificationEmailData
