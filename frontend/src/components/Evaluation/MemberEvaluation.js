@@ -26,8 +26,7 @@ const MemberEvaluation = () => {
     setOptions(
       familyMembers.map(person => ({
         text: `${person.name} ${person.surname}`,
-        value: person.name,
-        selected: person.id === personId
+        value: person.id
       }))
     );
   }, [personId, familyMembers]);
@@ -50,7 +49,12 @@ const MemberEvaluation = () => {
   return (
     <>
       <h1 className="member-profile__select">
-        <Select label="Alege persoana" selectProps={props} options={options} />
+        <Select
+          label="Alege persoana"
+          defaultValue={personId}
+          selectProps={props}
+          options={options}
+        />
       </h1>
       <Switch>
         {familyMembers.map(member => (
