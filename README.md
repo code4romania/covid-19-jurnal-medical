@@ -8,7 +8,19 @@ Objective: Reduction in the over overloading of emergency phone numbers, quick a
 
 How: Centralization and monitoring of the state of people under auto-isolation with standardized questionnaires completed daily directly in the users’ web application, for their families.
 
-[See the project live](https://stamacasa.ro/)
+## Live:
+
+### Production `not released`
+[stamacasa.ro](https://stamacasa.ro/)
+
+### Development `in progress`
+[frontend - start here ;)](https://dev.stamacasa.ro)
+
+[identity server](https://dev-is.stamacasa.ro/account/login?ReturnUrl=/connect/authorize/callback%253Fclient_id=awsjsclient&redirect_uri=https%253A%252F%252Fdev.stamacasa.ro%252Fsignin-oidc&response_type=id_token%2520token&scope=openid%2520email%2520answersApi%2520usersApi)
+
+[api](https://dev-api.stamacasa.ro/swagger)
+
+---
 
 [Contributing](#contributing) | [Built with](#built-with) | [Repos and projects](#repos-and-projects) | [Deployment](#deployment) | [Feedback](#feedback) | [License](#license) | [About Code4Ro](#about-code4ro)
 
