@@ -43,10 +43,12 @@ const ProfileDetails = ({
           </div>
         ))}
       </div>
-      <div className="footer">
-        <hr />
-        {children}
-      </div>
+      {isSelf && (
+        <div className="footer">
+          <hr />
+          {children}
+        </div>
+      )}
     </div>
   );
 };
