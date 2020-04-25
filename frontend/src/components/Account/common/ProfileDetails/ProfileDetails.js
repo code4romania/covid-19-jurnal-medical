@@ -13,7 +13,7 @@ const ProfileDetails = ({
   children
 }) => {
   if (!profileDetails || !Object.keys(profileDetails).length) {
-    return <div>Nu exista date</div>;
+    return <div>Nu există date</div>;
   }
 
   const data = mapProfileDetails(profileDetails);
@@ -43,10 +43,12 @@ const ProfileDetails = ({
           </div>
         ))}
       </div>
-      <div className="footer">
-        <hr />
-        {children}
-      </div>
+      {isSelf && (
+        <div className="footer">
+          <hr />
+          {children}
+        </div>
+      )}
     </div>
   );
 };

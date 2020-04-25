@@ -1,7 +1,7 @@
 import React from "react";
 import * as PropTypes from "prop-types";
 
-const defaultText = "Datele se incarca";
+const defaultText = "Datele se încarcă";
 
 const LoadingPlaceholder = ({ text = defaultText }) => {
   return <div>{text}</div>;

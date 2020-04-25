@@ -18,7 +18,7 @@ const formatCell = (key, value) => {
 
 const Table = ({ dataRows, headers, title }) => {
   if (!dataRows || !Object.keys(dataRows).length) {
-    return <div> Nu exista date</div>;
+    return <div> Nu există date</div>;
   }
 
   const renderRow = (item, itemIndex) => {
