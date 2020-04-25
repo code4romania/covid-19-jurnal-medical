@@ -11,7 +11,7 @@ const Home = () => {
   if (!user && [null, true].includes(pending)) {
     return (
       <BasePage>
-        <div>Datele se incarca</div>
+        <div>Datele se încarcă</div>
       </BasePage>
     );
   }

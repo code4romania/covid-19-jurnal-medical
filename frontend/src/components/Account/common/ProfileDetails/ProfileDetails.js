@@ -13,7 +13,7 @@ const ProfileDetails = ({
   children
 }) => {
   if (!profileDetails || !Object.keys(profileDetails).length) {
-    return <div>Nu exista date</div>;
+    return <div>Nu există date</div>;
   }
 
   const data = mapProfileDetails(profileDetails);
