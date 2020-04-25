@@ -13,13 +13,17 @@ export const MemberAccount = () => {
   const { personId } = useParams();
   const history = useHistory();
   const [options, setOptions] = useState([]);
-  const [familyMembers, setFamilyMembers] = useState([]);
+  const [familyMembers, setFamilyMembers] = useState(null);
 
   useEffect(() => {
     ProfileApi.getDependants().then(setFamilyMembers);
   }, []);
 
   useEffect(() => {
+    if (!familyMembers) {
+      return;
+    }
+
     if (!personId && familyMembers.length) {
       history.replace(`/account/other-members/${familyMembers[0].id}`);
     }
@@ -44,6 +48,10 @@ export const MemberAccount = () => {
       }
     }
   };
+
+  if (!familyMembers) {
+    return <div> Datele se incarca</div>;
+  }
 
   if (!familyMembers.length) {
     return <div> Nu exista alti membri</div>;
