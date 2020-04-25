@@ -8,6 +8,7 @@ import ProfileApi from "../../../api/profileApi";
 import { DESCRIPTION_TEXT } from "./constants.js";
 
 import "./MemberAccount.scss";
+import LoadingPlaceholder from "../../LoadingPlaceholder";
 
 export const MemberAccount = () => {
   const { personId } = useParams();
@@ -50,7 +51,7 @@ export const MemberAccount = () => {
   };
 
   if (!familyMembers) {
-    return <div> Datele se incarca</div>;
+    return <LoadingPlaceholder />;
   }
 
   if (!familyMembers.length) {
