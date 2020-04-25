@@ -28,22 +28,22 @@ export const PersonalData = ({
   };
 
   const nameValidationMessages = {
-    patternMismatch: "Acest camp poate contine doar caractere alfanumerice",
-    valueMissing: "Acest camp este obligatoriu"
+    patternMismatch: "Acest câmp poate conține doar caractere alfanumerice",
+    valueMissing: "Acest câmp este obligatoriu"
   };
 
   const phoneValidationMessages = {
     patternMismatch:
-      "Va rog introduceti un numar de telefon valid (07xxxxxxxx sau 00xxxxxxxxxx - doar cifre)",
-    valueMissing: "Acest camp este obligatoriu",
-    tooShort: "Acest camp trebuie sa contina minim 10 caractere"
+      "Te rugăm să completezi un număr de telefon valid (07xxxxxxxx sau 00xxxxxxxxxx - doar cifre)",
+    valueMissing: "Acest câmp este obligatoriu",
+    tooShort: "Acest câmp trebuie să conțină minim 10 caractere"
   };
 
   const ageValidationMessages = {
-    rangeOverflow: "Valoarea trebuie sa fie mai mica sau egala cu 120",
-    rangeUnderflow: "Valoarea trebuie sa fie mai mare sau egala cu 0",
-    valueMissing: "Acest camp este obligatoriu",
-    stepMismatch: "Valoarea trebuie sa fie un numar intreg"
+    rangeOverflow: "Valoarea trebuie să fie mai mică sau egală cu 120",
+    rangeUnderflow: "Valoarea trebuie să fie mai mare sau egală cu 0",
+    valueMissing: "Acest câmp este obligatoriu",
+    stepMismatch: "Valoarea trebuie să fie un număr întreg"
   };
 
   return (
