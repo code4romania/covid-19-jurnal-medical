@@ -2,11 +2,9 @@
 using Newtonsoft.Json;
 using StamAcasa.Common.DTO;
 using StamAcasa.Common.Models;
-using System;
-using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace StamAcasa.Common
+namespace StamAcasa.Common.Mapper
 {
     public class UserMappingProfile : Profile
     {
