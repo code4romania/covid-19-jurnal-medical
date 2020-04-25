@@ -32,12 +32,9 @@ const MemberEvaluation = () => {
   }, [personId, familyMembers]);
 
   const props = {
-    onChange: el => {
-      const selectedPerson = familyMembers.find(
-        person => person.name === el.target.value
-      );
-      if (selectedPerson) {
-        history.replace(`/evaluation/other-members/${selectedPerson.id}`);
+    onChange: ({ target: { value: personId } }) => {
+      if (personId) {
+        history.replace(`/evaluation/other-members/${personId}`);
       }
     }
   };
