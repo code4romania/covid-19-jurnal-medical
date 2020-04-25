@@ -1,4 +1,5 @@
-﻿using IdentityServer;
+﻿using System;
+using IdentityServer;
 using IdentityServer.Data;
 using IdentityServerAspNetIdentity;
 using Microsoft.AspNetCore.Hosting;
@@ -17,7 +18,14 @@ namespace IdentityServer
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseNpgsql(
-                        context.Configuration.GetConnectionString("ApplicationDbContextConnection")));
+                        context.Configuration.GetConnectionString("ApplicationDbContextConnection"), sqlOptions =>
+                        {
+                            sqlOptions.EnableRetryOnFailure(
+                                maxRetryCount: 5,
+                                maxRetryDelay: TimeSpan.FromSeconds(5),
+                                errorCodesToAdd: null
+                                );
+                        }));
                 var emailConfirmation = context.Configuration.GetValue<bool>("EnableEmailConfirmation");
                 services.AddDefaultIdentity<ApplicationUser>(options =>
                         options.SignIn.RequireConfirmedAccount = emailConfirmation)

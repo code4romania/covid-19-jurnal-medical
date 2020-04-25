@@ -7,7 +7,9 @@ import PersonalData from "./PersonalData";
 import Health from "./Health";
 import Context from "./Context";
 import SidebarLayout from "../SidebarLayout";
+import { mapPreExistMedCondTexts } from "../../utils";
 import { useHistory } from "react-router-dom";
+
 import titles from "./titles";
 
 export const ProfileForm = ({
@@ -156,7 +158,15 @@ export const ProfileForm = ({
         userData.livesWithOthers = false;
       }
 
-      sendResults(userData);
+      const preexistingMedicalCondition = mapPreExistMedCondTexts(
+        userData.preexistingMedicalCondition
+      );
+      const formattedUserData = {
+        ...userData,
+        preexistingMedicalCondition
+      };
+
+      sendResults(formattedUserData);
     }
   };
 
@@ -190,7 +200,12 @@ export const ProfileForm = ({
         />
       )}
 
-      <Button type="warning" inputType="submit" disabled={!canGoNext()}>
+      <Button
+        onClick={() => void 0}
+        type="warning"
+        inputType="submit"
+        disabled={!canGoNext()}
+      >
         Continuă
       </Button>
     </form>
@@ -201,7 +216,9 @@ const AddMember = () => {
   const history = useHistory();
 
   const sendResults = userData => {
-    ProfileApi.addDependant(userData).then(() => history.push("/account/me"));
+    ProfileApi.addDependant(userData).then(({ data: id }) =>
+      history.push(`/account/other-members/${id}`)
+    );
   };
 
   return (

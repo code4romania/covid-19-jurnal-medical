@@ -36,6 +36,7 @@ export const PersonalData = ({
           label={"Nume"}
           name="nume"
           required
+          pattern="[A-Za-z ]{1,32}"
           usePlaceholder
           value={userData.name}
           defaultValue={userData.name}
@@ -48,6 +49,7 @@ export const PersonalData = ({
           label={"Prenume"}
           name="surname"
           required
+          pattern="[A-Za-z ]{1,32}"
           usePlaceholder
           value={userData.surname}
           defaultValue={userData.surname}
@@ -112,8 +114,8 @@ export const PersonalData = ({
           value={userData.age}
           defaultValue={userData.age}
           step={1}
-          min="0"
-          max="120"
+          min={0}
+          max={120}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("age", +value);
           }}

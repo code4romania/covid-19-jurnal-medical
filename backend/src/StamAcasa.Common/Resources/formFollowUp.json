@@ -1,5 +1,5 @@
 {
-    "formId": 1,
+    "formId": 2,
     "title": "Ai simptome?",
     "firstNodeId": 1,
     "form": [
@@ -105,7 +105,7 @@
             "nextQuestionId": 13,
             "questionText": "Te rugăm să le descrii",
             "type": "INPUT",
-            "options": [ 
+            "options": [
                 {
                     "optionType": "string"
                 }
@@ -198,7 +198,7 @@
             "nextQuestionId": 18,
             "questionText": "Care a fost motivul deplasării?",
             "type": "INPUT",
-            "options": [ 
+            "options": [
                 {
                     "optionType": "string"
                 }
@@ -221,7 +221,7 @@
             "nextQuestionId": 21,
             "questionText": "Ai fost în contact direct cu o persoană diagnosticată/confirmată cu noul coronavirus?",
             "type": "SINGLE_CHOICE",
-            "options": [ 
+            "options": [
                 {
                     "label": "Da",
                     "value": true
@@ -233,16 +233,16 @@
             ]
         },
         {
-          "questionId": 21,
-          "nextQuestionId": 0,
-          "questionText": "Mulțumim!",
-          "type": "FINAL",
-          "options": [
-            {
-              "label": "Mulțumim că ai completat formularul!",
-              "value": 0
-            }
-          ]
+            "questionId": 21,
+            "nextQuestionId": 0,
+            "questionText": "Mulțumim!",
+            "type": "FINAL",
+            "options": [
+                {
+                    "label": "Mulțumim că ai completat formularul!",
+                    "value": 0
+                }
+            ]
         }
     ]
-  }
+}

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using Newtonsoft.Json;
@@ -22,12 +22,12 @@ namespace StamAcasa.Common.Services.Excel
 
         }
 
-        private void FillSingleChoiceMapFromFormString(string formNewUser)
+        private void FillSingleChoiceMapFromFormString(string form)
         {
-            var jObject = JObject.FromObject(JsonConvert.DeserializeObject<dynamic>(formNewUser));
+            var jObject = JObject.FromObject(JsonConvert.DeserializeObject<dynamic>(form));
 
             var formId = jObject["formId"].ToString();
-            var singleChoiceQuestions = jObject.SelectTokens("$.form[?(@.type== 'SINGLE_CHOICE')]");
+            var singleChoiceQuestions = jObject.SelectTokens("$.form[?(@.type == 'SINGLE_CHOICE')]");
 
             foreach (var question in singleChoiceQuestions)
             {
@@ -37,7 +37,7 @@ namespace StamAcasa.Common.Services.Excel
                     var optionValue = option["value"].ToString();
                     var optionLabel = option["label"].ToString();
 
-                    _singleChoiceOptionsMap.Add($"{formId}_{questionId}_{optionValue}".ToLower(), optionLabel);
+                    _singleChoiceOptionsMap.TryAdd($"{formId}_{questionId}_{optionValue}".ToLower(), optionLabel);
                 }
             }
         }
@@ -68,9 +68,14 @@ namespace StamAcasa.Common.Services.Excel
             {
 
                 var jProperties = jAnswerForm.Properties();
+                var formId = "";
 
                 foreach (var jProperty in jProperties)
                 {
+                    if (jProperty.Name == "formId")
+                    {
+                        formId = jProperty.Value.ToString();
+                    }
                     if (jProperty.Name == "answers")
                     {
 
@@ -90,13 +95,10 @@ namespace StamAcasa.Common.Services.Excel
                 }
 
                 var row = dataTable.NewRow();
-                var formId = "";
                 foreach (var jProperty in jProperties)
                 {
-                    if (jProperty.Name == "formId")
-                    {
-                        formId = jProperty.Value.ToString();
-                    }
+                    if (jProperty.Name == "timestamp")
+                        continue;
                     if (jProperty.Name == "answers")
                     {
 
@@ -108,21 +110,21 @@ namespace StamAcasa.Common.Services.Excel
                             var jAnswer = jAnswers[questionIndex];
 
                             var questionId = CastJToken(jAnswer["id"]);
-                            row[$"questionId{questionIndex + 1}"] = questionId ?? DBNull.Value;
+                            row[$"questionId{questionId}"] = questionId ?? questionIndex;
 
                             var questionText = CastJToken(jAnswer["questionText"]);
-                            row[$"questionText{questionIndex + 1}"] = questionText ?? DBNull.Value;
+                            row[$"questionText{questionId}"] = questionText ?? DBNull.Value;
 
                             var answer = CastJToken(jAnswer["answer"]);
 
                             var (isSingleOptionAnswer, newText) = MapAnswer(formId, questionId?.ToString(), answer);
                             if (isSingleOptionAnswer)
                             {
-                                row[$"answer{questionIndex + 1}"] = string.IsNullOrEmpty(newText.ToString()) ? DBNull.Value : newText;
+                                row[$"answer{questionId}"] = string.IsNullOrEmpty(newText.ToString()) ? DBNull.Value : newText;
                             }
                             else
                             {
-                                row[$"answer{questionIndex + 1}"] = answer ?? DBNull.Value;
+                                row[$"answer{questionId}"] = answer ?? DBNull.Value;
                             }
 
                         }
@@ -167,6 +169,9 @@ namespace StamAcasa.Common.Services.Excel
 
                     foreach (var jProperty in jProperties)
                     {
+                        if (jProperty.Name == "timestamp")
+                            continue;
+
                         if (jProperty.Name != "answers")
                         {
                             var value = CastJToken(jProperty.Value);
