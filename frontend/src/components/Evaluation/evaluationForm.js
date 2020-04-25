@@ -38,7 +38,7 @@ const EvaluationForm = ({ getForm, sendResults }) => {
           />
         )}
         {evaluationFormData === null && (
-          <LoadingPlaceholder text={"Formularul se incarca"} />
+          <LoadingPlaceholder text={"Formularul se încarcă"} />
         )}
         {finished && <FinishFormButton />}
       </>
