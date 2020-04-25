@@ -21,6 +21,11 @@ namespace StamAcasa.Common.Services.Emailing
 
         public async Task SendAsync(Email email, CancellationToken cancellationToken)
         {
+            if (string.IsNullOrEmpty(email.To))
+            {
+                return;
+            }
+
             using (var client = new SmtpClient())
             {
                 await client.ConnectAsync(_options.Host, _options.Port, SecureSocketOptions.Auto, cancellationToken);
@@ -37,7 +42,7 @@ namespace StamAcasa.Common.Services.Emailing
                 };
                 if (email.Attachment != null)
                 {
-                    var attachment = new MimePart("application","vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                    var attachment = new MimePart("application", "vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                     {
                         Content = new MimeContent(new MemoryStream(email.Attachment.Content)),
                         ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),

@@ -68,9 +68,14 @@ namespace StamAcasa.Common.Services.Excel
             {
 
                 var jProperties = jAnswerForm.Properties();
+                var formId = "";
 
                 foreach (var jProperty in jProperties)
                 {
+                    if (jProperty.Name == "formId")
+                    {
+                        formId = jProperty.Value.ToString();
+                    }
                     if (jProperty.Name == "answers")
                     {
 
@@ -90,13 +95,8 @@ namespace StamAcasa.Common.Services.Excel
                 }
 
                 var row = dataTable.NewRow();
-                var formId = "";
                 foreach (var jProperty in jProperties)
                 {
-                    if (jProperty.Name == "formId")
-                    {
-                        formId = jProperty.Value.ToString();
-                    }
                     if (jProperty.Name == "timestamp")
                         continue;
                     if (jProperty.Name == "answers")
@@ -110,21 +110,21 @@ namespace StamAcasa.Common.Services.Excel
                             var jAnswer = jAnswers[questionIndex];
 
                             var questionId = CastJToken(jAnswer["id"]);
-                            row[$"questionId{questionIndex + 1}"] = questionId ?? DBNull.Value;
+                            row[$"questionId{questionId}"] = questionId ?? questionIndex;
 
                             var questionText = CastJToken(jAnswer["questionText"]);
-                            row[$"questionText{questionIndex + 1}"] = questionText ?? DBNull.Value;
+                            row[$"questionText{questionId}"] = questionText ?? DBNull.Value;
 
                             var answer = CastJToken(jAnswer["answer"]);
 
                             var (isSingleOptionAnswer, newText) = MapAnswer(formId, questionId?.ToString(), answer);
                             if (isSingleOptionAnswer)
                             {
-                                row[$"answer{questionIndex + 1}"] = string.IsNullOrEmpty(newText.ToString()) ? DBNull.Value : newText;
+                                row[$"answer{questionId}"] = string.IsNullOrEmpty(newText.ToString()) ? DBNull.Value : newText;
                             }
                             else
                             {
-                                row[$"answer{questionIndex + 1}"] = answer ?? DBNull.Value;
+                                row[$"answer{questionId}"] = answer ?? DBNull.Value;
                             }
 
                         }

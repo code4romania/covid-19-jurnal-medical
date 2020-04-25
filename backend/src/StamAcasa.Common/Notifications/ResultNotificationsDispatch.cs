@@ -69,6 +69,7 @@ namespace StamAcasa.Common.Notifications
 
                     dynamic formInfo = new ExpandoObject();
                     formInfo.Name = c.UserInfo.Name;
+                    formInfo.Surname = c.UserInfo.Surname;
                     formInfo.City = c.UserInfo.City;
                     formInfo.County = c.UserInfo.County;
                     formInfo.PhoneNumber = c.UserInfo.PhoneNumber;
