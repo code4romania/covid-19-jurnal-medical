@@ -42,7 +42,7 @@ export const Account = ({ onProfileUpdated }) => {
   const getContent = () => {
     const loading = userProfile === null;
     if (loading) {
-      return <div>Datele se incarca</div>;
+      return <div>Datele se încarcă</div>;
     }
 
     const profileEmpty = userProfile.id === undefined;

@@ -44,7 +44,7 @@ const MemberEvaluation = () => {
   };
 
   if (!familyMembers.length) {
-    return <div> Nu exista alti membri</div>;
+    return <div> Nu există alți membri</div>;
   }
 
   return (

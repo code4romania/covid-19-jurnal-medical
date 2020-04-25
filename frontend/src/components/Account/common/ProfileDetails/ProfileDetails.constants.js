@@ -40,7 +40,7 @@ const FIELDS_DICT = {
 };
 
 const PREEXISTING_MEDICAL_CONDITION_MAP = {
-  6: "Nu exista"
+  6: "Nu există"
 };
 
 const FIELDS_PARTIAL_MAP_DICT = {
