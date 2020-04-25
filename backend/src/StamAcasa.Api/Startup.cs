@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
-using StamAcasa.Api.Common;
 using StamAcasa.Api.Extensions;
 using StamAcasa.Api.Models;
 using StamAcasa.Api.Services;
@@ -27,7 +22,7 @@ using StamAcasa.Common.Services.Assessment;
 using StamAcasa.Common.Services.Excel;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace Api
+namespace StamAcasa.Api
 {
     public class Startup
     {
