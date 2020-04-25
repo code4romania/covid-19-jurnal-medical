@@ -35,7 +35,8 @@ namespace StamAcasa.EmailService.EmailBuilder
                 To = emailRequest.Address,
                 SenderName = emailRequest.SenderName,
                 Subject = EmailConstants.GetSubject(emailRequest.TemplateType),
-                Content = template
+                Content = template,
+                Attachment = emailRequest.Attachment
             };
 
             return emailModel;

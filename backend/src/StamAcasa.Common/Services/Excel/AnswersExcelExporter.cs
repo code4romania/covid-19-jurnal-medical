@@ -22,12 +22,12 @@ namespace StamAcasa.Common.Services.Excel
 
         }
 
-        private void FillSingleChoiceMapFromFormString(string formNewUser)
+        private void FillSingleChoiceMapFromFormString(string form)
         {
-            var jObject = JObject.FromObject(JsonConvert.DeserializeObject<dynamic>(formNewUser));
+            var jObject = JObject.FromObject(JsonConvert.DeserializeObject<dynamic>(form));
 
             var formId = jObject["formId"].ToString();
-            var singleChoiceQuestions = jObject.SelectTokens("$.form[?(@.type== 'SINGLE_CHOICE')]");
+            var singleChoiceQuestions = jObject.SelectTokens("$.form[?(@.type == 'SINGLE_CHOICE')]");
 
             foreach (var question in singleChoiceQuestions)
             {
@@ -37,7 +37,7 @@ namespace StamAcasa.Common.Services.Excel
                     var optionValue = option["value"].ToString();
                     var optionLabel = option["label"].ToString();
 
-                    _singleChoiceOptionsMap.Add($"{formId}_{questionId}_{optionValue}".ToLower(), optionLabel);
+                    _singleChoiceOptionsMap.TryAdd($"{formId}_{questionId}_{optionValue}".ToLower(), optionLabel);
                 }
             }
         }
