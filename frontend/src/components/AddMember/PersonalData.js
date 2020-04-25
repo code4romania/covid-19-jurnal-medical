@@ -27,6 +27,25 @@ export const PersonalData = ({
     });
   };
 
+  const nameValidationMessages = {
+    patternMismatch: "Acest câmp poate conține doar caractere alfanumerice",
+    valueMissing: "Acest câmp este obligatoriu"
+  };
+
+  const phoneValidationMessages = {
+    patternMismatch:
+      "Te rugăm să completezi un număr de telefon valid (07xxxxxxxx sau 00xxxxxxxxxx - doar cifre)",
+    valueMissing: "Acest câmp este obligatoriu",
+    tooShort: "Acest câmp trebuie să conțină minim 10 caractere"
+  };
+
+  const ageValidationMessages = {
+    rangeOverflow: "Valoarea trebuie să fie mai mică sau egală cu 120",
+    rangeUnderflow: "Valoarea trebuie să fie mai mare sau egală cu 0",
+    valueMissing: "Acest câmp este obligatoriu",
+    stepMismatch: "Valoarea trebuie să fie un număr întreg"
+  };
+
   return (
     <>
       <ListHeader title="I. Date personale" />
@@ -35,6 +54,8 @@ export const PersonalData = ({
           type="text"
           label={"Nume"}
           name="nume"
+          title="Nume"
+          validationMessages={nameValidationMessages}
           required
           pattern="[A-Za-z ]{1,32}"
           usePlaceholder
@@ -48,8 +69,10 @@ export const PersonalData = ({
           type="text"
           label={"Prenume"}
           name="surname"
+          title="Prenume"
           required
           pattern="[A-Za-z ]{1,32}"
+          validationMessages={nameValidationMessages}
           usePlaceholder
           value={userData.surname}
           defaultValue={userData.surname}
@@ -63,6 +86,7 @@ export const PersonalData = ({
           type="tel"
           pattern="(?:00|07)[0-9]*"
           title="07xxxxxxxx sau 00xxxxxxxxxx - doar cifre"
+          validationMessages={phoneValidationMessages}
           minLength="10"
           maxLength="13"
           required={!isForFamilyMember}
@@ -109,7 +133,9 @@ export const PersonalData = ({
           type="number"
           label={"Vârstă în ani împliniți"}
           name="age"
+          title="Vârstă"
           required
+          validationMessages={ageValidationMessages}
           usePlaceholder
           value={userData.age}
           defaultValue={userData.age}
