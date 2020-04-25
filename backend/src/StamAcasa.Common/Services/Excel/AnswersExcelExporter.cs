@@ -81,11 +81,12 @@ namespace StamAcasa.Common.Services.Excel
 
                         var jAnswers = (JArray)jProperty.Value;
 
-                        for (int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++)
+                        foreach (var answer in jAnswers)
                         {
-                            CreatePrimitiveColumn(dataTable, $"questionId{questionIndex + 1}", JTokenType.String);
-                            CreatePrimitiveColumn(dataTable, $"questionText{questionIndex + 1}", JTokenType.String);
-                            CreatePrimitiveColumn(dataTable, $"answer{questionIndex + 1}", JTokenType.String);
+                            var questionId = CastJToken(answer["id"]);
+                            CreatePrimitiveColumn(dataTable, $"questionId{questionId}", JTokenType.String);
+                            CreatePrimitiveColumn(dataTable, $"questionText{questionId}", JTokenType.String);
+                            CreatePrimitiveColumn(dataTable, $"answer{questionId}", JTokenType.String);
                         }
                     }
                     else
