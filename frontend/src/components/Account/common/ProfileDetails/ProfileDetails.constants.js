@@ -1,18 +1,18 @@
 // fields are grouped by row
 export const FIELDS_LABELS = {
-  name: "Nume si prenume",
-  smoker: "Fumator",
+  name: "Nume și prenume",
+  smoker: "Fumător",
 
-  phoneNumber: "Numar de telefon",
-  preexistingMedicalCondition: "Afectiuni agravante",
+  phoneNumber: "Număr de telefon",
+  preexistingMedicalCondition: "Afecțiuni agravante",
 
-  location: "Judet, localitate",
-  livesWithOthers: "Locuiesti singur",
+  location: "Județ, localitate",
+  livesWithOthers: "Locuiești singur",
 
-  age: "Varsta in ani impliniti",
+  age: "Vârstă în ani împliniți",
   quarantineStatus: "Izolare proprie la domiciliu",
 
-  gender: "Genul",
+  gender: "Gen",
   quarantineStatusOthers: "Izolare alte persoane la domiciliu"
 };
 
@@ -39,7 +39,16 @@ const FIELDS_DICT = {
   quarantineStatusOthers: QUARANTINE_STATUS_DICT
 };
 
+const PREEXISTING_MEDICAL_CONDITION_MAP = {
+  6: "Nu exista"
+};
+
+const FIELDS_PARTIAL_MAP_DICT = {
+  preexistingMedicalCondition: PREEXISTING_MEDICAL_CONDITION_MAP
+};
+
 const fieldsWithDict = ["gender", "quarantineStatus", "quarantineStatusOthers"];
+const fieldsWithPartialMap = ["preexistingMedicalCondition"];
 
 const mapProfileDetails = data => {
   return Object.entries(FIELDS_LABELS)
@@ -61,7 +70,17 @@ const mapProfileDetails = data => {
       }
 
       if (fieldsWithDict.includes(key)) {
-        return { ...mappedItem, value: FIELDS_DICT[key][fieldValue] };
+        return { ...mappedItem, value: FIELDS_DICT[key][+fieldValue] };
+      }
+
+      if (
+        fieldsWithPartialMap.includes(key) &&
+        FIELDS_PARTIAL_MAP_DICT[key][+fieldValue] !== undefined
+      ) {
+        return {
+          ...mappedItem,
+          value: FIELDS_PARTIAL_MAP_DICT[key][+fieldValue]
+        };
       }
 
       return mappedItem;

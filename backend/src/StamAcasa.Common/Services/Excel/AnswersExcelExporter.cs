@@ -1,79 +1,136 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using StamAcasa.Common.Models;
+using StamAcasa.Common.Services.Assessment;
 
-namespace StamAcasa.Common.Services.Excel {
-    public class AnswersExcelExporter : IAnswersExcelExporter {
-
+namespace StamAcasa.Common.Services.Excel
+{
+    public class AnswersExcelExporter : IAnswersExcelExporter
+    {
         IExcelDocumentService ExcelDocumentService { get; }
-
-        public AnswersExcelExporter(IExcelDocumentService excelDocumentService) {
+        private readonly Dictionary<string, string> _singleChoiceOptionsMap = new Dictionary<string, string>();
+        public AnswersExcelExporter(IExcelDocumentService excelDocumentService, IAssessmentFormProvider assessmentFormProvider)
+        {
             ExcelDocumentService = excelDocumentService;
+            var formNewUser = assessmentFormProvider.GetFormNewUser().GetAwaiter().GetResult();
+            var formFollowUp = assessmentFormProvider.GetFormFollowUp().GetAwaiter().GetResult();
+            FillSingleChoiceMapFromFormString(formNewUser);
+            FillSingleChoiceMapFromFormString(formFollowUp);
+
         }
 
-        public byte[] AnswersToExcel(IList<JObject> jAnswerForms, AnswersExcelTemplateTypes template = AnswersExcelTemplateTypes.SingleRowPerForm) {
+        private void FillSingleChoiceMapFromFormString(string form)
+        {
+            var jObject = JObject.FromObject(JsonConvert.DeserializeObject<dynamic>(form));
+
+            var formId = jObject["formId"].ToString();
+            var singleChoiceQuestions = jObject.SelectTokens("$.form[?(@.type == 'SINGLE_CHOICE')]");
+
+            foreach (var question in singleChoiceQuestions)
+            {
+                var questionId = question["questionId"].ToString();
+                foreach (var option in question["options"])
+                {
+                    var optionValue = option["value"].ToString();
+                    var optionLabel = option["label"].ToString();
+
+                    _singleChoiceOptionsMap.TryAdd($"{formId}_{questionId}_{optionValue}".ToLower(), optionLabel);
+                }
+            }
+        }
+
+        public byte[] AnswersToExcel(IList<JObject> jAnswerForms, AnswersExcelTemplateTypes template = AnswersExcelTemplateTypes.SingleRowPerForm)
+        {
 
             DataTable dataTable = null;
 
-            if (template == AnswersExcelTemplateTypes.MultipleRowsPerForm) {
+            if (template == AnswersExcelTemplateTypes.MultipleRowsPerForm)
+            {
                 dataTable = AnswersToExcelMultipleRowsPerForm(jAnswerForms);
-            } else {
+            }
+            else
+            {
                 dataTable = AnswersToExcelSingleRowPerForm(jAnswerForms);
             }
 
             return ExcelDocumentService.DataTableToXlsxFile(dataTable, "Answers");
         }
 
-        DataTable AnswersToExcelSingleRowPerForm(IList<JObject> jAnswerForms) {
+        DataTable AnswersToExcelSingleRowPerForm(IList<JObject> jAnswerForms)
+        {
 
             var dataTable = new DataTable();
 
-            foreach (var jAnswerForm in jAnswerForms) {
+            foreach (var jAnswerForm in jAnswerForms)
+            {
 
                 var jProperties = jAnswerForm.Properties();
 
-                foreach (var jProperty in jProperties) {
-                    if (jProperty.Name == "answers") {
+                foreach (var jProperty in jProperties)
+                {
+                    if (jProperty.Name == "answers")
+                    {
 
                         var jAnswers = (JArray)jProperty.Value;
 
-                        for(int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++) {
-                            CreatePrimitiveColumn(dataTable, $"answerId{questionIndex + 1}", JTokenType.String);
+                        for (int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++)
+                        {
+                            CreatePrimitiveColumn(dataTable, $"questionId{questionIndex + 1}", JTokenType.String);
                             CreatePrimitiveColumn(dataTable, $"questionText{questionIndex + 1}", JTokenType.String);
                             CreatePrimitiveColumn(dataTable, $"answer{questionIndex + 1}", JTokenType.String);
                         }
-                    } else {
+                    }
+                    else
+                    {
                         CreatePrimitiveColumn(dataTable, jProperty);
                     }
                 }
 
                 var row = dataTable.NewRow();
-
+                var formId = "";
                 foreach (var jProperty in jProperties)
                 {
-
+                    if (jProperty.Name == "formId")
+                    {
+                        formId = jProperty.Value.ToString();
+                    }
                     if (jProperty.Name == "timestamp")
                         continue;
-                    if (jProperty.Name == "answers") {
+                    if (jProperty.Name == "answers")
+                    {
 
                         var jAnswers = (JArray)jProperty.Value;
 
-                        for (int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++) {
+                        for (int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++)
+                        {
 
                             var jAnswer = jAnswers[questionIndex];
 
-                            var answerId = CastJToken(jAnswer["id"]);
-                            row[$"answerId{questionIndex + 1}"] = answerId ?? DBNull.Value;
+                            var questionId = CastJToken(jAnswer["id"]);
+                            row[$"questionId{questionIndex + 1}"] = questionId ?? DBNull.Value;
 
                             var questionText = CastJToken(jAnswer["questionText"]);
                             row[$"questionText{questionIndex + 1}"] = questionText ?? DBNull.Value;
 
                             var answer = CastJToken(jAnswer["answer"]);
-                            row[$"answer{questionIndex + 1}"] = answer ?? DBNull.Value;
+
+                            var (isSingleOptionAnswer, newText) = MapAnswer(formId, questionId?.ToString(), answer);
+                            if (isSingleOptionAnswer)
+                            {
+                                row[$"answer{questionIndex + 1}"] = string.IsNullOrEmpty(newText.ToString()) ? DBNull.Value : newText;
+                            }
+                            else
+                            {
+                                row[$"answer{questionIndex + 1}"] = answer ?? DBNull.Value;
+                            }
+
                         }
-                    } else {
+                    }
+                    else
+                    {
                         var value = CastJToken(jProperty.Value);
                         row[jProperty.Name] = value ?? DBNull.Value;
                     }
@@ -85,29 +142,38 @@ namespace StamAcasa.Common.Services.Excel {
             return dataTable;
         }
 
-        DataTable AnswersToExcelMultipleRowsPerForm(IList<JObject> jAnswerForms) {
+        DataTable AnswersToExcelMultipleRowsPerForm(IList<JObject> jAnswerForms)
+        {
             var dataTable = new DataTable();
 
-            foreach (var jAnswerForm in jAnswerForms) {
+            foreach (var jAnswerForm in jAnswerForms)
+            {
 
                 var jProperties = jAnswerForm.Properties();
 
-                foreach (var jProperty in jProperties) {
+                foreach (var jProperty in jProperties)
+                {
                     CreatePrimitiveColumn(dataTable, jProperty);
                 }
 
-                CreatePrimitiveColumn(dataTable, $"answerId", JTokenType.String);
-                CreatePrimitiveColumn(dataTable, $"questionText", JTokenType.String);
-                CreatePrimitiveColumn(dataTable, $"answer", JTokenType.String);
+                CreatePrimitiveColumn(dataTable, "questionId", JTokenType.String);
+                CreatePrimitiveColumn(dataTable, "questionText", JTokenType.String);
+                CreatePrimitiveColumn(dataTable, "answer", JTokenType.String);
 
                 var jAnswers = (JArray)jAnswerForm["answers"];
-
-                for (int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++) {
+                var formId = jAnswerForm["formId"].ToString();
+                for (int questionIndex = 0; questionIndex < jAnswers.Count; questionIndex++)
+                {
 
                     var row = dataTable.NewRow();
 
-                    foreach (var jProperty in jProperties) {
-                        if (jProperty.Name != "answers") {
+                    foreach (var jProperty in jProperties)
+                    {
+                        if (jProperty.Name == "timestamp")
+                            continue;
+
+                        if (jProperty.Name != "answers")
+                        {
                             var value = CastJToken(jProperty.Value);
                             row[jProperty.Name] = value ?? DBNull.Value;
                         }
@@ -115,14 +181,24 @@ namespace StamAcasa.Common.Services.Excel {
 
                     var jAnswer = jAnswers[questionIndex];
 
-                    var answerId = CastJToken(jAnswer["id"]);
-                    row[$"answerId"] = answerId ?? DBNull.Value;
+                    var questionId = CastJToken(jAnswer["id"]);
+                    row["questionId"] = questionId ?? DBNull.Value;
 
                     var questionText = CastJToken(jAnswer["questionText"]);
-                    row[$"questionText"] = questionText ?? DBNull.Value;
+                    row["questionText"] = questionText ?? DBNull.Value;
 
                     var answer = CastJToken(jAnswer["answer"]);
-                    row[$"answer"] = answer ?? DBNull.Value;
+
+                    var (isSingleOptionAnswer, newText) = MapAnswer(formId, questionId?.ToString(), answer);
+
+                    if (isSingleOptionAnswer)
+                    {
+                        row["answer"] = string.IsNullOrEmpty(newText.ToString()) ? DBNull.Value : newText;
+                    }
+                    else
+                    {
+                        row["answer"] = answer ?? DBNull.Value;
+                    }
 
                     dataTable.Rows.Add(row);
                 }
@@ -131,25 +207,46 @@ namespace StamAcasa.Common.Services.Excel {
             return dataTable;
         }
 
+        private (bool isSingleOptionAnswer, object newText) MapAnswer(string formId, string questionId, object answer)
+        {
+            var key = $"{formId}_{questionId}_{answer}".ToLower();
+            if (_singleChoiceOptionsMap.ContainsKey(key))
+            {
+                return (true, _singleChoiceOptionsMap[key]);
+            }
 
-        object CastJToken(JToken value) {
-
+            return (false, answer);
+        }
+        object CastJToken(JToken value)
+        {
+            if (value == null)
+                return DBNull.Value;
             var jType = value.Type;
 
-            if (jType == JTokenType.Boolean) {
+            if (jType == JTokenType.Boolean)
+            {
                 return (bool?)value;
-            } else if (jType == JTokenType.Date) {
+            }
+            else if (jType == JTokenType.Date)
+            {
                 return (DateTime?)value;
-            } else if (jType == JTokenType.Float) {
+            }
+            else if (jType == JTokenType.Float)
+            {
                 return (double?)value;
-            } else if (jType == JTokenType.Integer) {
+            }
+            else if (jType == JTokenType.Integer)
+            {
                 return (long?)value;
-            } else {
+            }
+            else
+            {
                 return (string)value;
             }
         }
 
-        void CreatePrimitiveColumn(DataTable dataTable, JProperty jProperty) {
+        void CreatePrimitiveColumn(DataTable dataTable, JProperty jProperty)
+        {
 
             if (dataTable.Columns.Contains(jProperty.Name))
                 return;
@@ -159,28 +256,41 @@ namespace StamAcasa.Common.Services.Excel {
             CreatePrimitiveColumn(dataTable, jProperty.Name, jType);
         }
 
-        void CreatePrimitiveColumn(DataTable dataTable, string name, JTokenType jType) {
+        void CreatePrimitiveColumn(DataTable dataTable, string name, JTokenType jType)
+        {
 
             if (dataTable.Columns.Contains(name))
                 return;
 
             Type dataType;
 
-            if (jType == JTokenType.Array || jType == JTokenType.Object) {
+            if (jType == JTokenType.Array || jType == JTokenType.Object)
+            {
                 return;
-            } else if (jType == JTokenType.Boolean) {
+            }
+            else if (jType == JTokenType.Boolean)
+            {
                 dataType = typeof(bool);
-            } else if (jType == JTokenType.Date) {
+            }
+            else if (jType == JTokenType.Date)
+            {
                 dataType = typeof(DateTime);
-            } else if (jType == JTokenType.Float) {
+            }
+            else if (jType == JTokenType.Float)
+            {
                 dataType = typeof(double);
-            } else if (jType == JTokenType.Integer) {
+            }
+            else if (jType == JTokenType.Integer)
+            {
                 dataType = typeof(long);
-            } else {
+            }
+            else
+            {
                 dataType = typeof(string);
             }
 
-            dataTable.Columns.Add(new DataColumn() {
+            dataTable.Columns.Add(new DataColumn()
+            {
                 ColumnName = name,
                 DataType = dataType,
                 AllowDBNull = true

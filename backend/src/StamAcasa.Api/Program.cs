@@ -10,16 +10,16 @@ using Serilog.Enrichers;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 
-namespace Api
+namespace StamAcasa.Api
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
 
             const string loggerTemplate = @"{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u4}]<{ThreadId}> [{SourceContext:l}] {Message:lj}{NewLine}{Exception}";
             var baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            var logfile = Path.Combine(baseDir, "App_Data", "logs", "log.txt");
+            var logfile = Path.Combine(baseDir, "logs", "log.txt");
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .Enrich.With(new ThreadIdEnricher())

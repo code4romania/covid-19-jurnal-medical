@@ -20,20 +20,26 @@ const ProfileDetails = ({
 
   return (
     <div className="profile">
-      {isSelf && (
-        <div className="header">
-          {
-            //todo: should set url once available
-          }
-          <Link className="link" to="#">
-            Editare profil
-          </Link>
-        </div>
-      )}
+      <div className="header">
+        <Link
+          className="link"
+          to={{
+            pathname: "/update-profile",
+            state: {
+              id,
+              profileDetails,
+              isSelf
+            }
+          }}
+        >
+          Editare profil
+        </Link>
+      </div>
       <div className="content">
         {data.map(({ label, value }) => (
           <div className="profile__field" key={label}>
-            <strong>{label}:</strong> {value}
+            <strong>{label}: </strong>
+            {Array.isArray(value) ? value.join(", ") : value}
           </div>
         ))}
       </div>
@@ -53,19 +59,19 @@ ProfileDetails.defaultProps = {
 ProfileDetails.propTypes = {
   fields: PropTypes.shape({
     id: PropTypes.number,
-    name: PropTypes.string.isRequired,
-    surname: PropTypes.string.isRequired,
-    phoneNumber: PropTypes.string.isRequired,
-    age: PropTypes.number.isRequired,
-    gender: PropTypes.number.isRequired,
-    county: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    preexistingMedicalCondition: PropTypes.string.isRequired,
-    quarantineStatus: PropTypes.string.isRequired,
-    smoker: PropTypes.bool.isRequired,
-    livesWithOthers: PropTypes.bool.isRequired,
-    quarantineStatusOthers: PropTypes.number.isRequired,
-    relationshipType: PropTypes.number.isRequired
+    name: PropTypes.string,
+    surname: PropTypes.string,
+    phoneNumber: PropTypes.string,
+    age: PropTypes.number,
+    gender: PropTypes.number,
+    county: PropTypes.string,
+    city: PropTypes.string,
+    preexistingMedicalCondition: PropTypes.array,
+    quarantineStatus: PropTypes.number,
+    smoker: PropTypes.bool,
+    livesWithOthers: PropTypes.bool,
+    quarantineStatusOthers: PropTypes.number,
+    relationshipType: PropTypes.number
   }).isRequired,
   isSelf: PropTypes.bool,
   children: PropTypes.node

@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "name": "Test",
+  "surname": "string",
+  "phoneNumber": "string",
+  "county": "string",
+  "city": "string",
+  "age": 0,
+  "gender": 1,
+  "preexistingMedicalCondition": "string",
+  "quarantineStatus": 0,
+  "smoker": true,
+  "livesWithOthers": true,
+  "quarantineStatusOthers": 0,
+  "relationshipType": 0
+}

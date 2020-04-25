@@ -7,7 +7,7 @@ const StartFormButton = ({ onClick }) => {
   return (
     <div className={"call-to-action"}>
       <Button onClick={onClick} size={"large"} type={"warning"}>
-        Completeaza formularul
+        Completează formularul
       </Button>
     </div>
   );

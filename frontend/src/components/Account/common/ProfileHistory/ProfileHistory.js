@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
@@ -6,10 +6,11 @@ import { TemperatureChart } from "@code4ro/taskforce-fe-components";
 import Table from "../Table/Table";
 
 import ProfileDetails from "../ProfileDetails/ProfileDetails.js";
-import SymptomsHistoryTable from "../SymptomsHistoryTable/SymptomsHistoryTable.js";
 import ProfileOthers from "../ProfileOthers/ProfileOthers";
 
-import mockData from "../../mockData/mockData";
+import EvaluationApi from "../../../../api/evaluationApi";
+
+import { buildHistory } from "./ProfileHistoryBuilder";
 
 import {
   SYMPTOMS_HEADERS,
@@ -20,44 +21,62 @@ import {
 
 import "./ProfileHistory.scss";
 
-export const ProfileHistory = ({ data, family, isSelf }) => (
-  <div className="profile-history-container">
-    <ProfileDetails fields={data} isSelf={isSelf}>
-      <ProfileOthers family={family} />
-    </ProfileDetails>
-    <p className="profile-history-text">
-      {DESCRIPTION_TEXT}
-      <Link
-        to={isSelf ? "/evaluation/me" : `/evaluation/other-members/${data.id}`}
-      >
-        {" "}
-        formularul aici
-      </Link>
-      .
-    </p>
-    <h2 className="header">Istoric Simptome</h2>
-    <div className="profile-history-content">
-      <TemperatureChart
-        results={mockData.temperature}
-        title="Monitorizare temperatura"
-      />
+export const ProfileHistory = ({ data, family, isSelf }) => {
+  const [history, setHistory] = useState(null);
+
+  useEffect(() => {
+    EvaluationApi.getEvaluationResults(data.id).then(res => {
+      if (res && res.length > 0) {
+        setHistory(buildHistory(res));
+      }
+    });
+  }, []);
+
+  return (
+    <div className="profile-history-container">
+      <ProfileDetails fields={data} isSelf={isSelf}>
+        <ProfileOthers family={family} />
+      </ProfileDetails>
+      <p className="profile-history-text">
+        {DESCRIPTION_TEXT}
+        <Link
+          to={
+            isSelf ? "/evaluation/me" : `/evaluation/other-members/${data.id}`
+          }
+        >
+          {" "}
+          formularul aici
+        </Link>
+        .
+      </p>
+      {history && (
+        <>
+          <h2 className="header">Istoric Simptome</h2>
+          <div className="profile-history-content">
+            <TemperatureChart
+              results={history.temperature}
+              title="Monitorizare temperatura"
+            />
+          </div>
+          <Table
+            dataRows={history.symptoms}
+            headers={SYMPTOMS_HEADERS}
+            title="Istoric"
+          />
+          <hr />
+          <Table
+            dataRows={history.otherSymptoms}
+            headers={OTHER_SYMPTOMS_HEADERS}
+            title="Alte Simptome"
+          />
+          <hr />
+          <h2 className="header">Istoric deplasări </h2>
+          <Table dataRows={history.outings} headers={OUTINGS_HEADERS} />
+        </>
+      )}
     </div>
-    <SymptomsHistoryTable
-      symptomsData={mockData.symptoms}
-      headers={SYMPTOMS_HEADERS}
-      title="Istoric"
-    />
-    <hr />
-    <Table
-      dataRows={mockData.otherSymptoms}
-      headers={OTHER_SYMPTOMS_HEADERS}
-      title="Alte Simptome"
-    />
-    <hr />
-    <h2 className="header">Istoric deplasări </h2>
-    <Table dataRows={mockData.outings} headers={OUTINGS_HEADERS} />
-  </div>
-);
+  );
+};
 
 ProfileHistory.propTypes = {
   data: PropTypes.shape({

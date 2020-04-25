@@ -59,7 +59,7 @@ const MemberEvaluation = () => {
             path={`/evaluation/other-members/${member.id}`}
           >
             <EvaluationForm
-              getForm={EvaluationApi.getEvaluationForm}
+              getForm={() => EvaluationApi.getEvaluationForm(member.id)}
               sendResults={results =>
                 EvaluationApi.sendEvaluationResults(results, member.id)
               }

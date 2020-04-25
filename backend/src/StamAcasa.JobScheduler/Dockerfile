@@ -18,4 +18,12 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
+# install System.Drawing native dependencies
+RUN apt-get update \
+    && apt-get install -y --allow-unauthenticated \
+        libc6-dev \
+        libgdiplus \
+        libx11-dev \
+     && rm -rf /var/lib/apt/lists/*
+
 ENTRYPOINT ["dotnet", "StamAcasa.JobScheduler.dll"]

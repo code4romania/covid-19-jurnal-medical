@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -25,16 +25,16 @@ namespace StamAcasa.Common.Services
 
         private async Task<User> AddOrUpdateEntity(User user, UserProfileDTO profileUpdateInfo)
         {
+            var newUserInfo = _mapper.Map<User>(profileUpdateInfo);
             if (user == null)
             {
-                var newUserInfo = _mapper.Map<User>(profileUpdateInfo);
                 var saved = await _context.Users.AddAsync(newUserInfo);
                 await _context.SaveChangesAsync();
                 return saved.Entity;
             }
 
             var contextEntry = _context.Entry<User>(user);
-            contextEntry.CurrentValues.SetValues(profileUpdateInfo);
+            contextEntry.CurrentValues.SetValues(newUserInfo);
             _context.Users.Update(user);
             var result = await _context.SaveChangesAsync();
             return result > 0 ? user : null;
@@ -92,6 +92,19 @@ namespace StamAcasa.Common.Services
         {
             var users = await _context.Users.ToListAsync();
             var result = users.Select(_mapper.Map<UserInfo>);
+            return result;
+        }
+
+        public async Task<IEnumerable<UserInfo>> GetAllParents()
+        {
+            var parents = new ConcurrentQueue<User>();
+            await _context.Users.ForEachAsync(u =>
+            {
+                if (!u.ParentId.HasValue)
+                    parents.Enqueue(u);
+            });
+
+            var result = parents.Select(_mapper.Map<UserInfo>);
             return result;
         }
     }

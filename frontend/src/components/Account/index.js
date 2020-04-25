@@ -1,42 +1,43 @@
 import React, { useEffect, useState } from "react";
-
+import PropTypes from "prop-types";
 import "./Account.scss";
 
 import SidebarLayout from "../SidebarLayout";
+import Tabs from "../Tabs/Tabs";
 
 import MyAccount from "./MyAccount";
 import MemberAccount from "./MemberAccount";
-import Tabs from "../Tabs/Tabs";
-import BasePage from "../BasePage";
-import { Hero } from "@code4ro/taskforce-fe-components";
-import StepsBar from "../StepsBar";
-import ProfileApi from "../../api/profileApi";
 import CreateProfile from "./CreateProfile";
 
-export const Account = () => {
+import ProfileApi from "../../api/profileApi";
+
+const TABS = [
+  {
+    id: 0,
+    title: "Profilul meu",
+    content: <MyAccount />,
+    url: "/account/me"
+  },
+  {
+    id: 1,
+    title: "Alte persoane",
+    content: <MemberAccount />,
+    url: "/account/other-members/:personId?",
+    navUrl: "/account/other-members"
+  }
+];
+
+export const Account = ({ onProfileUpdated }) => {
   const [userProfile, setUserProfile] = useState(null);
 
   const updateProfileFromServer = () => {
-    ProfileApi.get().then(setUserProfile);
+    ProfileApi.get().then(data => {
+      setUserProfile(data);
+      onProfileUpdated(data);
+    });
   };
 
-  useEffect(updateProfileFromServer, []);
-
-  const tabs = [
-    {
-      id: 0,
-      title: "Profilul meu",
-      content: <MyAccount />,
-      url: "/account/me"
-    },
-    {
-      id: 1,
-      title: "Alte persoane",
-      content: <MemberAccount />,
-      url: "/account/other-members/:personId?",
-      navUrl: "/account/other-members"
-    }
-  ];
+  useEffect(() => updateProfileFromServer(), []);
 
   const getContent = () => {
     const loading = userProfile === null;
@@ -45,24 +46,19 @@ export const Account = () => {
     }
 
     const profileEmpty = userProfile.id === undefined;
+
     if (profileEmpty) {
       return <CreateProfile onFinish={updateProfileFromServer} />;
     }
 
-    return <Tabs tabs={tabs} />;
+    return <Tabs tabs={TABS} />;
   };
 
-  return (
-    <BasePage>
-      <Hero
-        title="Ce pași ai de urmat"
-        subtitle="Pentru a te putea ajuta iata ce ai la dispozitie in contul tau:"
-        useFallbackIcon={true}
-      />
-      <StepsBar />
-      <SidebarLayout>{getContent()}</SidebarLayout>
-    </BasePage>
-  );
+  return <SidebarLayout>{getContent()}</SidebarLayout>;
+};
+
+Account.propTypes = {
+  onProfileUpdated: PropTypes.func.isRequired
 };
 
 export default Account;

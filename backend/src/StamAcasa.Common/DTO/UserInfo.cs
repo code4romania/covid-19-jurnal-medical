@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using StamAcasa.Common.Models;
 
 namespace StamAcasa.Common.DTO {
@@ -17,7 +15,7 @@ namespace StamAcasa.Common.DTO {
         public string City { get; set; }
         public int Age { get; set; }
         public Gender Gender { get; set; }
-        public string PreexistingMedicalCondition { get; set; }
+        public string[] PreexistingMedicalCondition { get; set; }
         public QuarantineStatus QuarantineStatus { get; set; }
         public bool Smoker { get; set; }
         public bool LivesWithOthers { get; set; }

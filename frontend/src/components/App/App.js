@@ -1,11 +1,12 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 
 import "./App.scss";
 import { ROUTES } from "../../routes";
 import { useAuth } from "../../hooks/auth";
 
 const App = () => {
+  const history = useHistory();
   useAuth();
   const { base, oidc } = ROUTES;
   const baseRoutes = Object.values(base);
@@ -20,9 +21,10 @@ const App = () => {
           path={path}
           render={() => {
             if (method) {
-              method();
+              method(uri => {
+                history.push(uri);
+              });
             }
-            return <Redirect key={path} from={path} to="/account" />;
           }}
         />
       ))}
