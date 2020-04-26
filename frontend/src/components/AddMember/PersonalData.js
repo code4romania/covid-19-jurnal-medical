@@ -41,7 +41,9 @@ export const PersonalData = ({
 
   const ageValidationMessages = {
     rangeOverflow: "Valoarea trebuie să fie mai mică sau egală cu 120",
-    rangeUnderflow: "Valoarea trebuie să fie mai mare sau egală cu 0",
+    rangeUnderflow: `Valoarea trebuie să fie mai mare sau egală cu ${
+      isForFamilyMember ? "0" : "18"
+    }`,
     valueMissing: "Acest câmp este obligatoriu",
     stepMismatch: "Valoarea trebuie să fie un număr întreg"
   };
@@ -140,7 +142,7 @@ export const PersonalData = ({
           value={userData.age}
           defaultValue={userData.age}
           step={1}
-          min={0}
+          min={isForFamilyMember ? 0 : 18}
           max={120}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("age", +value);
