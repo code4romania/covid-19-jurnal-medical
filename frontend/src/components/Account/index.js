@@ -10,6 +10,7 @@ import MemberAccount from "./MemberAccount";
 import CreateProfile from "./CreateProfile";
 
 import ProfileApi from "../../api/profileApi";
+import LoadingPlaceholder from "../LoadingPlaceholder";
 
 const TABS = [
   {
@@ -42,7 +43,7 @@ export const Account = ({ onProfileUpdated }) => {
   const getContent = () => {
     const loading = userProfile === null;
     if (loading) {
-      return <div>Datele se încarcă</div>;
+      return <LoadingPlaceholder />;
     }
 
     const profileEmpty = userProfile.id === undefined;
