@@ -14,7 +14,7 @@ export const MemberAccount = () => {
   const { personId } = useParams();
   const history = useHistory();
   const [options, setOptions] = useState([]);
-  const [familyMembers, setFamilyMembers] = useState(null);
+  const [familyMembers, setFamilyMembers] = useState();
 
   useEffect(() => {
     ProfileApi.getDependants().then(setFamilyMembers);
