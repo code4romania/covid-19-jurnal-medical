@@ -41,7 +41,9 @@ export const PersonalData = ({
 
   const ageValidationMessages = {
     rangeOverflow: "Valoarea trebuie să fie mai mică sau egală cu 120",
-    rangeUnderflow: "Valoarea trebuie să fie mai mare sau egală cu 0",
+    rangeUnderflow: `Valoarea trebuie să fie mai mare sau egală cu ${
+      isForFamilyMember ? "0" : "18"
+    }`,
     valueMissing: "Acest câmp este obligatoriu",
     stepMismatch: "Valoarea trebuie să fie un număr întreg"
   };
@@ -53,23 +55,8 @@ export const PersonalData = ({
         <Input
           type="text"
           label={"Nume"}
-          name="nume"
-          title="Nume"
-          validationMessages={nameValidationMessages}
-          required
-          pattern="[A-Za-z ]{1,32}"
-          usePlaceholder
-          value={userData.name}
-          defaultValue={userData.name}
-          onChange={({ currentTarget: { value } }) => {
-            setUserDataField("name", value);
-          }}
-        />
-        <Input
-          type="text"
-          label={"Prenume"}
           name="surname"
-          title="Prenume"
+          title="Nume"
           required
           pattern="[A-Za-z ]{1,32}"
           validationMessages={nameValidationMessages}
@@ -78,6 +65,21 @@ export const PersonalData = ({
           defaultValue={userData.surname}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("surname", value);
+          }}
+        />
+        <Input
+          type="text"
+          label={"Prenume"}
+          name="name"
+          title="Prenume"
+          validationMessages={nameValidationMessages}
+          required
+          pattern="[A-Za-z ]{1,32}"
+          usePlaceholder
+          value={userData.name}
+          defaultValue={userData.name}
+          onChange={({ currentTarget: { value } }) => {
+            setUserDataField("name", value);
           }}
         />
         <Input
@@ -140,7 +142,7 @@ export const PersonalData = ({
           value={userData.age}
           defaultValue={userData.age}
           step={1}
-          min={0}
+          min={isForFamilyMember ? 0 : 18}
           max={120}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("age", +value);
