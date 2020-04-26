@@ -55,23 +55,8 @@ export const PersonalData = ({
         <Input
           type="text"
           label={"Nume"}
-          name="nume"
-          title="Nume"
-          validationMessages={nameValidationMessages}
-          required
-          pattern="[A-Za-z ]{1,32}"
-          usePlaceholder
-          value={userData.name}
-          defaultValue={userData.name}
-          onChange={({ currentTarget: { value } }) => {
-            setUserDataField("name", value);
-          }}
-        />
-        <Input
-          type="text"
-          label={"Prenume"}
           name="surname"
-          title="Prenume"
+          title="Nume"
           required
           pattern="[A-Za-z ]{1,32}"
           validationMessages={nameValidationMessages}
@@ -80,6 +65,21 @@ export const PersonalData = ({
           defaultValue={userData.surname}
           onChange={({ currentTarget: { value } }) => {
             setUserDataField("surname", value);
+          }}
+        />
+        <Input
+          type="text"
+          label={"Prenume"}
+          name="name"
+          title="Prenume"
+          validationMessages={nameValidationMessages}
+          required
+          pattern="[A-Za-z ]{1,32}"
+          usePlaceholder
+          value={userData.name}
+          defaultValue={userData.name}
+          onChange={({ currentTarget: { value } }) => {
+            setUserDataField("name", value);
           }}
         />
         <Input
