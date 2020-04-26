@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 [assembly: HostingStartup(typeof(IdentityHostingStartup))]
 namespace IdentityServer
@@ -31,7 +32,7 @@ namespace IdentityServer
                         options.SignIn.RequireConfirmedAccount = emailConfirmation)
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-                SeedData.EnsureSeedData(context.Configuration.GetConnectionString("ApplicationDbContextConnection"));
+                SeedData.EnsureSeedData(context.Configuration.GetConnectionString("ApplicationDbContextConnection"), context.HostingEnvironment.IsDevelopment());
             });
         }
     }
