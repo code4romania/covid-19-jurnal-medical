@@ -33,13 +33,13 @@ namespace StamAcasa.Common.Services.Emailing
                 await client.AuthenticateAsync(_options.User, _options.Password, cancellationToken);
 
                 var body = new TextPart(TextFormat.Html) { Text = email.Content };
-                var message = new MimeMessage
-                {
-                    Sender = new MailboxAddress(email.FromName, email.FromEmail),
-                    Subject = email.Subject,
-                    Body = body,
-                    To = { new MailboxAddress(email.To) }
-                };
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(email.FromName, email.FromEmail));
+                message.Sender = new MailboxAddress(email.FromName, email.FromEmail);
+                message.Subject = email.Subject;
+                message.Body = body;
+                message.To.Add(new MailboxAddress(email.To));
+
                 if (email.Attachment != null)
                 {
                     var attachment = new MimePart("application", "vnd.openxmlformats-officedocument.spreadsheetml.sheet")
