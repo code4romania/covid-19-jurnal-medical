@@ -54,17 +54,18 @@ namespace IdentityServer.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Te rugăm completează adresa de e-mail")]
+            [EmailAddress(ErrorMessage = "Adresa de e-mail nu este validă.")]
             [Display(Name = "Adresa de e-mail")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "Câmpul {0} trebuie să aibă lungimea între minim {2} și maximum {1} caractere.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Te rugăm să completezi parola")]
+            [StringLength(100, ErrorMessage = "Parola trebuie să aibă lungimea între minim {2} și maximum {1} caractere.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Setează parola")]
             public string Password { get; set; }
 
+            [Required(ErrorMessage = "Te rugăm să completezi confirmarea parolei")]
             [DataType(DataType.Password)]
             [Display(Name = "Confirmă parola")]
             [Compare("Password", ErrorMessage = "Câmpurile de parolă și confirmare parolă nu sunt identice.")]
