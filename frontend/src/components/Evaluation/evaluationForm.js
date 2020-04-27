@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Form } from "@code4ro/taskforce-fe-components";
 import FinishFormButton from "../Evaluation/finishFormButton";
 import IntroSelfEvaluation from "./SelfEvaluation/introSelfEvaluation";
+import LoadingPlaceholder from "../LoadingPlaceholder";
 
 const EvaluationForm = ({ getForm, sendResults }) => {
   const [started, setStarted] = useState(false);
@@ -36,7 +37,9 @@ const EvaluationForm = ({ getForm, sendResults }) => {
             onFinishingForm={onFinishingForm}
           />
         )}
-        {evaluationFormData === null && <div>Formularul se incarca</div>}
+        {evaluationFormData === null && (
+          <LoadingPlaceholder text={"Formularul se încarcă"} />
+        )}
         {finished && <FinishFormButton />}
       </>
     );

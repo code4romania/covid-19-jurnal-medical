@@ -8,18 +8,23 @@ import ProfileApi from "../../../api/profileApi";
 import { DESCRIPTION_TEXT } from "./constants.js";
 
 import "./MemberAccount.scss";
+import LoadingPlaceholder from "../../LoadingPlaceholder";
 
 export const MemberAccount = () => {
   const { personId } = useParams();
   const history = useHistory();
   const [options, setOptions] = useState([]);
-  const [familyMembers, setFamilyMembers] = useState([]);
+  const [familyMembers, setFamilyMembers] = useState();
 
   useEffect(() => {
     ProfileApi.getDependants().then(setFamilyMembers);
   }, []);
 
   useEffect(() => {
+    if (!familyMembers) {
+      return;
+    }
+
     if (!personId && familyMembers.length) {
       history.replace(`/account/other-members/${familyMembers[0].id}`);
     }
@@ -44,6 +49,10 @@ export const MemberAccount = () => {
       }
     }
   };
+
+  if (!familyMembers) {
+    return <LoadingPlaceholder />;
+  }
 
   if (!familyMembers.length) {
     return <div> Nu există alți membri</div>;
