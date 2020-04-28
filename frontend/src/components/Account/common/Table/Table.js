@@ -17,10 +17,6 @@ const formatCell = (key, value) => {
 };
 
 const Table = ({ dataRows, headers, title }) => {
-  if (!dataRows || !Object.keys(dataRows).length) {
-    return <div> Nu există date</div>;
-  }
-
   const renderRow = (item, itemIndex) => {
     return (
       <tr key={itemIndex}>
@@ -36,15 +32,19 @@ const Table = ({ dataRows, headers, title }) => {
   return (
     <div className="table-container">
       {title && <h2 className="header subheader">{title}</h2>}
-      <table className="table">
-        <thead>
-          <tr>
-            {headers.length &&
-              headers.map(item => <th key={item.label}>{item.label}</th>)}
-          </tr>
-        </thead>
-        <tbody>{dataRows.map(renderRow)}</tbody>
-      </table>
+      {dataRows && Object.keys(dataRows).length ? (
+        <table className="table">
+          <thead>
+            <tr>
+              {headers.length &&
+                headers.map(item => <th key={item.label}>{item.label}</th>)}
+            </tr>
+          </thead>
+          <tbody>{dataRows.map(renderRow)}</tbody>
+        </table>
+      ) : (
+        <div className="no-results">Nu există date</div>
+      )}
     </div>
   );
 };

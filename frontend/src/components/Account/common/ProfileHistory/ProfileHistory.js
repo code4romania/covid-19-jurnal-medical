@@ -70,7 +70,7 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
             title="Alte Simptome"
           />
           <hr />
-          <h2 className="header">Istoric deplasări </h2>
+          <h2 className="header">Istoric deplasări</h2>
           <Table dataRows={history.outings} headers={OUTINGS_HEADERS} />
         </>
       )}
