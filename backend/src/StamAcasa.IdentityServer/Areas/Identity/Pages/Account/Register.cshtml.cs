@@ -85,7 +85,7 @@ namespace IdentityServer.Pages.Account
                 PlaceholderContent = new Dictionary<string, string>(),
                 TemplateType = EmailTemplate.AccountConfirmation,
                 Type = "accountConfirmationTemplate",
-                SenderName = "Admin Stam Acasa",
+                SenderName = "Admin Stăm Acasă",
                 Subject = ""
             };
             email.PlaceholderContent.Add("name", userName);

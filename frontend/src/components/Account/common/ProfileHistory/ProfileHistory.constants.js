@@ -1,11 +1,11 @@
 export const SYMPTOMS_HEADERS = [
   { label: "Data/Ora", field: "date" },
   {
-    label: "Durere in gat si/sau dificultate in a inghiti?",
+    label: "Durere în gât și/sau dificultate în a înghiți?",
     field: "soreThroat"
   },
-  { label: "Tuse intensa?", field: "cough" },
-  { label: "Dificultate in a respira?", field: "shortnessBreath" },
+  { label: "Tuse intensă?", field: "cough" },
+  { label: "Dificultate în a respira?", field: "shortnessBreath" },
   { label: "Îți curge nasul?", field: "runningNose" }
 ];
 
