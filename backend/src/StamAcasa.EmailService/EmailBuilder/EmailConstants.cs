@@ -22,7 +22,7 @@ namespace StamAcasa.EmailService.EmailBuilder
             { EmailTemplate.AccountConfirmation, "Bine ai venit! #stamacasa impreună și în siguranță!"},
             { EmailTemplate.DailyAssessment, "Un minut pe zi pentru o viață liniștită. Chestionar zilnic de evaluare"},
             { EmailTemplate.StateEntity, "Rezultate evaluare persoane autoizolare"},
-            { EmailTemplate.ResetPassword, "Resetare parola"}
+            { EmailTemplate.ResetPassword, "Resetare parolă"}
         };
 
         private static Dictionary<EmailTemplate, string> templatePaths = new Dictionary<EmailTemplate, string>()

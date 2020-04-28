@@ -40,7 +40,7 @@ namespace StamAcasa.Common.Notifications
                 Type = "dailyAssessment",
                 PlaceholderContent = new Dictionary<string, string>
                 {
-                    { "name", $"{userInfo.Name} {userInfo.Surname}" },
+                    { "name", $"{userInfo.Name}" },
                     { "evaluationLink", _userProfileUrls.Evaluation }
                 }
             };
