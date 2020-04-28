@@ -1,30 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Form } from "@code4ro/taskforce-fe-components";
 import FinishFormButton from "../Evaluation/finishFormButton";
 import LoadingPlaceholder from "../LoadingPlaceholder";
 import StartFormButton from "./startFormButton";
-import ProfileApi from "../../api/profileApi";
-import ProfileDetails from "../Account/common/ProfileDetails/ProfileDetails";
-import ProfileOthers from "../Account/common/ProfileOthers/ProfileOthers";
 import formResultCalculator from "./formResultCalculator";
 
 const EvaluationForm = ({ getForm, sendResults }) => {
-  const [userProfile, setUserProfile] = useState({});
-  const [dependants, setDependants] = useState([]);
   const [started, setStarted] = useState(false);
   const [finished, setFinished] = useState(false);
   const [introData, setIntroData] = useState({});
   const [evaluationFormData, setEvaluationForm] = useState(null);
-  const [isSelf, setIsSelf] = useState(true);
-  const location = useLocation();
-
-  useEffect(() => {
-    setIsSelf(!location.pathname.startsWith("/evaluation/other-members"));
-    ProfileApi.get().then(setUserProfile);
-    ProfileApi.getDependants().then(setDependants);
-  }, []);
 
   useEffect(() => {
     getForm().then(setEvaluationForm);
@@ -57,17 +43,7 @@ const EvaluationForm = ({ getForm, sendResults }) => {
       </>
     );
   } else {
-    return (
-      <>
-        <StartFormButton onClick={onFinishingIntro} />
-
-        {userProfile.id && isSelf && (
-          <ProfileDetails fields={userProfile} isSelf>
-            <ProfileOthers family={dependants} />
-          </ProfileDetails>
-        )}
-      </>
-    );
+    return <StartFormButton onClick={onFinishingIntro} />;
   }
 };
 
