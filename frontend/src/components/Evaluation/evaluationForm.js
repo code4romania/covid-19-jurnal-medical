@@ -8,6 +8,7 @@ import StartFormButton from "./startFormButton";
 import ProfileApi from "../../api/profileApi";
 import ProfileDetails from "../Account/common/ProfileDetails/ProfileDetails";
 import ProfileOthers from "../Account/common/ProfileOthers/ProfileOthers";
+import formResultCalculator from "./formResultCalculator";
 
 const EvaluationForm = ({ getForm, sendResults }) => {
   const [userProfile, setUserProfile] = useState({});
@@ -29,8 +30,6 @@ const EvaluationForm = ({ getForm, sendResults }) => {
     getForm().then(setEvaluationForm);
   }, [getForm]);
 
-  const evaluateCallback = (_formState, options) => options[0];
-
   const onFinishingForm = result => {
     setFinished(true);
     sendResults(result, introData);
@@ -47,7 +46,7 @@ const EvaluationForm = ({ getForm, sendResults }) => {
         {evaluationFormData && (
           <Form
             data={evaluationFormData}
-            evaluateForm={evaluateCallback}
+            evaluateForm={formResultCalculator}
             onFinishingForm={onFinishingForm}
           />
         )}
