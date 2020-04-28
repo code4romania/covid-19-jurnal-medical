@@ -1,3 +1,5 @@
+using System;
+using System.Security.Cryptography.X509Certificates;
 using IdentityServer.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,8 +51,11 @@ namespace IdentityServer
                 .AddInMemoryClients(_identityConfiguration.Clients)
                 .AddAspNetIdentity<ApplicationUser>();
 
-            // not recommended for production - you need to store your key material somewhere secure
-            builder.AddDeveloperSigningCredential();
+            var base64EncodedCertificate = Configuration["Certificate:Base64Encoded"];
+            var password = Configuration["Certificate:Password"];
+
+            builder.AddSigningCredential(LoadCertificate(base64EncodedCertificate, password));
+
             services.AddAuthentication();
             var emailType = Configuration.GetValue<EmailingSystemTypes>("EMailingSystem");
             switch (emailType)
@@ -88,6 +93,14 @@ namespace IdentityServer
                                             Configuration.GetValue<string>("RabbitMQ:Password"))
                 ));
             services.AddSingleton<IQueueService, QueueService>();
+        }
+
+        private X509Certificate2 LoadCertificate(string base64EncodedCertificate, string password)
+        {
+            var certificateBytes = Convert.FromBase64String(base64EncodedCertificate);
+
+            var certificate = new X509Certificate2(certificateBytes, password, X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
+            return certificate;
         }
 
 
