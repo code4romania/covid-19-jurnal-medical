@@ -1,6 +1,7 @@
 import React from "react";
 import { Hero, SocialsShare } from "@code4ro/taskforce-fe-components";
 import SidebarLayout from "../../SidebarLayout";
+import { Constants } from "../../../config/constants";
 
 class DefaultHomePage extends React.Component {
   shareableLink() {
@@ -54,11 +55,7 @@ class DefaultHomePage extends React.Component {
           <Hero title="Cum îmi creez un cont" />
           <div className="content">
             <p>
-              Poți folosi această aplicație pe web sau să ți-o instalezi pe
-              mobil. Primul pas este să te înregistrezi și apoi vei putea să îți
-              completezi profilul tău, pe al altor membri ai familiei sau al
-              altor persoane pe care le ai în grijă și să completezi apoi
-              formularele recurente de monitorizare.
+              Poți folosi această aplicație pentru a-ți monitoriza starea de sănătate după ce îți creezi un cont de utilizator <a href={`${Constants.idpUrl}/identity/account/register?returnUrl=${window.location}register-complete`}>aici</a>. După înregistrare vei putea să îți completezi profilul tău, pe al altor membri ai familiei sau al altor persoane pe care le ai în grijă și să completezi apoi formularele recurente de monitorizare.
             </p>
           </div>
         </SidebarLayout>
