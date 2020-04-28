@@ -140,7 +140,7 @@
           "nextQuestionId": 13,
           "questionText": "Te rugăm să le descrii",
           "type": "INPUT",
-          "options": [ 
+          "options": [
               {
                   "optionType": "string"
               }
@@ -233,7 +233,7 @@
           "nextQuestionId": 18,
           "questionText": "Care a fost motivul deplasării?",
           "type": "INPUT",
-          "options": [ 
+          "options": [
               {
                   "optionType": "string"
               }
@@ -256,7 +256,7 @@
           "nextQuestionId": 21,
           "questionText": "Ai fost în contact direct cu o persoană diagnosticată/confirmată cu noul coronavirus?",
           "type": "SINGLE_CHOICE",
-          "options": [ 
+          "options": [
               {
                   "label": "Da",
                   "value": true
@@ -274,7 +274,7 @@
         "type": "FINAL",
         "options": [
             {
-                "label": "Conform răspunsurilor tale ai un grad ridicat de risc să fii infectat cu COVID-19. Te rugăm să suni la 112 și să aștepți ca cineva să te preia. Liniile sunt foarte ocupate acum, te rugăm să ai răbdare.Între timp, nu ieși din casă și limitează contactul cu familia pentru a nu îi pune în pericol.Alternativ, poți suna la Direcția de Sănătate Publică din județul tău daca simptomele sunt ușoare și ei te vor ghida mai departe.",
+                "label": "Conform răspunsurilor tale ai un grad ridicat de risc să fii infectat cu COVID-19. Te rugăm să suni la 112 și să aștepți ca cineva să te preia. Liniile sunt foarte ocupate acum, te rugăm să ai răbdare. Între timp, nu ieși din casă și limitează contactul cu familia pentru a nu îi pune în pericol.Alternativ, poți suna la Direcția de Sănătate Publică din județul tău daca simptomele sunt ușoare și ei te vor ghida mai departe.",
                 "value": "R1"
             },
             {
