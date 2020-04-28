@@ -32,8 +32,7 @@ export const MemberAccount = () => {
     setOptions(
       familyMembers.map(({ name, surname, id }) => ({
         text: `${name} ${surname}`,
-        value: `${id}`,
-        selected: id === +personId
+        value: id
       }))
     );
   }, [personId, familyMembers]);
@@ -62,7 +61,12 @@ export const MemberAccount = () => {
     <div className="member-profile">
       <p>{DESCRIPTION_TEXT}</p>
       <h1 className="member-profile__select">
-        <Select label="Alege persoana" selectProps={props} options={options} />
+        <Select
+          label="Alege persoana"
+          selectProps={props}
+          defaultValue={personId}
+          options={options}
+        />
       </h1>
       <Switch>
         {familyMembers.map(member => (
