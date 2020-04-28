@@ -18,11 +18,7 @@ export const FooterComponent = () => (
     <Footer>
       <FooterLinks>
         <FooterLinkHeader>Link-uri utile</FooterLinkHeader>
-        {FOOTER_LINKS.leftColumn.map(FooterLink)}
-      </FooterLinks>
-      <FooterLinks>
-        <FooterLinkHeader>&nbsp;</FooterLinkHeader>
-        {FOOTER_LINKS.rightColumn.map(FooterLink)}
+        {FOOTER_LINKS.map(FooterLink)}
       </FooterLinks>
     </Footer>
   </div>
