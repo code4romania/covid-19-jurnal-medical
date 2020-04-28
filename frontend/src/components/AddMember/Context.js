@@ -42,11 +42,11 @@ const Context = ({ userData, setUserDataField, titles }) => (
 Context.propTypes = {
   userData: PropTypes.object.isRequired,
   setUserDataField: PropTypes.func.isRequired,
-  titles: {
+  titles: PropTypes.shape({
     header: PropTypes.string.isRequired,
     quarantineStatus: PropTypes.string.isRequired,
     livesWithOthersStatus: PropTypes.string.isRequired
-  }
+  })
 };
 
 export default Context;
