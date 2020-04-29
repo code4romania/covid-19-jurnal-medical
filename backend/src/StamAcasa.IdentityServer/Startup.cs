@@ -93,6 +93,7 @@ namespace IdentityServer
                                             Configuration.GetValue<string>("RabbitMQ:Password"))
                 ));
             services.AddSingleton<IQueueService, QueueService>();
+            services.AddSingleton<PasswordValidationMessages>();
         }
 
         private X509Certificate2 LoadCertificate(string base64EncodedCertificate, string password)

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Configuration;
 using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services.Emailing;
 
@@ -34,8 +33,8 @@ namespace IdentityServer.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Te rugăm completează adresa de e-mail")]
+            [EmailAddress(ErrorMessage = "Adresa de e-mail nu este validă.")]
             public string Email { get; set; }
         }
 
