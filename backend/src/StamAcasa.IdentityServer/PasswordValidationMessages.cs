@@ -13,7 +13,7 @@ namespace StamAcasa.IdentityServer
             { "PasswordRequiresNonAlphanumeric", "Parola trebuie să conțină cel puțin un caracter non-alfanumeric"},
             { "PasswordRequiresDigit", "Parola trebuie să conțină cel puțin o cifră('0'-'9')" },
             { "PasswordRequiresUpper", "Parola trebuie să conțină cel puțin o literă mare('A'-'Z')" },
-            { "PasswordRequiresLower", "Parola trebuie să conțină cel puțin o literă mica('a'-'z')"}
+            { "PasswordRequiresLower", "Parola trebuie să conțină cel puțin o literă mică('a'-'z')"}
         };
 
         public string GetMessageByCode(IdentityError error)
