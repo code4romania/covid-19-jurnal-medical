@@ -37,7 +37,7 @@ namespace IdentityServer.Pages.Account.Manage
             [Display(Name = "Current password")]
             public string OldPassword { get; set; }
 
-            [Required(ErrorMessage = "Te rugăm să completeazi parola veche")]
+            [Required(ErrorMessage = "Te rugăm să completeazi noua parola")]
             [StringLength(100, ErrorMessage = "Câmpul {0} trebuie să aibă lungimea între minim {2} și maximum {1} caractere.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "New password")]
