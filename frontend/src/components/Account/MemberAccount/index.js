@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch, useHistory, useParams } from "react-router-dom";
+import { Link, Route, Switch, useHistory, useParams } from "react-router-dom";
 import { Select } from "@code4ro/taskforce-fe-components";
 
 import ProfileHistory from "../common/ProfileHistory/ProfileHistory.js";
@@ -54,7 +54,14 @@ export const MemberAccount = () => {
   }
 
   if (!familyMembers.length) {
-    return <div> Nu există alți membri</div>;
+    return (
+      <div>
+        <div>Nu există alți membri. </div>
+        <Link className="link" to={{ pathname: "/add-member" }}>
+          Adaugă pe cineva
+        </Link>
+      </div>
+    );
   }
 
   return (

@@ -24,7 +24,7 @@ const formResultCalculator = (formState, options) => {
   );
 
   if (!choosenResponse) {
-    return { label: "Mulțumim", value: 0 };
+    return { label: "Mulțumim că ai completat formularul!", value: 0 };
   }
 
   return choosenResponse;

@@ -15,9 +15,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using StamAcasa.Common.Models;
 using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services.Emailing;
+using StamAcasa.IdentityServer;
 
 namespace IdentityServer.Pages.Account
 {
@@ -29,19 +29,22 @@ namespace IdentityServer.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IQueueService _queue;
         private readonly IConfiguration _configuration;
+        private readonly PasswordValidationMessages _passwordValidationMessages;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IQueueService queueService,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            PasswordValidationMessages passwordValidationMessages)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _queue = queueService;
             _configuration = configuration;
+            _passwordValidationMessages = passwordValidationMessages;
         }
 
         [BindProperty]
@@ -85,7 +88,7 @@ namespace IdentityServer.Pages.Account
                 PlaceholderContent = new Dictionary<string, string>(),
                 TemplateType = EmailTemplate.AccountConfirmation,
                 Type = "accountConfirmationTemplate",
-                SenderName = "Admin Stam Acasa",
+                SenderName = "Admin Stăm Acasă",
                 Subject = ""
             };
             email.PlaceholderContent.Add("name", userName);
@@ -137,7 +140,8 @@ namespace IdentityServer.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    var errorDescription = _passwordValidationMessages.GetMessageByCode(error);
+                    ModelState.AddModelError(string.Empty, errorDescription);
                 }
             }
 

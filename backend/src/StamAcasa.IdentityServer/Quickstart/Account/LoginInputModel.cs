@@ -8,9 +8,11 @@ namespace IdentityServer.Quickstart.Account
 {
     public class LoginInputModel
     {
-        [Required]
+        [Required(ErrorMessage = "Te rugăm completează numele de utilizator")]
+        [EmailAddress(ErrorMessage = "Adresa de e-mail nu este validă.")]
         public string Username { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Te rugăm să completezi parola")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
         public bool RememberLogin { get; set; }
         public string ReturnUrl { get; set; }
