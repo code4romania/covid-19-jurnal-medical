@@ -32,7 +32,7 @@ namespace IdentityServer.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required(ErrorMessage = "Te rugăm să completeazi parola curenta")]
+            [Required(ErrorMessage = "Te rugăm să completezi parola curentă")]
             [DataType(DataType.Password)]
             [Display(Name = "Current password")]
             public string OldPassword { get; set; }
