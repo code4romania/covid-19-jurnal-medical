@@ -28,7 +28,7 @@ namespace IdentityServer.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Te rugăm să completeazi parola")]
             [StringLength(100, ErrorMessage = "Câmpul {0} trebuie să aibă lungimea între minim {2} și maximum {1} caractere.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "New password")]

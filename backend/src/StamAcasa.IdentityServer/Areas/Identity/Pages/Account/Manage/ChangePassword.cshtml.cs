@@ -32,12 +32,12 @@ namespace IdentityServer.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Te rugăm să completeazi parola curenta")]
             [DataType(DataType.Password)]
             [Display(Name = "Current password")]
             public string OldPassword { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Te rugăm să completeazi parola veche")]
             [StringLength(100, ErrorMessage = "Câmpul {0} trebuie să aibă lungimea între minim {2} și maximum {1} caractere.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "New password")]

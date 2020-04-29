@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using StamAcasa.IdentityServer;
 
 namespace IdentityServer.Pages.Account
 {
@@ -14,10 +15,13 @@ namespace IdentityServer.Pages.Account
     public class ResetPasswordModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly PasswordValidationMessages _passwordValidationMessages;
 
-        public ResetPasswordModel(UserManager<ApplicationUser> userManager)
+        public ResetPasswordModel(UserManager<ApplicationUser> userManager,
+            PasswordValidationMessages passwordValidationMessages)
         {
             _userManager = userManager;
+            _passwordValidationMessages = passwordValidationMessages;
         }
 
         [BindProperty]
@@ -25,11 +29,11 @@ namespace IdentityServer.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Te rugăm completează adresa de e-mail")]
+            [EmailAddress(ErrorMessage = "Adresa de e-mail nu este validă.")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Te rugăm să completezi parola")]
             [StringLength(100, ErrorMessage = "Câmpul {0} trebuie să aibă lungimea între minim {2} și maximum {1} caractere.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
@@ -80,7 +84,8 @@ namespace IdentityServer.Pages.Account
 
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                var errorDescription = _passwordValidationMessages.TryGetMessageByCode(error);
+                ModelState.AddModelError(string.Empty, errorDescription);
             }
             return Page();
         }
