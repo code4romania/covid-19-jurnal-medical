@@ -16,7 +16,7 @@ namespace StamAcasa.IdentityServer
             { "PasswordRequiresLower", "Parola trebuie să conțină cel puțin o literă mica('a'-'z')"}
         };
 
-        public string TryGetMessageByCode(IdentityError error)
+        public string GetMessageByCode(IdentityError error)
         {
             if (passwordValidationDictionary.ContainsKey(error.Code))
             {

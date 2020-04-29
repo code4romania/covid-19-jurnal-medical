@@ -84,7 +84,7 @@ namespace IdentityServer.Pages.Account
 
             foreach (var error in result.Errors)
             {
-                var errorDescription = _passwordValidationMessages.TryGetMessageByCode(error);
+                var errorDescription = _passwordValidationMessages.GetMessageByCode(error);
                 ModelState.AddModelError(string.Empty, errorDescription);
             }
             return Page();
