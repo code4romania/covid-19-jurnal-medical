@@ -3,23 +3,26 @@ import React from "react";
 
 const MenuItems = () => (
   <>
+    <a
+      href="https://cetrebuiesafac.ro"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Ce trebuie să fac
+    </a>
+    <a href="https://datelazi.ro" target="_blank" rel="noopener noreferrer">
+      Date la zi
+    </a>
+    <a
+      href="https://stirioficiale.ro"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Știri oficiale
+    </a>
     <NavLink className="nav-link" to="/despre">
       Despre
     </NavLink>
-    <a
-      href="https://code4.ro/ro/apps/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Ecosistemul Covid-19
-    </a>
-    <a
-      href="https://code4.ro/ro/doneaza/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Sprijină proiectul
-    </a>
   </>
 );
 
