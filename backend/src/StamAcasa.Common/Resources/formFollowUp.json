@@ -118,19 +118,19 @@
             "type": "SINGLE_CHOICE",
             "options": [
                 {
-                    "label": "Da, sunt in izolare - nu ies deloc din locuinta",
+                    "label": "Da, sunt în izolare - nu ies deloc din locuință",
                     "value": 0
                 },
                 {
-                    "label": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
+                    "label": "Stau mai mult pe acasă, dar mai ies atunci când este nevoie",
                     "value": 1
                 },
                 {
-                    "label": "Nu sunt in izolare si ies din locuinta dupa program normal",
+                    "label": "Nu sunt în izolare și ies din locuință după program normal",
                     "value": 2
                 },
                 {
-                    "label": "Alta situatie",
+                    "label": "Altă situație",
                     "value": 3
                 }
             ]
@@ -159,19 +159,19 @@
             "type": "SINGLE_CHOICE",
             "options": [
                 {
-                    "label": "Da, sunt in izolare - nu ies deloc din locuinta",
+                    "label": "Da, sunt în izolare - nu ies deloc din locuință",
                     "value": 0
                 },
                 {
-                    "label": "Stau mai mult pe acasa, dar mai ies atunci cand este nevoie",
+                    "label": "Stau mai mult pe acasă, dar mai ies atunci când este nevoie",
                     "value": 1
                 },
                 {
-                    "label": "Nu sunt in izolare si ies din locuinta dupa program normal",
+                    "label": "Nu sunt în izolare și ies din locuință după program normal",
                     "value": 2
                 },
                 {
-                    "label": "Alta situatie",
+                    "label": "Altă situație",
                     "value": 3
                 }
             ]
