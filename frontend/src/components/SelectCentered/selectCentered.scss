@@ -16,26 +16,26 @@
     background: none;
     width: 100%;
   }
-}
 
-.center-select__text {
-  background-color: #fff;
-  border-radius: 5px;
-  border: 1px solid #dbdbdb;
-  color: #363636;
-  cursor: pointer;
-  pointer-events: none;
-  text-align: center;
+  .text {
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #dbdbdb;
+    color: #363636;
+    cursor: pointer;
+    pointer-events: none;
+    text-align: center;
 
-  // to center the text in the middle of the span
-  // the line height value is coming from bulma - a bit of hack!
-  // Feel free to make it better
-  display: inline-block;
-  line-height: 2.5em;
+    // to center the text in the middle of the span
+    // the line height value is coming from bulma - a bit of hack!
+    // Feel free to make it better
+    display: inline-block;
+    line-height: 2.5em;
 
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
 }
