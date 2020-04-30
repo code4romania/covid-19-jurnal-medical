@@ -46,8 +46,8 @@ namespace IdentityServer.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Te rugăm completează adresa de e-mail")]
+            [EmailAddress(ErrorMessage = "Adresa de e-mail nu este validă.")]
             [Display(Name = "New email")]
             public string NewEmail { get; set; }
         }
