@@ -1,11 +1,31 @@
-.tabs{
+.tabs {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-top: 10px;
+
     .tab {
         flex: 1;
     }
-    @media (min-width: 457px) {
-        flex-direction: row;
+
+    @media (max-width: 480px) {
+        a {
+            padding: 0.5rem;
+
+            &:first-child { padding-left: 0; }
+            &:last-child { padding-right: 0; }
+        }
+
+
+        .hero {
+            margin: 0;
+
+            svg {
+                transform: scale(.7);
+            }
+
+            .hero-body .title {
+                font-size: 15px;
+            }
+        }
     }
 }

@@ -62,7 +62,7 @@ const mapProfileDetails = data => {
       };
 
       if (key === "name") {
-        return { ...mappedItem, value: `${data.name} ${data.surname}` };
+        return { ...mappedItem, value: `${data.surname} ${data.name}` };
       }
 
       if (key === "location") {
