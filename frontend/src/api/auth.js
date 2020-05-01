@@ -41,6 +41,7 @@ export const signinCallback = () => userManager.signinRedirectCallback();
 export const signout = () => userManager.signoutRedirect();
 export const signoutCallback = () => userManager.signoutRedirectCallback();
 export const silentRefreshCallback = () => userManager.signinSilentCallback();
+export const signinSilent = () => userManager.signinSilent();
 export const getUser = () => userManager.getUser();
 export const getUserToken = async () => {
   const user = await userManager.getUser();

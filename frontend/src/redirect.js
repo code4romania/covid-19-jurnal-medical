@@ -1,22 +1,20 @@
-import { signin, signinCallback } from "./api/auth";
+import { signinSilent, signin, signinCallback } from "./api/auth";
 
-export const redirectSigninCallback = changeLocation => {
-  signinCallback().then(res => {
-    if (res.state && res.state.uri && changeLocation) {
-      changeLocation(`/${res.state.uri}`);
-    } else {
-      changeLocation("/account");
-    }
-  });
+export const redirectSigninCallback = async changeLocation => {
+  const res = await signinCallback();
+  if (res.state && res.state.uri && changeLocation) {
+    changeLocation(`/${res.state.uri}`);
+  } else {
+    changeLocation("/account");
+  }
 };
 
 export const redirectPromise = (promise, location = "/account") => {
-  return changeLocation => {
-    promise().then(() => {
-      if (changeLocation) {
-        changeLocation(location);
-      }
-    });
+  return async changeLocation => {
+    await promise();
+    if (changeLocation) {
+      changeLocation(location);
+    }
   };
 };
 
@@ -39,4 +37,10 @@ export const redirectSignin = () => {
   }
 
   signin(data);
+};
+
+export const redirectSilentSignin = async changeLocation => {
+  changeLocation("/");
+  await signinSilent();
+  changeLocation("/account");
 };
