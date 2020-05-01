@@ -26,11 +26,9 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
 
   useEffect(() => {
     EvaluationApi.getEvaluationResults(data.id).then(res => {
-      if (res && res.length > 0) {
-        setHistory(buildHistory(res));
-      }
+      setHistory(res && res.length > 0 ? buildHistory(res) : null);
     });
-  }, []);
+  }, [data]);
 
   return (
     <div className="profile-history-container">
@@ -41,7 +39,12 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
         {DESCRIPTION_TEXT}
         <Link
           to={
-            isSelf ? "/evaluation/me" : `/evaluation/other-members/${data.id}`
+            isSelf
+              ? "/evaluation/me"
+              : {
+                  pathname: "/evaluation/other-members",
+                  state: { id: data.id }
+                }
           }
         >
           {" "}
