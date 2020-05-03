@@ -23,8 +23,7 @@ const TABS = [
     id: 1,
     title: "Alte persoane",
     content: <MemberAccount />,
-    url: "/account/other-members/:personId?",
-    navUrl: "/account/other-members"
+    url: "/account/other-members"
   }
 ];
 
