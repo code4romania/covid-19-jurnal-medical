@@ -5,7 +5,7 @@ import UpdateProfile from "./components/UpdateProfile";
 import Evaluation from "./components/Evaluation";
 import Account from "./components/Account";
 import {
-  redirect,
+  redirectSilentSignin,
   redirectPromise,
   redirectSignin,
   redirectSigninCallback
@@ -48,7 +48,7 @@ export const ROUTES = {
     },
     registercomplete: {
       path: "/register-complete",
-      method: redirect("/")
+      method: redirectSilentSignin
     }
   },
   home: {
