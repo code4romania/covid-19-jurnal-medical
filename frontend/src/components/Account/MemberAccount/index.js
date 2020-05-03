@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Route, Switch, useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { Select } from "@code4ro/taskforce-fe-components";
 
 import ProfileHistory from "../common/ProfileHistory/ProfileHistory.js";
@@ -11,14 +11,17 @@ import "./MemberAccount.scss";
 import LoadingPlaceholder from "../../LoadingPlaceholder";
 
 export const MemberAccount = () => {
-  const { personId } = useParams();
+  const location = useLocation();
   const history = useHistory();
-  const [options, setOptions] = useState([]);
-  const [familyMembers, setFamilyMembers] = useState();
+
+  const [options, setOptions] = useState();
+  const [familyMembers, setFamilyMembers] = useState([]);
 
   useEffect(() => {
     ProfileApi.getDependants().then(setFamilyMembers);
   }, []);
+
+  const personId = location?.state?.id;
 
   useEffect(() => {
     if (!familyMembers) {
@@ -26,13 +29,16 @@ export const MemberAccount = () => {
     }
 
     if (!personId && familyMembers.length) {
-      history.replace(`/account/other-members/${familyMembers[0].id}`);
+      history.replace({
+        state: { id: familyMembers[0].id }
+      });
     }
 
     setOptions(
       familyMembers.map(({ name, surname, id }) => ({
         text: `${name} ${surname}`,
-        value: id
+        value: id,
+        selected: +personId === id
       }))
     );
   }, [personId, familyMembers]);
@@ -44,7 +50,9 @@ export const MemberAccount = () => {
       );
 
       if (selectedPerson) {
-        history.replace(`/account/other-members/${selectedPerson.id}`);
+        history.replace({
+          state: { id: selectedPerson.id }
+        });
       }
     }
   };
@@ -75,13 +83,12 @@ export const MemberAccount = () => {
           options={options}
         />
       </h1>
-      <Switch>
-        {familyMembers.map(member => (
-          <Route key={member.id} path={`/account/other-members/${member.id}`}>
-            <ProfileHistory data={member} family={familyMembers} />
-          </Route>
-        ))}
-      </Switch>
+      {personId && (
+        <ProfileHistory
+          data={familyMembers.find(member => member.id === +personId)}
+          family={familyMembers}
+        />
+      )}
     </div>
   );
 };

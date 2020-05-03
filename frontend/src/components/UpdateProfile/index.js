@@ -18,7 +18,10 @@ const UpdateProfile = ({
       );
     } else {
       ProfileApi.updateFamilyProfile(id, userData).then(() =>
-        history.push(`/account/other-members/${id}`)
+        history.push({
+          pathname: "/account/other-members",
+          state: { id }
+        })
       );
     }
   };

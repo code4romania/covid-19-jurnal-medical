@@ -7,7 +7,10 @@ const OtherProfileRedirect = ({ person, isLastItem }) => (
     <Link
       key={person.id}
       className="link"
-      to={`/account/other-members/${person.id}`}
+      to={{
+        pathname: "/account/other-members",
+        state: { id: person.id }
+      }}
     >
       {`${person.name} ${person.surname}`}
     </Link>

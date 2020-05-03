@@ -216,9 +216,9 @@ const AddMember = () => {
   const history = useHistory();
 
   const sendResults = userData => {
-    ProfileApi.addDependant(userData).then(({ data: id }) =>
-      history.push(`/account/other-members/${id}`)
-    );
+    ProfileApi.addDependant(userData).then(({ data: id }) => {
+      history.push({ pathname: "/account/other-members", state: { id } });
+    });
   };
 
   return (

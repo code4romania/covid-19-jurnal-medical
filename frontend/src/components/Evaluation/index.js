@@ -16,8 +16,7 @@ const Evaluation = () => {
       id: 1,
       title: "Alte persoane",
       content: <MemberEvaluation />,
-      url: "/evaluation/other-members/:personId?",
-      navUrl: "/evaluation/other-members"
+      url: "/evaluation/other-members"
     }
   ];
   return (
