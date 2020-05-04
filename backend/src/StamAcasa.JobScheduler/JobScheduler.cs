@@ -59,7 +59,7 @@ namespace StamAcasa.JobScheduler
             var schedulerConfiguration = new Dictionary<string, string>();
             var section = _configuration.GetSection(ConfigurationSectionKey.ScheduledJobs);
             section.Bind(schedulerConfiguration);
-            
+
             foreach (var jobTypeKey in schedulerConfiguration.Keys)
             {
                 var jobType = Type.GetType(jobTypeKey);
@@ -80,7 +80,7 @@ namespace StamAcasa.JobScheduler
                     var job = (IScheduledJob)scope.ServiceProvider.GetService(jobType);
 
                     _logger.LogInformation($"Running job {jobType} at {DateTimeOffset.Now}");
-                    await job.RunAsync(cancellationToken);
+                    await job.RunAsync(cancellationToken).ConfigureAwait(false);
 
                     var newInterval = cronExpression.GetTimeSpanToNextOccurrence();
                     timer.Interval = newInterval.TotalMilliseconds;
