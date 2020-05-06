@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using StamAcasa.Api.Services;
@@ -36,10 +37,18 @@ namespace StamAcasa.Api.Controllers
             if (subClaimValue == null)
                 return new UnauthorizedResult();
 
+            var authenticatedUser = await _userService.GetUserInfo(subClaimValue);
+            var isRequestAllowed = await IsRequestAllowed(id, authenticatedUser);
+            if (isRequestAllowed.NotAllowed)
+            {
+                return isRequestAllowed.Result;
+            }
+
             var result =
-                id == null ?
-                    await _formService.GetForms(subClaimValue) :
-                    await _formService.GetForms(id.Value);
+              id.HasValue ?
+                  await _formService.GetForms(id.Value) :
+                  await _formService.GetForms(subClaimValue);
+
             return new OkObjectResult(result);
         }
 
@@ -73,20 +82,10 @@ namespace StamAcasa.Api.Controllers
             form.Add("Timestamp", timestamp);
 
             var authenticatedUser = await _userService.GetUserInfo(subClaimValue);
-            if (authenticatedUser == null)
+            var isRequestAllowed =  await IsRequestAllowed(id, authenticatedUser);
+            if (isRequestAllowed.NotAllowed)
             {
-                return NotFound("Could not find authenticated user");
-            }
-            if (id.HasValue)
-            {
-                var currentUser = await _userService.GetUserInfo(id.Value);
-                if (currentUser == null)
-                {
-                    return NotFound($"Could not find user with id {id.Value}");
-                }
-
-                if (currentUser.ParentId.HasValue && currentUser.ParentId != authenticatedUser.Id)
-                    return new ForbidResult();
+                return isRequestAllowed.Result;
             }
 
             form.Add("UserId", id ?? authenticatedUser.Id);
@@ -106,6 +105,28 @@ namespace StamAcasa.Api.Controllers
                 $"{Guid.Parse(subClaimValue).ToString("N")}_{form.formId}_{timestamp.ToEpochTime()}.json");
 
             return new OkObjectResult(string.Empty);
+        }
+
+        private async Task<(bool NotAllowed, IActionResult Result)> IsRequestAllowed(int? id, UserInfo authenticatedUser)
+        {
+            if (authenticatedUser == null)
+            {
+                return (true, NotFound("Could not find authenticated user"));
+            }
+            if (id.HasValue)
+            {
+                var currentUser = await _userService.GetUserInfo(id.Value);
+                if (currentUser == null)
+                {
+                    return (true, NotFound($"Could not find user with id {id.Value}"));
+                }
+
+                var notFamilyMember = (currentUser.ParentId.HasValue && currentUser.ParentId != authenticatedUser.Id) || !currentUser.ParentId.HasValue;
+                if (authenticatedUser.Id != currentUser.Id && notFamilyMember)
+                    return (true, new StatusCodeResult(StatusCodes.Status403Forbidden));
+            }
+
+            return (false, null);
         }
     }
 }
