@@ -87,7 +87,7 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
                 <img
                   src={ChevronImageLeft}
                   className="navigation-chevron"
-                  alt="Pagina anterioara"
+                  alt="Pagina anterioară"
                 />
               </div>
             )}
@@ -99,7 +99,7 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
                 <img
                   src={ChevronImageRight}
                   className="navigation-chevron"
-                  alt="Pagina urmatoare"
+                  alt="Pagina următoare"
                 />
               </div>
             )}
@@ -122,7 +122,7 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
                 <img
                   src={ChevronImageLeft}
                   className="navigation-chevron"
-                  alt="Pagina anterioara"
+                  alt="Pagina anterioară"
                 />
               </div>
             )}
@@ -134,7 +134,7 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
                 <img
                   src={ChevronImageRight}
                   className="navigation-chevron"
-                  alt="Pagina urmatoare"
+                  alt="Pagina următoare"
                 />
               </div>
             )}
@@ -157,7 +157,7 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
                 <img
                   src={ChevronImageLeft}
                   className="navigation-chevron"
-                  alt="Pagina anterioara"
+                  alt="Pagina anterioară"
                 />
               </div>
             )}
@@ -169,7 +169,7 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
                 <img
                   src={ChevronImageRight}
                   className="navigation-chevron"
-                  alt="Pagina urmatoare"
+                  alt="Pagina următoare"
                 />
               </div>
             )}
