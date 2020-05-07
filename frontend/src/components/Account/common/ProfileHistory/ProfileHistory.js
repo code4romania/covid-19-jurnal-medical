@@ -67,7 +67,7 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
                 symptomsPage * PAGE_SIZE,
                 PAGE_SIZE * (symptomsPage + 1)
               )}
-              title="Monitorizare temperatura"
+              title="Monitorizare temperatură"
             />
           </div>
           <Table
