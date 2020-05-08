@@ -22,4 +22,13 @@
         max-width: 305px;
         border: 1px solid #E0E0E0;
     }
+
+    .navigation {
+        display: inline-block;
+        width: 100%;
+
+        .button.right {
+            float: right;
+        }
+    }
 }
