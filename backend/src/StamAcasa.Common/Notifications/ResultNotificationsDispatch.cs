@@ -43,6 +43,11 @@ namespace StamAcasa.Common.Notifications
         {
             _logger.LogInformation($"{DateTimeOffset.Now}: Sending assessment results notification.");
             var formsForThePastDay = await _formService.GetFormsByTime(TimeSpan.FromDays(1));
+            if (!formsForThePastDay.Any())
+            {
+                return;
+            }
+
             var formsByCounty = formsForThePastDay.GroupBy(f => f.UserInfo.County);
 
             var tasks = new List<Task>

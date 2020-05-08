@@ -14,9 +14,16 @@ namespace StamAcasa.JobScheduler.Extensions
 
             DateTimeOffset? next = cronExpression.GetNextOccurrence(DateTimeOffset.Now, TimeZoneInfo.Local);
 
-            return next.HasValue
+            var timeSpanToNextOccurrence = next.HasValue
                 ? next.Value - DateTimeOffset.Now
                 : TimeSpan.Zero;
+
+            if (timeSpanToNextOccurrence < TimeSpan.Zero)
+            {
+                return TimeSpan.Zero;
+            }
+
+            return timeSpanToNextOccurrence;
         }
     }
 }

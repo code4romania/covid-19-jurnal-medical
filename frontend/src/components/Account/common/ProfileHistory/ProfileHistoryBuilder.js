@@ -52,6 +52,14 @@ export const buildHistory = rawData => {
     }
   });
 
+  const sortByDate = (a, b) => (a.date > b.date ? -1 : 1);
+  result.outings = result.outings.sort((a, b) =>
+    a.startTime > b.startTime ? -1 : 1
+  );
+  result.temperature = result.temperature.sort(sortByDate);
+  result.symptoms = result.symptoms.sort(sortByDate);
+  result.otherSymptoms = result.otherSymptoms.sort(sortByDate);
+
   return result;
 };
 
