@@ -107,5 +107,14 @@ namespace StamAcasa.Common.Services
             var result = parents.Select(_mapper.Map<UserInfo>);
             return result;
         }
+
+        public async Task<List<int>> GetFamilyMembersIds(string sub)
+        {
+            var user = await _context.Users
+                .Include(x => x.DependentUsers)
+                .FirstOrDefaultAsync(u => u.Sub == sub);
+
+            return user?.DependentUsers?.Select(d => d.Id).ToList() ?? new List<int>();
+        }
     }
 }

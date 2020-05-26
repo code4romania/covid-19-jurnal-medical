@@ -2,7 +2,8 @@
 using System.Threading.Tasks;
 using StamAcasa.Common.DTO;
 
-namespace StamAcasa.Common.Services {
+namespace StamAcasa.Common.Services
+{
     public interface IUserService
     {
         Task<UserInfo> AddOrUpdateUserInfo(UserProfileDTO user);
@@ -12,5 +13,6 @@ namespace StamAcasa.Common.Services {
         Task<IEnumerable<UserInfo>> GetDependentInfo(string sub);
         Task<IEnumerable<UserInfo>> GetAll();
         Task<IEnumerable<UserInfo>> GetAllParents();
+        Task<List<int>> GetFamilyMembersIds(string sub);
     }
 }
