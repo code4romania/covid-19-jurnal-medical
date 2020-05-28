@@ -25,6 +25,7 @@ namespace StamAcasa.IdentityServer.Quickstart.Account
         private readonly IStamAcasaIdentityConfiguration _identityConfiguration;
         private readonly IHttpClientFactory _clientFactory;
         private readonly string _apiUrl;
+        private const string IdsrvClientId = "idsrvClient";
 
         public DeleteAccountController(UserManager<ApplicationUser> userManager, DefaultTokenService tokenService, IStamAcasaIdentityConfiguration identityConfiguration, IHttpClientFactory clientFactory, IConfiguration configuration)
         {
@@ -39,12 +40,7 @@ namespace StamAcasa.IdentityServer.Quickstart.Account
         public async Task<IActionResult> DeleteAccountAsync([FromBody] DeleteAccountModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
-            if (user == null)
-            {
-                return NotFound($"Could not find user with id {model.Username}");
-            }
-
-            if (!await _userManager.CheckPasswordAsync(user, model.Password))
+            if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 return new UnauthorizedResult();
             }
@@ -84,7 +80,7 @@ namespace StamAcasa.IdentityServer.Quickstart.Account
                 AuthenticationTime = DateTime.UtcNow,
             };
 
-            var request = new TokenCreationRequest 
+            var request = new TokenCreationRequest
             {
                 Subject = IdentityUser.CreatePrincipal(),
                 IncludeAllIdentityClaims = true,
@@ -95,7 +91,7 @@ namespace StamAcasa.IdentityServer.Quickstart.Account
             {
                 Subject = request.Subject
             };
-            request.ValidatedRequest.SetClient(_identityConfiguration.Clients.FirstOrDefault());
+            request.ValidatedRequest.SetClient(_identityConfiguration.Clients.FirstOrDefault(c => c.ClientId == IdsrvClientId));
 
             var accesToken = await _tokenService.CreateAccessTokenAsync(request);
             var token = await _tokenService.CreateSecurityTokenAsync(accesToken);
