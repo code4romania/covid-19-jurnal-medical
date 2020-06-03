@@ -21,19 +21,10 @@ namespace StamAcasa.IdentityServer.Quickstart.Account
     public class DeleteAccountController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly DefaultTokenService _tokenService;
-        private readonly IStamAcasaIdentityConfiguration _identityConfiguration;
-        private readonly IHttpClientFactory _clientFactory;
-        private readonly string _apiUrl;
-        private const string IdsrvClientId = "idsrvClient";
 
-        public DeleteAccountController(UserManager<ApplicationUser> userManager, DefaultTokenService tokenService, IStamAcasaIdentityConfiguration identityConfiguration, IHttpClientFactory clientFactory, IConfiguration configuration)
+        public DeleteAccountController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
-            _tokenService = tokenService;
-            _identityConfiguration = identityConfiguration;
-            _clientFactory = clientFactory;
-            _apiUrl = configuration["StamAcasaApi"];
         }
 
         [HttpPost]
@@ -45,13 +36,6 @@ namespace StamAcasa.IdentityServer.Quickstart.Account
                 return new UnauthorizedResult();
             }
 
-            string tokenValue = await CreateAccessToken(user);
-            var deleteResponse = await DeleteApiUserDataAsync(tokenValue);
-            if (!deleteResponse.IsSuccessStatusCode)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Unexpected error occurred deleting user data" });
-            }
-
             var response = await _userManager.DeleteAsync(user);
             if (!response.Succeeded)
             {
@@ -59,43 +43,6 @@ namespace StamAcasa.IdentityServer.Quickstart.Account
             }
 
             return Ok();
-        }
-
-        private async Task<HttpResponseMessage> DeleteApiUserDataAsync(string tokenValue)
-        {
-            var client = _clientFactory.CreateClient();
-
-            var request = new HttpRequestMessage(HttpMethod.Delete,
-           $"{_apiUrl}/api/Profile");
-            request.Headers.Add("Authorization", $"Bearer {tokenValue}");
-
-            return await client.SendAsync(request);
-        }
-
-        private async Task<string> CreateAccessToken(ApplicationUser user)
-        {
-            var IdentityUser = new IdentityServerUser(user.Id)
-            {
-                IdentityProvider = IdentityServerConstants.LocalIdentityProvider,
-                AuthenticationTime = DateTime.UtcNow,
-            };
-
-            var request = new TokenCreationRequest
-            {
-                Subject = IdentityUser.CreatePrincipal(),
-                IncludeAllIdentityClaims = true,
-                Resources = new Resources(_identityConfiguration.Ids, _identityConfiguration.Apis())
-            };
-
-            request.ValidatedRequest = new ValidatedRequest
-            {
-                Subject = request.Subject
-            };
-            request.ValidatedRequest.SetClient(_identityConfiguration.Clients.FirstOrDefault(c => c.ClientId == IdsrvClientId));
-
-            var accesToken = await _tokenService.CreateAccessTokenAsync(request);
-            var token = await _tokenService.CreateSecurityTokenAsync(accesToken);
-            return token;
         }
     }
 }
