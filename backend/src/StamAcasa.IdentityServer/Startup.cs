@@ -10,7 +10,6 @@ using StamAcasa.Common.Services.Emailing;
 using StamAcasa.IdentityServer;
 using StamAcasa.Common.Queue;
 using EasyNetQ;
-using IdentityServer4.Services;
 
 namespace IdentityServer
 {
@@ -93,8 +92,6 @@ namespace IdentityServer
                                             Configuration.GetValue<string>("RabbitMQ:User"),
                                             Configuration.GetValue<string>("RabbitMQ:Password"))
                 ));
-            services.AddScoped<DefaultTokenService>();
-            services.AddSingleton(_identityConfiguration);
             services.AddSingleton<IQueueService, QueueService>();
             services.AddSingleton<PasswordValidationMessages>();
         }

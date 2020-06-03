@@ -107,39 +107,5 @@ namespace StamAcasa.Common.Services
             var result = parents.Select(_mapper.Map<UserInfo>);
             return result;
         }
-
-        public async Task DeleteUserAndDependentData(string sub)
-        {
-            var user = await _context.Users
-                .Include(u => u.DependentUsers)
-                .FirstOrDefaultAsync(u => u.Sub == sub);
-            if (user == null)
-            {
-                return;
-            }
-
-            var strategy = _context.Database.CreateExecutionStrategy();
-            await strategy.ExecuteAsync(async () =>
-            {
-                using (var transaction = _context.Database.BeginTransaction())
-                {
-                    await DeleteUserAndForms(user);
-
-                    foreach (var familyMember in user.DependentUsers)
-                    {
-                        await DeleteUserAndForms(familyMember);
-                    }
-
-                    await _context.SaveChangesAsync();
-                    transaction.Commit();
-                }
-            });
-        }
-
-        private async Task DeleteUserAndForms(User user)
-        {
-            await _context.Database.ExecuteSqlRawAsync("DELETE FROM \"Forms\" WHERE  \"UserId\" = {0}", new object[] { user.Id });
-            _context.Remove(user);
-        }
     }
 }

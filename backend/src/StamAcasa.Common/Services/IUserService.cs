@@ -12,6 +12,5 @@ namespace StamAcasa.Common.Services {
         Task<IEnumerable<UserInfo>> GetDependentInfo(string sub);
         Task<IEnumerable<UserInfo>> GetAll();
         Task<IEnumerable<UserInfo>> GetAllParents();
-        Task DeleteUserAndDependentData(string sub);
     }
 }
