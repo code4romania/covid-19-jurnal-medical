@@ -11,15 +11,14 @@ using Xunit;
 
 namespace StamAcasa.Api.Tests
 {
-    public class ProfileGetFamilyMembersShould : ControllerBaseTest<ProfileController>
+    public class ProfileAddFamilyProfileShould : ControllerBaseTest<ProfileController>
     {
         private readonly Mock<IUserService> _userServiceMock = new Mock<IUserService>();
 
-        public ProfileGetFamilyMembersShould()
+        public ProfileAddFamilyProfileShould()
         {
             _sut = new ProfileController(_userServiceMock.Object);
         }
-
 
         [Fact]
         public async Task Return_UnauthorizedResult_when_sub_is_not_in_claims()
@@ -27,7 +26,7 @@ namespace StamAcasa.Api.Tests
             var user = GetClaimsPrincipal();
             SetUserInControllerContext(user);
 
-            var result = await _sut.GetFamilyMembers();
+            var result = await _sut.AddFamilyProfile(new UserProfileDTO());
             result.Should().BeOfType<UnauthorizedResult>();
         }
 
@@ -37,8 +36,18 @@ namespace StamAcasa.Api.Tests
             var user = GetClaimsPrincipal(new[] { new Claim("sub", string.Empty) });
             SetUserInControllerContext(user);
 
-            var result = await _sut.GetFamilyMembers();
+            var result = await _sut.AddFamilyProfile(new UserProfileDTO());
             result.Should().BeOfType<UnauthorizedResult>();
+        }
+
+        [Fact]
+        public async Task Return_bad_request_when_model_is_empty()
+        {
+            var user = GetClaimsPrincipal(new[] { new Claim("sub", "my-sub") });
+            SetUserInControllerContext(user);
+
+            var result = await _sut.AddFamilyProfile(null);
+            result.Should().BeOfType<BadRequestObjectResult>();
         }
 
         [Fact]
@@ -55,12 +64,12 @@ namespace StamAcasa.Api.Tests
                 .Setup(x => x.GetUserInfoBySub("my-random-value"))
                 .ReturnsAsync(null as UserInfo);
 
-            var result = await _sut.GetFamilyMembers();
+            var result = await _sut.AddFamilyProfile(new UserProfileDTO());
             result.Should().BeOfType<UnauthorizedResult>();
         }
 
         [Fact]
-        public async Task Return_family_members_when_request_is_made_for_current_user()
+        public async Task Add_a_family_member_when_request_is_valid()
         {
             var user = GetClaimsPrincipal(new[] { new Claim("sub", "my-random-value") });
             SetUserInControllerContext(user);
@@ -77,15 +86,20 @@ namespace StamAcasa.Api.Tests
                 });
 
             _userServiceMock
-                .Setup(x => x.GetDependentInfo("my-random-value"))
-                .ReturnsAsync(new List<UserInfo>())
+                .Setup(x => x.AddOrUpdateDependentInfo(It.Is<UserProfileDTO>(x => x.Name == "New family member"), "my-random-value"))
+                .ReturnsAsync(new UserInfo())
                 .Verifiable();
 
 
-            var result = await _sut.GetFamilyMembers();
+            var result = await _sut.AddFamilyProfile(new UserProfileDTO()
+            {
+                Name = "New family member"
+            });
 
             result.Should().BeOfType<OkObjectResult>();
             _userServiceMock.Verify();
         }
+
+
     }
 }

@@ -86,7 +86,7 @@ namespace StamAcasa.Api.Controllers
             var timestamp = DateTime.Now;
             form.Add("Timestamp", timestamp);
 
-            var authenticatedUser = await UserService.GetUserInfo(subClaimValue);
+            var authenticatedUser = await UserService.GetUserInfoBySub(subClaimValue);
 
             form.Add("UserId", id ?? authenticatedUser.Id);
             // TODO: add user profile info as added properties to form, before save

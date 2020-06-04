@@ -12,11 +12,11 @@ using Xunit;
 
 namespace StamAcasa.Api.Tests
 {
-    public class ProfileGetUserInfoShould : ControllerBaseTest<ProfileController>
+    public class ProfileGetUserInfoBySubShould : ControllerBaseTest<ProfileController>
     {
         private readonly Mock<IUserService> _userServiceMock = new Mock<IUserService>();
 
-        public ProfileGetUserInfoShould()
+        public ProfileGetUserInfoBySubShould()
         {
             _sut = new ProfileController(_userServiceMock.Object);
         }
@@ -53,7 +53,7 @@ namespace StamAcasa.Api.Tests
                 .ReturnsAsync(new List<int>());
 
             _userServiceMock
-                .Setup(x => x.GetUserInfo("my-random-value"))
+                .Setup(x => x.GetUserInfoBySub("my-random-value"))
                 .ReturnsAsync(null as UserInfo);
 
             var result = await _sut.GetUserInfo(null);
@@ -71,7 +71,7 @@ namespace StamAcasa.Api.Tests
                 .ReturnsAsync(new List<int>());
 
             _userServiceMock
-                .Setup(x => x.GetUserInfo("my-random-value"))
+                .Setup(x => x.GetUserInfoBySub("my-random-value"))
                 .ReturnsAsync(new UserInfo()
                 {
                     Id = 1222
@@ -98,7 +98,7 @@ namespace StamAcasa.Api.Tests
                 .ReturnsAsync(new List<int>() { 1, 2, 3 });
 
             _userServiceMock
-                .Setup(x => x.GetUserInfo("my-random-value"))
+                .Setup(x => x.GetUserInfoBySub("my-random-value"))
                 .ReturnsAsync(new UserInfo()
                 {
                     Id = 1222
@@ -123,7 +123,7 @@ namespace StamAcasa.Api.Tests
                 .ReturnsAsync(familyIds?.ToList());
 
             _userServiceMock
-                .Setup(x => x.GetUserInfo("my-random-value"))
+                .Setup(x => x.GetUserInfoBySub("my-random-value"))
                 .ReturnsAsync(new UserInfo() { Id = 666 });
 
             var result = await _sut.GetUserInfo(requestedId);

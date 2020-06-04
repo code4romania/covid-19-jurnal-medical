@@ -29,7 +29,7 @@ namespace StamAcasa.Api.Controllers
         public async Task<IActionResult> GetUserInfo(int? id = null)
         {
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (sub == null)
+            if (string.IsNullOrEmpty(sub))
                 return new UnauthorizedResult();
 
             if (await IsRequestInvalid(sub, id))
@@ -39,8 +39,8 @@ namespace StamAcasa.Api.Controllers
 
             var result =
                 !id.HasValue ?
-                    await UserService.GetUserInfo(sub) :
-                    await UserService.GetUserInfo(id.Value);
+                    await UserService.GetUserInfoBySub(sub) :
+                    await UserService.GetUserInfoById(id.Value);
             return new OkObjectResult(result);
         }
 
@@ -61,7 +61,7 @@ namespace StamAcasa.Api.Controllers
                 return new UnauthorizedResult();
             }
 
-            if (sub == null)
+            if (string.IsNullOrEmpty(sub))
                 return new UnauthorizedResult();
 
             var result = await UserService.GetDependentInfo(sub);
@@ -80,9 +80,12 @@ namespace StamAcasa.Api.Controllers
         {
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
+
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (sub == null)
+
+            if (string.IsNullOrEmpty(sub))
                 return new UnauthorizedResult();
+
             var email = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
 
             model.Sub = sub;
@@ -104,14 +107,23 @@ namespace StamAcasa.Api.Controllers
         {
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
+
+            if (model == null)
+            {
+                return new BadRequestObjectResult("invalid request");
+            }
+
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (sub == null)
+            if (await IsRequestInvalid(sub))
+            {
                 return new UnauthorizedResult();
-            // todo
+            }
+            model.Id = 0;
+
             var result = await UserService.AddOrUpdateDependentInfo(model, sub);
             if (result == null)
             {
-                return NotFound($"Could not find parent user sub = {sub}");
+                return NotFound("Could not find parent user");
             }
             return new OkObjectResult(result.Id);
         }
@@ -129,14 +141,16 @@ namespace StamAcasa.Api.Controllers
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (sub == null)
+
+            if (string.IsNullOrEmpty(sub))
                 return new UnauthorizedResult();
-            //todo
-            var currentUser = await UserService.GetUserInfo(sub);
-            if (id != currentUser.Id)
+
+            var user = await UserService.GetUserInfoBySub(sub);
+            if (user?.Id != id)
             {
                 return new StatusCodeResult(StatusCodes.Status403Forbidden);
             }
+
 
             model.Sub = sub;
             model.Id = id;
@@ -158,17 +172,24 @@ namespace StamAcasa.Api.Controllers
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (sub == null)
+
+            if (string.IsNullOrEmpty(sub))
                 return new UnauthorizedResult();
-            // todo
-            var currentUser = await UserService.GetUserInfo(sub);
-            var person = await UserService.GetUserInfo(id);
-            if (person.ParentId.HasValue && person.ParentId != currentUser.Id)
+
+            if (await IsRequestInvalid(sub, id))
+            {
+                return new UnauthorizedResult();
+            }
+
+            var parentUser = await UserService.GetUserInfoBySub(sub);
+            if (parentUser.Id == id)
             {
                 return new StatusCodeResult(StatusCodes.Status403Forbidden);
             }
 
             model.Id = id;
+            model.ParentId = parentUser.Id;
+
             var result = await UserService.AddOrUpdateDependentInfo(model, sub);
 
             return new OkObjectResult(result != null);

@@ -155,7 +155,7 @@ namespace StamAcasa.Api.Tests
                 .ReturnsAsync(new List<int>());
 
             _userServiceMock
-                .Setup(x => x.GetUserInfo("836486E9-9A55-4513-A525-5FE0A84D3DA5"))
+                .Setup(x => x.GetUserInfoBySub("836486E9-9A55-4513-A525-5FE0A84D3DA5"))
                 .ReturnsAsync(null as UserInfo);
 
             var result = await _sut.PostAnswer(null);
@@ -173,7 +173,7 @@ namespace StamAcasa.Api.Tests
                 .ReturnsAsync(new List<int>());
 
             _userServiceMock
-                .Setup(x => x.GetUserInfo("836486E9-9A55-4513-A525-5FE0A84D3DA5"))
+                .Setup(x => x.GetUserInfoBySub("836486E9-9A55-4513-A525-5FE0A84D3DA5"))
                 .ReturnsAsync(new UserInfo()
                 {
                     Id = 1222
@@ -209,7 +209,7 @@ namespace StamAcasa.Api.Tests
                 .ReturnsAsync(new List<int>() { 1, 2, 3 });
 
             _userServiceMock
-                .Setup(x => x.GetUserInfo("836486E9-9A55-4513-A525-5FE0A84D3DA5"))
+                .Setup(x => x.GetUserInfoBySub("836486E9-9A55-4513-A525-5FE0A84D3DA5"))
                 .ReturnsAsync(new UserInfo()
                 {
                     Id = 1222
@@ -243,7 +243,7 @@ namespace StamAcasa.Api.Tests
                 .ReturnsAsync(familyIds?.ToList());
 
             _userServiceMock
-                .Setup(x => x.GetUserInfo("836486E9-9A55-4513-A525-5FE0A84D3DA5"))
+                .Setup(x => x.GetUserInfoBySub("836486E9-9A55-4513-A525-5FE0A84D3DA5"))
                 .ReturnsAsync(new UserInfo() { Id = 666 });
 
             var result = await _sut.PostAnswer(form, requestedId);
