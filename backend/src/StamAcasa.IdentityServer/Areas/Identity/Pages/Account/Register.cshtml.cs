@@ -28,7 +28,6 @@ namespace IdentityServer.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IQueueService _queue;
-        private readonly IConfiguration _configuration;
         private readonly PasswordValidationMessages _passwordValidationMessages;
 
         public RegisterModel(
@@ -36,14 +35,12 @@ namespace IdentityServer.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IQueueService queueService,
-            IConfiguration configuration,
             PasswordValidationMessages passwordValidationMessages)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _queue = queueService;
-            _configuration = configuration;
             _passwordValidationMessages = passwordValidationMessages;
         }
 
@@ -81,7 +78,8 @@ namespace IdentityServer.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        private async Task SendRegistrationEmail(string userName, string callbackUrl) {
+        private async Task SendRegistrationEmail(string userName, string callbackUrl)
+        {
             EmailRequestModel email = new EmailRequestModel()
             {
                 Address = Input.Email,
@@ -111,33 +109,29 @@ namespace IdentityServer.Pages.Account
                     {
                         new Claim(JwtClaimTypes.Id, Input.Email),
                         new Claim(JwtClaimTypes.Email, Input.Email),
-                        new Claim(JwtClaimTypes.EmailVerified,
-                            (!_configuration.GetValue<bool>("EnableEmailConfirmation")).ToString().ToLower(),
-                            ClaimValueTypes.Boolean
-                        ),
+                        new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                     });
                     _logger.LogInformation("User created a new account with password.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                        var callbackUrl = Url.Page(
-                            "/Account/ConfirmEmail",
-                            pageHandler: null,
-                            values: new {area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl},
-                            protocol: Request.Scheme);
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = Url.Page(
+                        "/Account/ConfirmEmail",
+                        pageHandler: null,
+                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                        protocol: Request.Scheme);
 
-                        await SendRegistrationEmail(user.UserName, callbackUrl);
+                    await SendRegistrationEmail(user.UserName, callbackUrl);
 
-                        return RedirectToPage("RegisterConfirmation", new {email = Input.Email});
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return Redirect(returnUrl);
-                    }
+                    return RedirectToPage("RegisterConfirmation");
                 }
+
+                if (result.Errors.Any(c => c.Code == "DuplicateUserName"))
+                {
+                    _logger.LogWarning("User already exits, redirect to register confirmation screen to avoid user enumeration.");
+                    return RedirectToPage("RegisterConfirmation");
+                }
+
                 foreach (var error in result.Errors)
                 {
                     var errorDescription = _passwordValidationMessages.GetMessageByCode(error);
