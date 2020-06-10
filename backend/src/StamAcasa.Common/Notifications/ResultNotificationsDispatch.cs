@@ -95,7 +95,6 @@ namespace StamAcasa.Common.Notifications
                 var email = new EmailRequestModel
                 {
                     TemplateType = EmailTemplate.StateEntity,
-                    Type = "dailyReportTemplate",
                     Address = contact,
                     Subject = emailData.FileName,
                     SenderName = _countyEmailDistribution.SenderName,
