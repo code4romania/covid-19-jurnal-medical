@@ -89,12 +89,14 @@ namespace IdentityServer.Pages.Account
                 return Page();
             }
 
+            var oldPassword = user.PasswordHash;
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
             if (result.Succeeded)
             {
+                // get the user again to have it with updated password
                 var userWithNewPassword = await _userManager.FindByEmailAsync(Input.Email);
 
-                userWithNewPassword.PreviousPasswords = ConcatUserPasswords(userWithNewPassword.PreviousPasswords, userWithNewPassword.PasswordHash);
+                userWithNewPassword.PreviousPasswords = ConcatUserPasswords(userWithNewPassword.PreviousPasswords, oldPassword);
                 await _userManager.UpdateAsync(userWithNewPassword);
 
                 return RedirectToPage("./ResetPasswordConfirmation");
@@ -112,7 +114,7 @@ namespace IdentityServer.Pages.Account
         {
             if (string.IsNullOrEmpty(previousPasswords))
             {
-                return $"{userPasswordHash};";
+                return $"{userPasswordHash}";
             }
 
             List<string> passwords = new List<string>();
@@ -140,7 +142,7 @@ namespace IdentityServer.Pages.Account
             foreach (var hashedPassword in previousPasswordsHashes)
             {
                 var passwordVerificationResult = _passwordHasher.VerifyHashedPassword(user, hashedPassword, inputPassword);
-                if (passwordVerificationResult == PasswordVerificationResult.Success)
+                if (passwordVerificationResult == PasswordVerificationResult.Success || passwordVerificationResult == PasswordVerificationResult.SuccessRehashNeeded)
                 {
                     return (false, "Nu poti folosi o parola folosita in trecut");
                 }
