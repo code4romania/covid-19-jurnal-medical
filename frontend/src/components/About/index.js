@@ -14,22 +14,28 @@ const About = () => {
         <Hero title="Despre proiect" subtitle="" useFallbackIcon={true} />
         <div className="content">
           <p>
-            Starea de alertă poate fi dificil de gestionat. Avem din nou voie să ieșim din casă, 
-            dar urmând proceduri și reguli foarte clare. Riscul de a contracta virusul este foarte 
-            ridicat și este important să putem să ne monitorizăm starea cu ușurință și, de asemenea, 
-            este util să ne menținem un jurnal al ieșirilor
+            Starea de alertă poate fi dificil de gestionat. Avem din nou voie să
+            ieșim din casă, dar urmând proceduri și reguli foarte clare. Riscul
+            de a contracta virusul este foarte ridicat și este important să
+            putem să ne monitorizăm starea cu ușurință și, de asemenea, este
+            util să ne menținem un jurnal al ieșirilor
           </p>
           <p>
-            Telefoanele de urgență sunt împovărate de numărul mare de apeluri, făcând astfel evaluarea situațiilor 
-            medicale la nivel național o problemă reală. Toți suntem în aceeași situație.
-            Jurnal Medical este o soluție digitală cu ajutorul căreia, împreună, reducem suprasolicitarea numerelor de urgență, 
-            colectăm rapid informații de la o populație foarte mare, ne monitorizăm starea de sănătate pentru noi și pentru cei dragi 
-            și rămânem cu toții în siguranță.
+            Telefoanele de urgență sunt împovărate de numărul mare de apeluri,
+            făcând astfel evaluarea situațiilor medicale la nivel național o
+            problemă reală. Toți suntem în aceeași situație. Jurnal Medical este
+            o soluție digitală cu ajutorul căreia, împreună, reducem
+            suprasolicitarea numerelor de urgență, colectăm rapid informații de
+            la o populație foarte mare, ne monitorizăm starea de sănătate pentru
+            noi și pentru cei dragi și rămânem cu toții în siguranță.
           </p>
           <p>
-            Jurnal Medical este un proiect dezvoltat în parteneriat cu Guvernul României prin Autoritatea pentru Digitalizarea României, 
-            cu colaborarea Ministerului Sănătății, de către organizația Code for Romania, în cadrul programului Code for Romania Task Force.
-            Proiectul este administrat de Autoritatea pentru Digitalizarea României.
+            Jurnal Medical este un proiect dezvoltat în parteneriat cu Guvernul
+            României prin Autoritatea pentru Digitalizarea României, cu
+            colaborarea Ministerului Sănătății, de către organizația Code for
+            Romania, în cadrul programului Code for Romania Task Force.
+            Proiectul este administrat de Autoritatea pentru Digitalizarea
+            României.
           </p>
           <div>
             <img
