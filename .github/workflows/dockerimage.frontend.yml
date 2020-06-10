@@ -27,7 +27,6 @@ jobs:
               --tag $IMAGE_NAME:$GITHUB_SHA \
               --file Dockerfile
         - name: Upload Docker image
-          if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
           run: |
             echo ${{ secrets.DOCKER_HUB_PASSWORD }} | \
             docker login \
