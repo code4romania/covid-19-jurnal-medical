@@ -65,13 +65,13 @@ namespace StamAcasa.Common.Services
             return _mapper.Map<UserInfo>(profile);
         }
 
-        public async Task<UserInfo> GetUserInfo(string sub)
+        public async Task<UserInfo> GetUserInfoBySub(string sub)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Sub == sub);
             var result = _mapper.Map<UserInfo>(user);
             return result;
         }
-        public async Task<UserInfo> GetUserInfo(int id)
+        public async Task<UserInfo> GetUserInfoById(int id)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
             var result = _mapper.Map<UserInfo>(user);
@@ -106,6 +106,15 @@ namespace StamAcasa.Common.Services
 
             var result = parents.Select(_mapper.Map<UserInfo>);
             return result;
+        }
+
+        public async Task<List<int>> GetFamilyMembersIds(string sub)
+        {
+            var user = await _context.Users
+                .Include(x => x.DependentUsers)
+                .FirstOrDefaultAsync(u => u.Sub == sub);
+
+            return user?.DependentUsers?.Select(d => d.Id).ToList() ?? new List<int>();
         }
     }
 }
