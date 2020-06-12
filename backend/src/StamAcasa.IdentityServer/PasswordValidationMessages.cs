@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StamAcasa.IdentityServer
 {
@@ -16,7 +13,7 @@ namespace StamAcasa.IdentityServer
             { "PasswordRequiresLower", "Parola trebuie să conțină cel puțin o literă mică('a'-'z')"}
         };
 
-        public string GetMessageByCode(IdentityError error)
+        public virtual string GetMessageByCode(IdentityError error)
         {
             if (passwordValidationDictionary.ContainsKey(error.Code))
             {
