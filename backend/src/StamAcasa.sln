@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StamAcasa.EmailService", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StamAcasa.JobScheduler", "StamAcasa.JobScheduler\StamAcasa.JobScheduler.csproj", "{980BB416-886D-422B-8A7B-7BCAD1244237}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StamAcasa.Api.Tests", "StamAcasa.Api.Tests\StamAcasa.Api.Tests.csproj", "{CB42A44B-952E-40F4-841E-302EC005E9A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StamAcasa.IdentityServer.Tests", "..\StamAcasa.IdentityServer.Tests\StamAcasa.IdentityServer.Tests.csproj", "{0A723549-93AE-4827-8715-F3EE8114AD65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +50,10 @@ Global
 		{980BB416-886D-422B-8A7B-7BCAD1244237}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{980BB416-886D-422B-8A7B-7BCAD1244237}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{980BB416-886D-422B-8A7B-7BCAD1244237}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A723549-93AE-4827-8715-F3EE8114AD65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A723549-93AE-4827-8715-F3EE8114AD65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A723549-93AE-4827-8715-F3EE8114AD65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A723549-93AE-4827-8715-F3EE8114AD65}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CB42A44B-952E-40F4-841E-302EC005E9A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CB42A44B-952E-40F4-841E-302EC005E9A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB42A44B-952E-40F4-841E-302EC005E9A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
