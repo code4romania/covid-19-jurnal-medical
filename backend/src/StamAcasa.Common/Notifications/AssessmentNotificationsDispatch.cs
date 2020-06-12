@@ -37,7 +37,6 @@ namespace StamAcasa.Common.Notifications
             {
                 Address = userInfo.Email,
                 TemplateType = EmailTemplate.DailyAssessment,
-                Type = "dailyAssessment",
                 PlaceholderContent = new Dictionary<string, string>
                 {
                     { "name", $"{userInfo.Name}" },

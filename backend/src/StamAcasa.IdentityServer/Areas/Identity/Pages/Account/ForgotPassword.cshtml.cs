@@ -74,7 +74,6 @@ namespace IdentityServer.Pages.Account
                 Address = Input.Email,
                 PlaceholderContent = new Dictionary<string, string>(),
                 TemplateType = EmailTemplate.ResetPassword,
-                Type = "resetPasswordTemplate",
                 SenderName = "Reset Password",
                 Subject = ""
             };

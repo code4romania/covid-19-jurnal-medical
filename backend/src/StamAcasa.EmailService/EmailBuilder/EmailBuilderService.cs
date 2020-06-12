@@ -1,7 +1,7 @@
-﻿
-using System;
-using System.IO;
+﻿using System.IO;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using StamAcasa.Common.Models;
@@ -61,7 +61,7 @@ namespace StamAcasa.EmailService.EmailBuilder
         {
             foreach (var placeholder in emailRequest.PlaceholderContent)
             {
-                template = template.Replace($"%%{placeholder.Key}%%", placeholder.Value);
+                template = template.Replace($"%%{placeholder.Key}%%", HttpUtility.HtmlEncode(placeholder.Value));
             }
 
             return template;
