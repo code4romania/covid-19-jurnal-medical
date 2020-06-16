@@ -41,6 +41,13 @@ namespace StamAcasa.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(365);
+            });
+
             services.AddControllers();
             var identityUrl = Configuration.GetValue<string>("InternalIdentityServerUrl");
             var apiSchemes = new List<ApiAuthenticationScheme>();
@@ -98,6 +105,12 @@ namespace StamAcasa.Api
 
         public void Configure(IApplicationBuilder app, UserDbContext dbContext)
         {
+            if (!_environment.IsDevelopment())
+            {
+                app.UseHsts();
+                app.UseHttpsRedirection();
+            }
+
             dbContext.Database.Migrate();
 
             app.UseRouting();
