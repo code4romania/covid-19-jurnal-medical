@@ -97,6 +97,7 @@ namespace IdentityServer.Pages.Account
                 var userWithNewPassword = await _userManager.FindByEmailAsync(Input.Email);
 
                 userWithNewPassword.PreviousPasswords = ConcatUserPasswords(userWithNewPassword.PreviousPasswords, oldPassword);
+                userWithNewPassword.ResetCounter = 0;
                 await _userManager.UpdateAsync(userWithNewPassword);
 
                 return RedirectToPage("./ResetPasswordConfirmation");
