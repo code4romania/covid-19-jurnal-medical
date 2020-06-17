@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace IdentityServer.Data
 {
@@ -6,5 +7,9 @@ namespace IdentityServer.Data
     public class ApplicationUser : IdentityUser
     {
         public string PreviousPasswords { get; set; }
+
+        public DateTimeOffset? NextAllowedReset { get; set; }
+
+        public int ResetCounter { get; set; }
     }
 }
