@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -49,6 +50,23 @@ namespace IdentityServer.Pages.Account
                     return RedirectToPage("./ForgotPasswordConfirmation");
                 }
 
+                if (user.ResetCounter > 2) // allow only 3 retries
+                {
+                    ModelState.AddModelError(string.Empty, $"Ați depășit numărul maxim de încercări. Vă rugăm contactați-ne la adresa contact@code4.ro");
+                    return Page();
+                }
+                if (user.NextAllowedReset != null)
+                {
+                    if (DateTimeOffset.UtcNow < user.NextAllowedReset)
+                    {
+                        var minutesUntilReset = (int)user.NextAllowedReset.Value.Subtract(DateTimeOffset.UtcNow).TotalMinutes;
+                        var errorMessage = minutesUntilReset == 1
+                            ? "Trebuie să aștepți un minut înainte să poți reseta parola"
+                            : $"Trebuie să aștepți {minutesUntilReset} minute înainte să poți reseta parola";
+                        ModelState.AddModelError(string.Empty, errorMessage);
+                        return Page();
+                    }
+                }
                 // For more information on how to enable account confirmation and password reset please 
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -61,6 +79,9 @@ namespace IdentityServer.Pages.Account
 
                 await SendPasswordResetEmail(user.UserName, callbackUrl);
 
+                user.NextAllowedReset = DateTimeOffset.UtcNow.AddMinutes(3);
+                user.ResetCounter++;
+                await _userManager.UpdateAsync(user);
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
 
