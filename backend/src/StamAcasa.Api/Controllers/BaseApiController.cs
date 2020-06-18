@@ -14,7 +14,7 @@ namespace StamAcasa.Api.Controllers
             UserService = userService;
         }
 
-        public async Task<bool> IsRequestInvalid(string subClaimValue, int? requestedId = null)
+        protected async Task<bool> IsRequestInvalid(string subClaimValue, int? requestedId = null)
         {
             var user = await UserService.GetUserInfoBySub(subClaimValue);
             if (user == null)
