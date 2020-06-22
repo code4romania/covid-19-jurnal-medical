@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
@@ -29,6 +29,7 @@
                         <input asp-for="Input.ConfirmPassword" class="input is-medium" />
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
+                    <p>Parola trebuie să includă cel puţin o literă mică, o literă mare, o cifră şi un simbol.</p>
                     <div class="container has-text-centered __login-form-button-container">
                         <button type="submit" class="button is-primary is-medium">CREEAZĂ CONT</button>
                     </div>
