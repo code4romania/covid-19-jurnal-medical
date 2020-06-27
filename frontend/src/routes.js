@@ -5,6 +5,7 @@ import UpdateProfile from "./components/UpdateProfile";
 import Evaluation from "./components/Evaluation";
 import Account from "./components/Account";
 import TermsAndConditions from "./components/TermsAndConditions";
+import DeleteAccount from "./components/DeleteAccount";
 
 import {
   redirectSilentSignin,
@@ -75,6 +76,10 @@ export const ROUTES = {
     updateprofile: {
       path: "/update-profile",
       component: UpdateProfile
+    },
+    deleteaccount: {
+      path: "/delete-account",
+      component: DeleteAccount
     }
   }
 };
