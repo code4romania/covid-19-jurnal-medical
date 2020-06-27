@@ -114,6 +114,12 @@ namespace StamAcasa.Api
             dbContext.Database.Migrate();
 
             app.UseRouting();
+            var cookiePolicyOptions = new CookiePolicyOptions
+            {
+                // Mark cookies as `Secure` (only if using HTTPS in development, and always in production)
+                Secure = _environment.IsDevelopment() ? CookieSecurePolicy.SameAsRequest : CookieSecurePolicy.Always
+            };
+            app.UseCookiePolicy(cookiePolicyOptions);
             app.Use(CustomMiddleware);
             app.UseCors("default");
 
