@@ -1,4 +1,5 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 15.0.26124.0
@@ -15,7 +16,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StamAcasa.Common", "StamAca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StamAcasa.EmailService", "StamAcasa.EmailService\StamAcasa.EmailService.csproj", "{4472DECA-11A8-4DBE-B508-8ACEC8D1C9E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StamAcasa.JobScheduler", "StamAcasa.JobScheduler\StamAcasa.JobScheduler.csproj", "{980BB416-886D-422B-8A7B-7BCAD1244237}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StamAcasa.JobScheduler", "StamAcasa.JobScheduler\StamAcasa.JobScheduler.csproj", "{980BB416-886D-422B-8A7B-7BCAD1244237}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StamAcasa.IdentityServer.Tests", "..\StamAcasa.IdentityServer.Tests\StamAcasa.IdentityServer.Tests.csproj", "{0A723549-93AE-4827-8715-F3EE8114AD65}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StamAcasa.Api.Tests", "StamAcasa.Api.Tests\StamAcasa.Api.Tests.csproj", "{51F3D0D5-8D32-498C-A6BA-29CCA04BDFE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +52,14 @@ Global
 		{980BB416-886D-422B-8A7B-7BCAD1244237}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{980BB416-886D-422B-8A7B-7BCAD1244237}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{980BB416-886D-422B-8A7B-7BCAD1244237}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A723549-93AE-4827-8715-F3EE8114AD65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A723549-93AE-4827-8715-F3EE8114AD65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A723549-93AE-4827-8715-F3EE8114AD65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A723549-93AE-4827-8715-F3EE8114AD65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51F3D0D5-8D32-498C-A6BA-29CCA04BDFE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51F3D0D5-8D32-498C-A6BA-29CCA04BDFE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51F3D0D5-8D32-498C-A6BA-29CCA04BDFE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51F3D0D5-8D32-498C-A6BA-29CCA04BDFE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

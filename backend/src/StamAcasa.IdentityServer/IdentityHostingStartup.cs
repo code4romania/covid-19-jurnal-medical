@@ -27,10 +27,8 @@ namespace IdentityServer
                                 errorCodesToAdd: null
                                 );
                         }));
-                var emailConfirmation = context.Configuration.GetValue<bool>("EnableEmailConfirmation");
-                services.AddDefaultIdentity<ApplicationUser>(options =>
-                        options.SignIn.RequireConfirmedAccount = emailConfirmation)
-                    .AddEntityFrameworkStores<ApplicationDbContext>();
+                services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                        .AddEntityFrameworkStores<ApplicationDbContext>();
 
                 SeedData.EnsureSeedData(context.Configuration.GetConnectionString("ApplicationDbContextConnection"), context.HostingEnvironment.IsDevelopment());
             });

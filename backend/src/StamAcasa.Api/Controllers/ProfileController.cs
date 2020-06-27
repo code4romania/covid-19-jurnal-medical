@@ -12,13 +12,10 @@ namespace StamAcasa.Api.Controllers
     [Authorize(AuthenticationSchemes = "usersApi")]
     [Route("api/[controller]")]
     [ApiController]
-    public class ProfileController : ControllerBase
+    public class ProfileController : BaseApiController
     {
-        private readonly IUserService _userService;
-
-        public ProfileController(IUserService userService)
+        public ProfileController(IUserService userService) : base(userService)
         {
-            _userService = userService;
         }
 
         /// <summary>
@@ -32,13 +29,18 @@ namespace StamAcasa.Api.Controllers
         public async Task<IActionResult> GetUserInfo(int? id = null)
         {
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (sub == null)
+            if (string.IsNullOrEmpty(sub))
                 return new UnauthorizedResult();
+
+            if (await IsRequestInvalid(sub, id))
+            {
+                return new UnauthorizedResult();
+            }
 
             var result =
                 !id.HasValue ?
-                    await _userService.GetUserInfo(sub) :
-                    await _userService.GetUserInfo(id.Value);
+                    await UserService.GetUserInfoBySub(sub) :
+                    await UserService.GetUserInfoById(id.Value);
             return new OkObjectResult(result);
         }
 
@@ -53,10 +55,16 @@ namespace StamAcasa.Api.Controllers
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (sub == null)
+
+            if (await IsRequestInvalid(sub))
+            {
+                return new UnauthorizedResult();
+            }
+
+            if (string.IsNullOrEmpty(sub))
                 return new UnauthorizedResult();
 
-            var result = await _userService.GetDependentInfo(sub);
+            var result = await UserService.GetDependentInfo(sub);
             return new OkObjectResult(result);
         }
 
@@ -72,14 +80,17 @@ namespace StamAcasa.Api.Controllers
         {
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
+
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (sub == null)
+
+            if (string.IsNullOrEmpty(sub))
                 return new UnauthorizedResult();
+
             var email = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
 
             model.Sub = sub;
             model.Email = email;
-            var result = await _userService.AddOrUpdateUserInfo(model);
+            var result = await UserService.AddOrUpdateUserInfo(model);
 
             return new OkObjectResult(result);
         }
@@ -96,14 +107,23 @@ namespace StamAcasa.Api.Controllers
         {
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
-            var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (sub == null)
-                return new UnauthorizedResult();
 
-            var result = await _userService.AddOrUpdateDependentInfo(model, sub);
+            if (model == null)
+            {
+                return new BadRequestObjectResult("invalid request");
+            }
+
+            var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+            if (await IsRequestInvalid(sub))
+            {
+                return new UnauthorizedResult();
+            }
+            model.Id = 0;
+
+            var result = await UserService.AddOrUpdateDependentInfo(model, sub);
             if (result == null)
             {
-                return NotFound($"Could not find parent user sub = {sub}");
+                return NotFound("Could not find parent user");
             }
             return new OkObjectResult(result.Id);
         }
@@ -121,18 +141,20 @@ namespace StamAcasa.Api.Controllers
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (sub == null)
+
+            if (string.IsNullOrEmpty(sub))
                 return new UnauthorizedResult();
 
-            var currentUser = await _userService.GetUserInfo(sub);
-            if (id != currentUser.Id)
+            var user = await UserService.GetUserInfoBySub(sub);
+            if (user?.Id != id)
             {
                 return new StatusCodeResult(StatusCodes.Status403Forbidden);
             }
 
+
             model.Sub = sub;
             model.Id = id;
-            var result = await _userService.AddOrUpdateUserInfo(model);
+            var result = await UserService.AddOrUpdateUserInfo(model);
 
             return new OkObjectResult(result != null);
         }
@@ -150,18 +172,25 @@ namespace StamAcasa.Api.Controllers
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (sub == null)
+
+            if (string.IsNullOrEmpty(sub))
                 return new UnauthorizedResult();
 
-            var currentUser = await _userService.GetUserInfo(sub);
-            var person = await _userService.GetUserInfo(id);
-            if (person.ParentId.HasValue && person.ParentId != currentUser.Id)
+            if (await IsRequestInvalid(sub, id))
+            {
+                return new UnauthorizedResult();
+            }
+
+            var parentUser = await UserService.GetUserInfoBySub(sub);
+            if (parentUser.Id == id)
             {
                 return new StatusCodeResult(StatusCodes.Status403Forbidden);
             }
 
             model.Id = id;
-            var result = await _userService.AddOrUpdateDependentInfo(model, sub);
+            model.ParentId = parentUser.Id;
+
+            var result = await UserService.AddOrUpdateDependentInfo(model, sub);
 
             return new OkObjectResult(result != null);
         }

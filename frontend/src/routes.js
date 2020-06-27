@@ -4,6 +4,8 @@ import AddMember from "./components/AddMember";
 import UpdateProfile from "./components/UpdateProfile";
 import Evaluation from "./components/Evaluation";
 import Account from "./components/Account";
+import TermsAndConditions from "./components/TermsAndConditions";
+
 import {
   redirectSilentSignin,
   redirectPromise,
@@ -18,6 +20,11 @@ export const ROUTES = {
     despre: {
       path: "/despre",
       component: About
+    },
+
+    termsAndConditions: {
+      path: "/termeni-si-conditii",
+      component: TermsAndConditions
     },
     // TODO Uncomment when dashboard is needed again
     // dashboard: {

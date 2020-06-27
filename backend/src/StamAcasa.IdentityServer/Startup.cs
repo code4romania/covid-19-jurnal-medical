@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using IdentityServer.Data;
 using Microsoft.AspNetCore.Builder;
@@ -10,13 +12,19 @@ using StamAcasa.Common.Services.Emailing;
 using StamAcasa.IdentityServer;
 using StamAcasa.Common.Queue;
 using EasyNetQ;
+using Microsoft.AspNetCore.Mvc.Routing;
+using StamAcasa.IdentityServer.Helpers;
+using StamAcasa.IdentityServer.Options;
 
 namespace IdentityServer
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
+            _env = env;
             Configuration = configuration;
             _identityConfiguration = new StamAcasaIdentityConfiguration(configuration);
         }
@@ -27,8 +35,28 @@ namespace IdentityServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            var allowedRedirectUrls = new List<string>();
+            Configuration.GetSection("AllowedRedirectUrls").Bind(allowedRedirectUrls);
 
+            var allowedRedirects = new AllowedRedirects
+            {
+                Urls = allowedRedirectUrls
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .Select(UrlHelpers.NormalizeUrl)
+                    .Where(url => _env.IsDevelopment() || url.StartsWith("https")) // on prod do not allow redirects to http
+                    .Distinct()
+                    .ToList()
+            };
+
+            services.AddSingleton(allowedRedirects);
             services.AddRazorPages();
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(365);
+            });
             services.AddControllersWithViews();
             var builder = services.AddIdentityServer(options =>
                 {
