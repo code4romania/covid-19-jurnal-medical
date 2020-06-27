@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using IdentityServer.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,7 +13,6 @@ using StamAcasa.Common.Services.Emailing;
 using StamAcasa.IdentityServer;
 using StamAcasa.Common.Queue;
 using EasyNetQ;
-using Microsoft.AspNetCore.Mvc.Routing;
 using StamAcasa.IdentityServer.Helpers;
 using StamAcasa.IdentityServer.Options;
 
@@ -150,6 +150,13 @@ namespace IdentityServer
 
             app.UseRouting();
             app.UseStaticFiles();
+            var cookiePolicyOptions = new CookiePolicyOptions
+            {
+                // Mark cookies as `Secure` (only if using HTTPS in development, and always in production)
+                Secure = env.IsDevelopment() ? CookieSecurePolicy.SameAsRequest : CookieSecurePolicy.Always
+            };
+            app.UseCookiePolicy(cookiePolicyOptions);
+
             app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();
