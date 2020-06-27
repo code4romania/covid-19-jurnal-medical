@@ -1,13 +1,13 @@
 import {
   Input,
   ListHeader,
-  Select,
   DropdownSearch
 } from "@code4ro/taskforce-fe-components";
 import React from "react";
 import { options } from "./options";
 import PropTypes from "prop-types";
 import cities from "./cities.json";
+import SelectCentered from "../SelectCentered";
 
 export const PersonalData = ({
   userData,
@@ -100,7 +100,7 @@ export const PersonalData = ({
           }}
         />
         {isForFamilyMember && (
-          <Select
+          <SelectCentered
             placeholder="Tip de relație"
             options={selectOption(options.relation, userData.relationshipType)}
             selectProps={{
@@ -148,7 +148,7 @@ export const PersonalData = ({
             setUserDataField("age", +value);
           }}
         />
-        <Select
+        <SelectCentered
           placeholder="Gen"
           options={selectOption(options.gender, userData.gender)}
           selectProps={{
