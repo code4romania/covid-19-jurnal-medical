@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import SidebarLayout from "../SidebarLayout";
 import AccountApi from "../../api/accountApi";
 import "./style.scss";
 import { removeUser } from "../../api/auth";
 const DeleteAccount = () => {
-  const [user, setUser] = useState();
-  const [password, setPassword] = useState();
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorDeleting, setErrorDeleting] = useState(false);
 
@@ -31,7 +30,15 @@ const DeleteAccount = () => {
   const buttonClasses = "button is-danger" + (loading ? " is-loading" : "");
   return (
     <SidebarLayout>
-      <div>Ești sigur că vrei să ștergi profilul și datele asociate?</div>
+      <div>
+        Contul tău va fi șters. Pentru a putea reutiliza această aplicație va
+        trebui să îți refaci contul de utilizator. Informațiile pe care le-ai
+        transmis pana acum prin intermediul aplicație vor rămâne stocate în baza
+        de date. Dacă dorești ca toate informațiile sa fie eliminate din baza de
+        date te rugam sa adresezi aceasta cerere către:
+        <p>Adresa: Strada Italiană, nr. 22, Sector 2, 020976, București</p>
+        <p>E-mail: jurnalmedical@adr.gov.ro</p>
+      </div>
       <form onSubmit={() => {}}>
         <div className="field">
           <label className="label">Email</label>
@@ -69,15 +76,6 @@ const DeleteAccount = () => {
       </div>
     </SidebarLayout>
   );
-};
-
-DeleteAccount.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      isSelf: PropTypes.bool.isRequired
-    }).isRequired
-  }).isRequired
 };
 
 export default DeleteAccount;
