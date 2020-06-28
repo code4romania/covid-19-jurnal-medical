@@ -1,291 +1,292 @@
 {
-  "formId": 1,
-  "title": "Ai simptome?",
-  "firstNodeId": 1,
-  "form": [
-      {
-          "questionId": 1,
-          "nextQuestionId": 2,
-          "questionText": "Ai avut febră 38 grade celsius sau mai mare?",
-          "type": "SINGLE_CHOICE",
-          "options": [
-              {
-                  "label": "Da",
-                  "value": true
-              },
-              {
-                  "label": "Nu",
-                  "value": false,
-                  "nextQuestionId": 3
-              }
-          ]
-      },
-      {
-          "questionId": 2,
-          "nextQuestionId": 3,
-          "questionText": "Din ce dată ai avut prima dată febră?",
-          "type": "DATE_PICKER"
-      },
-      {
-          "questionId": 3,
-          "nextQuestionId": 4,
-          "questionText": "Ai avut durere în gât și/sau dificultate în a înghiți?",
-          "type": "SINGLE_CHOICE",
-          "options": [
-              {
-                  "label": "Da",
-                  "value": true
-              },
-              {
-                  "label": "Nu",
-                  "value": false,
-                  "nextQuestionId": 5
-              }
-          ]
-      },
-      {
-          "questionId": 4,
-          "nextQuestionId": 5,
-          "questionText": "Din ce dată ai avut durere în gât și/sau dificultate în a înghiți?",
-          "type": "DATE_PICKER"
-      },
-      {
-          "questionId": 5,
-          "nextQuestionId": 6,
-          "questionText": "Ai avut tuse intensă?",
-          "type": "SINGLE_CHOICE",
-          "options": [
-              {
-                  "label": "Da",
-                  "value": true
-              },
-              {
-                  "label": "Nu",
-                  "value": false,
-                  "nextQuestionId": 7
-              }
-          ]
-      },
-      {
-          "questionId": 6,
-          "nextQuestionId": 7,
-          "questionText": "Din ce data ai avut tuse?",
-          "type": "DATE_PICKER"
-      },
-      {
-          "questionId": 7,
-          "nextQuestionId": 8,
-          "questionText": "Ai avut dificultate în a respira?",
-          "type": "SINGLE_CHOICE",
-          "options": [
-              {
-                  "label": "Da",
-                  "value": true
-              },
-              {
-                  "label": "Nu",
-                  "value": false,
-                  "nextQuestionId": 9
-              }
-          ]
-      },
-      {
-          "questionId": 8,
-          "nextQuestionId": 9,
-          "questionText": "Din ce dată ai avut dificultate în a respira?",
-          "type": "DATE_PICKER"
-      },
-      {
-          "questionId": 9,
-          "nextQuestionId": 10,
-          "questionText": "Ți-a curs nasul?",
-          "type": "SINGLE_CHOICE",
-          "options": [
-              {
-                  "label": "Da",
-                  "value": true
-              },
-              {
-                  "label": "Nu",
-                  "value": false,
-                  "nextQuestionId": 11
-              }
-          ]
-      },
-      {
-          "questionId": 10,
-          "nextQuestionId": 11,
-          "questionText": "Din ce dată ţi-a curs nasul?",
-          "type": "DATE_PICKER"
-      },
-      {
-          "questionId": 11,
-          "nextQuestionId": 12,
-          "questionText": "Alte simptome:",
-          "type": "SINGLE_CHOICE",
-          "options": [
-              {
-                  "label": "Da",
-                  "value": true
-              },
-              {
-                  "label": "Nu",
-                  "value": false,
-                  "nextQuestionId": 13
-              }
-          ]
-      },
-      {
-          "questionId": 12,
-          "nextQuestionId": 13,
-          "questionText": "Te rugăm să le descrii",
-          "type": "INPUT",
-          "options": [
-              {
-                  "optionType": "string"
-              }
-          ]
-      },
-      {
-          "questionId": 13,
-          "nextQuestionId": 14,
-          "questionText": "În momentul de față, te afli în izolare la domiciliu?",
-          "type": "SINGLE_CHOICE",
-          "options": [
-              {
-                  "label": "Da, sunt în izolare - nu ies deloc din locuință",
-                  "value": 0
-              },
-              {
-                  "label": "Stau mai mult pe acasă, dar mai ies atunci când este nevoie",
-                  "value": 1
-              },
-              {
-                  "label": "Nu sunt în izolare și ies din locuință după program normal",
-                  "value": 2
-              },
-              {
-                  "label": "Altă situație",
-                  "value": 3
-              }
-          ]
-      },
-      {
-          "questionId": 14,
-          "nextQuestionId": 15,
-          "questionText": "În momentul de față, împarți locuința și cu alte persoane?",
-          "type": "SINGLE_CHOICE",
-          "options": [
-              {
-                  "label": "Da",
-                  "value": true
-              },
-              {
-                  "label": "Nu",
-                  "value": false,
-                  "nextQuestionId": 16
-              }
-          ]
-      },
-      {
-          "questionId": 15,
-          "nextQuestionId": 16,
-          "questionText": "Celelalte persoane din locuință se află în izolare la domiciliu?",
-          "type": "SINGLE_CHOICE",
-          "options": [
-              {
-                  "label": "Da, sunt în izolare - nu ies deloc din locuință",
-                  "value": 0
-              },
-              {
-                  "label": "Stau mai mult pe acasă, dar mai ies atunci când este nevoie",
-                  "value": 1
-              },
-              {
-                  "label": "Nu sunt în izolare și ies din locuință după program normal",
-                  "value": 2
-              },
-              {
-                  "label": "Altă situație",
-                  "value": 3
-              }
-          ]
-      },
-      {
-          "questionId": 16,
-          "nextQuestionId": 17,
-          "questionText": "Ai ieșit din casă de la ultima completare a formularului?",
-          "type": "SINGLE_CHOICE",
-          "options": [
-              {
-                  "label": "Da",
-                  "value": true
-              },
-              {
-                  "label": "Nu",
-                  "value": false,
-                  "nextQuestionId": 20
-              }
-          ]
-      },
-      {
-          "questionId": 17,
-          "nextQuestionId": 18,
-          "questionText": "Care a fost motivul deplasării?",
-          "type": "INPUT",
-          "options": [
-              {
-                  "optionType": "string"
-              }
-          ]
-      },
-      {
-          "questionId": 18,
-          "nextQuestionId": 19,
-          "questionText": "Data și ora plecării:",
-          "type": "DATE_TIME_PICKER"
-      },
-      {
-          "questionId": 19,
-          "nextQuestionId": 20,
-          "questionText": "Data și ora sosirii:",
-          "type": "DATE_TIME_PICKER"
-      },
-      {
-          "questionId": 20,
-          "nextQuestionId": 21,
-          "questionText": "Ai fost în contact direct cu o persoană diagnosticată/confirmată cu noul coronavirus?",
-          "type": "SINGLE_CHOICE",
-          "options": [
-              {
-                  "label": "Da",
-                  "value": true
-              },
-              {
-                  "label": "Nu",
-                  "value": false
-              }
-          ]
-      },
-      {
-        "questionId": 21,
-        "nextQuestionId": 0,
-        "questionText": "Mulțumim!",
-        "type": "FINAL",
-        "options": [
-            {
-                "label": "Conform răspunsurilor tale ai un grad ridicat de risc să fii infectat cu COVID-19. Te rugăm să suni la 112 și să aștepți ca cineva să te preia. Liniile sunt foarte ocupate acum, te rugăm să ai răbdare. Între timp, nu ieși din casă și limitează contactul cu familia pentru a nu îi pune în pericol. Alternativ, poți suna la Direcția de Sănătate Publică din județul tău dacă simptomele sunt ușoare și ei te vor ghida mai departe.",
-                "value": "R1"
-            },
-            {
-                "label": "Infecția cu SARS-COV-2 (coronavirus) și răceala puternică au uneori simptome similare. Conform răspunsurilor tale, pentru siguranță te rugam să suni la medicul de familie sau la TelVerde 0800 800 358 și să aștepți ca cineva să te preia dacă vrei să te informezi în detaliu despre simptome si prevenție. Liniile sunt foarte ocupate acum, te rugăm să ai răbdare. Între timp, nu ieși din casă și limitează contactul cu familia pentru a nu îi pune în pericol si continuă să îți monitorizezi starea.",
-                "value": "R2"
-            },
-            {
-                "label": "Nu manifești niciun simptom de infecție. Te rugăm să rămâi în siguranță la domiciliu și să limitezi la maximum orice ieșire nerelevantă dacă ai posibilitatea și continuă săîți monitorizezi starea în fiecare zi. Dacă ai întrebări, apelează la TelVerde 0800 800 358 și așteaptă ca cineva să te preia. Liniile sunt foarte ocupate acum, te rugăm să ai răbdare.",
-                "value": "R3"
-            }
-        ]
-      }
-  ]
+    "formId": 1,
+    "title": "Ai simptome?",
+    "firstNodeId": 1,
+    "form": [
+        {
+            "questionId": 1,
+            "nextQuestionId": 2,
+            "questionText": "Ai avut febră 38 grade celsius sau mai mare?",
+            "type": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false,
+                    "nextQuestionId": 3
+                }
+            ]
+        },
+        {
+            "questionId": 2,
+            "nextQuestionId": 3,
+            "questionText": "Din ce dată ai avut prima dată febră?",
+            "type": "DATE_PICKER"
+        },
+        {
+            "questionId": 3,
+            "nextQuestionId": 4,
+            "questionText": "Ai avut durere în gât și/sau dificultate în a înghiți?",
+            "type": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false,
+                    "nextQuestionId": 5
+                }
+            ]
+        },
+        {
+            "questionId": 4,
+            "nextQuestionId": 5,
+            "questionText": "Din ce dată ai avut durere în gât și/sau dificultate în a înghiți?",
+            "type": "DATE_PICKER"
+        },
+        {
+            "questionId": 5,
+            "nextQuestionId": 6,
+            "questionText": "Ai avut tuse intensă?",
+            "type": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false,
+                    "nextQuestionId": 7
+                }
+            ]
+        },
+        {
+            "questionId": 6,
+            "nextQuestionId": 7,
+            "questionText": "Din ce data ai avut tuse?",
+            "type": "DATE_PICKER"
+        },
+        {
+            "questionId": 7,
+            "nextQuestionId": 8,
+            "questionText": "Ai avut dificultate în a respira?",
+            "type": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false,
+                    "nextQuestionId": 9
+                }
+            ]
+        },
+        {
+            "questionId": 8,
+            "nextQuestionId": 9,
+            "questionText": "Din ce dată ai avut dificultate în a respira?",
+            "type": "DATE_PICKER"
+        },
+        {
+            "questionId": 9,
+            "nextQuestionId": 10,
+            "questionText": "Ți-a curs nasul?",
+            "type": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false,
+                    "nextQuestionId": 11
+                }
+            ]
+        },
+        {
+            "questionId": 10,
+            "nextQuestionId": 11,
+            "questionText": "Din ce dată ţi-a curs nasul?",
+            "type": "DATE_PICKER"
+        },
+        {
+            "questionId": 11,
+            "nextQuestionId": 12,
+            "questionText": "Alte simptome:",
+            "type": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false,
+                    "nextQuestionId": 13
+                }
+            ]
+        },
+        {
+            "questionId": 12,
+            "nextQuestionId": 13,
+            "questionText": "Te rugăm să le descrii",
+            "type": "INPUT",
+            "options": [
+                {
+                    "optionType": "string"
+                }
+            ]
+        },
+        {
+            "questionId": 13,
+            "nextQuestionId": 14,
+            "questionText": "În momentul de față, te afli în izolare la domiciliu?",
+            "type": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da, sunt în izolare - nu ies deloc din locuință",
+                    "value": 0
+                },
+                {
+                    "label": "Stau mai mult pe acasă, dar mai ies atunci când este nevoie",
+                    "value": 1
+                },
+                {
+                    "label": "Nu sunt în izolare și ies din locuință după program normal",
+                    "value": 2
+                },
+                {
+                    "label": "Altă situație",
+                    "value": 3
+                }
+            ]
+        },
+        {
+            "questionId": 14,
+            "nextQuestionId": 15,
+            "questionText": "În momentul de față, împarți locuința și cu alte persoane?",
+            "type": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false,
+                    "nextQuestionId": 16
+                }
+            ]
+        },
+        {
+            "questionId": 15,
+            "nextQuestionId": 16,
+            "questionText": "Celelalte persoane din locuință se află în izolare la domiciliu?",
+            "type": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da, sunt în izolare - nu ies deloc din locuință",
+                    "value": 0
+                },
+                {
+                    "label": "Stau mai mult pe acasă, dar mai ies atunci când este nevoie",
+                    "value": 1
+                },
+                {
+                    "label": "Nu sunt în izolare și ies din locuință după program normal",
+                    "value": 2
+                },
+                {
+                    "label": "Altă situație",
+                    "value": 3
+                }
+            ]
+        },
+        {
+            "questionId": 16,
+            "nextQuestionId": 17,
+            "questionText": "Ai ieșit din casă de la ultima completare a formularului?",
+            "type": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false,
+                    "nextQuestionId": 20
+                }
+            ]
+        },
+        {
+            "questionId": 17,
+            "nextQuestionId": 18,
+            "questionText": "Care a fost motivul deplasării?",
+            "type": "INPUT",
+            "options": [
+                {
+                    "optionType": "string"
+                }
+            ]
+        },
+        {
+            "questionId": 18,
+            "nextQuestionId": 19,
+            "questionText": "Data și ora plecării:",
+            "type": "DATE_TIME_PICKER"
+        },
+        {
+            "questionId": 19,
+            "nextQuestionId": 20,
+            "questionText": "Data și ora sosirii:",
+            "type": "DATE_TIME_PICKER"
+        },
+        {
+            "questionId": 20,
+            "nextQuestionId": 21,
+            "questionText": "Ai fost în contact direct cu o persoană diagnosticată/confirmată cu noul coronavirus?",
+            "type": "SINGLE_CHOICE",
+            "options": [
+                {
+                    "label": "Da",
+                    "value": true
+                },
+                {
+                    "label": "Nu",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "questionId": 21,
+            "nextQuestionId": 0,
+            "questionText": "Mulțumim!",
+            "type": "FINAL",
+            "showBackButton": false,
+            "options": [
+                {
+                    "label": "Conform răspunsurilor tale ai un grad ridicat de risc să fii infectat cu COVID-19. Te rugăm să suni la 112 și să aștepți ca cineva să te preia. Liniile sunt foarte ocupate acum, te rugăm să ai răbdare. Între timp, nu ieși din casă și limitează contactul cu familia pentru a nu îi pune în pericol. Alternativ, poți suna la Direcția de Sănătate Publică din județul tău dacă simptomele sunt ușoare și ei te vor ghida mai departe.",
+                    "value": "R1"
+                },
+                {
+                    "label": "Infecția cu SARS-COV-2 (coronavirus) și răceala puternică au uneori simptome similare. Conform răspunsurilor tale, pentru siguranță te rugăm să suni la medicul de familie sau la TelVerde 0800 800 358 și să aștepți ca cineva să te preia dacă vrei să te informezi în detaliu despre simptome și prevenție. Liniile sunt foarte ocupate acum, te rugăm să ai răbdare. Între timp, nu ieși din casă și limitează contactul cu familia pentru a nu îi pune în pericol și continuă să îți monitorizezi starea.",
+                    "value": "R2"
+                },
+                {
+                    "label": "Nu manifești niciun simptom de infecție. Te rugăm să rămâi în siguranță la domiciliu și să limitezi la maximum orice ieșire nerelevantă dacă ai posibilitatea și continuă să îți monitorizezi starea în fiecare zi. Dacă ai întrebări, apelează la TelVerde 0800 800 358 și așteaptă ca cineva să te preia. Liniile sunt foarte ocupate acum, te rugăm să ai răbdare.",
+                    "value": "R3"
+                }
+            ]
+        }
+    ]
 }
