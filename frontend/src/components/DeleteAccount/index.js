@@ -33,9 +33,9 @@ const DeleteAccount = () => {
       <div>
         Contul tău va fi șters. Pentru a putea reutiliza această aplicație va
         trebui să îți refaci contul de utilizator. Informațiile pe care le-ai
-        transmis pana acum prin intermediul aplicație vor rămâne stocate în baza
-        de date. Dacă dorești ca toate informațiile sa fie eliminate din baza de
-        date te rugam sa adresezi aceasta cerere către:
+        transmis până acum prin intermediul aplicație vor rămâne stocate în baza
+        de date. Dacă dorești ca toate informațiile să fie eliminate din baza de
+        date te rugăm să adresezi această cerere către:
         <p>Adresa: Strada Italiană, nr. 22, Sector 2, 020976, București</p>
         <p>E-mail: jurnalmedical@adr.gov.ro</p>
       </div>
