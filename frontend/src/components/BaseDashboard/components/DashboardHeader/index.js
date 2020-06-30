@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { ReactComponent as LogoSvg } from "../../../../assets/stamacasa.svg";
+import { ReactComponent as LogoSvg } from "../../../../assets/jurnalmedical.svg";
 import "./DashboardHeader.scss";
 
 const DashboardHeader = () => (
