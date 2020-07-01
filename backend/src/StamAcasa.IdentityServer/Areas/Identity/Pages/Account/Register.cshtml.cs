@@ -85,7 +85,7 @@ namespace IdentityServer.Pages.Account
                 Address = Input.Email,
                 PlaceholderContent = new Dictionary<string, string>(),
                 TemplateType = EmailTemplate.AccountConfirmation,
-                SenderName = "Admin Stăm Acasă",
+                SenderName = "Admin Jurnal Medical",
                 Subject = ""
             };
             email.PlaceholderContent.Add("name", userName);
