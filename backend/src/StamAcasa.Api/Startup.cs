@@ -98,11 +98,6 @@ namespace StamAcasa.Api
 
         public void Configure(IApplicationBuilder app, UserDbContext dbContext)
         {
-            if (!_environment.IsDevelopment())
-            {
-                app.UseHttpsRedirection();
-            }
-
             dbContext.Database.Migrate();
 
             app.UseRouting();
