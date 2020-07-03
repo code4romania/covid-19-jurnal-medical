@@ -88,7 +88,7 @@ namespace IdentityServer.Pages.Account
                 SenderName = "Admin Jurnal Medical",
                 Subject = ""
             };
-            email.PlaceholderContent.Add("name", HtmlEncoder.Default.Encode(userName));
+            email.PlaceholderContent.Add("name", userName);
             email.PlaceholderContent.Add("confirmationLink", callbackUrl);
 
             await _queue.PublishEmailRequest<EmailRequestModel>(email);
