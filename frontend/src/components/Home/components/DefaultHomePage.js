@@ -7,7 +7,7 @@ class DefaultHomePage extends React.Component {
   shareableLink() {
     return window.location.host
       ? window.location.protocol + "//" + window.location.host
-      : "https://stamacasa.ro";
+      : "https://jurnalmedical.ro";
   }
 
   render() {

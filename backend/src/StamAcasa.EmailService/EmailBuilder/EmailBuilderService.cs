@@ -31,7 +31,7 @@ namespace StamAcasa.EmailService.EmailBuilder
             var emailModel = new Email
             {
                 FromName = emailRequest.SenderName,
-                FromEmail = "admin@stamacasa.ro",
+                FromEmail = "admin@jurnalmedical.ro",
                 To = emailRequest.Address,
                 SenderName = emailRequest.SenderName,
                 Subject = EmailConstants.GetSubject(emailRequest.TemplateType),
