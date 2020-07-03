@@ -1,4 +1,4 @@
-# Stăm acasă - Contributing guide
+# Jurnal Medical - Contributing guide
 
 :two_hearts: First off all, thank you for your interest in the project and for taking the time to contribute!
 
