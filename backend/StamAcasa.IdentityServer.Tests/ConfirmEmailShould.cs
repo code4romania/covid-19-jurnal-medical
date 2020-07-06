@@ -235,10 +235,10 @@ namespace StamAcasa.IdentityServer.Tests
 
 
         [Theory]
-        [InlineAutoMoqData("https://www.stamacasa.ro/redirect-me")]
-        [InlineAutoMoqData("https://www.stamacasa.ro/redirect-me/")]
-        [InlineAutoMoqData("https://stamacasa.ro/redirect-me")]
-        [InlineAutoMoqData("https://stamacasa.ro/redirect-me/")]
+        [InlineAutoMoqData("https://www.jurnalmedical.ro/redirect-me")]
+        [InlineAutoMoqData("https://www.jurnalmedical.ro/redirect-me/")]
+        [InlineAutoMoqData("https://jurnalmedical.ro/redirect-me")]
+        [InlineAutoMoqData("https://jurnalmedical.ro/redirect-me/")]
         public async Task Set_redirect_url_to_return_url_when_it_is_in_allow_list(
             string returnUrl,
             [Frozen]Mock<UserManager<ApplicationUser>> userManager,
@@ -261,7 +261,7 @@ namespace StamAcasa.IdentityServer.Tests
             {
                 Urls = new List<string>
                 {
-                    "https://stamacasa.ro/redirect-me",
+                    "https://jurnalmedical.ro/redirect-me",
                     "https://bing.com",
                     "https://www.youtube.com"
                 }
