@@ -1,8 +1,8 @@
-# Stăm acasă
+# Jurnal Medical
 
 [![GitHub contributors](https://img.shields.io/github/contributors/code4romania/stam-acasa.svg?style=for-the-badge)](https://github.com/code4romania/stam-acasa/graphs/contributors) [![GitHub last commit](https://img.shields.io/github/last-commit/code4romania/stam-acasa.svg?style=for-the-badge)](https://github.com/code4romania/stam-acasa/commits/master) [![License: MPL 2.0](https://img.shields.io/badge/license-MPL%202.0-brightgreen.svg?style=for-the-badge)](https://opensource.org/licenses/MPL-2.0)
 
-This repo holds the frontend app and the API for Stăm acasă
+This repo holds the frontend app and the API for Jurnal Medical
 
 Objective: Reduction in the over overloading of emergency phone numbers, quick and easy collection of information from a very large population, constant evaluation of a large population, the offer of support in the management of cases for authorities.
 
@@ -11,7 +11,7 @@ How: Centralization and monitoring of the state of people under auto-isolation w
 ## Live:
 
 ### Production `not released`
-[stamacasa.ro](https://stamacasa.ro/)
+[jurnalmedical.ro](https://jurnalmedical.ro/)
 
 ### Development `in progress`
 [frontend - start here ;)](https://dev.stamacasa.ro)
