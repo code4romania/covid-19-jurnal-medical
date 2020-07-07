@@ -17,6 +17,7 @@ const ProfileItems = () => {
           <NavLink to="/account">Contul meu</NavLink>
           <div className="account-separator" />
           <button onClick={handleLogout}>Logout</button>
+          <NavLink to="/delete-account">Ștergere cont</NavLink>
         </>
       ) : (
         <>
