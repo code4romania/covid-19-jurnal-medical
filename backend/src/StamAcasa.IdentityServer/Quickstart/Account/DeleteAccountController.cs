@@ -1,21 +1,12 @@
 ﻿using System;
-using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using IdentityServer.Data;
-using IdentityServer4;
-using IdentityServer4.Models;
-using IdentityServer4.Services;
-using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace StamAcasa.IdentityServer.Quickstart.Account
 {
-    [Route("api/[controller]")]
     [ApiController]
     [AllowAnonymous]
     public class DeleteAccountController : ControllerBase
@@ -26,21 +17,31 @@ namespace StamAcasa.IdentityServer.Quickstart.Account
         {
             _userManager = userManager;
         }
-
+        [Route("/api/delete")]
         [HttpPost]
         public async Task<IActionResult> DeleteAccountAsync([FromBody] DeleteAccountModel model)
         {
-            var user = await _userManager.FindByNameAsync(model.Username);
-            if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
             {
-                return new UnauthorizedResult();
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var response = await _userManager.DeleteAsync(user);
-            if (!response.Succeeded)
+            if (!await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Unexpected error occurred deleting user with ID '{user.Id}'.");
+                return Problem("Incorrect password");
             }
+
+
+            var result = await _userManager.DeleteAsync(user);
+            var userId = await _userManager.GetUserIdAsync(user);
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException($"Unexpected error occurred deleting user with ID '{userId}'.");
+            }
+
+            //await _signInManager.SignOutAsync();
+
 
             return Ok();
         }

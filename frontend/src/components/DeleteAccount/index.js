@@ -4,19 +4,17 @@ import AccountApi from "../../api/accountApi";
 import "./style.scss";
 import { removeUser } from "../../api/auth";
 const DeleteAccount = () => {
-  const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorDeleting, setErrorDeleting] = useState(false);
 
-  const fieldsFilled = user && password;
+  const fieldsFilled =  password;
 
-  const updateUser = event => setUser(event.target.value);
   const updatePassword = event => setPassword(event.target.value);
 
   const deleteProfile = () => {
     setLoading(true);
-    AccountApi.deleteAccount(user, password)
+    AccountApi.deleteAccount(password)
       .then(() => {
         setLoading(false);
       })
@@ -40,16 +38,6 @@ const DeleteAccount = () => {
         <p>E-mail: jurnalmedical@adr.gov.ro</p>
       </div>
       <form onSubmit={() => {}}>
-        <div className="field">
-          <label className="label">Email</label>
-          <input
-            className="input is-medium"
-            type="text"
-            placeholder="Email"
-            value={user}
-            onChange={updateUser}
-          />
-        </div>
         <div className="field">
           <label className="label">Parola</label>
           <input
