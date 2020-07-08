@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using StamAcasa.IdentityServer.Quickstart.Account;
 
 namespace IdentityServer.Quickstart.Account
 {
@@ -212,6 +213,32 @@ namespace IdentityServer.Quickstart.Account
             return View();
         }
 
+        [Route("account/delete")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteAccountAsync([FromBody] DeleteAccountModel model)
+        {
+            var user = await _userManager.FindByNameAsync(model.Email);
+            if (user == null)
+            {
+                return Problem("Utilizatorul nu a fost sters");
+            }
+
+            if (!await _userManager.CheckPasswordAsync(user, model.Password))
+            {
+                return Problem("Utilizatorul nu a fost sters");
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+            var userId = await _userManager.GetUserIdAsync(user);
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException($"Unexpected error occurred deleting user with ID '{userId}'.");
+            }
+
+            await _signInManager.SignOutAsync();
+
+            return Ok();
+        }
 
         /*****************************************/
         /* helper APIs for the AccountController */

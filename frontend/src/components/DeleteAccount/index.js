@@ -2,27 +2,27 @@ import React, { useState } from "react";
 import SidebarLayout from "../SidebarLayout";
 import AccountApi from "../../api/accountApi";
 import "./style.scss";
-import { removeUser } from "../../api/auth";
+import { removeUser, getUser } from "../../api/auth";
 const DeleteAccount = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorDeleting, setErrorDeleting] = useState(false);
 
-  const fieldsFilled =  password;
+  const fieldsFilled = password;
 
   const updatePassword = event => setPassword(event.target.value);
 
-  const deleteProfile = () => {
-    setLoading(true);
-    AccountApi.deleteAccount(password)
-      .then(() => {
-        setLoading(false);
-      })
-      .then(removeUser)
-      .catch(() => {
-        setErrorDeleting(true);
-        setLoading(false);
-      });
+  const deleteProfile = async () => {
+    try {
+      setLoading(true);
+      const user = await getUser();
+      await AccountApi.deleteAccount(user.profile.email, password);
+      setLoading(false);
+      await removeUser();
+    } catch {
+      setErrorDeleting(true);
+      setLoading(false);
+    }
   };
 
   const buttonClasses = "button is-danger" + (loading ? " is-loading" : "");
