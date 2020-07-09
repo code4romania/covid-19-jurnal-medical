@@ -42,9 +42,9 @@ namespace StamAcasa.Api.Tests
         }
 
         [Fact]
-        public async Task Return_UnauthorizedResult_when_no_user_found()
+        public async Task Get_version_for_newly_created_user()
         {
-            var user = GetClaimsPrincipal(new[] { new Claim("sub", string.Empty) });
+            var user = GetClaimsPrincipal(new[] { new Claim("sub", "my-random-value") });
             SetUserInControllerContext(user);
 
             _userServiceMock
@@ -54,9 +54,12 @@ namespace StamAcasa.Api.Tests
             _userServiceMock
                 .Setup(x => x.GetUserInfoBySub("my-random-value"))
                 .ReturnsAsync(null as UserInfo);
+            _assessmentServiceMock.Setup(x => x.GetAssessment("my-random-value", null))
+                .ReturnsAsync(new AssessmentDTO()).Verifiable();
 
             var result = await _sut.GetVersion(null);
-            result.Should().BeOfType<UnauthorizedResult>();
+            result.Should().BeOfType<OkObjectResult>();
+            _assessmentServiceMock.Verify();
         }
 
         [Fact]

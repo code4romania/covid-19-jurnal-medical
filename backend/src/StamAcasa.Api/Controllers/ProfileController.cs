@@ -54,6 +54,7 @@ namespace StamAcasa.Api.Controllers
         {
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(ModelState.Values);
+
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
 
             if (await IsRequestInvalid(sub))
@@ -114,7 +115,7 @@ namespace StamAcasa.Api.Controllers
             }
 
             var sub = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (await IsRequestInvalid(sub))
+            if (string.IsNullOrEmpty(sub) || await IsRequestInvalid(sub))
             {
                 return new UnauthorizedResult();
             }
