@@ -45,6 +45,7 @@ services:
         ClientApplications__3__RedirectUris__1: ${IS_ClientApplications__3__RedirectUris__1}
         ClientApplications__4__AllowedCorsOrigins__0: ${IS_ClientApplications__4__AllowedCorsOrigins__0}
         ClientApplications__4__RedirectUris__0: ${IS_ClientApplications__4__RedirectUris__0}
+        AllowedRedirectUrls__1: ${ALLOWED_REDIRECT_URLS__1}
     ports:
       - 5001:80
     container_name: identityserver
