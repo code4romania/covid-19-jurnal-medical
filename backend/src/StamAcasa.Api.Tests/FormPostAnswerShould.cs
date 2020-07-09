@@ -7,6 +7,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using StamAcasa.Api.Controllers;
+using StamAcasa.Api.Models;
 using StamAcasa.Api.Services;
 using StamAcasa.Common.DTO;
 using StamAcasa.Common.Services;
@@ -20,105 +21,8 @@ namespace StamAcasa.Api.Tests
         private readonly Mock<IFormService> _formServiceMock = new Mock<IFormService>();
         private readonly Mock<IUserService> _userServiceMock = new Mock<IUserService>();
 
-        private string form = @"
-        {
-	        ""formId"":1,
-	        ""timestamp"":1590514591645,
-	        ""answers"":[
-		        {
-			        ""id"":1,
-			        ""questionText"":""Ai avut febră 38 grade celsius sau mai mare?"",
-			        ""answer"":""false""
-		        },
-		        {
-			        ""id"":2,
-			        ""questionText"":""Din ce dată ai avut prima dată febră?""
-		        },
-		        {
-			        ""id"":3,
-			        ""questionText"":""Ai avut durere în gât și/sau dificultate în a înghiți?"",
-			        ""answer"":""false""
-		        },
-		        {
-			        ""id"":4,
-			        ""questionText"":""Din ce dată ai avut durere în gât și/sau dificultate în a înghiți?""
-		        },
-		        {
-			        ""id"":5,
-			        ""questionText"":""Ai avut tuse intensă?"",
-			        ""answer"":""false""
-		        },
-		        {
-			        ""id"":6,
-			        ""questionText"":""Din ce data ai avut tuse?""
-		        },
-		        {
-			        ""id"":7,
-			        ""questionText"":""Ai avut dificultate în a respira?"",
-			        ""answer"":""false""
-		        },
-		        {
-			        ""id"":8,
-			        ""questionText"":""Din ce dată ai avut dificultate în a respira?""
-		        },
-		        {
-			        ""id"":9,
-			        ""questionText"":""Ți-a curs nasul?"",
-			        ""answer"":""false""
-		        },
-		        {
-			        ""id"":10,
-			        ""questionText"":""Din ce dată ţi-a curs nasul?""
-		        },
-		        {
-			        ""id"":11,
-			        ""questionText"":""Alte simptome:"",
-			        ""answer"":""false""
-		        },
-		        {
-			        ""id"":12,
-			        ""questionText"":""Te rugăm să le descrii""
-		        },
-		        {
-			        ""id"":13,
-			        ""questionText"":""În momentul de față, te afli în izolare la domiciliu?"",
-			        ""answer"":""1""
-		        },
-		        {
-			        ""id"":14,
-			        ""questionText"":""În momentul de față, împarți locuința și cu alte persoane?"",
-			        ""answer"":""false""
-		        },
-		        {
-			        ""id"":15,
-			        ""questionText"":""Celelalte persoane din locuință se află în izolare la domiciliu?"",
-			        ""answer"":""undefined""
-		        },
-		        {
-			        ""id"":16,
-			        ""questionText"":""Ai ieșit din casă de la ultima completare a formularului?"",
-			        ""answer"":""false""
-		        },
-		        {
-			        ""id"":17,
-			        ""questionText"":""Care a fost motivul deplasării?""
-		        },
-		        {
-			        ""id"":18,
-			        ""questionText"":""Data și ora plecării:""
-		        },
-		        {
-			        ""id"":19,
-			        ""questionText"":""Data și ora sosirii:""
-		        },
-		        {
-			        ""id"":20,
-			        ""questionText"":""Ai fost în contact direct cu o persoană diagnosticată/confirmată cu noul coronavirus?"",
-			        ""answer"":""false""
-		        }
-	        ]
-        }
-        ";
+        private readonly UserForm _form = new UserForm();
+
         public FormPostAnswerShould()
         {
             _sut = new FormController(_fileServiceMock.Object, _formServiceMock.Object, _userServiceMock.Object, null);
@@ -139,24 +43,6 @@ namespace StamAcasa.Api.Tests
         {
             var user = GetClaimsPrincipal(new[] { new Claim("sub", string.Empty) });
             SetUserInControllerContext(user);
-
-            var result = await _sut.PostAnswer(null);
-            result.Should().BeOfType<UnauthorizedResult>();
-        }
-
-        [Fact]
-        public async Task Return_UnauthorizedResult_when_no_user_found()
-        {
-            var user = GetClaimsPrincipal(new[] { new Claim("sub", string.Empty) });
-            SetUserInControllerContext(user);
-
-            _userServiceMock
-                .Setup(x => x.GetFamilyMembersIds("836486E9-9A55-4513-A525-5FE0A84D3DA5"))
-                .ReturnsAsync(new List<int>());
-
-            _userServiceMock
-                .Setup(x => x.GetUserInfoBySub("836486E9-9A55-4513-A525-5FE0A84D3DA5"))
-                .ReturnsAsync(null as UserInfo);
 
             var result = await _sut.PostAnswer(null);
             result.Should().BeOfType<UnauthorizedResult>();
@@ -187,7 +73,7 @@ namespace StamAcasa.Api.Tests
                 .Returns(Task.CompletedTask)
                 .Verifiable();
 
-            var result = await _sut.PostAnswer(form, null);
+            var result = await _sut.PostAnswer(_form, null);
 
             _fileServiceMock.Verify();
             _formServiceMock.Verify();
@@ -223,7 +109,7 @@ namespace StamAcasa.Api.Tests
                 .Returns(Task.CompletedTask)
                 .Verifiable();
 
-            var result = await _sut.PostAnswer(form, requestedId);
+            var result = await _sut.PostAnswer(_form, requestedId);
 
             _fileServiceMock.Verify();
             _formServiceMock.Verify();
@@ -246,7 +132,7 @@ namespace StamAcasa.Api.Tests
                 .Setup(x => x.GetUserInfoBySub("836486E9-9A55-4513-A525-5FE0A84D3DA5"))
                 .ReturnsAsync(new UserInfo() { Id = 666 });
 
-            var result = await _sut.PostAnswer(form, requestedId);
+            var result = await _sut.PostAnswer(_form, requestedId);
 
             result.Should().BeOfType<UnauthorizedResult>();
         }

@@ -33,6 +33,13 @@ namespace StamAcasa.IdentityServer.Tests
 
     public class ConfirmEmailShould
     {
+        private readonly AllowedRedirects _allowedRedirects = new AllowedRedirects()
+        {
+            Urls = new List<string>()
+            {
+                "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            }
+        };
 
         [Theory]
         [InlineAutoMoqData("", "")]
@@ -50,7 +57,7 @@ namespace StamAcasa.IdentityServer.Tests
             FakeSignInManager signInManager
         )
         {
-            ConfirmEmailModel sut = new ConfirmEmailModel(userManager.Object, signInManager, null);
+            ConfirmEmailModel sut = new ConfirmEmailModel(userManager.Object, signInManager, _allowedRedirects);
 
             var result = await sut.OnGetAsync(userId, userCode, string.Empty);
 
@@ -67,7 +74,7 @@ namespace StamAcasa.IdentityServer.Tests
             userManager.Setup(x => x.FindByIdAsync("my-user-id"))
                 .ReturnsAsync(null as ApplicationUser);
 
-            ConfirmEmailModel sut = new ConfirmEmailModel(userManager.Object, signInManager, null);
+            ConfirmEmailModel sut = new ConfirmEmailModel(userManager.Object, signInManager, _allowedRedirects);
 
             var result = await sut.OnGetAsync("my-user-id", "my-user-code", string.Empty);
 
@@ -95,7 +102,7 @@ namespace StamAcasa.IdentityServer.Tests
             userManager.Setup(x => x.ConfirmEmailAsync(currentUser, "my-user-code"))
                 .ReturnsAsync(confirmEmailResult);
 
-            ConfirmEmailModel sut = new ConfirmEmailModel(userManager.Object, signInManager, null);
+            ConfirmEmailModel sut = new ConfirmEmailModel(userManager.Object, signInManager, _allowedRedirects);
 
             Mock<IUrlHelper> urlHelper = new Mock<IUrlHelper>();
             sut.Url = urlHelper.Object;
@@ -124,7 +131,7 @@ namespace StamAcasa.IdentityServer.Tests
                 .Returns(Task.CompletedTask)
                 .Verifiable();
 
-            ConfirmEmailModel sut = new ConfirmEmailModel(userManager.Object, signInManager.Object, null);
+            ConfirmEmailModel sut = new ConfirmEmailModel(userManager.Object, signInManager.Object, _allowedRedirects);
             urlHelper.Setup(x => x.Content("~/")).Returns("https://example.com/");
             sut.Url = urlHelper.Object;
 
@@ -154,7 +161,7 @@ namespace StamAcasa.IdentityServer.Tests
                 .Returns(Task.CompletedTask)
                 .Verifiable();
 
-            ConfirmEmailModel sut = new ConfirmEmailModel(userManager.Object, signInManager.Object, null);
+            ConfirmEmailModel sut = new ConfirmEmailModel(userManager.Object, signInManager.Object, _allowedRedirects);
             urlHelper.Setup(x => x.Content("~/")).Returns("https://example.com/");
             sut.Url = urlHelper.Object;
 
@@ -185,7 +192,7 @@ namespace StamAcasa.IdentityServer.Tests
                 .Returns(Task.CompletedTask)
                 .Verifiable();
 
-            ConfirmEmailModel sut = new ConfirmEmailModel(userManager.Object, signInManager.Object, null);
+            ConfirmEmailModel sut = new ConfirmEmailModel(userManager.Object, signInManager.Object, _allowedRedirects);
             urlHelper.Setup(x => x.Content("~/")).Returns("https://example.com/");
             sut.Url = urlHelper.Object;
 

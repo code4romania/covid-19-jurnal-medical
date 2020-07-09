@@ -32,7 +32,7 @@ namespace StamAcasa.Api.Controllers
         public async Task<IActionResult> Get(int? id = null)
         {
             var subClaimValue = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (subClaimValue == null)
+            if (string.IsNullOrEmpty(subClaimValue))
                 return new UnauthorizedResult();
 
             if (await IsRequestInvalid(subClaimValue, id))
@@ -70,7 +70,7 @@ namespace StamAcasa.Api.Controllers
         public async Task<IActionResult> PostAnswer([FromBody]UserForm form, [FromQuery]int? id = null)
         {
             var subClaimValue = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (subClaimValue == null)
+            if (string.IsNullOrEmpty(subClaimValue))
                 return new UnauthorizedResult();
 
             if (await IsRequestInvalid(subClaimValue, id))

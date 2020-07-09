@@ -51,9 +51,9 @@ namespace StamAcasa.Api.Tests
         }
 
         [Fact]
-        public async Task Return_UnauthorizedResult_when_no_user_found()
+        public async Task Return_not_found_when_adding_family_member_for_non_saved_user()
         {
-            var user = GetClaimsPrincipal(new[] { new Claim("sub", string.Empty) });
+            var user = GetClaimsPrincipal(new[] { new Claim("sub", "my-random-value") });
             SetUserInControllerContext(user);
 
             _userServiceMock
@@ -65,7 +65,7 @@ namespace StamAcasa.Api.Tests
                 .ReturnsAsync(null as UserInfo);
 
             var result = await _sut.AddFamilyProfile(new UserProfileDTO());
-            result.Should().BeOfType<UnauthorizedResult>();
+            result.Should().BeOfType<NotFoundObjectResult>().Which.Value.Should().Be("Could not find parent user");
         }
 
         [Fact]

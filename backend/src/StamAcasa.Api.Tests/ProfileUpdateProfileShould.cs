@@ -40,25 +40,6 @@ namespace StamAcasa.Api.Tests
             result.Should().BeOfType<UnauthorizedResult>();
         }
 
-        [Fact]
-        public async Task Return_UnauthorizedResult_when_no_user_found()
-        {
-            var user = GetClaimsPrincipal(new[] { new Claim("sub", string.Empty) });
-            SetUserInControllerContext(user);
-
-            _userServiceMock
-                .Setup(x => x.GetFamilyMembersIds("my-random-value"))
-                .ReturnsAsync(new List<int>());
-
-            _userServiceMock
-                .Setup(x => x.GetUserInfoBySub("my-random-value"))
-                .ReturnsAsync(null as UserInfo);
-
-            var result = await _sut.UpdateProfile(1, new UserProfileDTO());
-            result.Should().BeOfType<UnauthorizedResult>();
-        }
-
-
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
