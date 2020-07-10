@@ -14,7 +14,7 @@ namespace StamAcasa.Api.Models
         public long Timestamp { get; }
 
         [JsonProperty("answers")]
-        public Answer[] Answers { get; set; }
+        public AnswerModel[] Answers { get; set; }
 
         public UserForm()
         {
