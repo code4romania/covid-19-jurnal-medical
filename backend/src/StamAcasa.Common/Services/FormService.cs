@@ -43,7 +43,14 @@ namespace StamAcasa.Common.Services
 
         public async Task<bool> AddForm(FormInfo formModel)
         {
-            var formEntity = _mapper.Map<Form>(formModel);
+            var formEntity = new Form
+            {
+                Content = formModel.Content,
+                FormTypeId = formModel.FormTypeId,
+                Timestamp = formModel.Timestamp,
+                UserId = formModel.UserId
+            };
+
             var result = await _context.Forms.AddAsync(formEntity);
             await _context.SaveChangesAsync();
             return (result.Entity?.Id ?? 0) > 0;

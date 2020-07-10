@@ -82,7 +82,7 @@ namespace StamAcasa.Api.Controllers
 
             // TODO: add user profile info as added properties to form, before save
 
-            var contentToSave = JsonConvert.SerializeObject(form).ToString();
+            var contentToSave = JsonConvert.SerializeObject(form);
 
             await _formService.AddForm(new FormInfo
             {
