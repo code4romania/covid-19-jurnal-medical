@@ -18,18 +18,16 @@ export const buildHistory = rawData => {
     outings: []
   };
 
-  data.forEach(({ RootElement: { answers: answersList, timestamp } }) => {
-    const form = getAnswers(answersList);
-
-    const formTimestampInSeconds = Math.floor(timestamp / 1000);
+  data.forEach(responseForm => {
+    const form = getAnswers(responseForm.answers);
 
     result.temperature.push({
-      date: formTimestampInSeconds,
+      date: responseForm.timestamp,
       temperature: form.hadFever.answer === TRUE ? 38 : 37
     });
 
     result.symptoms.push({
-      date: formTimestampInSeconds,
+      date: responseForm.timestamp,
       soreThroat: form.hadSoreThroat.answer === TRUE,
       cough: form.hadCough.answer === TRUE,
       shortnessBreath: form.hadShortnessBreath.answer === TRUE,
@@ -38,7 +36,7 @@ export const buildHistory = rawData => {
 
     if (form.hadOtherSymptoms.answer === TRUE) {
       result.otherSymptoms.push({
-        date: formTimestampInSeconds,
+        date: responseForm.timestamp,
         otherSimptoms: form.otherSymptomsDescription.answer
       });
     }
