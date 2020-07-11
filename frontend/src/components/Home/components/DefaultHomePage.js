@@ -17,10 +17,25 @@ class DefaultHomePage extends React.Component {
         <Hero title="Bine ai venit" subtitle="" useFallbackIcon={true} />
         <div className="content">
           <p>
-            Starea de alertă poate fi dificil de gestionat. Avem voie să ieșim din casă, dar urmând proceduri și reguli foarte clare. Riscul de a contracta virusul este foarte ridicat și este important să putem să ne monitorizăm starea cu ușurință și, de asemenea, este util să ne menținem un jurnal al ieșirilor. Telefoanele de urgență sunt împovărate de numărul mare de apeluri, făcând astfel evaluarea situațiilor medicale la nivel național o problemă reală. Toți suntem în aceeași situație.
+            Starea de alertă poate fi dificil de gestionat. Avem voie să ieșim
+            din casă, dar urmând proceduri și reguli foarte clare. Riscul de a
+            contracta virusul este foarte ridicat și este important să putem să
+            ne monitorizăm starea cu ușurință și, de asemenea, este util să ne
+            menținem un jurnal al ieșirilor. Telefoanele de urgență sunt
+            împovărate de numărul mare de apeluri, făcând astfel evaluarea
+            situațiilor medicale la nivel național o problemă reală. Toți suntem
+            în aceeași situație.
           </p>
           <p>
-            Jurnal Medical este o soluție digitală cu ajutorul căreia, împreună, reducem suprasolicitarea numerelor de urgență, colectăm rapid informații de la o populație foarte mare, ne monitorizăm starea de sănătate pentru noi și pentru cei dragi și rămânem cu toții în siguranță. Datele completate de toți utilizatorii aplicației sunt centralizate și transmise zilnic către Institutul Național de Sănătate Publică și Direcțiile de Sănătate Publică pentru a putea gestiona potențiale focare și pentru a te putea proteja mai bine de pericol.
+            Jurnal Medical este o soluție digitală cu ajutorul căreia, împreună,
+            reducem suprasolicitarea numerelor de urgență, colectăm rapid
+            informații de la o populație foarte mare, ne monitorizăm starea de
+            sănătate pentru noi și pentru cei dragi și rămânem cu toții în
+            siguranță. Datele completate de toți utilizatorii aplicației sunt
+            centralizate și transmise zilnic către Institutul Național de
+            Sănătate Publică și Direcțiile de Sănătate Publică pentru a putea
+            gestiona potențiale focare și pentru a te putea proteja mai bine de
+            pericol.
           </p>
         </div>
         <SocialsShare currentPage={link} />
@@ -28,13 +43,22 @@ class DefaultHomePage extends React.Component {
           <Hero title="Cum funcționează" />
           <div className="content">
             <p>
-              Odată ce ți-ai creat un cont vei putea să îți construiești un profil pentru tine, respectiv membrii familiei tale sau alte persoane pe care le ai în grijă, cu ajutorul unui set inițial de întrebări.
+              Odată ce ți-ai creat un cont vei putea să îți construiești un
+              profil pentru tine, respectiv membrii familiei tale sau alte
+              persoane pe care le ai în grijă, cu ajutorul unui set inițial de
+              întrebări.
             </p>
             <p>
-              În fiecare zi vei primi notificare să completezi un chestionar de evaluare menit să te ajute să monitorizezi riscul unei potențiale infecții. Vei putea de asemenea să menții un istoric al tuturor ieșirilor din domiciliu ale tale sau ale membrilor familiei.
+              În fiecare zi vei primi notificare să completezi un chestionar de
+              evaluare menit să te ajute să monitorizezi riscul unei potențiale
+              infecții. Vei putea de asemenea să menții un istoric al tuturor
+              ieșirilor din domiciliu ale tale sau ale membrilor familiei.
             </p>
             <p>
-              Datele completate de toți utilizatorii aplicației sunt de asemenea monitorizate de Institutul Național de Sănătate Publică și Direcțiile de Sănătate Publică pentru a putea gestiona potențiale focare și pentru a te putea proteja mai bine de pericol.
+              Datele completate de toți utilizatorii aplicației sunt de asemenea
+              monitorizate de Institutul Național de Sănătate Publică și
+              Direcțiile de Sănătate Publică pentru a putea gestiona potențiale
+              focare și pentru a te putea proteja mai bine de pericol.
             </p>
           </div>
           <Hero title="Cum îmi creez un cont" />
