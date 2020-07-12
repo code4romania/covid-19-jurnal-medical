@@ -10,6 +10,7 @@ using StamAcasa.Api.Controllers;
 using StamAcasa.Api.Models;
 using StamAcasa.Api.Services;
 using StamAcasa.Common.DTO;
+using StamAcasa.Common.Models;
 using StamAcasa.Common.Services;
 using Xunit;
 
