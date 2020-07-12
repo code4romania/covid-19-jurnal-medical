@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Newtonsoft.Json;
 using StamAcasa.Api.Models;
 using StamAcasa.Api.Services;
 using StamAcasa.Common.DTO;
+using StamAcasa.Common.Models;
 using StamAcasa.Common.Services;
 
 namespace StamAcasa.Api.Controllers
@@ -86,7 +88,7 @@ namespace StamAcasa.Api.Controllers
 
             await _formService.AddForm(new FormInfo
             {
-                Content = contentToSave,
+                SubmitedForm = form,
                 Timestamp = form.Timestamp.ToDateTimeFromEpoch(),
                 UserId = id ?? authenticatedUser.Id,
                 FormTypeId = form.FormId.ToString()

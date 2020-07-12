@@ -1,5 +1,6 @@
 import React from "react";
 import { Hero, SocialsShare } from "@code4ro/taskforce-fe-components";
+import "./style.scss";
 import SidebarLayout from "../../SidebarLayout";
 import { Constants } from "../../../config/constants";
 
@@ -75,6 +76,14 @@ class DefaultHomePage extends React.Component {
               al altor membri ai familiei sau al altor persoane pe care le ai în
               grijă și să completezi apoi formularele recurente de monitorizare.
             </p>
+            <div className="has-text-centered">
+              <a
+                href={`${Constants.idpUrl}/identity/account/register?returnUrl=${window.location}register-complete`}
+                className="button big-button"
+              >
+                Creează cont
+              </a>
+            </div>
           </div>
         </SidebarLayout>
       </>
