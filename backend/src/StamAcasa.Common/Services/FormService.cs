@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using StamAcasa.Common.DTO;
 using StamAcasa.Common.Models;
 
@@ -43,9 +44,10 @@ namespace StamAcasa.Common.Services
 
         public async Task<bool> AddForm(FormInfo formModel)
         {
+
             var formEntity = new Form
             {
-                Content = formModel.Content,
+                Content = JsonConvert.SerializeObject(formModel.SubmitedForm),
                 FormTypeId = formModel.FormTypeId,
                 Timestamp = formModel.Timestamp,
                 UserId = formModel.UserId

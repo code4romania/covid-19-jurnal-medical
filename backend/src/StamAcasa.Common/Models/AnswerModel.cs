@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace StamAcasa.Api.Models
+namespace StamAcasa.Common.Models
 {
     public class AnswerModel
     {
