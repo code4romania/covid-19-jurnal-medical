@@ -6,7 +6,7 @@ COPY package*.json /app/
 RUN npm install
 
 COPY . /app
-RUN npm run-script build
+RUN npm run build
 
 # Production environment
 FROM node:12.16.1-alpine
@@ -25,8 +25,6 @@ RUN apk add --no-cache bash
 WORKDIR /app/build
 COPY ./env.sh .
 COPY ./serve.json .
-# COPY .env .
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Convert dos line endings to unix file endings - problem with build on docker for windows
 RUN sed -i 's/\r$//' env.sh
@@ -34,6 +32,5 @@ RUN sed -i 's/\r$//' env.sh
 # Make our shell script executable
 RUN chmod +x env.sh
 
-# Start Nginx server
+# Start server
 CMD ["/bin/bash", "-c", "/app/build/env.sh && PORT=5002 serve", "-s", "/app/build", "-l", "5002"]
-# CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]

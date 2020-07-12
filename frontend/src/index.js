@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "@code4ro/taskforce-fe-components/dist/index.css";
 import "./index.scss";
 import App from "./components/App/App";
 import * as serviceWorker from "./serviceWorker";
-import "@code4ro/taskforce-fe-components/dist/index.css";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import { BrowserRouter as Router } from "react-router-dom";
