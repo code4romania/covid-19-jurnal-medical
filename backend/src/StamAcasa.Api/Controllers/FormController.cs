@@ -88,7 +88,7 @@ namespace StamAcasa.Api.Controllers
 
             await _formService.AddForm(new FormInfo
             {
-                SubmitedForm = form,
+                Content = form,
                 Timestamp = form.Timestamp.ToDateTimeFromEpoch(),
                 UserId = id ?? authenticatedUser.Id,
                 FormTypeId = form.FormId.ToString()

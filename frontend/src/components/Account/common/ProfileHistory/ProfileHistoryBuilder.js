@@ -6,7 +6,7 @@ const formatDateTimeForOuting = dateAsISOString => {
   return format(new Date(dateAsISOString), "d MMM HH:mm", { locale: ro });
 };
 export const buildHistory = rawData => {
-  const data = rawData.map(({ content }) => JSON.parse(content));
+  const data = rawData.map(({ content }) => content);
   if (!data) {
     return;
   }
