@@ -41,7 +41,8 @@ namespace StamAcasa.Common.Notifications
                 {
                     { "name", $"{userInfo.Name}" },
                     { "evaluationLink", _userProfileUrls.Evaluation }
-                }
+                },
+                SenderName = "Echipa Jurnal Medical"
             };
         }
     }

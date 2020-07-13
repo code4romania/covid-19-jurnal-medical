@@ -95,7 +95,7 @@ namespace IdentityServer.Pages.Account
                 Address = Input.Email,
                 PlaceholderContent = new Dictionary<string, string>(),
                 TemplateType = EmailTemplate.ResetPassword,
-                SenderName = "Reset Password",
+                SenderName = "Resetare parolă",
                 Subject = ""
             };
             email.PlaceholderContent.Add("name", userName);
