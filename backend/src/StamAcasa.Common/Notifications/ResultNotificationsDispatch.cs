@@ -77,8 +77,8 @@ namespace StamAcasa.Common.Notifications
                     formInfo.County = c.UserInfo.County;
                     formInfo.PhoneNumber = c.UserInfo.PhoneNumber;
                     formInfo.Comorbidities = string.Join(",", c.UserInfo.PreexistingMedicalCondition);
-                    formInfo.answers = c.SubmitedForm.Answers;
-                    formInfo.formId = c.SubmitedForm.FormId;
+                    formInfo.answers = c.Content.Answers;
+                    formInfo.formId = c.Content.FormId;
                     return formInfo;
                 }).ToList());
             var excelFile = _answersExcelExporter.AnswersToExcel(jArray);
