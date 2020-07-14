@@ -9,14 +9,13 @@ namespace StamAcasa.Common.Models
         public long FormId { get; set; }
 
         [JsonProperty("timestamp")]
-        public long Timestamp { get; }
+        public long Timestamp { get; set; }
 
         [JsonProperty("answers")]
         public AnswerModel[] Answers { get; set; }
 
         public UserForm()
         {
-
             Timestamp = ToEpochTime(DateTime.UtcNow);
         }
 
