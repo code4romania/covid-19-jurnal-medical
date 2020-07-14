@@ -28,7 +28,7 @@ export const PersonalData = ({
   };
 
   const nameValidationMessages = {
-    patternMismatch: "Acest câmp poate conține doar caractere alfanumerice",
+    patternMismatch: "Lungimea maximă este 32 caractere",
     valueMissing: "Acest câmp este obligatoriu"
   };
 
@@ -58,7 +58,7 @@ export const PersonalData = ({
           name="surname"
           title="Nume"
           required
-          pattern="[A-Za-z ]{1,32}"
+          pattern=".{1,32}"
           validationMessages={nameValidationMessages}
           usePlaceholder
           value={userData.surname}
@@ -74,7 +74,7 @@ export const PersonalData = ({
           title="Prenume"
           validationMessages={nameValidationMessages}
           required
-          pattern="[A-Za-z ]{1,32}"
+          pattern=".{1,32}"
           usePlaceholder
           value={userData.name}
           defaultValue={userData.name}
