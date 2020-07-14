@@ -19,12 +19,12 @@ namespace StamAcasa.Common.Models
             Timestamp = ToEpochTime(DateTime.UtcNow);
         }
 
-        private static int ToEpochTime(DateTime dateTime)
+        private static long ToEpochTime(DateTime dateTime)
         {
             var date = dateTime.ToUniversalTime();
             var ticks = date.Ticks - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).Ticks;
             var ts = ticks / TimeSpan.TicksPerSecond;
-            return (int)ts;
+            return ts;
         }
     }
 }
