@@ -28,7 +28,7 @@ export const PersonalData = ({
   };
 
   const nameValidationMessages = {
-    patternMismatch: "Lungimea maxima e 32 caractere",
+    patternMismatch: "Lungimea maximă este 32 caractere",
     valueMissing: "Acest câmp este obligatoriu"
   };
 
