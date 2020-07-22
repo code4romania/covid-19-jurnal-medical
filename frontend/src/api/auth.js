@@ -56,3 +56,5 @@ export const getUserToken = async () => {
   }
   return user.access_token;
 };
+
+export const removeUser = () => userManager.removeUser();
