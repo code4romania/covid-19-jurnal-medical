@@ -6,6 +6,7 @@ import {
   Checkbox
 } from "@code4ro/taskforce-fe-components";
 import React from "react";
+import { Link } from "react-router-dom";
 import { options } from "./options";
 import PropTypes from "prop-types";
 import cities from "./cities.json";
@@ -167,9 +168,12 @@ export const PersonalData = ({
           }}
           defaultValue={userData.agree}
         >
-          Declar că am acordul persoanelor pentru care completez acest formular,
-          dedicat menținerii unui jurnal de simptome și deplasări și
-          transmiterea acestor informații către autoritățile competente.
+          Declar că informațiile completate in acest formular îmi aparțin, sau,
+          după caz, că am acordul persoanelor pentru care completez acest
+          formular, dedicat menținerii unui jurnal de simptome și deplasări, și
+          că am luat cunoștință de{" "}
+          <Link to="/termeni-si-conditii">termenii și condițiile</Link> de
+          utilizare ai acestei platforme.
         </Checkbox>
       </div>
     </>
