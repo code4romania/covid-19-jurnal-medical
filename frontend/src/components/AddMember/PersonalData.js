@@ -2,7 +2,8 @@ import {
   Input,
   ListHeader,
   Select,
-  DropdownSearch
+  DropdownSearch,
+  Checkbox
 } from "@code4ro/taskforce-fe-components";
 import React from "react";
 import { options } from "./options";
@@ -159,6 +160,17 @@ export const PersonalData = ({
             }
           }}
         />
+        <Checkbox
+          name="agree"
+          onChange={({ target: { checked } }) => {
+            setUserDataField("agree", checked);
+          }}
+          defaultValue={userData.agree}
+        >
+          Declar că am acordul persoanelor pentru care completez acest formular,
+          dedicat menținerii unui jurnal de simptome și deplasări și
+          transmiterea acestor informații către autoritățile competente.
+        </Checkbox>
       </div>
     </>
   );
