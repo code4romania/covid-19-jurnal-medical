@@ -52,7 +52,7 @@ namespace IdentityServer.Pages.Account
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        public class InputModel
+        public class InputModel : IValidatableObject
         {
             [Required(ErrorMessage = "Te rugăm completează adresa de e-mail")]
             [EmailAddress(ErrorMessage = "Adresa de e-mail nu este validă.")]
@@ -70,6 +70,16 @@ namespace IdentityServer.Pages.Account
             [Display(Name = "Confirmă parola")]
             [Compare("Password", ErrorMessage = "Câmpurile de parolă și confirmare parolă nu sunt identice.")]
             public string ConfirmPassword { get; set; }
+            public bool AcceptTermsAndConditions { get; set; }
+            public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+            {
+                if (AcceptTermsAndConditions == false)
+                {
+                    yield return new ValidationResult(
+                        "Te rugăm să accepți termenii și condițiile.",
+                        new[] { nameof(AcceptTermsAndConditions) });
+                }
+            }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
