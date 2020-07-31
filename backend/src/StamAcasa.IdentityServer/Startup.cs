@@ -116,6 +116,19 @@ namespace IdentityServer
                 ));
             services.AddSingleton<IQueueService, QueueService>();
             services.AddSingleton<PasswordValidationMessages>();
+
+            services.AddCors(options =>
+            {
+                // this defines a CORS policy called "default"
+                options.AddPolicy("default", policy =>
+                {
+                    policy = _identityConfiguration.Clients.SelectMany(x => x.AllowedCorsOrigins)
+                        .Aggregate(policy, (current, url) => current.WithOrigins(url));
+
+                    policy.AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
         }
 
         private X509Certificate2 LoadCertificate(string base64EncodedCertificate, string password)
@@ -140,6 +153,7 @@ namespace IdentityServer
                 app.UseHttpsRedirection();
             }
 
+            app.UseCors("default");
             app.UseRouting();
             app.UseStaticFiles();
             var cookiePolicyOptions = new CookiePolicyOptions
