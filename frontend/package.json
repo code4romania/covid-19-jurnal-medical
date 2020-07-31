@@ -11,14 +11,16 @@
     "chart.js": "^2.9.3",
     "date-fns": "^2.11.1",
     "oidc-client": "^1.10.1",
-    "query-string": "^6.12.0",
     "react": "^16.13.0",
     "react-cookie-consent": "^5.0.1",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "react-super-responsive-table": "^5.1.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
     "redux-act": "^1.8.0",
+    "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0"
   },
   "scripts": {
@@ -27,11 +29,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
-    "cy:open": "cypress open",
-    "browserTest": "cypress run",
-    "startForTest": "PORT=3030 BROWSER=none react-scripts start",
-    "startAndBrowserTest": "CYPRESS_BASE_URL=http://localhost:3030 start-server-and-test startForTest http://localhost:3030 browserTest"
+    "lint:fix": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix"
   },
   "husky": {
     "hooks": {
@@ -61,7 +59,6 @@
   "devDependencies": {
     "@testing-library/dom": "^7.2.0",
     "@testing-library/react": "^9.5.0",
-    "cypress": "^4.3.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-jest": "^23.8.2",
@@ -70,10 +67,6 @@
     "husky": "^4.2.3",
     "node-sass": "^4.14.1",
     "prettier": "^1.19.1",
-    "react-redux": "^7.2.0",
-    "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0",
-    "start-server-and-test": "^1.10.11"
+    "redux-devtools-extension": "^2.13.8"
   }
 }

@@ -37,6 +37,8 @@ describe("Logic determining form results", () => {
   it("Default response when expected values are not present", () => {
     const moreSyptoms = { ...allAnswersNegative, 5: true, 20: true };
 
-    expect(formResultCalculator(moreSyptoms, []).label).toEqual("Mulțumim");
+    expect(formResultCalculator(moreSyptoms, []).label).toEqual(
+      "Mulțumim că ai completat formularul!"
+    );
   });
 });
