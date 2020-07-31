@@ -70,8 +70,6 @@ namespace StamAcasa.Common.Notifications
             var jArray =
                 JArray.FromObject(forms.Select(c =>
                 {
-                    var deserializedFormContent = JsonConvert.DeserializeObject<dynamic>(c.Content);
-
                     dynamic formInfo = new ExpandoObject();
                     formInfo.Name = c.UserInfo.Name;
                     formInfo.Surname = c.UserInfo.Surname;
@@ -79,8 +77,8 @@ namespace StamAcasa.Common.Notifications
                     formInfo.County = c.UserInfo.County;
                     formInfo.PhoneNumber = c.UserInfo.PhoneNumber;
                     formInfo.Comorbidities = string.Join(",", c.UserInfo.PreexistingMedicalCondition);
-                    formInfo.answers = deserializedFormContent.RootElement.answers;
-                    formInfo.formId = deserializedFormContent.RootElement.formId;
+                    formInfo.answers = c.Content.Answers;
+                    formInfo.formId = c.Content.FormId;
                     return formInfo;
                 }).ToList());
             var excelFile = _answersExcelExporter.AnswersToExcel(jArray);

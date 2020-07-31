@@ -20,6 +20,7 @@ export const ProfileForm = ({
   const [currentStep, setCurrentStep] = useState(1);
   const [userData, setUserData] = useState(currentUserData);
 
+  const ALLOWED_TO_CAPTURE_DATA = "agree";
   const fieldsForYourself = [
     {
       name: "name",
@@ -48,7 +49,8 @@ export const ProfileForm = ({
     {
       name: "city",
       required: true
-    }
+    },
+    { name: ALLOWED_TO_CAPTURE_DATA, required: true }
   ];
   const fieldsForDependant = [
     {
@@ -82,7 +84,8 @@ export const ProfileForm = ({
     {
       name: "relationshipType",
       required: false
-    }
+    },
+    { name: ALLOWED_TO_CAPTURE_DATA, required: true }
   ];
   const personalFields = forYourself ? fieldsForYourself : fieldsForDependant;
 
@@ -112,16 +115,19 @@ export const ProfileForm = ({
     }
   ];
 
-  const fieldsCompleted = fields => {
-    return (
-      fields.filter(
-        field => field.required && userData[field.name] === undefined
-      ).length === 0
-    );
-  };
+  const fieldsCompleted = fields =>
+    fields.filter(
+      field =>
+        field.required &&
+        (userData[field.name] === undefined || userData[field.name] === "")
+    ).length === 0;
 
   const canGoNext = () => {
-    if (currentStep === 1 && fieldsCompleted(personalFields)) {
+    if (
+      currentStep === 1 &&
+      fieldsCompleted(personalFields) &&
+      userData[ALLOWED_TO_CAPTURE_DATA]
+    ) {
       return true;
     }
 

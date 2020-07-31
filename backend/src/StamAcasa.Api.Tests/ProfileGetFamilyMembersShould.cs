@@ -42,24 +42,6 @@ namespace StamAcasa.Api.Tests
         }
 
         [Fact]
-        public async Task Return_UnauthorizedResult_when_no_user_found()
-        {
-            var user = GetClaimsPrincipal(new[] { new Claim("sub", string.Empty) });
-            SetUserInControllerContext(user);
-
-            _userServiceMock
-                .Setup(x => x.GetFamilyMembersIds("my-random-value"))
-                .ReturnsAsync(new List<int>());
-
-            _userServiceMock
-                .Setup(x => x.GetUserInfoBySub("my-random-value"))
-                .ReturnsAsync(null as UserInfo);
-
-            var result = await _sut.GetFamilyMembers();
-            result.Should().BeOfType<UnauthorizedResult>();
-        }
-
-        [Fact]
         public async Task Return_family_members_when_request_is_made_for_current_user()
         {
             var user = GetClaimsPrincipal(new[] { new Claim("sub", "my-random-value") });

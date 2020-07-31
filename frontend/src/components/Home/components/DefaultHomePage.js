@@ -1,5 +1,6 @@
 import React from "react";
 import { Hero, SocialsShare } from "@code4ro/taskforce-fe-components";
+import "./style.scss";
 import SidebarLayout from "../../SidebarLayout";
 import { Constants } from "../../../config/constants";
 
@@ -17,20 +18,25 @@ class DefaultHomePage extends React.Component {
         <Hero title="Bine ai venit" subtitle="" useFallbackIcon={true} />
         <div className="content">
           <p>
-            Starea de alertă poate fi dificil de gestionat. Avem din nou voie să
-            ieșim din casă, dar urmând proceduri și reguli foarte clare. Riscul
-            de a contracta virusul este foarte ridicat și este important să
-            putem să ne monitorizăm starea cu ușurință și, de asemenea, este
-            util să ne menținem un jurnal al ieșirilor
+            Starea de alertă poate fi dificil de gestionat. Avem voie să ieșim
+            din casă, dar urmând proceduri și reguli foarte clare. Riscul de a
+            contracta virusul este foarte ridicat și este important să putem să
+            ne monitorizăm starea cu ușurință și, de asemenea, este util să ne
+            menținem un jurnal al ieșirilor. Telefoanele de urgență sunt
+            împovărate de numărul mare de apeluri, făcând astfel evaluarea
+            situațiilor medicale la nivel național o problemă reală. Toți suntem
+            în aceeași situație.
           </p>
           <p>
-            Telefoanele de urgență sunt împovărate de numărul mare de apeluri,
-            făcând astfel evaluarea situațiilor medicale la nivel național o
-            problemă reală. Toți suntem în aceeași situație. Jurnal Medical este
-            o soluție digitală cu ajutorul căreia, împreună, reducem
-            suprasolicitarea numerelor de urgență, colectăm rapid informații de
-            la o populație foarte mare, ne monitorizăm starea de sănătate pentru
-            noi și pentru cei dragi și rămânem cu toții în siguranță.
+            Jurnal Medical este o soluție digitală cu ajutorul căreia, împreună,
+            reducem suprasolicitarea numerelor de urgență, colectăm rapid
+            informații de la o populație foarte mare, ne monitorizăm starea de
+            sănătate pentru noi și pentru cei dragi și rămânem cu toții în
+            siguranță. Datele completate de toți utilizatorii aplicației sunt
+            centralizate și transmise zilnic către Institutul Național de
+            Sănătate Publică și Direcțiile de Sănătate Publică pentru a putea
+            gestiona potențiale focare și pentru a te putea proteja mai bine de
+            pericol.
           </p>
         </div>
         <SocialsShare currentPage={link} />
@@ -51,9 +57,9 @@ class DefaultHomePage extends React.Component {
             </p>
             <p>
               Datele completate de toți utilizatorii aplicației sunt de asemenea
-              monitorizate de Ministerul Sănătății și Direcțiile de Sănătate
-              Publică pentru a putea gestiona potențiale focare și pentru a te
-              putea proteja mai bine de pericol.
+              monitorizate de Institutul Național de Sănătate Publică și
+              Direcțiile de Sănătate Publică pentru a putea gestiona potențiale
+              focare și pentru a te putea proteja mai bine de pericol.
             </p>
           </div>
           <Hero title="Cum îmi creez un cont" />
@@ -70,6 +76,14 @@ class DefaultHomePage extends React.Component {
               al altor membri ai familiei sau al altor persoane pe care le ai în
               grijă și să completezi apoi formularele recurente de monitorizare.
             </p>
+            <div className="has-text-centered">
+              <a
+                href={`${Constants.idpUrl}/identity/account/register?returnUrl=${window.location}register-complete`}
+                className="button big-button"
+              >
+                Creează cont
+              </a>
+            </div>
           </div>
         </SidebarLayout>
       </>

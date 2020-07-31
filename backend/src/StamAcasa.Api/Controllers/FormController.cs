@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Newtonsoft.Json;
 using StamAcasa.Api.Models;
 using StamAcasa.Api.Services;
 using StamAcasa.Common.DTO;
+using StamAcasa.Common.Models;
 using StamAcasa.Common.Services;
 
 namespace StamAcasa.Api.Controllers
@@ -32,7 +34,7 @@ namespace StamAcasa.Api.Controllers
         public async Task<IActionResult> Get(int? id = null)
         {
             var subClaimValue = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (subClaimValue == null)
+            if (string.IsNullOrEmpty(subClaimValue))
                 return new UnauthorizedResult();
 
             if (await IsRequestInvalid(subClaimValue, id))
@@ -70,7 +72,7 @@ namespace StamAcasa.Api.Controllers
         public async Task<IActionResult> PostAnswer([FromBody]UserForm form, [FromQuery]int? id = null)
         {
             var subClaimValue = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-            if (subClaimValue == null)
+            if (string.IsNullOrEmpty(subClaimValue))
                 return new UnauthorizedResult();
 
             if (await IsRequestInvalid(subClaimValue, id))
@@ -81,13 +83,13 @@ namespace StamAcasa.Api.Controllers
             var authenticatedUser = await UserService.GetUserInfoBySub(subClaimValue);
 
             // TODO: add user profile info as added properties to form, before save
-
-            var contentToSave = JsonConvert.SerializeObject(form).ToString();
+            form.Timestamp = DateTime.UtcNow.ToEpochTime();
+            var contentToSave = JsonConvert.SerializeObject(form);
 
             await _formService.AddForm(new FormInfo
             {
-                Content = contentToSave,
-                Timestamp = form.Timestamp.ToDateTimeFromEpoch(),
+                Content = form,
+                Timestamp = DateTime.UtcNow,
                 UserId = id ?? authenticatedUser.Id,
                 FormTypeId = form.FormId.ToString()
             });

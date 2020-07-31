@@ -34,8 +34,8 @@ const UserHomePage = ({ isAuthenticated }) => {
   return (
     <>
       <Hero
-        title="Ce pași ai de urmat"
-        subtitle="Pentru a te putea ajuta iată ce ai la dispoziție în contul tău:"
+        title="Ce pași ai de urmat:"
+        subtitle="În secțiunea Profilul meu vei putea să vezi istoricul datelor tale sub tab-ul Formularele mele și istoricul celorlalți membri ai familiei sau persoane pentru care monitorizezi apariția sau manifestarea simptomelor sub tab-ul Alte persoane. În secțiunea Adaugă-ți familia în cont vei putea adăuga alte persoane în contul tău, iar în secțiunea Completează formularul de evaluare vei putea completa evaluarea zilnică atât pentru tine cât și pentru ceilalți."
         useFallbackIcon={true}
       />
       <StepsBar

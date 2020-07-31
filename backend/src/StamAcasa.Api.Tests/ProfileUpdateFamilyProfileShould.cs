@@ -44,7 +44,7 @@ namespace StamAcasa.Api.Tests
         [Fact]
         public async Task Return_UnauthorizedResult_when_no_user_found()
         {
-            var user = GetClaimsPrincipal(new[] { new Claim("sub", string.Empty) });
+            var user = GetClaimsPrincipal(new[] { new Claim("sub", "my-random-value") });
             SetUserInControllerContext(user);
 
             _userServiceMock
@@ -105,7 +105,7 @@ namespace StamAcasa.Api.Tests
                 });
 
             _userServiceMock
-                .Setup(x => x.AddOrUpdateDependentInfo(It.Is<UserProfileDTO>(dto=>dto.Id == requestedId), "my-random-value"))
+                .Setup(x => x.AddOrUpdateDependentInfo(It.Is<UserProfileDTO>(dto => dto.Id == requestedId), "my-random-value"))
                 .ReturnsAsync(new UserInfo()
                 {
                     Id = requestedId

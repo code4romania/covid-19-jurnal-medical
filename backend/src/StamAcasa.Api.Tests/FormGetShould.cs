@@ -43,9 +43,9 @@ namespace StamAcasa.Api.Tests
         }
 
         [Fact]
-        public async Task Return_UnauthorizedResult_when_no_user_found()
+        public async Task Return_forms_for_a_newly_created_user()
         {
-            var user = GetClaimsPrincipal(new[] { new Claim("sub", string.Empty) });
+            var user = GetClaimsPrincipal(new[] { new Claim("sub", "my-random-value") });
             SetUserInControllerContext(user);
 
             _userServiceMock
@@ -55,9 +55,10 @@ namespace StamAcasa.Api.Tests
             _userServiceMock
                 .Setup(x => x.GetUserInfoBySub("my-random-value"))
                 .ReturnsAsync(null as UserInfo);
-
+            _formServiceMock.Setup(x => x.GetForms("my-random-value")).ReturnsAsync(new List<FormInfo>()).Verifiable();
             var result = await _sut.Get(null);
-            result.Should().BeOfType<UnauthorizedResult>();
+            _formServiceMock.Verify();
+            result.Should().BeOfType<OkObjectResult>();
         }
 
         [Fact]

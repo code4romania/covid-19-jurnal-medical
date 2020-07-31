@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace StamAcasa.Api.Models
+namespace StamAcasa.Common.Models
 {
-    public class Answer
+    public class AnswerModel
     {
         [JsonProperty("id")]
         public long Id { get; set; }
@@ -11,6 +11,6 @@ namespace StamAcasa.Api.Models
         public string QuestionText { get; set; }
 
         [JsonProperty("answer", NullValueHandling = NullValueHandling.Ignore)]
-        public string AnswerAnswer { get; set; }
+        public string Answer { get; set; }
     }
 }

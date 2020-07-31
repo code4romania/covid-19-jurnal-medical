@@ -25,7 +25,6 @@ jobs:
 
       - name: Run ESLint check
         working-directory: ${{env.working-directory}}
-        run: |
-          npm run lint
+        run: npm run lint
         env:
           CI: true

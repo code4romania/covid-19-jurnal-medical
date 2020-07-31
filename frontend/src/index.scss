@@ -1,6 +1,7 @@
-html,
-body,
-#root {
-  width: 100%;
-  height: 100%;
-}
+@import "./fonts";
+
+@import "~bulma/sass/utilities/_all.sass";
+@import "~bulma/sass/elements/container.sass";
+@import "~bulma/sass/grid/columns.sass";
+
+@import "~bulma/sass/components/tabs";

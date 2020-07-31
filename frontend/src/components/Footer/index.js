@@ -19,7 +19,6 @@ export const FooterComponent = () => (
       <FooterLinks>
         <FooterLinkHeader>Link-uri utile</FooterLinkHeader>
         {FOOTER_LINKS.map(FooterLink)}
-        <FooterLink label="Termeni și condiții" URL="/termeni-si-conditii" />
       </FooterLinks>
     </Footer>
   </div>

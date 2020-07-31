@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Register";
 }
-
 <div class="login-page">
 
     <div class="login-form-wrapper">
@@ -30,37 +29,44 @@
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
                     <p>Parola trebuie să includă cel puţin o literă mică, o literă mare, o cifră şi un simbol.</p>
+
+                    <br />
+                    <div class="field">
+                        <div class="container __login-form-options">
+                            <label class="__checkbox-label" asp-for="Input.AcceptTermsAndConditions">
+                                <input type="checkbox" asp-for="Input.AcceptTermsAndConditions">
+                                <span class="__checkbox-custom"></span>
+                                Declar că am citit și sunt de acord cu <a href="https://jurnalmedical.ro/termeni-si-conditii">Termenii și Condițiile</a> aplicației Jurnal Medical.
+                            </label>
+                        </div>
+                        <span asp-validation-for="Input.AcceptTermsAndConditions" class="text-danger"></span>
+                    </div>
                     <div class="container has-text-centered __login-form-button-container">
-                        <button type="submit" class="button is-primary is-medium">CREEAZĂ CONT</button>
+
+                        <button type="submit" class="button is-primary is-medium disabled" id="submitButton" disabled="disabled">CREEAZĂ CONT</button>
                     </div>
                 </div>
             </form>
         </div>
-        </div>
-        <div class="col-md-6 col-md-offset-2">
-            <section>
-
-                @{
-                    if ((Model.ExternalLogins?.Count ?? 0) == 0) {
-                    }
-                    else {
-                        <h4>Use another service to register.</h4>
-                        <hr />
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <div>
-                                <p>
-                                    @foreach (var provider in Model.ExternalLogins) {
-                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                    }
-                                </p>
-                            </div>
-                        </form>
-                    }
-                }
-            </section>
-        </div>
     </div>
+</div>
 
-    @section Scripts {
-        <partial name="_ValidationScriptsPartial" />
-    }
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $('#Input_AcceptTermsAndConditions').change(function() 
+            {
+                if (this.checked !== false) {
+                    $('#submitButton').removeClass('disabled');
+                    $('#submitButton').removeAttr('disabled');
+                } else {
+                    $('#submitButton').attr('disabled','disabled');
+                    $('#submitButton').addClass('disabled');
+                }
+            });   
+        });
+    </script>
+}
