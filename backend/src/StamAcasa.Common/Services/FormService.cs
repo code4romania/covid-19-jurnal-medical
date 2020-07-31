@@ -47,7 +47,7 @@ namespace StamAcasa.Common.Services
 
             var formEntity = new Form
             {
-                Content = JsonConvert.SerializeObject(formModel.SubmitedForm),
+                Content = JsonConvert.SerializeObject(formModel.Content),
                 FormTypeId = formModel.FormTypeId,
                 Timestamp = formModel.Timestamp,
                 UserId = formModel.UserId

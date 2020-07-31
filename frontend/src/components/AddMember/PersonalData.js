@@ -2,9 +2,11 @@ import {
   Input,
   ListHeader,
   Select,
-  DropdownSearch
+  DropdownSearch,
+  Checkbox
 } from "@code4ro/taskforce-fe-components";
 import React from "react";
+import { Link } from "react-router-dom";
 import { options } from "./options";
 import PropTypes from "prop-types";
 import cities from "./cities.json";
@@ -28,7 +30,7 @@ export const PersonalData = ({
   };
 
   const nameValidationMessages = {
-    patternMismatch: "Acest câmp poate conține doar caractere alfanumerice",
+    patternMismatch: "Lungimea maximă este 32 caractere",
     valueMissing: "Acest câmp este obligatoriu"
   };
 
@@ -58,7 +60,7 @@ export const PersonalData = ({
           name="surname"
           title="Nume"
           required
-          pattern="[A-Za-z ]{1,32}"
+          pattern=".{1,32}"
           validationMessages={nameValidationMessages}
           usePlaceholder
           value={userData.surname}
@@ -74,7 +76,7 @@ export const PersonalData = ({
           title="Prenume"
           validationMessages={nameValidationMessages}
           required
-          pattern="[A-Za-z ]{1,32}"
+          pattern=".{1,32}"
           usePlaceholder
           value={userData.name}
           defaultValue={userData.name}
@@ -159,6 +161,20 @@ export const PersonalData = ({
             }
           }}
         />
+        <Checkbox
+          name="agree"
+          onChange={({ target: { checked } }) => {
+            setUserDataField("agree", checked);
+          }}
+          defaultValue={userData.agree}
+        >
+          Declar că informațiile completate in acest formular îmi aparțin, sau,
+          după caz, că am acordul persoanelor pentru care completez acest
+          formular, dedicat menținerii unui jurnal de simptome și deplasări, și
+          că am luat cunoștință de{" "}
+          <Link to="/termeni-si-conditii">termenii și condițiile</Link> de
+          utilizare ai acestei platforme.
+        </Checkbox>
       </div>
     </>
   );

@@ -72,11 +72,11 @@ const About = () => {
             cu participarea Ministerului Sănătății și de către organizația Code
             for Romania, în cadrul programului Code for Romania Task Force.
             Platforma este administrată de Autoritatea pentru Digitalizarea
-            României. Pentru orice intrebare, ne puteți contacta la adresa{" "}
+            României. Pentru orice intrebare, ne puteți contacta la adresa
             <a href="mailto:jurnalmedical@adr.gov.ro">
               jurnalmedical@adr.gov.ro
             </a>
-            .”
+            .
           </p>
 
           <div>

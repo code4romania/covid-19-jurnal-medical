@@ -83,13 +83,13 @@ namespace StamAcasa.Api.Controllers
             var authenticatedUser = await UserService.GetUserInfoBySub(subClaimValue);
 
             // TODO: add user profile info as added properties to form, before save
-
+            form.Timestamp = DateTime.UtcNow.ToEpochTime();
             var contentToSave = JsonConvert.SerializeObject(form);
 
             await _formService.AddForm(new FormInfo
             {
-                SubmitedForm = form,
-                Timestamp = form.Timestamp.ToDateTimeFromEpoch(),
+                Content = form,
+                Timestamp = DateTime.UtcNow,
                 UserId = id ?? authenticatedUser.Id,
                 FormTypeId = form.FormId.ToString()
             });

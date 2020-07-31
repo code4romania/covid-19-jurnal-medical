@@ -11,7 +11,7 @@ namespace StamAcasa.Common.Mapper
         {
             CreateMap<Form, FormInfo>()
                 .ForMember(m => m.UserInfo, f => f.MapFrom(src => src.User))
-                .ForMember(m => m.SubmitedForm,
+                .ForMember(m => m.Content,
                     f => f.MapFrom(src => JsonConvert.DeserializeObject<UserForm>(src.Content)));
 
         }
