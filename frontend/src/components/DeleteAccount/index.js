@@ -3,6 +3,7 @@ import SidebarLayout from "../SidebarLayout";
 import AccountApi from "../../api/accountApi";
 import "./style.scss";
 import { removeUser, getUser } from "../../api/auth";
+import {   redirect  } from '../../redirect';
 const DeleteAccount = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,6 +20,7 @@ const DeleteAccount = () => {
       await AccountApi.deleteAccount(user.profile.email, password);
       setLoading(false);
       await removeUser();
+      redirect("/");
     } catch {
       setErrorDeleting(true);
       setLoading(false);
