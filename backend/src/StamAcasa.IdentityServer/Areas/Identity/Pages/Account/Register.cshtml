@@ -42,7 +42,6 @@
                         <span asp-validation-for="Input.AcceptTermsAndConditions" class="text-danger"></span>
                     </div>
                     <div class="container has-text-centered __login-form-button-container">
-
                         <button type="submit" class="button is-primary is-medium disabled" id="submitButton" disabled="disabled">CREEAZĂ CONT</button>
                     </div>
                 </div>
@@ -53,20 +52,24 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    
+
     <script type="text/javascript">
-        $(document).ready(function()
-        {
-            $('#Input_AcceptTermsAndConditions').change(function() 
-            {
-                if (this.checked !== false) {
-                    $('#submitButton').removeClass('disabled');
-                    $('#submitButton').removeAttr('disabled');
-                } else {
-                    $('#submitButton').attr('disabled','disabled');
-                    $('#submitButton').addClass('disabled');
-                }
-            });   
+        function disableButton(areConditionAccepted) {
+            if (areConditionAccepted === true) {
+                $('#submitButton').removeClass('disabled');
+                $('#submitButton').removeAttr('disabled');
+            } else {
+                $('#submitButton').attr('disabled', 'disabled');
+                $('#submitButton').addClass('disabled');
+            }
+        }
+
+        $(document).ready(function () {
+            disableButton($('#Input_AcceptTermsAndConditions').is(':checked'));
+
+            $('#Input_AcceptTermsAndConditions').change(function () {
+                disableButton(this.checked);
+            });
         });
     </script>
 }
