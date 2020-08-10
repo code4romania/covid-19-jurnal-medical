@@ -125,8 +125,8 @@ namespace IdentityServer
                 // this defines a CORS policy called "default"
                 options.AddPolicy("default", policy =>
                 {
-                    policy = _identityConfiguration.Clients.SelectMany(x => x.AllowedCorsOrigins)
-                        .Aggregate(policy, (current, url) => current.WithOrigins(url));
+                    var origins = _identityConfiguration.Clients.SelectMany(x => x.AllowedCorsOrigins).ToArray();
+                    policy.WithOrigins(origins);
 
                     policy.AllowAnyHeader()
                         .AllowAnyMethod();
