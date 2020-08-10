@@ -116,7 +116,10 @@ namespace IdentityServer
                 ));
             services.AddSingleton<IQueueService, QueueService>();
             services.AddSingleton<PasswordValidationMessages>();
-
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.SameSite = SameSiteMode.None;
+            });
             services.AddCors(options =>
             {
                 // this defines a CORS policy called "default"
@@ -159,7 +162,8 @@ namespace IdentityServer
             var cookiePolicyOptions = new CookiePolicyOptions
             {
                 // Mark cookies as `Secure` (only if using HTTPS in development, and always in production)
-                Secure = env.IsDevelopment() ? CookieSecurePolicy.SameAsRequest : CookieSecurePolicy.Always
+                Secure = env.IsDevelopment() ? CookieSecurePolicy.SameAsRequest : CookieSecurePolicy.Always,
+                MinimumSameSitePolicy = SameSiteMode.None
             };
             app.UseCookiePolicy(cookiePolicyOptions);
 
