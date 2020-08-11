@@ -125,9 +125,8 @@ namespace IdentityServer
                 // this defines a CORS policy called "default"
                 options.AddPolicy("default", policy =>
                 {
-                    var origins = _identityConfiguration.Clients.SelectMany(x => x.AllowedCorsOrigins).ToArray();
-                    policy.WithOrigins(origins);
-
+                    policy = _identityConfiguration.Clients.SelectMany(x => x.AllowedCorsOrigins)
+                        .Aggregate(policy, (current, url) => current.WithOrigins(url));
                     policy.AllowAnyHeader()
                         .AllowAnyMethod();
                 });
@@ -163,7 +162,6 @@ namespace IdentityServer
             {
                 // Mark cookies as `Secure` (only if using HTTPS in development, and always in production)
                 Secure = env.IsDevelopment() ? CookieSecurePolicy.SameAsRequest : CookieSecurePolicy.Always,
-                MinimumSameSitePolicy = SameSiteMode.None
             };
             app.UseCookiePolicy(cookiePolicyOptions);
 
