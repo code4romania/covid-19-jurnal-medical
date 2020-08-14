@@ -13,12 +13,12 @@ const DeleteAccount = () => {
 
   const updatePassword = event => setPassword(event.target.value);
 
-  const deleteProfile = async () => {
+  const deleteProfile = async event => {
+    event.preventDefault();
     try {
       setLoading(true);
       const user = await getUser();
       await AccountApi.deleteAccount(user.profile.email, password);
-      setLoading(false);
       await removeUser();
       redirect("/");
     } catch {
@@ -39,7 +39,7 @@ const DeleteAccount = () => {
         <p>Adresa: Strada Italiană, nr. 22, Sector 2, 020976, București</p>
         <p>E-mail: jurnalmedical@adr.gov.ro</p>
       </div>
-      <form onSubmit={() => {}}>
+      <form onSubmit={deleteProfile}>
         <div className="field">
           <label className="label">Parola</label>
           <input
@@ -51,11 +51,7 @@ const DeleteAccount = () => {
           />
         </div>
         <div className="field">
-          <button
-            className={buttonClasses}
-            onClick={deleteProfile}
-            disabled={!fieldsFilled || loading}
-          >
+          <button className={buttonClasses} disabled={!fieldsFilled || loading}>
             Șterge cont
           </button>
         </div>
