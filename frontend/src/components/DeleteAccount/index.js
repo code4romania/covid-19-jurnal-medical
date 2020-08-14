@@ -13,9 +13,9 @@ const DeleteAccount = () => {
 
   const updatePassword = event => setPassword(event.target.value);
 
-  const deleteProfile = async (event) => {
+  const deleteProfile = async event => {
+    event.preventDefault();
     try {
-      event.preventDefault();
       setLoading(true);
       const user = await getUser();
       await AccountApi.deleteAccount(user.profile.email, password);
@@ -51,10 +51,7 @@ const DeleteAccount = () => {
           />
         </div>
         <div className="field">
-          <button
-            className={buttonClasses}
-            disabled={!fieldsFilled || loading}
-          >
+          <button className={buttonClasses} disabled={!fieldsFilled || loading}>
             Șterge cont
           </button>
         </div>
