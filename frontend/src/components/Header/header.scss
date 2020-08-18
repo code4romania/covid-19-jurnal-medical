@@ -3,14 +3,13 @@
     width: 0.625em;
   }
   .dropdown-menu {
-    text-align: left;
+    a {
+      padding-right: 0.375rem 1rem 0.375rem 3rem;
+      margin: 0;
+    }
   }
-  .dropdown-menu a {
-    padding-right: 0.375rem 1rem 0.375rem 3rem;
-    margin: 0;
-  }
-  .dropdown-menu .button {
-    font-weight: normal;
+  .button {
+    font-size: 1rem;
   }
   .account-items {
     margin-left: 20px;
@@ -19,7 +18,7 @@
 
     .account-separator {
       display: inline-block;
-      height: 30px;
+      height: 35px;
       border-left: 1px solid #e0e0e0;
     }
   }

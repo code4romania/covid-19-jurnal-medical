@@ -42,7 +42,7 @@ const ProfileItems = () => {
           </div>
           <div className="dropdown-menu" id="dropdown-menu" role="menu">
             <div className="dropdown-content has-text-left">
-              <NavLink to="/account" className="dropdown-item">
+              <NavLink to="/account" className="dropdown-item button is-white">
                 Profil
               </NavLink>
               <hr className="dropdown-divider"></hr>
