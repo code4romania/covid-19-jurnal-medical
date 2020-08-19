@@ -208,7 +208,7 @@ export const ProfileForm = ({
 
       <Button
         onClick={() => void 0}
-        type="warning"
+        color="warning"
         inputType="submit"
         disabled={!canGoNext()}
       >
