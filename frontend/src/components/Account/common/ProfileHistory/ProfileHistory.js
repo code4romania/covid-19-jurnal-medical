@@ -58,6 +58,21 @@ export const ProfileHistory = ({ data, family, isSelf }) => {
         </Link>
         .
       </p>
+      <div className="has-text-centered">
+        <Link
+          to={
+            isSelf
+              ? "/evaluation/me"
+              : {
+                  pathname: "/evaluation/other-members",
+                  state: { id: data.id }
+                }
+          }
+          className="button big-button"
+        >
+          Completează formular
+        </Link>
+      </div>
       {history && (
         <>
           <h2 className="header">Istoric Simptome</h2>
