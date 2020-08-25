@@ -1,5 +1,5 @@
 import { signin, signout } from "../../api/auth";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React from "react";
 import { sel as userSel } from "../../store/ducks/user";
 import { useSelector } from "react-redux";
@@ -42,9 +42,15 @@ const ProfileItems = () => {
           </div>
           <div className="dropdown-menu" id="dropdown-menu" role="menu">
             <div className="dropdown-content has-text-left">
-              <NavLink to="/account" className="dropdown-item button is-white">
+              <Link to="/account" className="dropdown-item button is-white">
                 Profil
-              </NavLink>
+              </Link>
+              <Link
+                to="/delete-account"
+                className="dropdown-item button is-white"
+              >
+                Ștergere cont
+              </Link>
               <hr className="dropdown-divider"></hr>
               <button
                 onClick={handleLogout}
