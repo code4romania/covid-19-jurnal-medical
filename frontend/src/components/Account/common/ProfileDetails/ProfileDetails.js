@@ -47,16 +47,6 @@ const ProfileDetails = ({
         <div className="footer">
           <hr />
           {children}
-          <div className="header">
-            <Link
-              className="link"
-              to={{
-                pathname: "/delete-account"
-              }}
-            >
-              Ștergere cont
-            </Link>
-          </div>
         </div>
       )}
     </div>
