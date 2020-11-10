@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StamAcasa.Api.BackgroundServices;
 using StamAcasa.Api.Extensions;
 using StamAcasa.Api.Models;
 using StamAcasa.Api.Services;
@@ -94,6 +95,8 @@ namespace StamAcasa.Api
             services.ConfigureSwagger(Configuration);
 
             services.AddProblemDetails(ConfigureProblemDetails);
+
+            services.AddHostedService<UserManagementService>();
         }
 
         public void Configure(IApplicationBuilder app, UserDbContext dbContext)
