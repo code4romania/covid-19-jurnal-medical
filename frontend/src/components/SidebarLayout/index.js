@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import {
   Instruments,
   InstrumentsItem,
+  BannerImage,
   Hero
 } from "@code4ro/taskforce-fe-components";
 import { instrumentsItems } from "./const";
+import rovaccinareImage from "../../images/rovaccinare.jpg";
 
 const SidebarLayout = ({ children }) => {
   return (
@@ -14,6 +16,14 @@ const SidebarLayout = ({ children }) => {
       <aside className="column is-4">
         <Instruments layout="column">
           <Hero useFallbackIcon title="Instrumente utile" />
+          <BannerImage
+            link="https://vaccinare-covid.gov.ro/"
+            image={{
+              src: rovaccinareImage,
+              alt: "#ROVACCINARE",
+              title: "#ROVACCINARE"
+            }}
+          />
           {instrumentsItems.map((item, index) => (
             <InstrumentsItem
               key={index}
