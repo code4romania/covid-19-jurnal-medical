@@ -209,7 +209,7 @@ export const ProfileForm = ({
       <Button
         onClick={() => void 0}
         color="warning"
-        inputType="submit"
+        type="submit"
         disabled={!canGoNext()}
       >
         Continuă
