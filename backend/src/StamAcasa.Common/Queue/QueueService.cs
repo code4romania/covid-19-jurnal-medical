@@ -11,6 +11,8 @@ namespace StamAcasa.Common.Queue
     public class QueueService : IQueueService
     {
         private const string EmailRequestsQueueName = "email:requests";
+        private const string UserRequestsQueueName = "user:requests";
+
         private readonly IBus _bus;
         private readonly ILogger<QueueService> _logger;
 
@@ -35,10 +37,12 @@ namespace StamAcasa.Common.Queue
                 return false;
             }
             // register queues
-            IQueue queueDeclare = _bus.Advanced.QueueDeclare(EmailRequestsQueueName);
+            IQueue emailQueue = _bus.Advanced.QueueDeclare(EmailRequestsQueueName);
+            IQueue userQueue = _bus.Advanced.QueueDeclare(UserRequestsQueueName);
 
             // add them to dictionary
-            _availableQueues.Add(EmailRequestsQueueName, queueDeclare);
+            _availableQueues.Add(EmailRequestsQueueName, emailQueue);
+            _availableQueues.Add(UserRequestsQueueName, userQueue);
 
             return true;
         }
@@ -51,7 +55,13 @@ namespace StamAcasa.Common.Queue
         public async Task PublishEmailRequest<T>(T message) where T : class
         {
             var messageWrapper = new Message<T>(message);
-            await _bus.Advanced.PublishAsync(Exchange.GetDefault(), EmailRequestsQueueName, false, messageWrapper);
+            await _bus.Advanced.PublishAsync(Exchange.GetDefault(), UserRequestsQueueName, false, messageWrapper);
+        }
+
+        public async Task PublishUserRequest<T>(T message) where T : class
+        {
+            var messageWrapper = new Message<T>(message);
+            await _bus.Advanced.PublishAsync(Exchange.GetDefault(), UserRequestsQueueName, false, messageWrapper);
         }
 
         public void SubscribeConsumerToNotificationsQueue<T>(Func<T, Task> messageHandler) where T : class
@@ -77,17 +87,27 @@ namespace StamAcasa.Common.Queue
             }));
         }
 
+        public void SubscribeConsumerToUserRequestsQueue<T>(Func<T, Task> messageHandler) where T : class
+        {
+            var emailQueue = _availableQueues[UserRequestsQueueName];
+
+            _bus.Advanced.Consume(emailQueue, x => x.Add<T>(async (message, info) =>
+            {
+                try
+                {
+                    await messageHandler(message.Body).ConfigureAwait(false);
+
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error in consumer.");
+                }
+            }));
+        }
+
         public void Dispose()
         {
             _bus?.Dispose();
         }
-    }
-
-    public interface IQueueService : IDisposable
-    {
-        Task PublishNotification<T>(T message) where T : class;
-        Task PublishEmailRequest<T>(T message) where T : class;
-        void SubscribeConsumerToNotificationsQueue<T>(Func<T, Task> messageHandler) where T : class;
-        void SubscribeConsumerToEmailRequestsQueue<T>(Func<T, Task> messageHandler) where T : class;
     }
 }

@@ -28,6 +28,7 @@ namespace StamAcasa.Common.Models {
         public bool LivesWithOthers { get; set; }
         public QuarantineStatus? QuarantineStatusOthers { get; set; }
         public RelationshipTypes? RelationshipType { get; set; }
+        public bool IsDeleted { get; set; }
 
         public virtual User ParentUser { get; set; }
         public virtual HashSet<User> DependentUsers { get; set; }

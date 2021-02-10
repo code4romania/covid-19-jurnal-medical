@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using StamAcasa.Common.Queue;
+using StamAcasa.Common.Services.UserManagement;
 using StamAcasa.IdentityServer.Quickstart.Account;
 
 namespace IdentityServer.Quickstart.Account
@@ -33,6 +35,7 @@ namespace IdentityServer.Quickstart.Account
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly IQueueService _queueService;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -41,7 +44,8 @@ namespace IdentityServer.Quickstart.Account
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
             IEventService events,
-            IWebHostEnvironment hostingEnvironment)
+            IWebHostEnvironment hostingEnvironment,
+            IQueueService queueService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -50,6 +54,7 @@ namespace IdentityServer.Quickstart.Account
             _schemeProvider = schemeProvider;
             _events = events;
             _hostingEnvironment = hostingEnvironment;
+            _queueService = queueService;
         }
 
         /// <summary>
@@ -227,7 +232,7 @@ namespace IdentityServer.Quickstart.Account
             {
                 return Problem("Utilizatorul nu a fost sters");
             }
-
+            await _queueService.PublishUserRequest(new DeleteUserModel(user.Id));
             var result = await _userManager.DeleteAsync(user);
             var userId = await _userManager.GetUserIdAsync(user);
             if (!result.Succeeded)

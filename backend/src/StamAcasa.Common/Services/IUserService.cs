@@ -14,5 +14,6 @@ namespace StamAcasa.Common.Services
         Task<IEnumerable<UserInfo>> GetAll();
         Task<IEnumerable<UserInfo>> GetAllParents();
         Task<List<int>> GetFamilyMembersIds(string sub);
+        Task MarkUserAsDeleted(string sub);
     }
 }

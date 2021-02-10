@@ -81,7 +81,7 @@ namespace StamAcasa.Common.Services
         public async Task<IEnumerable<UserInfo>> GetDependentInfo(string sub)
         {
             var user = await _context.Users
-                .Include("DependentUsers")
+                .Include(x=>x.DependentUsers)
                 .FirstOrDefaultAsync(u => u.Sub == sub);
 
             var result = user?.DependentUsers?.Select(d => _mapper.Map<UserInfo>(d)) ?? new UserInfo[0];
@@ -90,19 +90,20 @@ namespace StamAcasa.Common.Services
 
         public async Task<IEnumerable<UserInfo>> GetAll()
         {
-            var users = await _context.Users.ToListAsync();
+            var users = await _context.Users
+                .Where(u => u.IsDeleted == false)
+                .ToListAsync();
+
             var result = users.Select(_mapper.Map<UserInfo>);
             return result;
         }
 
         public async Task<IEnumerable<UserInfo>> GetAllParents()
         {
-            var parents = new ConcurrentQueue<User>();
-            await _context.Users.ForEachAsync(u =>
-            {
-                if (!u.ParentId.HasValue)
-                    parents.Enqueue(u);
-            });
+            var parents = await _context.Users
+                .Where(u => u.IsDeleted == false)
+                .Where(u => !u.ParentId.HasValue)
+                .ToListAsync();
 
             var result = parents.Select(_mapper.Map<UserInfo>);
             return result;
@@ -116,5 +117,20 @@ namespace StamAcasa.Common.Services
 
             return user?.DependentUsers?.Select(d => d.Id).ToList() ?? new List<int>();
         }
+
+        public async Task MarkUserAsDeleted(string sub)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Sub == sub);
+
+            if(user == null)
+            {
+                _logger.LogWarning($"Could not find user with sub = {sub}");
+                return;
+            }
+
+            user.IsDeleted = true;
+            await _context.SaveChangesAsync();
+        }
+
     }
 }
