@@ -31,7 +31,7 @@ namespace StamAcasa.Api
 
             try
             {
-                Console.Title = "API";
+                Console.Title = "Jurnal Medical API";
 
                 var webHost = CreateWebHostBuilder(args).Build();
 
