@@ -110,7 +110,6 @@ namespace StamAcasa.Api
                 Secure = _environment.IsDevelopment() ? CookieSecurePolicy.SameAsRequest : CookieSecurePolicy.Always
             };
             app.UseCookiePolicy(cookiePolicyOptions);
-            app.Use(CustomMiddleware);
             app.UseCors("default");
 
             app.UseAuthentication();
@@ -151,30 +150,6 @@ namespace StamAcasa.Api
             // Because exceptions are handled polymorphically, this will act as a "catch all" mapping, which is why it's added last.
             // If an exception other than NotImplementedException and HttpRequestException is thrown, this will handle it.
             options.MapToStatusCode<Exception>(StatusCodes.Status500InternalServerError);
-        }
-
-        private Task CustomMiddleware(HttpContext context, Func<Task> next)
-        {
-            if (context.Request.Path.StartsWithSegments("/middleware", out _, out var remaining))
-            {
-                if (remaining.StartsWithSegments("/error"))
-                {
-                    throw new Exception("This is an exception thrown from middleware.");
-                }
-
-                if (remaining.StartsWithSegments("/status", out _, out remaining))
-                {
-                    var statusCodeString = remaining.Value.Trim('/');
-
-                    if (int.TryParse(statusCodeString, out var statusCode))
-                    {
-                        context.Response.StatusCode = statusCode;
-                        return Task.CompletedTask;
-                    }
-                }
-            }
-
-            return next();
         }
     }
 
