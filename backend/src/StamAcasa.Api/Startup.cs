@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
+using EasyNetQ;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -95,7 +96,12 @@ namespace StamAcasa.Api
             services.ConfigureSwagger(Configuration);
 
             services.AddProblemDetails(ConfigureProblemDetails);
-
+            services.AddSingleton(RabbitHutch.CreateBus(string.Format("host={0}:{1};username={2};password={3}",
+                Configuration.GetValue<string>("RabbitMQ:HostName"),
+                Configuration.GetValue<int>("RabbitMQ:Port").ToString(),
+                Configuration.GetValue<string>("RabbitMQ:User"),
+                Configuration.GetValue<string>("RabbitMQ:Password"))
+            ));
             services.AddHostedService<UserManagementService>();
         }
 
