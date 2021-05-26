@@ -66,7 +66,15 @@ namespace StamAcasa.JobScheduler
 
                     services.AddAutoMapper(typeof(Program), typeof(UserDbContext));
                     services.AddDbContextPool<UserDbContext>(options =>
-                        options.UseNpgsql(hostContext.Configuration.GetConnectionString("UserDBConnection")));
+                        options.UseNpgsql(hostContext.Configuration.GetConnectionString("UserDBConnection"), sqlOptions =>
+                        {
+                            sqlOptions.EnableRetryOnFailure(
+                                maxRetryCount: 5,
+                                maxRetryDelay: TimeSpan.FromSeconds(5),
+                                errorCodesToAdd: null
+                            );
+                        }));
+                
 
                     services.AddSingleton(RabbitHutch.CreateBus(string.Format("host={0}:{1};username={2};password={3}",
                         hostContext.Configuration.GetValue<string>("RabbitMQ:HostName"),
