@@ -55,7 +55,7 @@ namespace StamAcasa.Common.Queue
         public async Task PublishEmailRequest<T>(T message) where T : class
         {
             var messageWrapper = new Message<T>(message);
-            await _bus.Advanced.PublishAsync(Exchange.GetDefault(), UserRequestsQueueName, false, messageWrapper);
+            await _bus.Advanced.PublishAsync(Exchange.GetDefault(), EmailRequestsQueueName, false, messageWrapper);
         }
 
         public async Task PublishUserRequest<T>(T message) where T : class

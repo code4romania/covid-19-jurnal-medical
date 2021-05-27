@@ -19,6 +19,7 @@ using StamAcasa.Api.Extensions;
 using StamAcasa.Api.Models;
 using StamAcasa.Api.Services;
 using StamAcasa.Common;
+using StamAcasa.Common.Queue;
 using StamAcasa.Common.Services;
 using StamAcasa.Common.Services.Assessment;
 using StamAcasa.Common.Services.Excel;
@@ -102,6 +103,8 @@ namespace StamAcasa.Api
                 Configuration.GetValue<string>("RabbitMQ:User"),
                 Configuration.GetValue<string>("RabbitMQ:Password"))
             ));
+
+            services.AddSingleton<IQueueService, QueueService>();
             services.AddHostedService<UserManagementService>();
         }
 
