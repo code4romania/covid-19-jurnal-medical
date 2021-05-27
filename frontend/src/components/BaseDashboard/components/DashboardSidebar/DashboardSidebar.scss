@@ -1,0 +1,46 @@
+@import "./src/styles/variables";
+
+.dashboardSidebar {
+  height: 100%;
+  border-right: 1px solid #C1C1C1;
+  padding-top: 40px;
+
+  @media (max-width: $mobileMaxWidth) {
+    & {
+      height: auto;
+      min-height: auto;
+      padding-top: 0;
+    }
+  }
+
+  .sidebar-menu {
+    .dashboardLink {
+      font-size: 14px;
+      display: block;
+      color: black;
+      padding: 10px 10px 10px 80px;
+    }
+
+    .dashboard-menu-item {
+      background: url("../../../../images/eye-icon.svg") no-repeat 40px 50%;
+
+      &.dashboardActiveLink {
+        background: #FFBD59 url("../../../../images/eye-icon-active.svg") no-repeat 40px 50%;
+      }
+    }
+    .cazuri-red-flag-menu-item, .users-menu-item {
+      background: url("../../../../images/user-icon.svg") no-repeat 40px 50%;
+
+      &.dashboardActiveLink {
+        background: #FFBD59 url("../../../../images/user-icon-active.svg") no-repeat 40px 50%;
+      }
+    }
+    .reports-menu-item {
+      background: url("../../../../images/report-icon.svg") no-repeat 40px 50%;
+
+      &.dashboardActiveLink {
+        background: #FFBD59 url("../../../../images/report-icon-active.svg") no-repeat 40px 50%;
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.main-content {
+  padding: 0 20px;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.mb-5 {
+  margin-bottom: 5px;
+}
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+.align-items-center {
+  align-items: center;
+}
+.d-flex {
+  display: flex;
+}
+@media screen and (min-width: 1024px) {
+  .main-content {
+    padding: 0 100px;
+  }
+}
+
+.dashboard-box {
+  padding: 40px;
+  background: white;
+  width: 100%;
+  border: 1px solid #c1c1c1;
+  border-radius: 10px;
+}

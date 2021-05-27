@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StamAcasa.Api</name>
+    </assembly>
+    <members>
+        <member name="M:StamAcasa.Api.Controllers.UserController.GetUserInfo(System.Nullable{System.Int32})">
+            <summary>
+            Gets profile information for a given user.
+            If no id is passed, then the current(authenticated) user info is returned.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StamAcasa.Api.Controllers.UserController.SaveUserInfo(StamAcasa.Common.DTO.UserModel)">
+            <summary>
+            Saves user profile for current(authenticated) user or for people in his care.
+            The dependent flag is used to distinguish between the current user profile and person in his care.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,75 @@
+@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="login-page">
+
+    <div class="login-form-wrapper">
+        <img src="~/jurnalmedical.svg" alt="logo" role="logo">
+        <div class="container __login-form-container">
+            <h1 class="subtitle is-size-2">Creează-ți cont</h1>
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="container">
+                    <div class="field">
+                        <label asp-for="Input.Email"></label>
+                        <input asp-for="Input.Email" class="input is-medium" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="field">
+                        <label asp-for="Input.Password"></label>
+                        <input asp-for="Input.Password" class="input is-medium" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="field">
+                        <label asp-for="Input.ConfirmPassword"></label>
+                        <input asp-for="Input.ConfirmPassword" class="input is-medium" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <p>Parola trebuie să includă cel puţin o literă mică, o literă mare, o cifră şi un simbol.</p>
+
+                    <br />
+                    <div class="field">
+                        <div class="container __login-form-options">
+                            <label class="__checkbox-label" asp-for="Input.AcceptTermsAndConditions">
+                                <input type="checkbox" asp-for="Input.AcceptTermsAndConditions">
+                                <span class="__checkbox-custom"></span>
+                                Declar că am citit și sunt de acord cu <a href="https://jurnalmedical.ro/termeni-si-conditii">Termenii și Condițiile</a> aplicației Jurnal Medical.
+                            </label>
+                        </div>
+                        <span asp-validation-for="Input.AcceptTermsAndConditions" class="text-danger"></span>
+                    </div>
+                    <div class="container has-text-centered __login-form-button-container">
+                        <button type="submit" class="button is-primary is-medium disabled" id="submitButton" disabled="disabled">CREEAZĂ CONT</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript">
+        function disableButton(areConditionAccepted) {
+            if (areConditionAccepted === true) {
+                $('#submitButton').removeClass('disabled');
+                $('#submitButton').removeAttr('disabled');
+            } else {
+                $('#submitButton').attr('disabled', 'disabled');
+                $('#submitButton').addClass('disabled');
+            }
+        }
+
+        $(document).ready(function () {
+            disableButton($('#Input_AcceptTermsAndConditions').is(':checked'));
+
+            $('#Input_AcceptTermsAndConditions').change(function () {
+                disableButton(this.checked);
+            });
+        });
+    </script>
+}

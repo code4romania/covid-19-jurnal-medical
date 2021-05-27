@@ -1,0 +1,31 @@
+.App-header {
+  .svg-inline--fa.fa-w-10 {
+    width: 0.625em;
+  }
+  .dropdown-menu {
+    a {
+      padding-right: 0.375rem 1rem 0.375rem 3rem;
+      margin: 0;
+    }
+  }
+  .button {
+    font-size: 1rem;
+  }
+  .account-items {
+    margin-left: 20px;
+    display: inline-block;
+    vertical-align: middle;
+
+    .account-separator {
+      display: inline-block;
+      height: 35px;
+      border-left: 1px solid #e0e0e0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .developed-by {
+    padding: 0 20px;
+  }
+}

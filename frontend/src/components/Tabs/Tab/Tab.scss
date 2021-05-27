@@ -1,0 +1,18 @@
+.tab {
+  display: inline-block;
+   header, .hero-body {
+    width: 100%;
+  }
+}
+.tab .hero .hero-body .title {
+    font-size: 30px;
+    line-height: 2.2;
+    font-weight: normal;
+    color: #828282;
+    border-bottom: 1px solid #E0E0E0;
+}
+.tab--active .hero .hero-body .title{
+    font-weight: 600;
+    color: #3C2653;
+    border-bottom: 1px solid #3C2653;
+}

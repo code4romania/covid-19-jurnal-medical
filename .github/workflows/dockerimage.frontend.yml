@@ -1,0 +1,50 @@
+on:
+    push:
+      branches:
+        - develop
+        - master
+      paths:
+        - "frontend/**"
+
+name: CI-FrontEnd
+
+env:
+    IMAGE_NAME: ${{ secrets.DOCKER_HUB_ORGANIZATION || 'code4romania' }}/stamacasa
+
+jobs:
+    build-parser:
+      name: Build FrontEnd container
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkoout
+          uses: actions/checkout@v2
+
+        - name: Build Docker image
+          run: |
+            cd frontend
+            docker build . \
+              --tag $IMAGE_NAME:$GITHUB_SHA \
+              --file Dockerfile
+        - name: Upload Docker image
+          run: |
+            echo ${{ secrets.DOCKER_HUB_PASSWORD }} | \
+            docker login \
+              -u ${{ secrets.DOCKER_HUB_USERNAME }} \
+              --password-stdin
+            docker push $IMAGE_NAME:$GITHUB_SHA
+        - name: Tag develop
+          if: github.ref == 'refs/heads/develop'
+          run: |
+            docker tag \
+              $IMAGE_NAME:$GITHUB_SHA \
+              $IMAGE_NAME:develop
+            docker push $IMAGE_NAME:develop
+
+        - name: Tag Latest
+          if: github.ref == 'refs/heads/master'
+          run: |
+            docker tag \
+              $IMAGE_NAME:$GITHUB_SHA \
+              $IMAGE_NAME:latest
+            docker push $IMAGE_NAME:latest

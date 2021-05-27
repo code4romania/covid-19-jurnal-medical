@@ -1,0 +1,30 @@
+.terms-and-conditions {
+  .heading {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 20px 0;
+  }
+
+  .subheading {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 15px 0;
+  }
+
+  .third-heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+
+  ul {
+    list-style-type: disc;
+    list-style-position: inside;
+    padding-left: 20px;
+
+    ul {
+      list-style-type: circle;
+      padding-left: 20px;
+    }
+  }
+}

@@ -1,0 +1,107 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
+using IdentityServer.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.WebUtilities;
+using StamAcasa.Common.Queue;
+using StamAcasa.Common.Services.Emailing;
+
+namespace IdentityServer.Pages.Account
+{
+    [AllowAnonymous]
+    public class ForgotPasswordModel : PageModel
+    {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IQueueService _queue;
+
+        public ForgotPasswordModel(
+            UserManager<ApplicationUser> userManager,
+            IQueueService queueService)
+        {
+            _userManager = userManager;
+            _queue = queueService;
+        }
+
+        [BindProperty]
+        public InputModel Input { get; set; }
+
+        public class InputModel
+        {
+            [Required(ErrorMessage = "Te rugăm completează adresa de e-mail")]
+            [EmailAddress(ErrorMessage = "Adresa de e-mail nu este validă.")]
+            public string Email { get; set; }
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(Input.Email);
+                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                {
+                    // Don't reveal that the user does not exist or is not confirmed
+                    return RedirectToPage("./ForgotPasswordConfirmation");
+                }
+
+                if (user.ResetCounter > 2) // allow only 3 retries
+                {
+                    ModelState.AddModelError(string.Empty, $"Ați depășit numărul maxim de încercări. Vă rugăm contactați-ne la adresa contact@code4.ro");
+                    return Page();
+                }
+                if (user.NextAllowedReset != null)
+                {
+                    if (DateTimeOffset.UtcNow < user.NextAllowedReset)
+                    {
+                        var minutesUntilReset = (int)user.NextAllowedReset.Value.Subtract(DateTimeOffset.UtcNow).TotalMinutes;
+                        var errorMessage = minutesUntilReset == 1
+                            ? "Trebuie să aștepți un minut înainte să poți reseta parola"
+                            : $"Trebuie să aștepți {minutesUntilReset} minute înainte să poți reseta parola";
+                        ModelState.AddModelError(string.Empty, errorMessage);
+                        return Page();
+                    }
+                }
+                // For more information on how to enable account confirmation and password reset please 
+                // visit https://go.microsoft.com/fwlink/?LinkID=532713
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var callbackUrl = Url.Page(
+                    "/Account/ResetPassword",
+                    pageHandler: null,
+                    values: new { area = "Identity", code },
+                    protocol: Request.Scheme);
+
+                await SendPasswordResetEmail(user.UserName, callbackUrl);
+
+                user.NextAllowedReset = DateTimeOffset.UtcNow.AddMinutes(3);
+                user.ResetCounter++;
+                await _userManager.UpdateAsync(user);
+                return RedirectToPage("./ForgotPasswordConfirmation");
+            }
+
+            return Page();
+        }
+
+        private async Task SendPasswordResetEmail(string userName, string callbackUrl)
+        {
+            EmailRequestModel email = new EmailRequestModel()
+            {
+                Address = Input.Email,
+                PlaceholderContent = new Dictionary<string, string>(),
+                TemplateType = EmailTemplate.ResetPassword,
+                SenderName = "Echipa Jurnal Medical",
+                Subject = ""
+            };
+            email.PlaceholderContent.Add("name", userName);
+            email.PlaceholderContent.Add("resetPasswordLink", HtmlEncoder.Default.Encode(callbackUrl));
+
+            await _queue.PublishEmailRequest<EmailRequestModel>(email);
+        }
+    }
+}

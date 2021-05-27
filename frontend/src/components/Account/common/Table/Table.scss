@@ -1,0 +1,22 @@
+.table-container {
+    .table {
+        border: none;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+    th {
+        font-weight: normal;
+        border: none;
+    }
+    td:first-child{
+       width: 200px;
+       font-weight: bold;
+    }
+    th, td {
+        border: none !important;
+    }
+
+    .no-results {
+        margin-left: 10px;
+    }
+}
