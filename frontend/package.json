@@ -26,6 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-test": "NODE_ENV=test node env.js && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
