@@ -1,18 +1,21 @@
-export const instrumentsItems = [
-  {
+export const browserExtensions = {
+  chrome: {
     color: "green",
     title: "Instalează-ți extensia de Chrome pentru a depista știri false",
     ctaText: "Instalează extensia",
     ctaLink:
       "https://chrome.google.com/webstore/detail/covid-19-stiri-oficiale/pdcpkplohipjhdfdchpmgekifmcdbnha"
   },
-  {
+  firefox: {
     color: "green",
     title: "Instalează-ți extensia de Firefox pentru a depista știri false",
     ctaText: "Instalează extensia",
     ctaLink:
       "https://addons.mozilla.org/en-US/firefox/addon/covid-19-%C8%99tiri-oficiale/"
-  },
+  }
+};
+
+export const instrumentsItems = [
   {
     color: "green",
     title: "Știri oficiale și informații la zi",
